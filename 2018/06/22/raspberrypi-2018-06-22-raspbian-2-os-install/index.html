@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Raspberry Pi : Install Raspbian - Blogging through Programming</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:type" content="article"><meta property="og:title" content="Raspberry Pi : Install Raspbian"><meta property="og:url" content="https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"><meta property="og:site_name" content="Blogging through Programming"><meta property="og:description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/mac-diskutility.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/win32diskimager.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"><meta property="article:published_time" content="2018-06-22T00:10:00.000Z"><meta property="article:modified_time" content="2022-02-24T16:16:51.969Z"><meta property="article:author" content="Gangtai"><meta property="article:tag" content="라즈베리파이"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Raspberry Pi"><meta property="article:tag" content="Raspberry Pi 3"><meta property="article:tag" content="Raspbian"><meta property="article:tag" content="라즈비안"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/opensuse/etcher-image-writing.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"},"headline":"Raspberry Pi : Install Raspbian","image":["https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png","https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png","https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png","https://blog.thinkbee.kr/images/mac-diskutility.png","https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png","https://blog.thinkbee.kr/images/win32diskimager.png","https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"],"datePublished":"2018-06-22T00:10:00.000Z","dateModified":"2022-02-24T16:16:51.969Z","author":{"@type":"Person","name":"Gangtai"},"publisher":{"@type":"Organization","name":"Blogging through Programming","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp; Configuration - Nginx"}</script><link rel="canonical" href="https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1465716454138955" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 6.0.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="Blogging through Programming" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-06-22T00:10:00.000Z" title="2018-6-22 9:10:00">2018-06-22</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2022-02-24T16:16:51.969Z" title="2022-2-25 1:16:51">2022-02-25</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Raspberry-Pi/">Raspberry Pi</a><span> / </span><a class="link-muted" href="/categories/Raspberry-Pi/Linux/">Linux</a></span><span class="level-item">23분안에 읽기 (약 3456 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">Raspberry Pi : Install Raspbian</h1><div class="content"><p>Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.</p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Raspberry Pi : Install Raspbian - Blogging through Programming</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:type" content="article"><meta property="og:title" content="Raspberry Pi : Install Raspbian"><meta property="og:url" content="https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"><meta property="og:site_name" content="Blogging through Programming"><meta property="og:description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/mac-diskutility.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/win32diskimager.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"><meta property="article:published_time" content="2018-06-22T00:10:00.000Z"><meta property="article:modified_time" content="2022-02-24T22:20:15.882Z"><meta property="article:author" content="Gangtai"><meta property="article:tag" content="라즈베리파이"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Raspberry Pi"><meta property="article:tag" content="Raspberry Pi 3"><meta property="article:tag" content="Raspbian"><meta property="article:tag" content="라즈비안"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/opensuse/etcher-image-writing.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"},"headline":"Raspberry Pi : Install Raspbian","image":["https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png","https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png","https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png","https://blog.thinkbee.kr/images/mac-diskutility.png","https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png","https://blog.thinkbee.kr/images/win32diskimager.png","https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"],"datePublished":"2018-06-22T00:10:00.000Z","dateModified":"2022-02-24T22:20:15.882Z","author":{"@type":"Person","name":"Gangtai"},"publisher":{"@type":"Organization","name":"Blogging through Programming","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp; Configuration - Nginx"}</script><link rel="canonical" href="https://blog.thinkbee.kr/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1465716454138955" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 6.0.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="Blogging through Programming" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-06-22T00:10:00.000Z" title="2018-6-22 9:10:00">2018-06-22</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2022-02-24T22:20:15.882Z" title="2022-2-25 7:20:15">2022-02-25</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Raspberry-Pi/">Raspberry Pi</a><span> / </span><a class="link-muted" href="/categories/Raspberry-Pi/Linux/">Linux</a></span><span class="level-item">23분안에 읽기 (약 3457 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">Raspberry Pi : Install Raspbian</h1><div class="content"><p>Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.</p>
 <ol>
 <li><strong><a href="!--swig%EF%BF%BC30--">Raspberry Pi 설치준비</a></strong></li>
 <li><strong>Install Raspbian OS</strong></li>
@@ -10,8 +10,10 @@
 <blockquote>
 <p>2017-10-30: swap 추가, timezone 수정<br>{:.right-history}</p>
 </blockquote>
+<span id="more"></span>
+
 <h2 id="Install-Raspbian-OS"><a href="#Install-Raspbian-OS" class="headerlink" title="Install Raspbian OS"></a>Install Raspbian OS</h2><p>Raspberry Pi(라즈베리파이)에 Raspbian, Ubuntu 등을 설치하고 <em>Serial Console</em> 을 이용해서, 라즈베리파이를 처음 설정하고 <em>SSH</em> 구성을 활성화 하겠다.</p>
-<p>라즈베리파이에 OS를 설치하기 위해서는 <strong>NOOBS</strong>를 사용하거나 <strong>오에스 이미지</strong>를 다운받아 SD Card에 구워서 사용한다. 라즈베리파이는 다음과 같은 OS 배포본을 사용할 수 있다. </p>
+<p>라즈베리파이에 OS를 설치하기 위해서는 <strong>NOOBS</strong>를 사용하거나 <strong>오에스 이미지</strong>를 다운받아 SD Card에 구워서 사용한다. 라즈베리파이는 다음과 같은 OS 배포본을 사용할 수 있다.</p>
 <table>
 <thead>
 <tr>
@@ -51,7 +53,7 @@
 <li>OS 설치 SD Memory Card: 8GB 이상, Class6 이상</li>
 <li>USB to Serial Cable</li>
 </ul>
-<h4 id="SDCard에-대해"><a href="#SDCard에-대해" class="headerlink" title="SDCard에 대해"></a>SDCard에 대해</h4><p>라즈베리파이는 SD 호환 카드에서 작동하도록 되어 있다. </p>
+<h4 id="SDCard에-대해"><a href="#SDCard에-대해" class="headerlink" title="SDCard에 대해"></a>SDCard에 대해</h4><p>라즈베리파이는 SD 호환 카드에서 작동하도록 되어 있다.</p>
 <ul>
 <li><p>NOOBS를 이용한다면 최소 8GB</p>
 </li>
@@ -83,7 +85,7 @@
 <li>(2). 서비스 설치</li>
 </ul>
 <h4 id="1-Download-OS-Image-Etcher-sdFormatter"><a href="#1-Download-OS-Image-Etcher-sdFormatter" class="headerlink" title="(1). Download OS Image, Etcher, sdFormatter"></a>(1). Download OS Image, Etcher, sdFormatter</h4><p>라즈베리안 OS를 다운로드,</p>
-<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspbian/">Raspberry Pi Raspbian Download</a> 링크에서 다운 받을 수 있다. </p>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspbian/">Raspberry Pi Raspbian Download</a> 링크에서 다운 받을 수 있다.</p>
 <blockquote>
 <p>토렌트와 zip 형식으로 다운 받을 수 있습니다.</p>
 </blockquote>
@@ -98,46 +100,45 @@
 </ul>
 <p>이 글에서는 디스크 이미지 쓰기<a target="_blank" rel="noopener" href="http://etcher.io/">Etcher</a> 프로그램을 이용해서 오에스 이미지 파일을 SD Card에 쓰겠다.</p>
 <blockquote>
-<p>macOS, Windows, Linux 지원 </p>
+<p>macOS, Windows, Linux 지원</p>
 </blockquote>
 <p>여기까지 필요한 준비 사항은:</p>
 <ul>
 <li>Raspbian OS Image</li>
 <li>SD Card Formatter</li>
 </ul>
-<h4 id="OS-image-파일을-SD-Card-쓰기"><a href="#OS-image-파일을-SD-Card-쓰기" class="headerlink" title="OS image 파일을 SD Card 쓰기"></a>OS image 파일을 SD Card 쓰기</h4><p>Etcher를 실행하고 </p>
+<h4 id="OS-image-파일을-SD-Card-쓰기"><a href="#OS-image-파일을-SD-Card-쓰기" class="headerlink" title="OS image 파일을 SD Card 쓰기"></a>OS image 파일을 SD Card 쓰기</h4><p>Etcher를 실행하고</p>
 <p><img src="/images/opensuse/etcher-image-writing.png">{:width&#x3D;”640”}</p>
-<h5 id="dd-를-사용한다면"><a href="#dd-를-사용한다면" class="headerlink" title="dd 를 사용한다면,"></a><code>dd</code> 를 사용한다면,</h5><p>다운받은 <code>.zip</code> 파일을  <code>unzip</code>으로 풀어 dd&#96;로 SD Card에 이미지를 쓴다.</p>
+<h5 id="dd-를-사용한다면"><a href="#dd-를-사용한다면" class="headerlink" title="dd 를 사용한다면,"></a><code>dd</code> 를 사용한다면,</h5><p>다운받은 <code>.zip</code> 파일을 <code>unzip</code>으로 풀어 dd&#96;로 SD Card에 이미지를 쓴다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -p 2017-06-21-raspbian-stretch-lite.zip | sudo dd of=/dev/rdisk1 bs=4M; sync</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>MacOS는 dd의 bs 옵션이 소문자로 받는다: <code>bs=4m</code></p>
 </blockquote>
-<p>다쓴 SD Card를 마운트 한다. </p>
+<p>다쓴 SD Card를 마운트 한다.</p>
 <h4 id="ssh-활성화"><a href="#ssh-활성화" class="headerlink" title="ssh 활성화"></a>ssh 활성화</h4><p>Raspbian 2016-11-25일 릴리즈 이후 기본으로 ssh가 비활성화 되어 있다. 그래서 처음 부팅후 ssh 접속이 필요하다면 부트 파티션에 <code>ssh</code> 파일을 생성해 주면된다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /boot</span><br><span class="line">$ touch ssh</span><br></pre></td></tr></table></figure>
-
 
 <br>
 #### Serial console
 
 <p>여기서는 <strong>Serial console</strong>에서 네트워크 확인 및 초기 설정을 하고 <strong>ssh</strong> 로 서버에 로그인해서 시스템 구성을 진행한다.</p>
 <blockquote>
-<p>SD Card를 라즈베리파이에 꽃고 HDMI, Keyboard 및 Mouse 가 별도로 준비되어 있으면 직접 모니터를 보고 작업을 진행하면 좋다. </p>
+<p>SD Card를 라즈베리파이에 꽃고 HDMI, Keyboard 및 Mouse 가 별도로 준비되어 있으면 직접 모니터를 보고 작업을 진행하면 좋다.</p>
 </blockquote>
 <p>USB to Serial 케이블을 사용해서 Raspberry Pi의 Serial Console에 연결한다.</p>
 <p><img src="/images/raspberrypi/rpi-usb-serial.png">{:width&#x3D;”640”}</p>
 <p>그리고 시리얼 포트를 통해 tty 연결을 위해 터미널 프로그램에서 baud rate 115200 으로 연결한다. 아래는 macOS의 <code>screen</code> CLI 명령으로 usb serial 포트에 연결하고 있다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/cu.usbserial 115200</span><br></pre></td></tr></table></figure>
 
-<p>이제 SD Card를 넣고 부팅을 하면, 터미널에 부트 단계가 진행되고 처음 5분 정도 소요된다. </p>
+<p>이제 SD Card를 넣고 부팅을 하면, 터미널에 부트 단계가 진행되고 처음 5분 정도 소요된다.</p>
 <p><img src="/images/opensuse/opensuse-boot33.png">{:width&#x3D;”640”}</p>
-<p>Raspberry Pi를 위한 이미지는 처음 계정은 <code>root/linux</code> 이다. </p>
+<p>Raspberry Pi를 위한 이미지는 처음 계정은 <code>root/linux</code> 이다.</p>
 <p>터미널에서 uname 은 <strong>aarch64</strong> 임을 확인 할 수 있다.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment"># uname -a</span></span><br><span class="line">Linux homepi 4.4.90-18.32-default <span class="comment">#1 SMP Fri Oct 6 13:30:08 UTC 2017 (465b410) aarch64 aarch64 aarch64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
 
 <p>처음으로 라즈베리파이에서 64bit 환경으로 운영해 볼 수 있게 됐다.</p>
-<h4 id="Raspbian-OS-Image-복사"><a href="#Raspbian-OS-Image-복사" class="headerlink" title="Raspbian OS Image 복사"></a>Raspbian OS Image 복사</h4><p>맥&#x2F;리눅스에서 dd 명령을 이용해서 이미지를 복사할 수 있습니다. </p>
+<h4 id="Raspbian-OS-Image-복사"><a href="#Raspbian-OS-Image-복사" class="headerlink" title="Raspbian OS Image 복사"></a>Raspbian OS Image 복사</h4><p>맥&#x2F;리눅스에서 dd 명령을 이용해서 이미지를 복사할 수 있습니다.</p>
 <blockquote>
 <p>sudo dd bs&#x3D;1m if&#x3D;path_of_your_image.img of&#x3D;&#x2F;dev&#x2F;diskn</p>
 <ul>
@@ -167,7 +168,6 @@
 <h5 id="Mac-diskutil-과-dd-이용"><a href="#Mac-diskutil-과-dd-이용" class="headerlink" title="Mac diskutil 과 dd 이용"></a>Mac diskutil 과 dd 이용</h5><p>diskutil로 디스크 목록 확인해 SD카드 번호 확인</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
 
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil unmountDisk /dev/disk1</span><br></pre></td></tr></table></figure>
 
 <p>이미지 쓰기</p>
@@ -181,6 +181,7 @@
 
 <p>SD card를 포맷하려면</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo dd if=/dev/zero of=/dev/rdisk1 bs=4k count=1</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>bs: 한번에 읽어들일 byte를 의미</li>
 <li>count: block 수 입니다.</li>
@@ -191,21 +192,16 @@
 <p>Mac의 diskutil을 사용하면</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil partitionDisk /dev/disk3 1 MBR &quot;Free Space&quot; &quot;%noformat%&quot; 100%</span><br></pre></td></tr></table></figure>
 
-
 <p>다운로드한 이미지는 zip 압축 파일로 저장된다. 다음 같이 명령 파이프를 이용하면 압축 파일을 풀지않고 디스크에 이미지를 쓸 수 있다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -p 2016-09-23-raspbian-jessie.zip* | sudo dd of=/dev/rdisk1 bs=4m</span><br><span class="line">password: ****</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-
-<p>이미지를 <em>dd</em>  명령으로 작성한 후에 카드를 추출한다:</p>
+<p>이미지를 <em>dd</em> 명령으로 작성한 후에 카드를 추출한다:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil eject /dev/rdisk3</span><br></pre></td></tr></table></figure>
-
 
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">https://www.raspberrypi.org/documentation/installation/installing-images/mac.md</a></p>
 </blockquote>
 <h5 id="clone-disk"><a href="#clone-disk" class="headerlink" title="clone disk"></a>clone disk</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd if=/dev/diskX conv=sync,noerror bs=4m | gzip -c  &gt; /path/to/backup.img.gz</span><br></pre></td></tr></table></figure>
-
 
 <blockquote>
 <p>반대로 디스크를 디스크이미지로 만들려면 다음 같이 dd 를 사용할 수 있습니다.<br>쓰기 전에 sd card의 마운트한 파티션을 마운트를 해제해야 합니다.</p>
@@ -216,7 +212,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.sdcard.org/downloads/formatter_4/">https://www.sdcard.org/downloads/formatter_4/</a></li>
 </ul>
 <ol>
-<li>오에스에 맞는 버전을 다운로드하고 실행하면 설치를 합니다. </li>
+<li>오에스에 맞는 버전을 다운로드하고 실행하면 설치를 합니다.</li>
 <li>SD Card를 컴퓨터에 삽입합니다.</li>
 <li>SDFormatter를 실행하고 다음 화면 처럼 SD card를 포맷할 수 있습니다.</li>
 </ol>
@@ -237,18 +233,18 @@
 <h2 id="부팅"><a href="#부팅" class="headerlink" title="부팅"></a>부팅</h2><h3 id="IP-강제-지정"><a href="#IP-강제-지정" class="headerlink" title="IP 강제 지정"></a>IP 강제 지정</h3><p>CD Card를 마운트 하면 boot 파티션이 마운트 된다. boot 파티션에 있는 <em>cmdline.txt</em> 에 <code>ip=</code> 옵션을 추가해 강제로 IP 주소를 지정할 수 있다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait **ip=192.168.0.203**</span><br></pre></td></tr></table></figure>
 
-
 <h3 id="Serial-Console"><a href="#Serial-Console" class="headerlink" title="Serial Console"></a>Serial Console</h3><p><img src="/images/raspberypi/rpi-usb-serial.png"></p>
 <p>Raspbian 은 boot 파티션에 있는 <em>cmdline.txt</em> 옵션으로 기본적으로 serial console을 사용하도록 하고 있다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait</span><br></pre></td></tr></table></figure>
 
 <h4 id="Mac-Serial"><a href="#Mac-Serial" class="headerlink" title="Mac Serial"></a>Mac Serial</h4><p>보통 FTDI USB 케이브을 다음 두 제품이 대부분이다.</p>
 <ul>
-<li>Prolific PL2303:   <a target="_blank" rel="noopener" href="http://www.prolific.com.tw/us/showproduct.aspx?p_id=229&pcid=41">PL2303 MacOSX</a></li>
-<li>FTDI USB Serial:   FTDIUSBSerialDriver_v2_3.zip</li>
+<li>Prolific PL2303: <a target="_blank" rel="noopener" href="http://www.prolific.com.tw/us/showproduct.aspx?p_id=229&pcid=41">PL2303 MacOSX</a></li>
+<li>FTDI USB Serial: FTDIUSBSerialDriver_v2_3.zip</li>
 </ul>
 <blockquote>
-<p>macOS Maverick 이후 FTDI 드라이버가 포함되어 있다.<br>혹시 새 버전을 설치하거나 이전 버전이 설치되어 삭제하려면 [^6]<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Library/Extensions/</span><br><span class="line">$ sudo rm -r PL2303.kext</span><br><span class="line">$ sudo rm -r ProlificUsbSerial.kext</span><br></pre></td></tr></table></figure></p>
+<p>macOS Maverick 이후 FTDI 드라이버가 포함되어 있다.<br>혹시 새 버전을 설치하거나 이전 버전이 설치되어 삭제하려면 [^6]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Library/Extensions/</span><br><span class="line">$ sudo rm -r PL2303.kext</span><br><span class="line">$ sudo rm -r ProlificUsbSerial.kext</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>FTDI 케이블을 사용한다고 가정하고 맥에 USB to Serial 케이블을 연결하면 <em>&#x2F;dev</em> 장치에 <em>cu.</em>, <em>tty.</em> 장치 드라이버가 생성된다. 두 장치는 다른 점이 있다.[^5]</p>
 <ul>
@@ -257,18 +253,17 @@
 </ul>
 <p>FTDI 로 시리얼을 사용시는 <em>cu.</em> 장치를 사용하면 된다.</p>
 <blockquote>
-<p>일반적으로 </p>
+<p>일반적으로</p>
 </blockquote>
 <h4 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h4><p>Mac에서 <code>screen</code> 사용시</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen /dev/cu.usbserial-XXXXXXXX 115200</span><br></pre></td></tr></table></figure>
 
-<p>시리얼 터미널에서 빠져나오려면  ‘ctrl-a, ctrl-&#39; 를  순서데로 입력</p>
+<p>시리얼 터미널에서 빠져나오려면  ‘ctrl-a, ctrl-&#39; 를 순서데로 입력</p>
 <h3 id="Linux-Serial-terminal"><a href="#Linux-Serial-terminal" class="headerlink" title="Linux Serial terminal"></a>Linux Serial terminal</h3><p>Linux machine에서 Usb to serial 케이블을 사용할 수 있는지 콘솔 메시지에서 Serial console이 있는 지 확인한다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg | egrep --color &#x27;serial&#x27;</span><br><span class="line">[ 1969.914088] usbcore: registered new interface driver usbserial</span><br><span class="line">[ 1969.914139] usbcore: registered new interface driver usbserial_generic</span><br><span class="line">[ 1969.914175] usbserial: USB Serial support registered for generic</span><br><span class="line">[ 1969.918325] usbserial: USB Serial support registered for pl2303</span><br></pre></td></tr></table></figure>
 
 <p>장치 드라이버는 보통 <em>&#x2F;dev&#x2F;ttyUSB0</em> 장치로 연결된다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/ttyUSB*</span><br><span class="line">/dev/ttyUSB0</span><br></pre></td></tr></table></figure>
-
 
 <h4 id="dterm"><a href="#dterm" class="headerlink" title="dterm"></a>dterm</h4><p>dtermAUR is a tiny serial communication program. If you invoke it without parameters, it will connect to &#x2F;dev&#x2F;ttyS0 at 9600 baud by default. The following example connect to &#x2F;dev&#x2F;ttyS0 at 115200 baud, with 8 data bits, no parity bit and 1 stop bit-times:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dterm 115200 8 n 1</span><br></pre></td></tr></table></figure>
@@ -294,7 +289,7 @@
 
 <p>screen 명령 사용중 어떤 상황에서 세션이 멈춘 경우 종료 명령이 안된다. 이 경우 screen 세션을 찾고 가제 종료를 시도해 본다.</p>
 <p>Type screen -list to identify the detached screen session.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ screen -list  </span><br><span class="line">    There are screens on:  </span><br><span class="line">         20751.Melvin_Peter_V42  (Detached)  </span><br><span class="line">Note: 20751.Melvin_Peter_V42 is your session id.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ screen -list</span><br><span class="line">    There are screens on:</span><br><span class="line">         20751.Melvin_Peter_V42  (Detached)</span><br><span class="line">Note: 20751.Melvin_Peter_V42 is your session id.</span><br></pre></td></tr></table></figure>
 
 <p>Get attached to the detached screen session<br>screen -r 20751.Melvin_Peter_V42<br>Once connected to the session press Ctrl + A then type :quit</p>
 <p>Attached session 종료</p>
