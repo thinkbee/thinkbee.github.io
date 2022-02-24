@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Raspberry Pi : Install Raspbian | Blogging through Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp; Configuration - Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi : Install Raspbian">
+<meta property="og:url" content="http://example.com/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/index.html">
+<meta property="og:site_name" content="Blogging through Programming">
+<meta property="og:description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp; Configuration - Nginx">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://example.com/images/opensuse/etcher-image-writing.png">
+<meta property="og:image" content="http://example.com/images/raspberrypi/rpi-usb-serial.png">
+<meta property="og:image" content="http://example.com/images/opensuse/opensuse-boot33.png">
+<meta property="og:image" content="http://example.com/images/mac-diskutility.png">
+<meta property="og:image" content="http://example.com/images/raspberrypi/sdcardformatter-main.png">
+<meta property="og:image" content="http://example.com/images/win32diskimager.png">
+<meta property="og:image" content="http://example.com/images/raspberypi/rpi-usb-serial.png">
+<meta property="article:published_time" content="2018-06-22T00:10:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T16:16:51.969Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="라즈베리파이">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Raspberry Pi">
+<meta property="article:tag" content="Raspberry Pi 3">
+<meta property="article:tag" content="Raspbian">
+<meta property="article:tag" content="라즈비안">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/opensuse/etcher-image-writing.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blogging through Programming" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blogging through Programming</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-raspberrypi-2018-06-22-raspbian-2-os-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/" class="article-date">
+  <time class="dt-published" datetime="2018-06-22T00:10:00.000Z" itemprop="datePublished">2018-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a>►<a class="article-category-link" href="/categories/Raspberry-Pi/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Raspberry Pi : Install Raspbian
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.</p>
+<ol>
+<li><strong><a href="!--swig%EF%BF%BC30--">Raspberry Pi 설치준비</a></strong></li>
+<li><strong>Install Raspbian OS</strong></li>
+<li>Managing Service daemon</li>
+<li>Basic OS Security for Server</li>
+<li><a href="!--swig%EF%BF%BC31--">Install &amp; Configuration - Nginx, Node JS, Jupyter</a></li>
+</ol>
+<blockquote>
+<p>2017-10-30: swap 추가, timezone 수정<br>{:.right-history}</p>
+</blockquote>
+<h2 id="Install-Raspbian-OS"><a href="#Install-Raspbian-OS" class="headerlink" title="Install Raspbian OS"></a>Install Raspbian OS</h2><p>Raspberry Pi(라즈베리파이)에 Raspbian, Ubuntu 등을 설치하고 <em>Serial Console</em> 을 이용해서, 라즈베리파이를 처음 설정하고 <em>SSH</em> 구성을 활성화 하겠다.</p>
+<p>라즈베리파이에 OS를 설치하기 위해서는 <strong>NOOBS</strong>를 사용하거나 <strong>오에스 이미지</strong>를 다운받아 SD Card에 구워서 사용한다. 라즈베리파이는 다음과 같은 OS 배포본을 사용할 수 있다. </p>
+<table>
+<thead>
+<tr>
+<th>운영체제</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Raspbian (Debian)</td>
+<td>Raspberry Pi + Debian의 합성어, 가장 범용 OS.</td>
+</tr>
+<tr>
+<td>Arch Linux (A non-Linux Distribution)</td>
+<td>ARM 프로세서를 지원하는 Arch Linux</td>
+</tr>
+<tr>
+<td>RISC OS</td>
+<td>ARM 프로세서를 위한 실시가(RTOS) 운영체제</td>
+</tr>
+<tr>
+<td>OpenElec</td>
+<td>XBMC 미디어 센터 지원을 위한 운영체제</td>
+</tr>
+<tr>
+<td>RaspBMC</td>
+<td>XBMC 미디어 센터 지원을 위한 운영체제</td>
+</tr>
+<tr>
+<td>Pidora</td>
+<td>Pi + Fedora 운영체제</td>
+</tr>
+</tbody></table>
+<p>**Raspbian(라즈비안)**은 라즈베리파이를 위한 데비안 리눅스로 가장 대중적인 데비안 리눅스, 우분투와 같은 사용자 경험을 제공해 주고 있다.</p>
+<h3 id="Raspberry-Pi-준비"><a href="#Raspberry-Pi-준비" class="headerlink" title="Raspberry Pi 준비"></a>Raspberry Pi 준비</h3><p>설치에 앞서 준비해야 할 것 이 있습니다.</p>
+<ul>
+<li>Raspberry Pi 1, 2, 3</li>
+<li>OS 설치 SD Memory Card: 8GB 이상, Class6 이상</li>
+<li>USB to Serial Cable</li>
+</ul>
+<h4 id="SDCard에-대해"><a href="#SDCard에-대해" class="headerlink" title="SDCard에 대해"></a>SDCard에 대해</h4><p>라즈베리파이는 SD 호환 카드에서 작동하도록 되어 있다. </p>
+<ul>
+<li><p>NOOBS를 이용한다면 최소 8GB</p>
+</li>
+<li><p>다른 버전은 최소 4GB</p>
+</li>
+<li><p>Class 4는 4MB&#x2F;s 쓰기 속도, Class 10은 10MB&#x2F;s 쓰기가 가능하지만 Class 10이 Class 4를 앞선다는 것을 보장하진 않는다. 라즈베리파이는 Class 6의 8GB 사용을 권장하고 있다.</p>
+</li>
+<li><p>Mac: SDCardFormatter</p>
+</li>
+</ul>
+<h4 id="SDCard-사용시-주의"><a href="#SDCard-사용시-주의" class="headerlink" title="SDCard 사용시 주의"></a>SDCard 사용시 주의</h4><ul>
+<li>정품 SD Card 사용을 권장</li>
+<li>전원은 품질이 좋아야. 라즈베리파이 보드의 TP1, TP2 전력을 측정해서 4.75v 이하면 품질이 좋은 전원으로 바꾸길.</li>
+<li>더불어 좋은 품질의 USB 케이블을 사용해야 한다.</li>
+<li>종료시 <strong>sudo halt</strong> 를 이용하도록</li>
+<li>오버클록은 지양하도록</li>
+</ul>
+<br>
+### Download and Install
+
+<p>OS 설치와 서비스 설치는 크게 아래 과정을 거친다.</p>
+<ul>
+<li>(1). Download OS Image, Etcher, sdFormatter</li>
+<li>(2). OS image 파일을 SD Card에 쓴다.</li>
+</ul>
+<p>SD Card로 부팅후에</p>
+<ul>
+<li>(1). 모니터 혹은 시리얼 콘솔에서 <code>raspi-conifg</code> 로 시스템 구성을 마무리</li>
+<li>(2). 서비스 설치</li>
+</ul>
+<h4 id="1-Download-OS-Image-Etcher-sdFormatter"><a href="#1-Download-OS-Image-Etcher-sdFormatter" class="headerlink" title="(1). Download OS Image, Etcher, sdFormatter"></a>(1). Download OS Image, Etcher, sdFormatter</h4><p>라즈베리안 OS를 다운로드,</p>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspbian/">Raspberry Pi Raspbian Download</a> 링크에서 다운 받을 수 있다. </p>
+<blockquote>
+<p>토렌트와 zip 형식으로 다운 받을 수 있습니다.</p>
+</blockquote>
+<p>다운로드된 파일은 <em>yyyy-mm-dd-raspbian-wheezy.zip</em> 형식으로 다운로드가 된다. 디스크 이미지 파일 <em>yyyy-mm-dd-raspbian-wheezy.img</em> 이 zip으로 압축되어 있는데,이 이미지 파일을 SD Card에 복사해야 한다.</p>
+<p>디스크 이미지를 쓰기위한 프로그램으로 오에스 이미지를 SD Card, Disk 등에 쓴다. 보통 아래 프로그램을 이용한다.</p>
+<ul>
+<li>Windows : Win32DiskImager</li>
+<li>Linux: ImageWriter</li>
+<li>macOS: <code>dd</code> 명령</li>
+<li>모든 플랫폼: Etcher</li>
+<li>SD Memory Card Formatter 5.0 for SD&#x2F;SDHC&#x2F;SDXC</li>
+</ul>
+<p>이 글에서는 디스크 이미지 쓰기<a target="_blank" rel="noopener" href="http://etcher.io/">Etcher</a> 프로그램을 이용해서 오에스 이미지 파일을 SD Card에 쓰겠다.</p>
+<blockquote>
+<p>macOS, Windows, Linux 지원 </p>
+</blockquote>
+<p>여기까지 필요한 준비 사항은:</p>
+<ul>
+<li>Raspbian OS Image</li>
+<li>SD Card Formatter</li>
+</ul>
+<h4 id="OS-image-파일을-SD-Card-쓰기"><a href="#OS-image-파일을-SD-Card-쓰기" class="headerlink" title="OS image 파일을 SD Card 쓰기"></a>OS image 파일을 SD Card 쓰기</h4><p>Etcher를 실행하고 </p>
+<p><img src="/images/opensuse/etcher-image-writing.png">{:width&#x3D;”640”}</p>
+<h5 id="dd-를-사용한다면"><a href="#dd-를-사용한다면" class="headerlink" title="dd 를 사용한다면,"></a><code>dd</code> 를 사용한다면,</h5><p>다운받은 <code>.zip</code> 파일을  <code>unzip</code>으로 풀어 dd&#96;로 SD Card에 이미지를 쓴다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -p 2017-06-21-raspbian-stretch-lite.zip | sudo dd of=/dev/rdisk1 bs=4M; sync</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MacOS는 dd의 bs 옵션이 소문자로 받는다: <code>bs=4m</code></p>
+</blockquote>
+<p>다쓴 SD Card를 마운트 한다. </p>
+<h4 id="ssh-활성화"><a href="#ssh-활성화" class="headerlink" title="ssh 활성화"></a>ssh 활성화</h4><p>Raspbian 2016-11-25일 릴리즈 이후 기본으로 ssh가 비활성화 되어 있다. 그래서 처음 부팅후 ssh 접속이 필요하다면 부트 파티션에 <code>ssh</code> 파일을 생성해 주면된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /boot</span><br><span class="line">$ touch ssh</span><br></pre></td></tr></table></figure>
+
+
+<br>
+#### Serial console
+
+<p>여기서는 <strong>Serial console</strong>에서 네트워크 확인 및 초기 설정을 하고 <strong>ssh</strong> 로 서버에 로그인해서 시스템 구성을 진행한다.</p>
+<blockquote>
+<p>SD Card를 라즈베리파이에 꽃고 HDMI, Keyboard 및 Mouse 가 별도로 준비되어 있으면 직접 모니터를 보고 작업을 진행하면 좋다. </p>
+</blockquote>
+<p>USB to Serial 케이블을 사용해서 Raspberry Pi의 Serial Console에 연결한다.</p>
+<p><img src="/images/raspberrypi/rpi-usb-serial.png">{:width&#x3D;”640”}</p>
+<p>그리고 시리얼 포트를 통해 tty 연결을 위해 터미널 프로그램에서 baud rate 115200 으로 연결한다. 아래는 macOS의 <code>screen</code> CLI 명령으로 usb serial 포트에 연결하고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/cu.usbserial 115200</span><br></pre></td></tr></table></figure>
+
+<p>이제 SD Card를 넣고 부팅을 하면, 터미널에 부트 단계가 진행되고 처음 5분 정도 소요된다. </p>
+<p><img src="/images/opensuse/opensuse-boot33.png">{:width&#x3D;”640”}</p>
+<p>Raspberry Pi를 위한 이미지는 처음 계정은 <code>root/linux</code> 이다. </p>
+<p>터미널에서 uname 은 <strong>aarch64</strong> 임을 확인 할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment"># uname -a</span></span><br><span class="line">Linux homepi 4.4.90-18.32-default <span class="comment">#1 SMP Fri Oct 6 13:30:08 UTC 2017 (465b410) aarch64 aarch64 aarch64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
+
+<p>처음으로 라즈베리파이에서 64bit 환경으로 운영해 볼 수 있게 됐다.</p>
+<h4 id="Raspbian-OS-Image-복사"><a href="#Raspbian-OS-Image-복사" class="headerlink" title="Raspbian OS Image 복사"></a>Raspbian OS Image 복사</h4><p>맥&#x2F;리눅스에서 dd 명령을 이용해서 이미지를 복사할 수 있습니다. </p>
+<blockquote>
+<p>sudo dd bs&#x3D;1m if&#x3D;path_of_your_image.img of&#x3D;&#x2F;dev&#x2F;diskn</p>
+<ul>
+<li>bs: 한번에 읽어들일 사이즈를 의미</li>
+</ul>
+</blockquote>
+<p>마지막 옵션인 ‘diskn’의 n은 SD Card의 번호로 SDCard Formater에서 기억하란 번호입니다. 여기서 번호가 2로 가정합니다.<br>그리고 Mac OSX는 디스크가 &#x2F;dev 경로에 두 가지 종류가 있습니다.</p>
+<ul>
+<li>&#x2F;dev&#x2F;disk# 버퍼 디바이스로 데이터가 부가적인 처리를 통해 사용합니다.</li>
+<li>&#x2F;dev&#x2F;rdisk# 저수준 경로로 빠르고 dd 명령을 사용할 때 완벽합니다.</li>
+</ul>
+<blockquote>
+<p>Class 4 SD card는 rdisk 경로를 사용할 때 20배 빠릅니다.</p>
+</blockquote>
+<p>먼저 포맷터로 포맷한 디스크 마운트를 해제합니다. 맥의 디스크유틸리티를 이용해서 마운트를 해제합니다.<br><img src="/images/mac-diskutility.png"></p>
+<p>이미지가 있는 곳에서 dd 명령으로 라즈비안을 복사합니다.3.2GB 크기를 복사해서 9분~15분 정도의 시간이 소요됩니다.</p>
+<p>zip 압축 파일을 입력으로 다음 같이 dd 명령으로 sd card에 쓴다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -p 2016-05-27-raspbian-jessie.zip | sudo dd of=/dev/rdisk1 bs=1m</span><br></pre></td></tr></table></figure>
+
+<p>압축을 푼후</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$sudo dd bs=1m if=2015-02-16-raspbian-wheezy.img of=/dev/rdisk2</span><br><span class="line">3125+0 records in</span><br><span class="line">3125+0 records out</span><br><span class="line">3276800000 bytes transferred i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n 551.608702 secs (5940443 bytes/sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rdisk 이용시 에러가 발생하면 disk를 사용합니다.</p>
+</blockquote>
+<p>다음 링크에 설명한 방법을 바탕으로 설명해보겠습니다.<br>참조: <a target="_blank" rel="noopener" href="http://elinux.org/RPi_Easy_SD_Card_Setup">http://elinux.org/RPi_Easy_SD_Card_Setup</a></p>
+<h5 id="Mac-diskutil-과-dd-이용"><a href="#Mac-diskutil-과-dd-이용" class="headerlink" title="Mac diskutil 과 dd 이용"></a>Mac diskutil 과 dd 이용</h5><p>diskutil로 디스크 목록 확인해 SD카드 번호 확인</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil unmountDisk /dev/disk1</span><br></pre></td></tr></table></figure>
+
+<p>이미지 쓰기</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd bs=1m if=image.img of=/dev/rdisk[n] conv=noerror,sync</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>위 명령으로도 ‘Permission Denied’ 가 나오면, 이것은 SD 카드의 파티션 테이블이 덮어쓰기를 막고 있다는 의미로 이 경우 파티션 테이블을 제거해야 한다. 다음 같이 zero로 SDCard를 덮어쓰면 all partitions, master boot records, and data를 지운다.</p>
+</blockquote>
+<p>진행 상황을 보려면 <em>status&#x3D;progress</em> 로 알 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd bs=1m if=image.img of=/dev/rdisk[n] conv=noerror,sync status=progress</span><br></pre></td></tr></table></figure>
+
+<p>SD card를 포맷하려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo dd if=/dev/zero of=/dev/rdisk1 bs=4k count=1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bs: 한번에 읽어들일 byte를 의미</li>
+<li>count: block 수 입니다.</li>
+</ul>
+<p>혹은 랜덤 데이터로 지우려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$dd if=/dev/urandom of=/dev/sda bs=4k</span><br></pre></td></tr></table></figure>
+
+<p>Mac의 diskutil을 사용하면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil partitionDisk /dev/disk3 1 MBR &quot;Free Space&quot; &quot;%noformat%&quot; 100%</span><br></pre></td></tr></table></figure>
+
+
+<p>다운로드한 이미지는 zip 압축 파일로 저장된다. 다음 같이 명령 파이프를 이용하면 압축 파일을 풀지않고 디스크에 이미지를 쓸 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -p 2016-09-23-raspbian-jessie.zip* | sudo dd of=/dev/rdisk1 bs=4m</span><br><span class="line">password: ****</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>이미지를 <em>dd</em>  명령으로 작성한 후에 카드를 추출한다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil eject /dev/rdisk3</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">https://www.raspberrypi.org/documentation/installation/installing-images/mac.md</a></p>
+</blockquote>
+<h5 id="clone-disk"><a href="#clone-disk" class="headerlink" title="clone disk"></a>clone disk</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd if=/dev/diskX conv=sync,noerror bs=4m | gzip -c  &gt; /path/to/backup.img.gz</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>반대로 디스크를 디스크이미지로 만들려면 다음 같이 dd 를 사용할 수 있습니다.<br>쓰기 전에 sd card의 마운트한 파티션을 마운트를 해제해야 합니다.</p>
+<p>$sudo dd bs&#x3D;1m if&#x3D;2015-02-16-raspbian-wheezy.img of&#x3D;&#x2F;dev&#x2F;rdisk2</p>
+</blockquote>
+<h4 id="SDFormatter-이용"><a href="#SDFormatter-이용" class="headerlink" title="SDFormatter 이용"></a>SDFormatter 이용</h4><p>SDCard Formatter 를 이용해서 SD Card를 포맷할 수 있습니다. 윈도우즈, 리눅스 및 맥을 지원합니다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sdcard.org/downloads/formatter_4/">https://www.sdcard.org/downloads/formatter_4/</a></li>
+</ul>
+<ol>
+<li>오에스에 맞는 버전을 다운로드하고 실행하면 설치를 합니다. </li>
+<li>SD Card를 컴퓨터에 삽입합니다.</li>
+<li>SDFormatter를 실행하고 다음 화면 처럼 SD card를 포맷할 수 있습니다.</li>
+</ol>
+<ul>
+<li>SDFormatter 라는 프로그램을 설치하여, 옵션의 FORMAT SIZE ADJUSTMENT 설정을 ON 으로 하여 SD카드를 포맷</li>
+</ul>
+<p><img src="/images/raspberrypi/sdcardformatter-main.png" alt="SDCard Formatter 실행"></p>
+<blockquote>
+<p>SDCard Formatter에서 디스크 선택시 디스크 번호를 잘 기억해 두세요.</p>
+</blockquote>
+<h3 id="윈도우즈에서-라즈비안-복사하기"><a href="#윈도우즈에서-라즈비안-복사하기" class="headerlink" title="윈도우즈에서 라즈비안 복사하기"></a>윈도우즈에서 라즈비안 복사하기</h3><p>윈도우XP&#x2F;7&#x2F;8 에서 다운로드한 라즈비안 OS를 SD카드로 복사하겠습니다. 아래 링크에서 ‘Win32 Disk Imager’를 다운받아 사용해야 합니다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a></li>
+</ul>
+<p>win32diskimager를 실행하고 다운받은 ‘2015-03-15-raspbian-wheezy.zip’ 파일을 선택하고 SD카드 위치를 선택해 주면 됩니다.</p>
+<p><img src="/images/win32diskimager.png"></p>
+<p>그리고 Write버튼을 눌러주고 기다리면 복사를 시작합니다.</p>
+<h2 id="부팅"><a href="#부팅" class="headerlink" title="부팅"></a>부팅</h2><h3 id="IP-강제-지정"><a href="#IP-강제-지정" class="headerlink" title="IP 강제 지정"></a>IP 강제 지정</h3><p>CD Card를 마운트 하면 boot 파티션이 마운트 된다. boot 파티션에 있는 <em>cmdline.txt</em> 에 <code>ip=</code> 옵션을 추가해 강제로 IP 주소를 지정할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait **ip=192.168.0.203**</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Serial-Console"><a href="#Serial-Console" class="headerlink" title="Serial Console"></a>Serial Console</h3><p><img src="/images/raspberypi/rpi-usb-serial.png"></p>
+<p>Raspbian 은 boot 파티션에 있는 <em>cmdline.txt</em> 옵션으로 기본적으로 serial console을 사용하도록 하고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait</span><br></pre></td></tr></table></figure>
+
+<h4 id="Mac-Serial"><a href="#Mac-Serial" class="headerlink" title="Mac Serial"></a>Mac Serial</h4><p>보통 FTDI USB 케이브을 다음 두 제품이 대부분이다.</p>
+<ul>
+<li>Prolific PL2303:   <a target="_blank" rel="noopener" href="http://www.prolific.com.tw/us/showproduct.aspx?p_id=229&pcid=41">PL2303 MacOSX</a></li>
+<li>FTDI USB Serial:   FTDIUSBSerialDriver_v2_3.zip</li>
+</ul>
+<blockquote>
+<p>macOS Maverick 이후 FTDI 드라이버가 포함되어 있다.<br>혹시 새 버전을 설치하거나 이전 버전이 설치되어 삭제하려면 [^6]<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Library/Extensions/</span><br><span class="line">$ sudo rm -r PL2303.kext</span><br><span class="line">$ sudo rm -r ProlificUsbSerial.kext</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>FTDI 케이블을 사용한다고 가정하고 맥에 USB to Serial 케이블을 연결하면 <em>&#x2F;dev</em> 장치에 <em>cu.</em>, <em>tty.</em> 장치 드라이버가 생성된다. 두 장치는 다른 점이 있다.[^5]</p>
+<ul>
+<li>&#x2F;dev&#x2F;tty.* 장치는 DCD (data-carrier-detect) 신호를 대기한다, 이것은 누군가 호출해 온다는 의미이다.</li>
+<li>&#x2F;dev&#x2F;cu.* 장치는 DCD를 추정하지 않고 항상 즉시 연결한다(응답 혹은 성공)</li>
+</ul>
+<p>FTDI 로 시리얼을 사용시는 <em>cu.</em> 장치를 사용하면 된다.</p>
+<blockquote>
+<p>일반적으로 </p>
+</blockquote>
+<h4 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h4><p>Mac에서 <code>screen</code> 사용시</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen /dev/cu.usbserial-XXXXXXXX 115200</span><br></pre></td></tr></table></figure>
+
+<p>시리얼 터미널에서 빠져나오려면  ‘ctrl-a, ctrl-&#39; 를  순서데로 입력</p>
+<h3 id="Linux-Serial-terminal"><a href="#Linux-Serial-terminal" class="headerlink" title="Linux Serial terminal"></a>Linux Serial terminal</h3><p>Linux machine에서 Usb to serial 케이블을 사용할 수 있는지 콘솔 메시지에서 Serial console이 있는 지 확인한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg | egrep --color &#x27;serial&#x27;</span><br><span class="line">[ 1969.914088] usbcore: registered new interface driver usbserial</span><br><span class="line">[ 1969.914139] usbcore: registered new interface driver usbserial_generic</span><br><span class="line">[ 1969.914175] usbserial: USB Serial support registered for generic</span><br><span class="line">[ 1969.918325] usbserial: USB Serial support registered for pl2303</span><br></pre></td></tr></table></figure>
+
+<p>장치 드라이버는 보통 <em>&#x2F;dev&#x2F;ttyUSB0</em> 장치로 연결된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/ttyUSB*</span><br><span class="line">/dev/ttyUSB0</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="dterm"><a href="#dterm" class="headerlink" title="dterm"></a>dterm</h4><p>dtermAUR is a tiny serial communication program. If you invoke it without parameters, it will connect to &#x2F;dev&#x2F;ttyS0 at 9600 baud by default. The following example connect to &#x2F;dev&#x2F;ttyS0 at 115200 baud, with 8 data bits, no parity bit and 1 stop bit-times:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dterm 115200 8 n 1</span><br></pre></td></tr></table></figure>
+
+<p>See its homepage[1] for more examples.</p>
+<h4 id="Minicom"><a href="#Minicom" class="headerlink" title="Minicom"></a>Minicom</h4><p>minicom can be obtained from the official repositories. Start Minicom in setup mode:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ minicom -s</span><br></pre></td></tr></table></figure>
+
+<p>Using the textual navigation menu, change the serial port settings to the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial Device: /dev/ttyS0</span><br><span class="line">Bps/Par/Bits: 9600 8N1</span><br></pre></td></tr></table></figure>
+
+<p>Press Enter to exit the menus (pressing Esc will not save changes). Remove the modem Init and Reset strings, as we are not connecting to a modem. To do this, under the Modem and Dialing menu, delete the Init and Reset strings. Optionally save the configuration by choosing save setup as dfl from the main menu. Restart minicom with the serial cable connected to the target machine. To end the session, press Ctrl+A followed by Ctrl+X.</p>
+<h4 id="picocom"><a href="#picocom" class="headerlink" title="picocom"></a>picocom</h4><p>picocom is a tiny dumb-terminal emulation program that is very like minicom, but instead of mini, it is pico. The following example connect to ttyS0 at 9600 bps:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ picocom -b 9600 /dev/ttyS0</span><br></pre></td></tr></table></figure>
+
+<p>Note: if the backspace key won’t work properly try out this option: ‘–omap delbs’<br>See its manual for detailed usage.</p>
+<h4 id="Screen"><a href="#Screen" class="headerlink" title="Screen"></a>Screen</h4><p>screen is able to connect to a serial port. It will connect at 9600 baud by default:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/ttyS0 115200</span><br></pre></td></tr></table></figure>
+
+<p>To end the session, press Ctrl+a followed by k.</p>
+<p>여러 사용자로 열려면 <strong>-R</strong> 옵션을 주고 다시 연다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -R /dev/tty.usbserial-XXXXXXXX 115200</span><br></pre></td></tr></table></figure>
+
+<p>screen 명령 사용중 어떤 상황에서 세션이 멈춘 경우 종료 명령이 안된다. 이 경우 screen 세션을 찾고 가제 종료를 시도해 본다.</p>
+<p>Type screen -list to identify the detached screen session.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ screen -list  </span><br><span class="line">    There are screens on:  </span><br><span class="line">         20751.Melvin_Peter_V42  (Detached)  </span><br><span class="line">Note: 20751.Melvin_Peter_V42 is your session id.</span><br></pre></td></tr></table></figure>
+
+<p>Get attached to the detached screen session<br>screen -r 20751.Melvin_Peter_V42<br>Once connected to the session press Ctrl + A then type :quit</p>
+<p>Attached session 종료</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ screen -ls</span><br><span class="line">There is a screen on:</span><br><span class="line">  2667.ttys003.gogangtaeui-MacBook-Pro  (Attached)</span><br><span class="line">1 Socket in /var/folders/02/4qk5tfw527b9zqx92gtv4m980000gn/T/.screen.</span><br></pre></td></tr></table></figure>
+
+<p>screen -S sessionname -p 0 -X quit</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a target="_blank" rel="noopener" href="http://www.mostlynetworks.com/2014/11/os-x-yosemite-prolific-usb-drivers/">http://www.mostlynetworks.com/2014/11/os-x-yosemite-prolific-usb-drivers/</a><br><a target="_blank" rel="noopener" href="http://www.mostlynetworks.com/2015/01/fixing-prolific-driver-os-x/">http://www.mostlynetworks.com/2015/01/fixing-prolific-driver-os-x/</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/disk_cloning">https://wiki.archlinux.org/index.php/disk_cloning</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/working_with_the_serial_console">Archlinux-Working with serial console</a></li>
+</ul>
+<p>[^5]: <a target="_blank" rel="noopener" href="https://pbxbook.com/other/mac-tty.html">Mac tty</a><br>[^6]: <a target="_blank" rel="noopener" href="http://sewellsupport.com/Uninstall-Pl-2303-on-Mac-OSX.aspx">Uninstall PL-2303 on macOS X</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/06/22/raspberrypi-2018-06-22-raspbian-2-os-install/" data-id="cl0196xk900i7js7g7bxa104m" data-title="Raspberry Pi : Install Raspbian" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/raspberrypi-2018-06-22-raspbian-1-prepare/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">최신</strong>
+      <div class="article-nav-title">
+        
+          Raspberry Pi : Raspbian 설치준비
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/08/linux-2018-06-08-mongodb-3-6-install/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">MongoDB Community Edition 3.6 on Ubuntu</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">카테고리</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/NodeJS/">NodeJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Programming/">Programming</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/Database/">Database</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photoshop/">Photoshop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angular/">Angular</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angularjs/">Angularjs</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARM/" rel="tag">ARM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Armbian/" rel="tag">Armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence/" rel="tag">Artificial Intelligence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian-Strech/" rel="tag">Debian Strech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON-Web-Token/" rel="tag">JSON Web Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT-Toekn/" rel="tag">JWT Toekn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-15-0/" rel="tag">LEAP 15.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-42-3/" rel="tag">LEAP 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid/" rel="tag">Odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid-C2/" rel="tag">Odroid C2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Orange-Pi/" rel="tag">Orange Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SD-Card/" rel="tag">SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scientific/" rel="tag">Scientific</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript-Tutorials/" rel="tag">TypeScript Tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X11/" rel="tag">X11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular4/" rel="tag">angular4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banana-pi/" rel="tag">banana pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate-ssl/" rel="tag">certificate ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clipping-mask/" rel="tag">clipping-mask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collages/" rel="tag">collages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-compiler/" rel="tag">cross compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewall/" rel="tag">firewall</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/" rel="tag">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jasmine/" rel="tag">jasmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/karma/" rel="tag">karma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-15/" rel="tag">leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-42-3/" rel="tag">leap 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/" rel="tag">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm2/" rel="tag">lvm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-SD-Card/" rel="tag">micro SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/" rel="tag">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-tutorials/" rel="tag">nodejs tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid/" rel="tag">odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse/" rel="tag">opensuse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse-leap-15/" rel="tag">opensuse leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/orange-pi/" rel="tag">orange pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/" rel="tag">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/synergy/" rel="tag">synergy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unit-testing/" rel="tag">unit testing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdav/" rel="tag">webdav</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" rel="tag">데비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" rel="tag">리눅스</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" rel="tag">바나나파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" rel="tag">방화벽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" rel="tag">오렌지파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" rel="tag">웹토큰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" rel="tag">인공지능</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" rel="tag">전원관리</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" rel="tag">파이어월</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ARM/" style="font-size: 10px;">ARM</a> <a href="/tags/Armbian/" style="font-size: 10px;">Armbian</a> <a href="/tags/Artificial-Intelligence/" style="font-size: 12px;">Artificial Intelligence</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Debian-Strech/" style="font-size: 10px;">Debian Strech</a> <a href="/tags/JSON-Web-Token/" style="font-size: 10px;">JSON Web Token</a> <a href="/tags/JWT-Toekn/" style="font-size: 10px;">JWT Toekn</a> <a href="/tags/LEAP-15-0/" style="font-size: 11px;">LEAP 15.0</a> <a href="/tags/LEAP-42-3/" style="font-size: 11px;">LEAP 42.3</a> <a href="/tags/Linux/" style="font-size: 19px;">Linux</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Odroid/" style="font-size: 11px;">Odroid</a> <a href="/tags/Odroid-C2/" style="font-size: 10px;">Odroid C2</a> <a href="/tags/Orange-Pi/" style="font-size: 10px;">Orange Pi</a> <a href="/tags/Raspberry-Pi/" style="font-size: 14px;">Raspberry Pi</a> <a href="/tags/Raspberry-Pi-3/" style="font-size: 19px;">Raspberry Pi 3</a> <a href="/tags/Raspbian/" style="font-size: 14px;">Raspbian</a> <a href="/tags/SD-Card/" style="font-size: 10px;">SD Card</a> <a href="/tags/Scientific/" style="font-size: 10px;">Scientific</a> <a href="/tags/TensorFlow/" style="font-size: 11px;">TensorFlow</a> <a href="/tags/TypeScript/" style="font-size: 14px;">TypeScript</a> <a href="/tags/TypeScript-Tutorials/" style="font-size: 11px;">TypeScript Tutorials</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/X11/" style="font-size: 10px;">X11</a> <a href="/tags/amd64/" style="font-size: 14px;">amd64</a> <a href="/tags/angular4/" style="font-size: 12px;">angular4</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/arm64/" style="font-size: 14px;">arm64</a> <a href="/tags/armbian/" style="font-size: 16px;">armbian</a> <a href="/tags/banana-pi/" style="font-size: 10px;">banana pi</a> <a href="/tags/certificate-ssl/" style="font-size: 10px;">certificate ssl</a> <a href="/tags/clipping-mask/" style="font-size: 10px;">clipping-mask</a> <a href="/tags/collages/" style="font-size: 10px;">collages</a> <a href="/tags/cross-compiler/" style="font-size: 10px;">cross compiler</a> <a href="/tags/debian/" style="font-size: 15px;">debian</a> <a href="/tags/firewall/" style="font-size: 12px;">firewall</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/install/" style="font-size: 11px;">install</a> <a href="/tags/jasmine/" style="font-size: 10px;">jasmine</a> <a href="/tags/jupyter/" style="font-size: 14px;">jupyter</a> <a href="/tags/jupyter-notebook/" style="font-size: 10px;">jupyter notebook</a> <a href="/tags/jupyter-notebook/" style="font-size: 15px;">jupyter-notebook</a> <a href="/tags/karma/" style="font-size: 10px;">karma</a> <a href="/tags/leap-15/" style="font-size: 11px;">leap 15</a> <a href="/tags/leap-42-3/" style="font-size: 11px;">leap 42.3</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lvm2/" style="font-size: 10px;">lvm2</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/micro-SD-Card/" style="font-size: 10px;">micro SD Card</a> <a href="/tags/middleware/" style="font-size: 10px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 17px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 11px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 18px;">nodejs</a> <a href="/tags/nodejs-tutorials/" style="font-size: 10px;">nodejs tutorials</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/odroid/" style="font-size: 11px;">odroid</a> <a href="/tags/odroid-c2/" style="font-size: 12px;">odroid c2</a> <a href="/tags/odroid-c2/" style="font-size: 14px;">odroid-c2</a> <a href="/tags/openSUSE/" style="font-size: 17px;">openSUSE</a> <a href="/tags/opensuse/" style="font-size: 11px;">opensuse</a> <a href="/tags/opensuse-leap-15/" style="font-size: 10px;">opensuse leap 15</a> <a href="/tags/orange-pi/" style="font-size: 10px;">orange pi</a> <a href="/tags/photoshop/" style="font-size: 11px;">photoshop</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">raspberry pi</a> <a href="/tags/security/" style="font-size: 11px;">security</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/synergy/" style="font-size: 10px;">synergy</a> <a href="/tags/terminal/" style="font-size: 11px;">terminal</a> <a href="/tags/tmux/" style="font-size: 11px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/unit-testing/" style="font-size: 10px;">unit testing</a> <a href="/tags/virtualenv/" style="font-size: 14px;">virtualenv</a> <a href="/tags/virtualenvwrapper/" style="font-size: 14px;">virtualenvwrapper</a> <a href="/tags/webdav/" style="font-size: 10px;">webdav</a> <a href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" style="font-size: 10px;">데비안</a> <a href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" style="font-size: 13px;">데이안</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" style="font-size: 19px;">라즈베리파이</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" style="font-size: 14px;">라즈비안</a> <a href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="font-size: 12px;">리눅스</a> <a href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">바나나파이</a> <a href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" style="font-size: 10px;">방화벽</a> <a href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">오렌지파이</a> <a href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" style="font-size: 15px;">우분투</a> <a href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" style="font-size: 10px;">웹토큰</a> <a href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" style="font-size: 12px;">인공지능</a> <a href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" style="font-size: 10px;">전원관리</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" style="font-size: 12px;">파이썬</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" style="font-size: 10px;">파이어월</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">10월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">8월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">7월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">6월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">12월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">11월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">10월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">9월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">7월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">5월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">4월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">12월 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2월 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/24/hello-world/">blog.thinkbee.kr 이전 작업중입니다.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/">HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-config/">MongoDB 구성 설정과 사용자 인증 사용</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/05/python-2019-09-05-OpenSuse-JupyterNotebook-scientific/">openSUSE - 과학계산을 위한 Python, Jupyter Notebook</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

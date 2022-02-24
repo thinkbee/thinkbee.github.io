@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MongoDB 구성 설정과 사용자 인증 사용 | Blogging through Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="mongdb community edition 에서 사용하는 mongod.conf 를 구성하고 설정한 내용을 정리했다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 구성 설정과 사용자 인증 사용">
+<meta property="og:url" content="http://example.com/2019/12/20/linux-2019-12-20-mongodb-config/index.html">
+<meta property="og:site_name" content="Blogging through Programming">
+<meta property="og:description" content="mongdb community edition 에서 사용하는 mongod.conf 를 구성하고 설정한 내용을 정리했다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2019-12-20T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T16:43:48.206Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="debian">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="armbian">
+<meta property="article:tag" content="mongodb">
+<meta property="article:tag" content="odroid-c2">
+<meta property="article:tag" content="arm64">
+<meta property="article:tag" content="amd64">
+<meta property="article:tag" content="우분투">
+<meta property="article:tag" content="데이안">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Blogging through Programming" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blogging through Programming</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux-2019-12-20-mongodb-config" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/12/20/linux-2019-12-20-mongodb-config/" class="article-date">
+  <time class="dt-published" datetime="2019-12-20T03:00:00.000Z" itemprop="datePublished">2019-12-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Database/">Database</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MongoDB 구성 설정과 사용자 인증 사용
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MongoDB에 관련 글</p>
+<p><strong>MongoDB Community Edition Installations</strong> 시리즈:ㅇ</p>
+<ol>
+<li><a href="/linux/database/mongodb-4.2-install_arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu&#x2F;Debian Armbian</a></li>
+<li><a href="/linux/database/mongodb-config/">MongoDB 구성 설정 과 사용자 인증 사용</a></li>
+</ol>
+<hr>
+<p><strong>MongoDB Tutorials</strong> 시리즈:</p>
+<ol>
+<li><a href="/linux/database/mongodb-collections/">MongoDB Tutorials: collections</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.mongodb.org/display/DOCS/Tutorial">MongoDB Tutorial</a></li>
+</ol>
+<hr>
+<p><strong>MongoDB와 Middleware Platform</strong>:</p>
+<ol>
+<li><a href="/nodejs/database/mongodb-mongoose/">NodeJS Mongoose</a></li>
+<li><a href="/nodejs/database/mongodb-mongoose-middleware/">Mongodb mongoose-middleware</a></li>
+</ol>
+<hr>
+<p>이전 버전과 기타 자료:</p>
+<ol>
+<li><a href="/linux/database/mongodb-user-auth/">MongoDB User Authentication</a></li>
+<li><a href="/linux/database/mongodb-3.6-install/">MongoDB Community Edition 3.6 on Ubuntu(ARM64)</a></li>
+<li><a href="/linux/database/mongodb-3.4-install-armv8/">Mongodb 3.4 install on Armv8</a></li>
+<li><a href="/raspberry%20pi/linux/database/opensuse-jeos-mongodb/">Raspberry Pi 3 64bit OS openSUSE: Build MongoDB 3.4</a></li>
+</ol>
+<hr>
+<br>
+
+<h1 id="Mongo-Database-설정과-사용자-인증-사용"><a href="#Mongo-Database-설정과-사용자-인증-사용" class="headerlink" title="Mongo Database 설정과 사용자 인증 사용"></a>Mongo Database 설정과 사용자 인증 사용</h1><p>이 문서는 <strong>MongoDB Community Edition</strong> 를 리눅스 플랫폼에서 시작과 운영에 필요한 구성 파일 <code>mongod.conf</code> 의 설정을 다루고 있다. 이를 통해 데이터베이스 서비스를 동작시키고, 인증한 사용자로서 클라이언트 프로그램으로 접속하기 위한 <strong>기본 인증방식을 구성</strong>하는 것을 정리하고 있다.</p>
+<ol>
+<li><a href="#Mongo-Database-%EC%84%A4%EC%A0%95">Mongo Database 설정</a></li>
+<li>기본인증 구성</li>
+</ol>
+<blockquote>
+<p>이 글의 내용은 MongoDB Community Edition 3.6 이후 4.2 까지 사용이 가능하다.</p>
+</blockquote>
+<br/>
+
+<h2 id="Mongo-Database-설정"><a href="#Mongo-Database-설정" class="headerlink" title="Mongo Database 설정"></a>Mongo Database 설정</h2><p>우분투&#x2F;데비안 계열은 설치시 <code>mongod</code> 데몬이 데이터베이스 운영에 필요한 여러 구성에 대한 설정을 위해서 <code>/etc/mongod.conf</code> 구성 파일을 사용한다. 구성 파일에 데이터베이스 구성에 필요한 여러 설정을 지정할 수 있다.</p>
+<ul>
+<li>mongodb 사용자와 디렉토리 퍼미션 확인</li>
+<li>외부 접속 허용 여부</li>
+<li>mongo client 접속 테스트</li>
+<li>mongodb 인증</li>
+</ul>
+<p>이제 실제 파일에 구성 내용을 설정하는데, 여기서는 mongod 의 기본인증 방법과 데이터 저장소에 대해서만 다룬다.</p>
+<h3 id="mongod-설정"><a href="#mongod-설정" class="headerlink" title="mongod 설정"></a>mongod 설정</h3><p>MongoDB의 <code>systemd</code> 서비스는 보통 데이터베이스 구성 파일 <code>/etc/mongod.conf</code> 을 참조한다. mongod 서비스 상태를 확인해 보면 <code>--config /etc/mongod.conf</code> 옵션으로 구성 파일을 지시하고 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status mongod.service</span><br><span class="line">* mongod.service - MongoDB Database Server</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Wed 2019-12-19 15:38:14 UTC; 3 weeks 6 days ago</span><br><span class="line">     Docs: https://docs.mongodb.org/manual</span><br><span class="line"> Main PID: 2051 (mongod)</span><br><span class="line">   Memory: 191.3M</span><br><span class="line">   CGroup: /system.slice/mongod.service</span><br><span class="line">           `-2051 /usr/bin/mongod --config /etc/mongod.conf</span><br></pre></td></tr></table></figure>
+
+<p>mongod.conf 파일을 살펴보자,</p>
+<h4 id="mongod-conf-파일"><a href="#mongod-conf-파일" class="headerlink" title="mongod.conf 파일"></a>mongod.conf 파일</h4><p>먼저 <code>/etc/mongod.conf</code> 파일에 <strong>인증</strong>을 제외한 <strong>데이터 디렉토리</strong>, <strong>bindIp</strong>, <strong>로그</strong> 부분만 설정한다.</p>
+<ul>
+<li>storage: 데이터 베이스 파일 저장 위치 및 방법<ul>
+<li><strong>dbPath</strong> : 데이터베이스 스토리지 위치</li>
+</ul>
+</li>
+<li>systemlog: 로그 파일 및 로그 조작 방법</li>
+<li>net: 네트워크 관련<ul>
+<li><strong>bindIp</strong>: 서버 외에서 mongo 클라이언트가 접근하려면 IP 를 입력한다.</li>
+</ul>
+</li>
+</ul>
+<p>먼저 <strong>인증을 비활성화</strong> 한 구성을 하는데, 다음은 기본적인 mongod.conf 를 구성한 내용이다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">storage:</span><br><span class="line">  dbPath: /data/mongodata/</span><br><span class="line">  journal:</span><br><span class="line">    enabled: true</span><br><span class="line"></span><br><span class="line">systemLog:</span><br><span class="line">  destination: file</span><br><span class="line">  logAppend: true</span><br><span class="line">  path: /var/log/mongodb/mongod.log</span><br><span class="line"></span><br><span class="line">processManagement:</span><br><span class="line">   fork: true</span><br><span class="line"></span><br><span class="line">net:</span><br><span class="line">  port: 27017</span><br><span class="line">  bindIp: 127.0.0.1,192.168.0.2</span><br></pre></td></tr></table></figure>
+
+<p>이제 <code>mongo.conf</code> 구성 파일이 준비되었으면 systemctl 로 mongod 데몬을 재시작한다..</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod.service</span><br><span class="line">$ sudo systemctl status mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>간단한 구성 설정, 아직은 인증이 비활성화된 상태를 마련 했으면 사용자 인증을 통한 원격 접속을 살펴보자,</p>
+<hr>
+<br>
+
+<h2 id="mongo-기본인증"><a href="#mongo-기본인증" class="headerlink" title="mongo 기본인증"></a>mongo 기본인증</h2><p>보통 mongo 클라이언트 등에서 MongoDatabase 를 사용하기 위해서 클라이언트를 위한 인증을 제공해야 한다. 클라이언트를 위한 인증은 관리용 데이터베이스에서 데이터베이스 사용자를 등록하고 클라이언트가 등록한 사용자로 데이터베이스에 접속하는 방법을 사용한다.</p>
+<p>인증을 추가하기 위해서 mongod의 <code>mongo.conf</code> 설정 파일에 접근 제어를 하지 않는 상태에서 <strong>mongo</strong> 클라이언트로 접속해서 기본인증을 위한 데이터베이스 사용자를 추가해 준다.</p>
+<h3 id="Admin-사용자-생성"><a href="#Admin-사용자-생성" class="headerlink" title="Admin 사용자 생성"></a>Admin 사용자 생성</h3><p><code>mongod</code>에 인증이 비활성화 상태에서 mongo 클라이언트로 접속에 성공하면 <strong><code>&gt;</code></strong> 프롬프트가 나온 후 use 명령으로 <em>admin</em> 데이터베이스로 전환한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line">&gt;</span><br><span class="line">&gt; use admin</span><br><span class="line">switched to db admin</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1). <em>admin</em> 데이터베이스에서 관리자 role을 가진 사용자를 추가하고, 2). 사용할 데이터베이스의 사용자와 접근 제어를 추가해서 사용하기 위해서 작업한다.</p>
+<h4 id="user-administrator"><a href="#user-administrator" class="headerlink" title="user administrator"></a>user administrator</h4><p><em>admin</em> 데이터베이스에 <code>userAdmin role</code> 혹은 <code>userAdminAnyDatabase role</code>을 가진 사용자 만든다.</p>
+<p>다음은 <em>admin</em> 데이터베이스에서 사용자 <strong><code>admin</code></strong> 계정를 생성하고 있다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">switched to db admin</span><br><span class="line">&gt;</span><br><span class="line">&gt; db.<span class="title function_">createUser</span>(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">user</span>:<span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">    <span class="attr">pwd</span>:<span class="string">&#x27;****&#x27;</span>,</span><br><span class="line">    <span class="attr">roles</span>:[<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"><span class="title class_">Successfully</span> added <span class="attr">user</span>: &#123; <span class="string">&quot;user&quot;</span> : <span class="string">&quot;admin&quot;</span>, <span class="string">&quot;roles&quot;</span> : [ <span class="string">&quot;userAdminAnyDatabase&quot;</span> ] &#125;</span><br><span class="line">&gt;</span><br><span class="line">&gt; db.<span class="title function_">getUsers</span>()</span><br></pre></td></tr></table></figure>
+
+<p>사용자 패스워드 변경은 <code>.changeUserPassword()</code> 메서드를 사용한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.<span class="title function_">changeUserPassword</span>(<span class="string">&quot;accountUser&quot;</span>, <span class="string">&quot;SOh3TbYhx8ypJPxmt1oOfL&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>사용자의 <code>role</code> 변경은 <code>.grantRolesToUser()</code> 메서드를 사용한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.<span class="title function_">grantRolesToUser</span>( <span class="string">&#x27;admin&#x27;</span>, [&#123;<span class="attr">role</span>: <span class="string">&#x27;userAdmin&#x27;</span>, <span class="attr">db</span>:<span class="string">&#x27;admin&#x27;</span>&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>혹은 <code>updateUser()</code> 를 사용할 수 있다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.updateUser( &quot;appClient01&quot;, ...</span><br></pre></td></tr></table></figure>
+
+<p>현재 데이터베이스의 사용자를 출력한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.<span class="title function_">getUsers</span>()</span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;_id&quot;</span> : <span class="string">&quot;admin.admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;user&quot;</span> : <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;roles&quot;</span> : [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span> : <span class="string">&quot;userAdmin&quot;</span>,</span><br><span class="line">        <span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span> : <span class="string">&quot;userAdminAnyDatabase&quot;</span>,</span><br><span class="line">        <span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>admin 데이터베이스에 새로 생성한 admin 사용자로 로그인을 해보자. 그러기 위해서는 admin 데이터베이스에 인증 로그인을 한 후에 데이터 베이스를 생성하거나 사용할 수 있다.</p>
+<br>
+
+<h2 id="인증-활성화"><a href="#인증-활성화" class="headerlink" title="인증 활성화"></a>인증 활성화</h2><p><strong><code>mongod.conf</code></strong> 파일 안의 security 섹션에서 <code>security.authorization</code> 을 활성화 한다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">security:</span><br><span class="line">  authorization: enabled</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>인증 활성화는 MongoDB v2.4이전에는 인증모드를 명령행의 <code>--auth</code> 옵션을 사용하고, v2.6 이후에서 <em>mongod.conf</em> 파일 사용할 때 <code>security.authorization</code> 를 활성화 하고 있다.</p>
+</blockquote>
+<p>systemd 로 서비스를 재시작 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod.service</span><br><span class="line">$ sudo systemctl status mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>이렇게 인증모드로 데이터베이스를 시작하면 인증 정보로 로그인해야 한다. 아래 같이 인증 정보없이 로그인 하면 데이터베이스 사용시 에러를 만난다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line">&gt; show dbs;</span><br><span class="line">Tue Sep 27 23:22:40.683 listDatabases failed:&#123; &quot;ok&quot; : 0, &quot;errmsg&quot; : &quot;unauthorized&quot; &#125; at src/mongo/shell/mongo.js:46</span><br><span class="line">&gt;</span><br><span class="line">&gt; show users</span><br><span class="line">Tue Sep 27 23:22:44.667 error: &#123; &quot;$err&quot; : &quot;not authorized for query on test.system.users&quot;, &quot;code&quot; : 16550 &#125; at src/mongo/shell/query.js:128</span><br></pre></td></tr></table></figure>
+
+<p>이제 인증 모드에서 데이터베이스에 접속해야 한다.</p>
+<h3 id="인증모드로-접속"><a href="#인증모드로-접속" class="headerlink" title="인증모드로 접속"></a>인증모드로 접속</h3><p>데이터베이스 시스템에 접근제어가 활성화 되서 인증모드로 <code>mongo</code> 클라이언트 접속할 때는 옵션으로 <code>-u &lt;username&gt;, -p &lt;password&gt;</code> 와 <code>--authenticationDatabase &lt;database&gt;</code> 를 지정해 주어야 한다.</p>
+<p>앞서 생성해둔 admin 계정으로 접속해 보자,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mongo --port 27017 -u <span class="string">&quot;admin&quot;</span> -p <span class="string">&quot;****&quot;</span> --authenticationDatabase <span class="string">&quot;admin&quot;</span></span><br><span class="line">MongoDB shell version v4.2</span><br><span class="line">connecting to: mongodb://127.0.0.1:27017</span><br><span class="line">MongoDB server version: 4.2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>MongoDatabae는 데이터베이스 마다 인증한 사용자를 통해 조작을 하게 된다. 그래서 인증모드로 접속 되었지만, 어떤 데이터베이스에 비인증된 사용자로 접근하는 경우는 에러가 발생한다. 예를 들어서 admin 사용자로 인증 로그한 mongodb shell에서 아래 같이 비인증인 student 데이터베이스에 접근하면 에러가 난다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;</span><br><span class="line">&gt; use students</span><br><span class="line">switched to db students</span><br><span class="line">&gt; show users</span><br><span class="line">2018-06-25T18:30:38.174+0900 E QUERY    [thread1] Error: not authorized on students to execute command &#123; usersInfo: 1.0, $db: &quot;students&quot; &#125; :</span><br></pre></td></tr></table></figure>
+
+<h4 id="mongo-비인증-접근시"><a href="#mongo-비인증-접근시" class="headerlink" title="mongo 비인증 접근시"></a>mongo 비인증 접근시</h4><p>위와 같이 로컬에서 mongo 클라이언트 접속하는 것 외에 외부에서 mongodb로 접근시 authentication을 적용한 상태라면 다음과 같은 URL로 접근할 수 있다:</p>
+<blockquote>
+<p>“username:password@HOST_NAME&#x2F;mydb”</p>
+</blockquote>
+<p>그러나 외부접근시 클라이언트 버전과 서버의 Credential 버전이 맞지 않은 경우 다음 같이 실패 메시지를 확인할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2016-05-16T00:53:10.338+0900 I ACCESS [conn2] Failed to authenticate student@student with mechanism MONGODB-CR: AuthenticationFailed: MONGODB-CR credentials missing in the user document</span><br><span class="line">&gt; 2016-05-16T00:53:10.352+0900 I NETWORK [conn2] end connection 220.121.140.59:51634 (0 connections now open)</span><br></pre></td></tr></table></figure>
+
+<br/>
+<br/>
+
+<h2 id="mongod-명령-사용"><a href="#mongod-명령-사용" class="headerlink" title="mongod 명령 사용"></a><code>mongod</code> 명령 사용</h2><p>보통 디버깅 목적으로 사용하기 위해서 <code>systemd</code>가 아닌 명령행에서 <code>mongod</code> 명령으로 로 MongoDB를 시작해 설정 파일 등이 제대로 동작하는지 확인할 수 있다.</p>
+<blockquote>
+<p>다만 데이터베이스가 생성하는 데이터와 로그 파일의 접근권한이 실행한 사용자 계정으로 처리되어 퍼미션 문제가 발생할 수 있다.</p>
+</blockquote>
+<h4 id="mongoDB-v2-6-이후"><a href="#mongoDB-v2-6-이후" class="headerlink" title="mongoDB v2.6 이후"></a>mongoDB v2.6 이후</h4><p>앞서 시작한 명령행 <strong>mongodb</strong>를 종료하고 명령라인에서 재시작 <code>--auth</code> 옵션을 붙여 시작한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mongod --auth --port 27017 --dbpath /data/mongodata</span><br></pre></td></tr></table></figure>
+
+<p>접근제어 <code>--auth</code> 옵션으로 데이터베이스를 시작하면 로그인시 <code>-u &lt;username&gt;, -p &lt;password&gt;</code> 와 <code>--authenticationDatabase &lt;database&gt;</code> 를 지정해 주어야 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mongo --port 27017 -u &quot;admin&quot; -p &quot;****&quot; --authenticationDatabase &quot;admin&quot;</span><br><span class="line">MongoDB shell version v3.4.0</span><br><span class="line">connecting to: mongodb://127.0.0.1:27017</span><br><span class="line">MongoDB server version: 3.4.0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>이전 버전의 mongod 명령</p>
+<h4 id="mongoDB-v2-4-인증모드로-시작"><a href="#mongoDB-v2-4-인증모드로-시작" class="headerlink" title="mongoDB v2.4 인증모드로 시작"></a>mongoDB v2.4 인증모드로 시작</h4><p>&#96;&#96;mongod&#96; 명령라인으로 시작할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mongod --port 27017 --dbpath /data/mongodata</span><br></pre></td></tr></table></figure>
+
+<p>mongoDB v2.4는 다음 같이 인증 모드로 시작한다. <code>mongod</code> 명령라인에서 <code>--auth</code> 옵션을 붙여 DB 인스턴스(<code>mongod</code>)를 시작 혹은 재시작한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mongod --auth --port 27017 --dbpath /data/db1</span><br></pre></td></tr></table></figure>
+
+<p>혹은 <em>mongod.conf</em> 설정 파일에서 <strong>auth</strong> 를 활성화 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth = true</span><br></pre></td></tr></table></figure>
+
+<h2 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h2><p>[^1]: <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition">Install mongodb on Ubuntu</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/12/20/linux-2019-12-20-mongodb-config/" data-id="cl0196xg7001hjs7gh3k4d6mw" data-title="MongoDB 구성 설정과 사용자 인증 사용" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">최신</strong>
+      <div class="article-nav-title">
+        
+          HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">카테고리</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/NodeJS/">NodeJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Programming/">Programming</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/Database/">Database</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photoshop/">Photoshop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angular/">Angular</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angularjs/">Angularjs</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARM/" rel="tag">ARM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Armbian/" rel="tag">Armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence/" rel="tag">Artificial Intelligence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian-Strech/" rel="tag">Debian Strech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON-Web-Token/" rel="tag">JSON Web Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT-Toekn/" rel="tag">JWT Toekn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-15-0/" rel="tag">LEAP 15.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-42-3/" rel="tag">LEAP 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid/" rel="tag">Odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid-C2/" rel="tag">Odroid C2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Orange-Pi/" rel="tag">Orange Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SD-Card/" rel="tag">SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scientific/" rel="tag">Scientific</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript-Tutorials/" rel="tag">TypeScript Tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X11/" rel="tag">X11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular4/" rel="tag">angular4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banana-pi/" rel="tag">banana pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate-ssl/" rel="tag">certificate ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clipping-mask/" rel="tag">clipping-mask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collages/" rel="tag">collages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-compiler/" rel="tag">cross compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewall/" rel="tag">firewall</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/" rel="tag">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jasmine/" rel="tag">jasmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/karma/" rel="tag">karma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-15/" rel="tag">leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-42-3/" rel="tag">leap 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/" rel="tag">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm2/" rel="tag">lvm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-SD-Card/" rel="tag">micro SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/" rel="tag">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-tutorials/" rel="tag">nodejs tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid/" rel="tag">odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse/" rel="tag">opensuse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse-leap-15/" rel="tag">opensuse leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/orange-pi/" rel="tag">orange pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/" rel="tag">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/synergy/" rel="tag">synergy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unit-testing/" rel="tag">unit testing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdav/" rel="tag">webdav</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" rel="tag">데비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" rel="tag">리눅스</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" rel="tag">바나나파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" rel="tag">방화벽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" rel="tag">오렌지파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" rel="tag">웹토큰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" rel="tag">인공지능</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" rel="tag">전원관리</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" rel="tag">파이어월</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ARM/" style="font-size: 10px;">ARM</a> <a href="/tags/Armbian/" style="font-size: 10px;">Armbian</a> <a href="/tags/Artificial-Intelligence/" style="font-size: 12px;">Artificial Intelligence</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Debian-Strech/" style="font-size: 10px;">Debian Strech</a> <a href="/tags/JSON-Web-Token/" style="font-size: 10px;">JSON Web Token</a> <a href="/tags/JWT-Toekn/" style="font-size: 10px;">JWT Toekn</a> <a href="/tags/LEAP-15-0/" style="font-size: 11px;">LEAP 15.0</a> <a href="/tags/LEAP-42-3/" style="font-size: 11px;">LEAP 42.3</a> <a href="/tags/Linux/" style="font-size: 19px;">Linux</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Odroid/" style="font-size: 11px;">Odroid</a> <a href="/tags/Odroid-C2/" style="font-size: 10px;">Odroid C2</a> <a href="/tags/Orange-Pi/" style="font-size: 10px;">Orange Pi</a> <a href="/tags/Raspberry-Pi/" style="font-size: 14px;">Raspberry Pi</a> <a href="/tags/Raspberry-Pi-3/" style="font-size: 19px;">Raspberry Pi 3</a> <a href="/tags/Raspbian/" style="font-size: 14px;">Raspbian</a> <a href="/tags/SD-Card/" style="font-size: 10px;">SD Card</a> <a href="/tags/Scientific/" style="font-size: 10px;">Scientific</a> <a href="/tags/TensorFlow/" style="font-size: 11px;">TensorFlow</a> <a href="/tags/TypeScript/" style="font-size: 14px;">TypeScript</a> <a href="/tags/TypeScript-Tutorials/" style="font-size: 11px;">TypeScript Tutorials</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/X11/" style="font-size: 10px;">X11</a> <a href="/tags/amd64/" style="font-size: 14px;">amd64</a> <a href="/tags/angular4/" style="font-size: 12px;">angular4</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/arm64/" style="font-size: 14px;">arm64</a> <a href="/tags/armbian/" style="font-size: 16px;">armbian</a> <a href="/tags/banana-pi/" style="font-size: 10px;">banana pi</a> <a href="/tags/certificate-ssl/" style="font-size: 10px;">certificate ssl</a> <a href="/tags/clipping-mask/" style="font-size: 10px;">clipping-mask</a> <a href="/tags/collages/" style="font-size: 10px;">collages</a> <a href="/tags/cross-compiler/" style="font-size: 10px;">cross compiler</a> <a href="/tags/debian/" style="font-size: 15px;">debian</a> <a href="/tags/firewall/" style="font-size: 12px;">firewall</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/install/" style="font-size: 11px;">install</a> <a href="/tags/jasmine/" style="font-size: 10px;">jasmine</a> <a href="/tags/jupyter/" style="font-size: 14px;">jupyter</a> <a href="/tags/jupyter-notebook/" style="font-size: 10px;">jupyter notebook</a> <a href="/tags/jupyter-notebook/" style="font-size: 15px;">jupyter-notebook</a> <a href="/tags/karma/" style="font-size: 10px;">karma</a> <a href="/tags/leap-15/" style="font-size: 11px;">leap 15</a> <a href="/tags/leap-42-3/" style="font-size: 11px;">leap 42.3</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lvm2/" style="font-size: 10px;">lvm2</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/micro-SD-Card/" style="font-size: 10px;">micro SD Card</a> <a href="/tags/middleware/" style="font-size: 10px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 17px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 11px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 18px;">nodejs</a> <a href="/tags/nodejs-tutorials/" style="font-size: 10px;">nodejs tutorials</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/odroid/" style="font-size: 11px;">odroid</a> <a href="/tags/odroid-c2/" style="font-size: 12px;">odroid c2</a> <a href="/tags/odroid-c2/" style="font-size: 14px;">odroid-c2</a> <a href="/tags/openSUSE/" style="font-size: 17px;">openSUSE</a> <a href="/tags/opensuse/" style="font-size: 11px;">opensuse</a> <a href="/tags/opensuse-leap-15/" style="font-size: 10px;">opensuse leap 15</a> <a href="/tags/orange-pi/" style="font-size: 10px;">orange pi</a> <a href="/tags/photoshop/" style="font-size: 11px;">photoshop</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">raspberry pi</a> <a href="/tags/security/" style="font-size: 11px;">security</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/synergy/" style="font-size: 10px;">synergy</a> <a href="/tags/terminal/" style="font-size: 11px;">terminal</a> <a href="/tags/tmux/" style="font-size: 11px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/unit-testing/" style="font-size: 10px;">unit testing</a> <a href="/tags/virtualenv/" style="font-size: 14px;">virtualenv</a> <a href="/tags/virtualenvwrapper/" style="font-size: 14px;">virtualenvwrapper</a> <a href="/tags/webdav/" style="font-size: 10px;">webdav</a> <a href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" style="font-size: 10px;">데비안</a> <a href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" style="font-size: 13px;">데이안</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" style="font-size: 19px;">라즈베리파이</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" style="font-size: 14px;">라즈비안</a> <a href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="font-size: 12px;">리눅스</a> <a href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">바나나파이</a> <a href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" style="font-size: 10px;">방화벽</a> <a href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">오렌지파이</a> <a href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" style="font-size: 15px;">우분투</a> <a href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" style="font-size: 10px;">웹토큰</a> <a href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" style="font-size: 12px;">인공지능</a> <a href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" style="font-size: 10px;">전원관리</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" style="font-size: 12px;">파이썬</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" style="font-size: 10px;">파이어월</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">10월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">8월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">7월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">6월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">12월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">11월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">10월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">9월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">7월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">5월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">4월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">12월 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2월 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/24/hello-world/">blog.thinkbee.kr 이전 작업중입니다.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/">HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-config/">MongoDB 구성 설정과 사용자 인증 사용</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/05/python-2019-09-05-OpenSuse-JupyterNotebook-scientific/">openSUSE - 과학계산을 위한 Python, Jupyter Notebook</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

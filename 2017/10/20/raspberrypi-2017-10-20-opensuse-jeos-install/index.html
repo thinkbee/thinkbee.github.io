@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Raspberry Pi 3 64bit OS openSUSE: Install | Blogging through Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="2017-10-30: swap 추가, timezone 수정{:.right-history}  Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.  https:&#x2F;&#x2F;en.opensuse.org&#x2F;HCL:Raspberry_Pi3  이글은 5개 글타래로 구성되며, openSUSE 설치 및 사용">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi 3 64bit OS openSUSE: Install">
+<meta property="og:url" content="http://example.com/2017/10/20/raspberrypi-2017-10-20-opensuse-jeos-install/index.html">
+<meta property="og:site_name" content="Blogging through Programming">
+<meta property="og:description" content="2017-10-30: swap 추가, timezone 수정{:.right-history}  Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.  https:&#x2F;&#x2F;en.opensuse.org&#x2F;HCL:Raspberry_Pi3  이글은 5개 글타래로 구성되며, openSUSE 설치 및 사용">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://example.com/images/opensuse/etcher-image-writing.png">
+<meta property="og:image" content="http://example.com/images/raspberrypi/rpi-usb-serial.png">
+<meta property="og:image" content="http://example.com/images/opensuse/opensuse-boot33.png">
+<meta property="og:image" content="http://example.com/images/opensuse/opensuse-root-passwd.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-cli-ui.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-date_time.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-date_time-ntp1.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-date_time-ntp2.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network1.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network2.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network-settings.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network-ip-address.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network-host.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-network-gw.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-user.png">
+<meta property="article:published_time" content="2017-10-20T00:10:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T16:47:05.972Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Raspberry Pi 3">
+<meta property="article:tag" content="openSUSE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/opensuse/etcher-image-writing.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blogging through Programming" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blogging through Programming</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-raspberrypi-2017-10-20-opensuse-jeos-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/10/20/raspberrypi-2017-10-20-opensuse-jeos-install/" class="article-date">
+  <time class="dt-published" datetime="2017-10-20T00:10:00.000Z" itemprop="datePublished">2017-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a>►<a class="article-category-link" href="/categories/Raspberry-Pi/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Raspberry Pi 3 64bit OS openSUSE: Install
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>2017-10-30: swap 추가, timezone 수정<br>{:.right-history}</p>
+</blockquote>
+<p>Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.opensuse.org/HCL:Raspberry_Pi3">https://en.opensuse.org/HCL:Raspberry_Pi3</a></li>
+</ul>
+<p>이글은 5개 글타래로 구성되며, openSUSE 설치 및 사용에 대해 작성한다.</p>
+<ol>
+<li><strong>Install 64bit openSUSE Leap 42.2 &#x2F; JeOS</strong></li>
+<li>openSUSE: Managing Service daemon</li>
+<li>openSUSE: Basic OS Security for Server</li>
+<li><a href="!--swig%EF%BF%BC32--">Install &amp; Configuration - Nginx, Node JS, Jupyter</a></li>
+<li>openSUSE: Build MongoDB 3.4.x</li>
+</ol>
+<h2 id="Install-64bit-openSUSE-Leap-42-2-x2F-JeOS"><a href="#Install-64bit-openSUSE-Leap-42-2-x2F-JeOS" class="headerlink" title="Install 64bit openSUSE Leap 42.2 &#x2F; JeOS"></a>Install 64bit openSUSE Leap 42.2 &#x2F; JeOS</h2><p>openSUSE는 <strong>Raspberry Pi 3</strong>를 위한 Opensuse community edition은 정식 버전 <strong>Leap 42.2 image</strong>, 개발버전 <em>Tumbleweed image</em>, 커뮤니티버전 non-upstream openSUSE Tumbleweed image* 으로 구성되어 있다.</p>
+<p>이들 버전은 용도에 따라 JeOS, E20, LXQT X11 이미지로 다운받을 수 있다.</p>
+<ul>
+<li><p>Just Enought Operating System (JeOS)</p>
+<ul>
+<li>jeOS 이미지는 기본 오에스만을 포함하고 있다.</li>
+<li><a target="_blank" rel="noopener" href="https://www.suse.com/products/server/jeos/">https://www.suse.com/products/server/jeos/</a></li>
+</ul>
+</li>
+<li><p>E20</p>
+<ul>
+<li>데스크탑 환경으로 Enlightenment 을 사용하 GUI 이미지</li>
+</ul>
+</li>
+<li><p>LXQt</p>
+<ul>
+<li>LXDE-Qt 와 RazorQt 병합한 데스크탑 환경</li>
+<li><a target="_blank" rel="noopener" href="https://en.opensuse.org/LXQt">https://en.opensuse.org/LXQt</a></li>
+</ul>
+</li>
+</ul>
+<br>
+### Download and Install
+
+<p><a target="_blank" rel="noopener" href="https://en.opensuse.org/HCL:Raspberry_Pi3">Download Page</a> 의 두번째 <em>Installing the 64-bit openSUSE Leap image</em> 단락에 있는 JeOS image 를 다운로드 한다.</p>
+<h4 id="Writing-image-to-SD-Card"><a href="#Writing-image-to-SD-Card" class="headerlink" title="Writing image to SD Card"></a>Writing image to SD Card</h4><p><a target="_blank" rel="noopener" href="http://etcher.io/">Etcher</a> 등을 이용해서 다운받은 이미지 파일을 SD Card에 쓴다.</p>
+<p><img src="/images/opensuse/etcher-image-writing.png">{:width&#x3D;”640”}</p>
+<h5 id="dd-를-사용한다면"><a href="#dd-를-사용한다면" class="headerlink" title="dd 를 사용한다면,"></a><code>dd</code> 를 사용한다면,</h5><p>다운받은 <code>.xz</code> 파일을 <code>dd</code> 를 이용해서 SD Card에 쓴다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xzcat openSUSE-Leap42.2-ARM-JeOS-raspberrypi3.aarch64.raw.xz | sudo dd of=/dev/rdisk1 bs=4m; sync</span><br></pre></td></tr></table></figure>
+
+<br>
+#### Serial console
+
+<p>여기서는 <strong>Serial console</strong>에서 네트워크 확인 및 초기 설정을 하고 <strong>ssh</strong> 로 서버에 로그인해서 시스템 구성을 진행한다.</p>
+<blockquote>
+<p>SD Card를 라즈베리파이에 꽃고 HDMI, Keyboard 및 Mouse 가 별도로 준비되어 있으면 직접 모니터를 보고 작업을 진행하면 좋다.</p>
+</blockquote>
+<p>USB to Serial 케이블을 사용해서 Raspberry Pi의 Serial Console에 연결한다.</p>
+<p><img src="/images/raspberrypi/rpi-usb-serial.png">{:width&#x3D;”640”}</p>
+<p>그리고 시리얼 포트를 통해 tty 연결을 위해 터미널 프로그램에서 baud rate 115200 으로 연결한다. 아래는 macOS의 <code>screen</code> CLI 명령으로 usb serial 포트에 연결하고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/cu.usbserial 115200</span><br></pre></td></tr></table></figure>
+
+<p>이제 SD Card를 넣고 부팅을 하면, 터미널에 부트 단계가 진행되고 처음 5분 정도 소요된다.</p>
+<p><img src="/images/opensuse/opensuse-boot33.png">{:width&#x3D;”640”}</p>
+<p>Raspberry Pi를 위한 이미지는 처음 계정은 <code>root/linux</code> 이다.</p>
+<p>터미널에서 uname 은 <strong>aarch64</strong> 임을 확인 할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment"># uname -a</span></span><br><span class="line">Linux homepi 4.4.90-18.32-default <span class="comment">#1 SMP Fri Oct 6 13:30:08 UTC 2017 (465b410) aarch64 aarch64 aarch64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
+
+<p>처음으로 라즈베리파이에서 64bit 환경으로 운영해 볼 수 있게 됐다.</p>
+<br>
+<br>
+### 설치 후 서버 구성을 위해 할 일
+
+<p>JeOS를 서버로 구성하기 위해서 다음 같은 작업을 수행해 준다.</p>
+<ul>
+<li>root 패스워드 변경</li>
+<li>sudoer 사용자 생성</li>
+<li>DHCP를 고정 IP로 변경</li>
+</ul>
+<h4 id="root-패스워드"><a href="#root-패스워드" class="headerlink" title="root 패스워드"></a>root 패스워드</h4><p>root 사용자의 패스워드를 변경한다.</p>
+<p><img src="/images/opensuse/opensuse-root-passwd.png">{:width&#x3D;”640”}</p>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>Ubuntu&#x2F;Debian 계열의 패키지 명령 <code>apt</code>,<code>apt-get</code> 과 비슷한 openSUSE 명령라인 패키지 관리자는 <strong>zypper</strong> 가 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zypper <span class="built_in">help</span> search     <span class="comment"># to print help for the search command</span></span><br><span class="line">zypper refresh, ref    <span class="comment"># Refresh all repositories.</span></span><br><span class="line">zypper update,  up     <span class="comment"># to update all installed packages</span></span><br><span class="line">zypper lp              <span class="comment"># to see what patch updates are needed</span></span><br><span class="line">zypper patch           <span class="comment"># to apply the needed patches</span></span><br><span class="line">zypper se sqlite       <span class="comment"># to search for sqlite</span></span><br><span class="line">zypper <span class="built_in">rm</span> sqlite2      <span class="comment"># to remove sqlite2</span></span><br><span class="line">zypper <span class="keyword">in</span> sqlite3      <span class="comment"># to install sqlite3</span></span><br><span class="line">zypper <span class="keyword">in</span> yast*        <span class="comment"># to install all packages matching &#x27;yast*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.opensuse.org/SDB:Zypper_usage">zypper usages</a> 에서 사용방법을 자세히 알 수 있다.</li>
+</ul>
+<p>머저 최신 소프트웨어 목록으로 업데이트 한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zypper refresh</span><br><span class="line">zypper ref</span><br></pre></td></tr></table></figure>
+
+<p>그리고 최근 업그레이드된 필요한 패키지를 다운로드하고 설치한다.[^1]</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zypper update</span><br><span class="line">zypper up</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>지원중단된 패키지, 나뉘어진 패키지 등의 의존성을 고려한 업그레이드를 하려면 <code>dup</code> 명령을 사용한다.&gt;</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zypper dup             <span class="comment"># distribution upgrade</span></span><br><span class="line">zypper dist-upgrade</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="upgrade-후에"><a href="#upgrade-후에" class="headerlink" title="upgrade 후에"></a>upgrade 후에</h5><p>실행중인 데몬을 재시작해줄 필요가 있는데 <code>zypper ps -s</code> 를 실행하면 목록을 표시해 준다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">pi64:/home/ # zypper ps -s</span><br><span class="line">The following running processes use deleted files:</span><br><span class="line"></span><br><span class="line">PID   | PPID  | UID  | User       | Command                    | Service</span><br><span class="line">------+-------+------+------------+----------------------------+-------------------</span><br><span class="line">307   | 1     | 0    | root       | systemd-journald (deleted) | systemd-journald</span><br><span class="line">484   | 1     | 0    | root       | auditd                     | auditd</span><br><span class="line">502   | 1     | 1000 | qkboo      | python3                    | jupyter</span><br><span class="line">513   | 1     | 499  | messagebus | dbus-daemon (deleted)      | dbus</span><br><span class="line">525   | 1     | 0    | root       | systemd-logind (deleted)   | systemd-logind</span><br><span class="line">529   | 1     | 0    | root       | agetty (deleted)           | getty@tty1</span><br><span class="line">996   | 1     | 0    | root       | cupsd                      | cups</span><br><span class="line">1018  | 1     | 0    | root       | cron                       | cron</span><br><span class="line">1043  | 1     | 74   | ntp        | ntpd                       | ntpd</span><br><span class="line">1047  | 1043  | 74   | ntp        | ntpd                       | ntpd</span><br><span class="line">1145  | 1     | 0    | root       | python2.7                  | fail2ban</span><br><span class="line">1146  | 1     | 1000 | qkboo      | node                       | pm2-qkboo</span><br><span class="line">2131  | 1     | 0    | root       | agetty (deleted)           | serial-getty@ttyS0</span><br><span class="line">5716  | 1146  | 1000 | qkboo      | node                       | pm2-qkboo</span><br><span class="line">5749  | 1146  | 1000 | qkboo      | node                       | pm2-qkboo</span><br><span class="line">12400 | 1     | 0    | root       | sshd (deleted)             |</span><br><span class="line">12402 | 1     | 1000 | qkboo      | systemd (deleted)          |</span><br><span class="line">12405 | 0     | 1000 | qkboo      | systemd (deleted)          |</span><br><span class="line">12411 | 12400 | 1000 | qkboo      | sshd (deleted)             |</span><br><span class="line">12412 | 12411 | 1000 | qkboo      | bash                       |</span><br><span class="line">12783 | 12412 | 0    | root       | sudo                       |</span><br><span class="line">12784 | 12783 | 0    | root       | bash                       |</span><br><span class="line">12876 | 1     | 0    | root       | nginx                      | nginx</span><br><span class="line">12879 | 12876 | 494  | nginx      | nginx                      | nginx</span><br><span class="line">12880 | 12876 | 494  | nginx      | nginx                      | nginx</span><br><span class="line">12881 | 12876 | 494  | nginx      | nginx                      | nginx</span><br><span class="line">12882 | 12876 | 494  | nginx      | nginx                      | nginx</span><br><span class="line">15908 | 502   | 1000 | qkboo      | node                       | jupyter</span><br><span class="line">15916 | 15908 | 1000 | qkboo      | node                       | jupyter</span><br><span class="line">26929 | 502   | 1000 | qkboo      | node                       | jupyter</span><br></pre></td></tr></table></figure>
+
+<h4 id="ip-주소-확인"><a href="#ip-주소-확인" class="headerlink" title="ip 주소 확인"></a>ip 주소 확인</h4><p>ifconfig 명령으로 현재 IP Address를 확인하고 이 IP Address에 <code>ssh</code> 를 사용해 접속한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">linux:~ <span class="comment"># ifconfig</span></span><br><span class="line">eth0      Link encap:Ethernet  HWaddr B9:40:EB:BA:10:02</span><br><span class="line">          inet addr:192.168.1.104  Bcast:192.168.1.255  Mask:255.255.255.0</span><br><span class="line">          inet6 addr: fe90::ba37:ebff:feba:1012/64 Scope:Link</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:83136 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:27300 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:120797947 (115.2 Mb)  TX bytes:2369690 (2.2 Mb)</span><br><span class="line">linux:~ <span class="comment">#</span></span><br><span class="line">linux:~ <span class="comment"># shutdown now</span></span><br></pre></td></tr></table></figure>
+
+<p>좀더 편리한 사용을 위해 <code>ifconfig</code> 명령으로 찾은 IP address에 ssh 로그인을 해서 작업을 진행한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@192.168.1.104</span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+### 시스템 설정
+
+<p>이제 sudoer 사용자로 시스템을 서버에 적합하게 구성해 보자.</p>
+<ul>
+<li>sudoer 추가</li>
+<li>yast 소개</li>
+<li>timezone</li>
+<li>Network 구성: 호스트 이름, IP 주소</li>
+<li>swap 개선</li>
+<li>yast로 사용자 추가</li>
+</ul>
+<h4 id="sudoer"><a href="#sudoer" class="headerlink" title="sudoer"></a>sudoer</h4><p><strong>root</strong> 사용자가 아닌 일반사용자를 <code>sudoer</code>로 등록해 관리자 기능을 대행 할 수 있다. 그러기 위해서 먼저 사용자를 추가한다. openSUSE <code>yast</code>라는 시스템 도구로 할 수 있지만 여기선 <code>useradd</code> 명령을 사용해서 사용자 추가한다. <code>useradd</code>에 대해서는 <a target="_blank" rel="noopener" href="http://www.tecmint.com/add-users-in-linux/">useradd 명령</a>을 참조한다.</p>
+<p><code>useradd</code> 는 홈 디렉토리, 쉘 등에 대한 옵션을 주고 사용자를 등록한다.</p>
+<ul>
+<li>추가한 사용자를 &#x2F;etc&#x2F;passwd, &#x2F;etc&#x2F;shadow, &#x2F;etc&#x2F;group and &#x2F;etc&#x2F;gshadow 추가</li>
+<li>그리고 <code>-m</code> 옵션으로 으로 사용자 홈 디렉토리 까지 생성한다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment">#  useradd -m foo</span></span><br></pre></td></tr></table></figure>
+
+<p>그리고 패스워드를 등록한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment"># passwd foo</span></span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line">passwd: password updated successfully</span><br></pre></td></tr></table></figure>
+
+<h4 id="sudoer-등록"><a href="#sudoer-등록" class="headerlink" title="sudoer 등록"></a>sudoer 등록</h4><p><code>visudo</code> 명령으로 <em>&#x2F;etc&#x2F;sudoers</em> 파일을 편집한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo visudo</span><br></pre></td></tr></table></figure>
+
+<p><em>sudoer</em> 파일에 있는 <em>User privilege</em> 항목 아래에 새로운 사용자 foo를 아래 같이 등록한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># User privilege specification</span><br><span class="line">root  ALL=(ALL) ALL</span><br><span class="line">foo  ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>이제 root에서 로그아웃하고 새로 추가한 사용자로 로그인한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh foo@192.168.1.104</span><br><span class="line">Password:</span><br><span class="line">Have a lot of fun...</span><br><span class="line">foo@linux:~&gt;</span><br></pre></td></tr></table></figure>
+
+<p>openSUSE는 관리자용 명령을 직접 내리면 찾지 못한다고 한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo@linux:~&gt; yast2 timezone</span><br><span class="line">-bash: yast2: <span class="built_in">command</span> not found</span><br></pre></td></tr></table></figure>
+
+<p>그리고 처음으로 sudoer 사용자가 관리자 권한이 필요한 명령을 사용하기 위해 <code>sudu</code> 로 명령을 내리면 아래 같은 경고가 나온다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo@linux:~&gt; sudo /sbin/yast2 timezone</span><br><span class="line"></span><br><span class="line">We trust you have received the usual lecture from the <span class="built_in">local</span> System</span><br><span class="line">Administrator. It usually boils down to these three things:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#1) Respect the privacy of others.</span></span><br><span class="line">    <span class="comment">#2) Think before you type.</span></span><br><span class="line">    <span class="comment">#3) With great power comes great responsibility.</span></span><br></pre></td></tr></table></figure>
+
+<p>openSUSE는 시스템 관리 도구로 <code>yast</code> 를 사용해서 소프트웨어 설치, 네트워크 구성, 시간 관리, 보안 및 사용자 등을 다루는 소프트웨어로 GUI와 CLI 모두 사용할 수 있다.</p>
+<p>시스템 네트워크를 구성하기 위해서 <code>yast</code> 명령을 사용해보자,</p>
+<h4 id="yast"><a href="#yast" class="headerlink" title="yast"></a>yast</h4><p>yast는 GUI 혹은 ClI에서 사용이 가능하다 . 다음은 <code>sudo yast</code> 를 실행하면 Ncurse 로 표시되는 yast 화면이다.</p>
+<p><img src="/images/opensuse/yast-cli-ui.png">{:width&#x3D;”640”}</p>
+<p>TAB 키로 각 항목을 이동할 수 있고, Enter로 실행한다. 전체 화면에서 F9는 Cancel, F10은 OK 기능을 수행한다.</p>
+<h4 id="Timezone"><a href="#Timezone" class="headerlink" title="Timezone"></a>Timezone</h4><p>처음 설치후 <em>CET</em> 시간대로 되어 있어서 Asia&#x2F;Seoul로 변경하고자 한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linux:~ <span class="comment"># date</span></span><br><span class="line">Sun Oct 29 09:19:31 CET 2017</span><br></pre></td></tr></table></figure>
+
+<p>시스템 시간대를 설정하려면 <code>yast</code> 를 시작해 <em>System -&gt; Date and Time</em> 을 실행해 시간대를 지정한다. 혹은 <code>yast timezone</code> 모듈 명령을 주면 해당 Date and Time 화면으로 이동할 수 있다.</p>
+<p><img src="/images/opensuse/yast-date_time.png">{:width&#x3D;”640”}</p>
+<p>시간대를 변경후 확인해 보면,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linux:~ # date</span><br><span class="line">Sun Oct 29 17:22:11 KST 2017</span><br></pre></td></tr></table></figure>
+
+<p>ntp로 동기화하려면 <em>Other Settings…</em> 항목을 선택해 <em>ntp server</em> 를 설치하고 활성화 한다.</p>
+<p><img src="/images/opensuse/yast-date_time-ntp1.png">{:width&#x3D;”640”}<br><img src="/images/opensuse/yast-date_time-ntp2.png">{:width&#x3D;”640”}</p>
+<!--
+참고로 ClI로 `yast` 명령을 사용할 수 있다. 예를 들어 timezone 사용 가능한 시간대는
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yast2 timezone list</span><br></pre></td></tr></table></figure>
+
+<p>해당 하는 시간대 문자열을 이용해 시간대를 지정한다.</p>
+<blockquote>
+<p>sudo yast2 timezone set timezone&#x3D;[TIMEZONE]</p>
+</blockquote>
+<p>우리나라 시간대 ‘Asia&#x2F;Seoul (Seoul)’는 이렇게 지정할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo yast2 timezone <span class="built_in">set</span> timezone=<span class="string">&#x27;Asia/Seoul (Seoul)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>–&gt;</p>
+<h4 id="yast로-네트워크-설정하기"><a href="#yast로-네트워크-설정하기" class="headerlink" title="yast로 네트워크 설정하기"></a>yast로 네트워크 설정하기</h4><p>시스템 네트워크 구성을 설정하려면 <code>yast</code> 에서 <em>System -&gt; Network Settings</em> 을 실행한다.</p>
+<p><img src="/images/opensuse/yast-network1.png">{:width&#x3D;”640”}</p>
+<p>네트워크 구성 상태를 가져오는 시간이 걸린다.</p>
+<p><img src="/images/opensuse/yast-network2.png">{:width&#x3D;”640”}</p>
+<p>네트워크 구성을 시작한다. TAB으로 <code>Edit</code> 를 선택하고,</p>
+<p><img src="/images/opensuse/yast-network-settings.png">{:width&#x3D;”640”}</p>
+<p><em>Statically Assigned IP Address</em>를 선택하고, 아래 IP Address, Subnet Mask, Hostname 을 입력한다.</p>
+<p><img src="/images/opensuse/yast-network-ip-address.png">{:width&#x3D;”640”}</p>
+<p>TAB으로 이동해 <strong>Next</strong> 버튼을 누른다. 그리고 TAB으로 <strong>Hostname&#x2F;DNS</strong> 탭 으로 이동해서 Name Server를 입력한다. 보통 DHCP를 지원하는 공유기&#x2F;라우터에서 DNS server 역할을 하므로 게이트웨이 IP를 입력해도 무방하다.</p>
+<p><img src="/images/opensuse/yast-network-host.png">{:width&#x3D;”640”}</p>
+<p>마지막으로 <strong>Routing</strong> 탭을 이동해 Gateway를 입력해 준다.</p>
+<p><img src="/images/opensuse/yast-network-gw.png">{:width&#x3D;”640”}</p>
+<p>완료됐으면 <em>F10</em> 혹은 TAB으로 <strong>OK 버튼</strong>으로 이동해 설정한 내용을 저장한다. 이로서 수동 IP 주소 입력을 마친다.</p>
+<p><code>yast</code> ClI 명령으로 Host 이름을 변경할 수 있다.</p>
+<blockquote>
+<p>yast dns edit hostname&#x3D;HOSTNAME</p>
+</blockquote>
+<p>또한 <code>yast</code> ClI 명령으로 소프트웨어 패키지를 설치 할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yast -i &lt;package_name&gt;</span><br><span class="line">sudo yast --install &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="swap-개선"><a href="#swap-개선" class="headerlink" title="swap 개선"></a>swap 개선</h4><p>JeOS는 별도의 파티션에 swap을 가지고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo swapon -s</span><br><span class="line">Filename        Type    Size  Used  Priority</span><br><span class="line">/dev/mmcblk0p3                          partition 497384  1816  -1</span><br></pre></td></tr></table></figure>
+
+<p>별도의 swap 을 1GB 크기 Swap file로 추가하려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd if=/dev/zero of=/var/swapfile1G bs=1G count=1</span><br><span class="line">$ sudo chmod 600 /var/swapfile1G</span><br><span class="line">$ sudo mkswap /var/swapfile1G</span><br><span class="line">Setting up swapspace version 1, size = 1024 MiB (1073737728 bytes)</span><br><span class="line">no label, UUID=3b192470-5297-42ef-a033-b19b0de03590</span><br><span class="line"></span><br><span class="line">$ sudo swapon /var/swapfile1G</span><br><span class="line">$ sudo swapon -s</span><br></pre></td></tr></table></figure>
+
+<p><code>mkswap</code> 명령 결과에 있는 <em>UUID&#x3D;…</em> 부분을 복사해 &#x2F;etc&#x2F;fstab 에 종속적으로 등록해 주면 재시동 후에도 사용 가능하다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=3b192470-5297-42ef-a033-b19b0de03590 swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<h4 id="yast-사용자-추가"><a href="#yast-사용자-추가" class="headerlink" title="yast 사용자 추가"></a>yast 사용자 추가</h4><p>앞에서 <code>adduser</code> 명령으로 사용자를 추가했는데 openSUSE에서는 <code>yast</code>에서 사용할 수 있다. <code>yast</code> 를 시작해서 사용자 관리로 가거나, 아래 같이 바로 사용자 관리 화면으로 시작할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yast2 <span class="built_in">users</span></span><br></pre></td></tr></table></figure>
+
+<p>yast 화면에서 사용자 관리 화면,</p>
+<p><img src="/images/opensuse/yast-user.png">{:width&#x3D;”650”}</p>
+<p>다음 서버로 운영을 위해서 openSUSE에서 sshd 보안 강화, 방화벽, 필터링 등의 기본적인 보안 작업을 진행한다. <em>다음 openSUSE: Basic Security for Server</em></p>
+<h4 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h4><p>rpi3 가 1GB 메인메모리로 출시, raspbian 실제 메모리 정보는,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/meminfo</span><br><span class="line">MemTotal:         949572 kB</span><br><span class="line">MemFree:          386192 kB</span><br><span class="line">MemAvailable:     711148 kB</span><br></pre></td></tr></table></figure>
+
+<p>rpi3에 openSUSE LEAP 42.2에서</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /proc/meminfo</span><br><span class="line">MemTotal:         803988 kB</span><br><span class="line">MemFree:          661276 kB</span><br><span class="line">MemAvailable:     684504 kB</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://raspberrypi.stackexchange.com/questions/56266/raspberry-pi-3-has-less-than-1gb-memory-available-at-os-level">여기</a> 에 따르면 GPU 때문 인듯…</p>
+<h3 id="tune2fs"><a href="#tune2fs" class="headerlink" title="tune2fs"></a>tune2fs</h3><p>fsck로 마지막 체크한 시간 확인은 <code>tune2fs</code> 명령을 이용</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo tune2fs -l /dev/sdbX | grep Last\ c</span><br><span class="line">Last checked:             Sun Dec 13 09:14:22 2015</span><br></pre></td></tr></table></figure>
+
+<h4 id="e2fsck-점검"><a href="#e2fsck-점검" class="headerlink" title="e2fsck 점검"></a>e2fsck 점검</h4><p>부팅시 e2fsck로 점검할 마운트 횟수가 설정되 있다. <code>-l</code> 옵션으로 확인한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tune2fs -l /dev/sdbX | grep Mount</span><br><span class="line">Mount count:              157</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tune2fs -l /dev/sdbX | grep Max</span><br><span class="line">Maximum mount count:      -1</span><br></pre></td></tr></table></figure>
+
+<p>이 마운트 회수를 지정할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tune2fs -c 10 /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a target="_blank" rel="noopener" href="https://en.opensuse.org/HCL:Raspberry_Pi3#Installing_the_64-bit_openSUSE_Leap_image">Raspberry Pi 3: Installing 64bit openSuse Leap Image</a></p>
+<p>[^1]: <a target="_blank" rel="noopener" href="https://en.opensuse.org/SDB:System_upgrade">System Upgrade</a><br>[^2]: <a target="_blank" rel="noopener" href="https://software.opensuse.org/package/net-tools-deprecated">net-tools deprecated</a><br>[^4]: <a target="_blank" rel="noopener" href="http://www.susegeek.com/networking/how-to-setup-persistent-static-routes-in-opensuse-110/">Static route in Opensuse</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/10/20/raspberrypi-2017-10-20-opensuse-jeos-install/" data-id="cl0196xk800i5js7gc0ltftfh" data-title="Raspberry Pi 3 64bit OS openSUSE: Install" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/21/raspberrypi-2017-10-21-opensuse-jeos-securities/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">최신</strong>
+      <div class="article-nav-title">
+        
+          Raspberry Pi 3 64bit OS openSUSE: Basic Security
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/17/linux-2017-09-17-synergy-build/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">synergy build</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">카테고리</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/NodeJS/">NodeJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Programming/">Programming</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/Database/">Database</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photoshop/">Photoshop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angular/">Angular</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angularjs/">Angularjs</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARM/" rel="tag">ARM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Armbian/" rel="tag">Armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence/" rel="tag">Artificial Intelligence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian-Strech/" rel="tag">Debian Strech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON-Web-Token/" rel="tag">JSON Web Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT-Toekn/" rel="tag">JWT Toekn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-15-0/" rel="tag">LEAP 15.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-42-3/" rel="tag">LEAP 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid/" rel="tag">Odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid-C2/" rel="tag">Odroid C2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Orange-Pi/" rel="tag">Orange Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SD-Card/" rel="tag">SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scientific/" rel="tag">Scientific</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript-Tutorials/" rel="tag">TypeScript Tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X11/" rel="tag">X11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular4/" rel="tag">angular4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banana-pi/" rel="tag">banana pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate-ssl/" rel="tag">certificate ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clipping-mask/" rel="tag">clipping-mask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collages/" rel="tag">collages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-compiler/" rel="tag">cross compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewall/" rel="tag">firewall</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/" rel="tag">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jasmine/" rel="tag">jasmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/karma/" rel="tag">karma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-15/" rel="tag">leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-42-3/" rel="tag">leap 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/" rel="tag">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm2/" rel="tag">lvm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-SD-Card/" rel="tag">micro SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/" rel="tag">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-tutorials/" rel="tag">nodejs tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid/" rel="tag">odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse/" rel="tag">opensuse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse-leap-15/" rel="tag">opensuse leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/orange-pi/" rel="tag">orange pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/" rel="tag">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/synergy/" rel="tag">synergy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unit-testing/" rel="tag">unit testing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdav/" rel="tag">webdav</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" rel="tag">데비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" rel="tag">리눅스</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" rel="tag">바나나파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" rel="tag">방화벽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" rel="tag">오렌지파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" rel="tag">웹토큰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" rel="tag">인공지능</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" rel="tag">전원관리</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" rel="tag">파이어월</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ARM/" style="font-size: 10px;">ARM</a> <a href="/tags/Armbian/" style="font-size: 10px;">Armbian</a> <a href="/tags/Artificial-Intelligence/" style="font-size: 12px;">Artificial Intelligence</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Debian-Strech/" style="font-size: 10px;">Debian Strech</a> <a href="/tags/JSON-Web-Token/" style="font-size: 10px;">JSON Web Token</a> <a href="/tags/JWT-Toekn/" style="font-size: 10px;">JWT Toekn</a> <a href="/tags/LEAP-15-0/" style="font-size: 11px;">LEAP 15.0</a> <a href="/tags/LEAP-42-3/" style="font-size: 11px;">LEAP 42.3</a> <a href="/tags/Linux/" style="font-size: 19px;">Linux</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Odroid/" style="font-size: 11px;">Odroid</a> <a href="/tags/Odroid-C2/" style="font-size: 10px;">Odroid C2</a> <a href="/tags/Orange-Pi/" style="font-size: 10px;">Orange Pi</a> <a href="/tags/Raspberry-Pi/" style="font-size: 14px;">Raspberry Pi</a> <a href="/tags/Raspberry-Pi-3/" style="font-size: 19px;">Raspberry Pi 3</a> <a href="/tags/Raspbian/" style="font-size: 14px;">Raspbian</a> <a href="/tags/SD-Card/" style="font-size: 10px;">SD Card</a> <a href="/tags/Scientific/" style="font-size: 10px;">Scientific</a> <a href="/tags/TensorFlow/" style="font-size: 11px;">TensorFlow</a> <a href="/tags/TypeScript/" style="font-size: 14px;">TypeScript</a> <a href="/tags/TypeScript-Tutorials/" style="font-size: 11px;">TypeScript Tutorials</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/X11/" style="font-size: 10px;">X11</a> <a href="/tags/amd64/" style="font-size: 14px;">amd64</a> <a href="/tags/angular4/" style="font-size: 12px;">angular4</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/arm64/" style="font-size: 14px;">arm64</a> <a href="/tags/armbian/" style="font-size: 16px;">armbian</a> <a href="/tags/banana-pi/" style="font-size: 10px;">banana pi</a> <a href="/tags/certificate-ssl/" style="font-size: 10px;">certificate ssl</a> <a href="/tags/clipping-mask/" style="font-size: 10px;">clipping-mask</a> <a href="/tags/collages/" style="font-size: 10px;">collages</a> <a href="/tags/cross-compiler/" style="font-size: 10px;">cross compiler</a> <a href="/tags/debian/" style="font-size: 15px;">debian</a> <a href="/tags/firewall/" style="font-size: 12px;">firewall</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/install/" style="font-size: 11px;">install</a> <a href="/tags/jasmine/" style="font-size: 10px;">jasmine</a> <a href="/tags/jupyter/" style="font-size: 14px;">jupyter</a> <a href="/tags/jupyter-notebook/" style="font-size: 10px;">jupyter notebook</a> <a href="/tags/jupyter-notebook/" style="font-size: 15px;">jupyter-notebook</a> <a href="/tags/karma/" style="font-size: 10px;">karma</a> <a href="/tags/leap-15/" style="font-size: 11px;">leap 15</a> <a href="/tags/leap-42-3/" style="font-size: 11px;">leap 42.3</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lvm2/" style="font-size: 10px;">lvm2</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/micro-SD-Card/" style="font-size: 10px;">micro SD Card</a> <a href="/tags/middleware/" style="font-size: 10px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 17px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 11px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 18px;">nodejs</a> <a href="/tags/nodejs-tutorials/" style="font-size: 10px;">nodejs tutorials</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/odroid/" style="font-size: 11px;">odroid</a> <a href="/tags/odroid-c2/" style="font-size: 12px;">odroid c2</a> <a href="/tags/odroid-c2/" style="font-size: 14px;">odroid-c2</a> <a href="/tags/openSUSE/" style="font-size: 17px;">openSUSE</a> <a href="/tags/opensuse/" style="font-size: 11px;">opensuse</a> <a href="/tags/opensuse-leap-15/" style="font-size: 10px;">opensuse leap 15</a> <a href="/tags/orange-pi/" style="font-size: 10px;">orange pi</a> <a href="/tags/photoshop/" style="font-size: 11px;">photoshop</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">raspberry pi</a> <a href="/tags/security/" style="font-size: 11px;">security</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/synergy/" style="font-size: 10px;">synergy</a> <a href="/tags/terminal/" style="font-size: 11px;">terminal</a> <a href="/tags/tmux/" style="font-size: 11px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/unit-testing/" style="font-size: 10px;">unit testing</a> <a href="/tags/virtualenv/" style="font-size: 14px;">virtualenv</a> <a href="/tags/virtualenvwrapper/" style="font-size: 14px;">virtualenvwrapper</a> <a href="/tags/webdav/" style="font-size: 10px;">webdav</a> <a href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" style="font-size: 10px;">데비안</a> <a href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" style="font-size: 13px;">데이안</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" style="font-size: 19px;">라즈베리파이</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" style="font-size: 14px;">라즈비안</a> <a href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="font-size: 12px;">리눅스</a> <a href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">바나나파이</a> <a href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" style="font-size: 10px;">방화벽</a> <a href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">오렌지파이</a> <a href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" style="font-size: 15px;">우분투</a> <a href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" style="font-size: 10px;">웹토큰</a> <a href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" style="font-size: 12px;">인공지능</a> <a href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" style="font-size: 10px;">전원관리</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" style="font-size: 12px;">파이썬</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" style="font-size: 10px;">파이어월</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">10월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">8월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">7월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">6월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">12월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">11월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">10월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">9월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">7월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">5월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">4월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">12월 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2월 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/24/hello-world/">blog.thinkbee.kr 이전 작업중입니다.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/">HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-config/">MongoDB 구성 설정과 사용자 인증 사용</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/05/python-2019-09-05-OpenSuse-JupyterNotebook-scientific/">openSUSE - 과학계산을 위한 Python, Jupyter Notebook</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

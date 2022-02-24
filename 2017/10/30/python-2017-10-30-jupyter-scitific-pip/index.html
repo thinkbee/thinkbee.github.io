@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Python - 과학계산을 위한 Jupyter(pip) | Blogging through Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="과학계산을 위한 Python3 및 pip를 사용한 scipy, jupyter 설치 및 구성을  요약하고 있다. https:&#x2F;&#x2F;packaging.python.org&#x2F;guides&#x2F;installing-scientific-packages&#x2F; 과학계산을 위한 Python Jupyter과학계산을 위한 Python 과 Jupyter Notebook 환경을 정리한다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python - 과학계산을 위한 Jupyter(pip)">
+<meta property="og:url" content="http://example.com/2017/10/30/python-2017-10-30-jupyter-scitific-pip/index.html">
+<meta property="og:site_name" content="Blogging through Programming">
+<meta property="og:description" content="과학계산을 위한 Python3 및 pip를 사용한 scipy, jupyter 설치 및 구성을  요약하고 있다. https:&#x2F;&#x2F;packaging.python.org&#x2F;guides&#x2F;installing-scientific-packages&#x2F; 과학계산을 위한 Python Jupyter과학계산을 위한 Python 과 Jupyter Notebook 환경을 정리한다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://example.com/images/python/jupyter5-run.png">
+<meta property="og:image" content="http://example.com/images/python/jupyter-login.png">
+<meta property="article:published_time" content="2017-10-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T16:16:46.094Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="virtualenv">
+<meta property="article:tag" content="virtualenvwrapper">
+<meta property="article:tag" content="jupyter">
+<meta property="article:tag" content="jupyter-notebook">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/python/jupyter5-run.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blogging through Programming" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blogging through Programming</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-python-2017-10-30-jupyter-scitific-pip" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/10/30/python-2017-10-30-jupyter-scitific-pip/" class="article-date">
+  <time class="dt-published" datetime="2017-10-30T00:00:00.000Z" itemprop="datePublished">2017-10-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Python - 과학계산을 위한 Jupyter(pip)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>과학계산을 위한 Python3 및 pip를 사용한 scipy, jupyter 설치 및 구성을  요약하고 있다.</p>
+<p><a target="_blank" rel="noopener" href="https://packaging.python.org/guides/installing-scientific-packages/">https://packaging.python.org/guides/installing-scientific-packages/</a></p>
+<h2 id="과학계산을-위한-Python-Jupyter"><a href="#과학계산을-위한-Python-Jupyter" class="headerlink" title="과학계산을 위한 Python Jupyter"></a>과학계산을 위한 Python Jupyter</h2><p>과학계산을 위한 Python 과 Jupyter Notebook 환경을 정리한다. </p>
+<ul>
+<li>개발 프론트 엔드: Jupyter</li>
+<li>과학계산 모듈: numpy, scipy 등</li>
+</ul>
+<p>Python과 Virtualenv 환경을 더 알고 싶으면 다음 두 링크에 자세한 설명이 있다.</p>
+<ul>
+<li><a href="!--swig%EF%BF%BC27--">Python - Install virtualenv on Linux</a></li>
+</ul>
+<h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><p>시스템에 Python2, Python3 가 설치되었는지 확인:</p>
+<ul>
+<li>Ubuntu&#x2F;Debian 계열: Python 2.7, Python 3.5 설치되어 있다.</li>
+<li>openSUSE : Python2.7</li>
+</ul>
+<h4 id="Python-3-설치"><a href="#Python-3-설치" class="headerlink" title="Python 3 설치"></a>Python 3 설치</h4><h4 id="시스템-개발-패키지-설치"><a href="#시스템-개발-패키지-설치" class="headerlink" title="시스템 개발 패키지 설치"></a>시스템 개발 패키지 설치</h4><p>컴파일에 필요한 헤더 등이 포함된 개발자 라이브러리를 설치한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get install python-dev python-distlib python3-dev python3-distlib</span><br></pre></td></tr></table></figure>
+
+<p>python-dev, python-distlib, apython-setuptools 은 파이썬 개발과 패키징을 지원한다.</p>
+<p>apt-get install libfreetype6-dev<br>apt-get install pkg-config<br>apt-get install libpng-dev<br>apt-get install pkg-config</p>
+<p>libzmq3-dev은 쥬피터 노트북에서 필요로 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libzmq3-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>python-curses: Python이 (N)Curses Libr에 대한 인터페이스이다</li>
+</ul>
+<p>Pandas 로 데이터 셋트를 다룰 예정, libgdal-dev 은 geopandas에서 geospatial analysis 에 필요하다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgdal-dev</span><br></pre></td></tr></table></figure>
+
+<p>For Debian Jessie and Stretch installing the following packages resolves the issue:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libblas3 liblapack3 liblapack-dev libblas-dev</span><br></pre></td></tr></table></figure>
+
+<p>Your next issue is very likely going to be a missing Fortran compiler, resolve this by installing it like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gfortran</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="pip-설치"><a href="#pip-설치" class="headerlink" title="pip 설치"></a>pip 설치</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python3-pip</span><br></pre></td></tr></table></figure>
+
+<p>python3 설치후 마지막으로 <code>update-alternatives</code> 를 이용해 <code>pip</code> 를 pip3 로 연결해 준다. </p>
+<p>다른 배포본에서 필요시 update-alternatives 사용:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 30</span><br></pre></td></tr></table></figure>
+
+<p>시스템 <code>pip</code> 모듈을 최신 버전으로 업그레이드한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -U pip</span><br><span class="line">sudo pip install -U setuptools</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="pip로-설치하기"><a href="#pip로-설치하기" class="headerlink" title="pip로 설치하기"></a><code>pip</code>로 설치하기</h3><p>Python2.6부터 User scheme 개념이 도입되며서 <code>pip</code>로 설치하는 패키지를 개별 사용자 환경 위치에 설치할 수 있다. </p>
+<p>install 명령에 <code>--user</code> 옵션을 주고 설치한다.[^2] </p>
+<ul>
+<li>기본으로 리눅스는 <em>~&#x2F;.local</em> 폴더이고, </li>
+<li>Mac OS X 는 <em>~&#x2F;Library&#x2F;Python&#x2F;X.Y</em> 에 위치한다.[^3]</li>
+<li>그리고 <code>PATH</code> 에 <em>~&#x2F;.local&#x2F;bin</em> 을 추가한다.</li>
+</ul>
+<h4 id="Scientific-stack"><a href="#Scientific-stack" class="headerlink" title="Scientific stack"></a>Scientific stack</h4><p>아래 같이 사용자 영역에 python3 기반으로 설치해보자, pip 를 파이썬 버전의 site-package 에 모듈을 설치하기 위해서 파이썬 <code>-m</code> 을 사용한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user numpy sympy nose</span><br></pre></td></tr></table></figure>
+
+<p>scipy는 설치 시스템에 따라 시간이 많이 걸린다. 또한 swap 영역을 사용하므로 스왑파일시스템을 활성화 하는 것을 권한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user scipy</span><br></pre></td></tr></table></figure>
+
+<h5 id="error"><a href="#error" class="headerlink" title="error"></a>error</h5><p>스왑 파일시스템을 사용하지 않거나 모자라면 아래 같이 가상메모리 에러 혹은 컴파일 에러가 나는 것 같다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> #warning &quot;Using deprecated NumPy API, disable it by &quot; \</span><br><span class="line">  ^~~~~~~</span><br><span class="line">virtual memory exhausted: Cannot allocate memory</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>글쓴이는 OdroidC2, Armbian Stretch 에서 시도했다.</p>
+</blockquote>
+<h4 id="pandas-및"><a href="#pandas-및" class="headerlink" title="pandas 및"></a>pandas 및</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user pandas</span><br></pre></td></tr></table></figure>
+
+<p>파이썬이 있고 pip를 사용하여 패키지를 설치하려면 다음 명령을 사용합니다.</p>
+<p>matplotlib  pillow graphviz</p>
+<p>scikit-learn </p>
+<h4 id="conda를-사용한-패키지-설치"><a href="#conda를-사용한-패키지-설치" class="headerlink" title="conda를 사용한 패키지 설치"></a>conda를 사용한 패키지 설치</h4><p>설치된 파이썬이 있다면 conda 패키지 매니저를 사용하여 다음 명령을 실행하면 필요한 패키지를 모두 얻을 수 있습니다.</p>
+<p>conda install numpy scipy scikit-learn matplotlib pandas pillow graphviz python-graphviz<br>pip를 사용한 패키지 설치</p>
+<h4 id="설치-확인"><a href="#설치-확인" class="headerlink" title="설치 확인"></a>설치 확인</h4><p>설치되고 사용이 가능한지 확인한다. 다음 두 모듈이 없으면 jupyter 설치가 제대로 안된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &quot;import numpy;print(numpy.__version__)&quot;</span><br><span class="line">1.9.3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &quot;import scipy;print(scipy.__version__)&quot;</span><br><span class="line">0.16.0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &quot;import numpy;print(matplotlib.__version__)&quot;</span><br></pre></td></tr></table></figure>
+
+<br>
+### Jupyter Notebook
+
+<p>Jupyter는 웹 브라우저를 통해서 IDE 환경을 제공하고, 다양한 언어&#x2F;문법을 지원하는 Kernel 이라는 해석기를 통해 IDE에서 코딩한 결과를 확인할 수 있다. </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m pip install --user jupyter </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>물론 가상환경이 아닌 시스템 패키지로 설치해도 된다.<br>$ sudo pip install jupyter geopandas osmnx</p>
+</blockquote>
+<p><code>jupyter-notebook</code>을 실행해 보고, 서버 관련 구성 내용을 설정해서 사용해 보자.</p>
+<h5 id="Upgrade-jupyter"><a href="#Upgrade-jupyter" class="headerlink" title="Upgrade jupyter"></a>Upgrade jupyter</h5><p>여기서는 pip 가상머신을 이용하고 있어서 다음 같이 pip install 명령으로 업그레이드 할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m pip install -U jupyter</span><br></pre></td></tr></table></figure>
+
+
+<p>python3 -m pip freeze —local &gt; requirements.txt</p>
+<h4 id="서버로-실행"><a href="#서버로-실행" class="headerlink" title="서버로 실행"></a>서버로 실행</h4><p><code>jupyter-notebook</code> 은 로컬 머신에서 브라우저를 실행한다. 여기서는 원격 사용을 위해 다음 같이 시작할 수 있다. <code>[DIR]</code> 에 jupyter-notebook에서 작성한 노트북 파일이 저장된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter-notebook --no-browser --ip=* --port=8000 [DIR]</span><br><span class="line">[I 02:51:04.797 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).</span><br><span class="line">[C 02:51:04.800 NotebookApp]</span><br><span class="line"></span><br><span class="line">    Copy/paste this URL into your browser when you connect for the first time,</span><br><span class="line">    to login with a token:</span><br><span class="line">        http://localhost:8585/?token=a747472bc9a7c6684829267d2ed0a4cd9a722e</span><br></pre></td></tr></table></figure>
+
+<p>시작후 <code>?token=a.....</code> 부분의 토큰을 복사해 브라우저에 입력후 쥬피터 노트북 사용을 시작한다. 브라우저로 노트북에 접속해서 복사한 토큰을 입력한 후 로그인한다.</p>
+<p><img src="/images/python/jupyter5-run.png">{:width&#x3D;”650”}</p>
+<br>
+### Jupyter 설정 이용
+
+<p>jupyter는 설치된 후에 jupyter 시스템 디렉토리와 사용자 <strong>JUPYTER_DATA_DIR</strong>에 필요한 내용을 저장한다.</p>
+<ul>
+<li><strong>시스템 디렉토리</strong>: &#x2F;usr&#x2F;local&#x2F;share&#x2F;jupyter&#x2F;</li>
+<li><strong>JUPYTER_DATA_DIR</strong> 는 보통 ~&#x2F;.jupyter</li>
+</ul>
+<p>설정 파일을 이용해서 사용자 비밀번호를 이용해 노트북을 사용할 수 있다.</p>
+<p>먼저 실행중인 쥬피터 노트북에서 <code>passwd()</code> 를 실행해 <strong>패스워드 해시 값</strong>을 얻는다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd</span><br><span class="line">In [<span class="number">2</span>]: passwd()</span><br><span class="line">Enter password:</span><br><span class="line">Verify password:</span><br><span class="line">Out[<span class="number">2</span>]: <span class="string">&#x27;sha1:67c9e60bb8b6:9ffede0825894254b2e043ea597d771089e11eed&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>패스워드 해시 값을 데이터 디렉토리의 설정 파일에 입력해야 한다.</p>
+<h4 id="데이터-설정-파일"><a href="#데이터-설정-파일" class="headerlink" title="데이터 설정 파일"></a>데이터 설정 파일</h4><p>먼저 다음 같이 설정 파일을 생성한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter notebook --generate-config</span><br><span class="line">Writing default config to: /home/foo/.jupyter/jupyter_notebook_config.py</span><br><span class="line">$ <span class="built_in">cd</span> .jupyter &amp;&amp; <span class="built_in">mv</span> jupyter_notebook_config.py mynotebook.py</span><br></pre></td></tr></table></figure>
+
+<p><em>mynotebook.py</em>에 다음을 설정한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#c.NotebookApp.notebook_dir = &#x27;/path/to/notebook_directory&#x27;</span><br><span class="line">c.NotebookApp.base_url = &#x27;http://www.yourdomain.com/notebok&#x27;</span><br><span class="line">c.NotebookApp.password = &#x27;&#x27;</span><br><span class="line">c.NotebookApp.port = 8000</span><br><span class="line">c.NotebookApp.port_retries = 50</span><br></pre></td></tr></table></figure>
+
+<p>복사한 패스워드 해시 값을 mynotebook.py 설정 파일 안의 <code>c.NotebookApp.password</code> 항목 주석을 풀고 해시 값을 입력한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.password = &#x27;sha1:4ee6bb2da3d7:ed76216b87228540e5f5f20fcfa8069cf82686f0&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>설정 파일을 이용해 jupyter-notebook을 실행한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter notebook --config .jupyter/mybook_config.py [DIR]</span><br></pre></td></tr></table></figure>
+
+<p>이제 jupyter에 접속하려면 다음 같이 패스워드를 묻고 입력한 후에 사용할 수 있다.</p>
+<p><img src="/images/python/jupyter-login.png">{:width&#x3D;”650”}</p>
+<h4 id="Background-실행"><a href="#Background-실행" class="headerlink" title="Background 실행"></a>Background 실행</h4><p>Jupyter-notebook을 백그라운드로 실행하려면 <code>nohup</code> 을 사용할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">nohup</span> jupyter notebook --no-browser --ip=* --port=8000 [DIR] &gt; log-jupyter.log &amp;</span><br></pre></td></tr></table></figure>
+
+<p>nohup은 재시동시 다시 시작해야 하는 불편한 점이 있다.</p>
+<h4 id="crontab-으로-실행"><a href="#crontab-으로-실행" class="headerlink" title="crontab 으로 실행"></a>crontab 으로 실행</h4><p>nohup 과 결합해서 사용해도 좋은 방법으로 crontab 을 사용해 재시동 후 자동으로 시작해 줄 수 있다. 사용자 crontab 을 편집해 다음 같이 사용할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@reboot cd /home/foo; jnohup jupyter notebook --no-browser --ip=* --port=8000 [DIR] &gt; log-jupyter.log &amp;</span><br></pre></td></tr></table></figure>
+
+
+<p>이 방법도 사용자가 시작&#x2F;상태확인&#x2F;종료 같은 직접적인 방법을 사용하기는 좀 불편하다.</p>
+<p>그래서 upstart의 init.d 를 사용하거나 systemd 의 unit으로 생성해서 사용하는 것이 좋다.</p>
+<h4 id="systemd-에서-실행"><a href="#systemd-에서-실행" class="headerlink" title="systemd 에서 실행"></a>systemd 에서 실행</h4><p>systemd unit으로 새로운 unit 파일을 생성해서 기존 <code>systemctl</code> 명령으로 시작&#x2F;상태&#x2F;종료&#x2F;재시작 등의 작업을 할 수 있다. 물론 재시동 관련해서도 완벽히 동작한다.</p>
+<p>systemd의 unit 위치는 OS 마다 조금 다른 것 같다. 여기서는 <em>&#x2F;etc&#x2F;systemd&#x2F;system</em> 밑에 <em>jupyter.service</em> 라는 유닉 파일로 직접 작업한다.</p>
+<ul>
+<li>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;jupyter.service</li>
+</ul>
+<p>가상환경을 사용하고 있으므로 systemd unit의 <code>ExecStart</code> 의 python도 가상환경 위치로 지정해 주어야 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=My Jupyter-Notebook</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">PIDFile=/run/jupyter-notebook.pid</span><br><span class="line">ExecStart=/home/foo/.virtualenvs/jupyter/bin/jupyter-notebook --config=/home/foo/.jupyter/mynotebook.py</span><br><span class="line">User=foo</span><br><span class="line">Group=foo</span><br><span class="line">WorkingDirectory=/home/foo/notebooks</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>그리고 시스템 유닛을 시작해 준다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable jupyter.service</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart jupyter.service</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://pandas.pydata.org/pandas-docs/stable/install.html">Pandas Install</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.scipy.org/install.html">Scipy Install</a></li>
+<li><a target="_blank" rel="noopener" href="http://geoffboeing.com/2016/03/scientific-python-raspberry-pi/">Scientific Python on Raspberry Pi</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/10/30/python-2017-10-30-jupyter-scitific-pip/" data-id="cl0196xgt002qjs7g8s741as8" data-title="Python - 과학계산을 위한 Jupyter(pip)" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/01/angularjs-2017-11-01-angularjs-test/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">최신</strong>
+      <div class="article-nav-title">
+        
+          Angularjs - Karma Unit Testing
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/30/python-2017-10-30-jupyter-scitific-virtuaenv/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">Python - 과학계산을 위한 Jupyter(Armbian)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">카테고리</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/NodeJS/">NodeJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Programming/">Programming</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/Database/">Database</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photoshop/">Photoshop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angular/">Angular</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angularjs/">Angularjs</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARM/" rel="tag">ARM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Armbian/" rel="tag">Armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence/" rel="tag">Artificial Intelligence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian-Strech/" rel="tag">Debian Strech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON-Web-Token/" rel="tag">JSON Web Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT-Toekn/" rel="tag">JWT Toekn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-15-0/" rel="tag">LEAP 15.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-42-3/" rel="tag">LEAP 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid/" rel="tag">Odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid-C2/" rel="tag">Odroid C2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Orange-Pi/" rel="tag">Orange Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SD-Card/" rel="tag">SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scientific/" rel="tag">Scientific</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript-Tutorials/" rel="tag">TypeScript Tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X11/" rel="tag">X11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular4/" rel="tag">angular4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banana-pi/" rel="tag">banana pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate-ssl/" rel="tag">certificate ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clipping-mask/" rel="tag">clipping-mask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collages/" rel="tag">collages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-compiler/" rel="tag">cross compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewall/" rel="tag">firewall</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/" rel="tag">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jasmine/" rel="tag">jasmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/karma/" rel="tag">karma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-15/" rel="tag">leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-42-3/" rel="tag">leap 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/" rel="tag">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm2/" rel="tag">lvm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-SD-Card/" rel="tag">micro SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/" rel="tag">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-tutorials/" rel="tag">nodejs tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid/" rel="tag">odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse/" rel="tag">opensuse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse-leap-15/" rel="tag">opensuse leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/orange-pi/" rel="tag">orange pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/" rel="tag">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/synergy/" rel="tag">synergy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unit-testing/" rel="tag">unit testing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdav/" rel="tag">webdav</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" rel="tag">데비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" rel="tag">리눅스</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" rel="tag">바나나파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" rel="tag">방화벽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" rel="tag">오렌지파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" rel="tag">웹토큰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" rel="tag">인공지능</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" rel="tag">전원관리</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" rel="tag">파이어월</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ARM/" style="font-size: 10px;">ARM</a> <a href="/tags/Armbian/" style="font-size: 10px;">Armbian</a> <a href="/tags/Artificial-Intelligence/" style="font-size: 12px;">Artificial Intelligence</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Debian-Strech/" style="font-size: 10px;">Debian Strech</a> <a href="/tags/JSON-Web-Token/" style="font-size: 10px;">JSON Web Token</a> <a href="/tags/JWT-Toekn/" style="font-size: 10px;">JWT Toekn</a> <a href="/tags/LEAP-15-0/" style="font-size: 11px;">LEAP 15.0</a> <a href="/tags/LEAP-42-3/" style="font-size: 11px;">LEAP 42.3</a> <a href="/tags/Linux/" style="font-size: 19px;">Linux</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Odroid/" style="font-size: 11px;">Odroid</a> <a href="/tags/Odroid-C2/" style="font-size: 10px;">Odroid C2</a> <a href="/tags/Orange-Pi/" style="font-size: 10px;">Orange Pi</a> <a href="/tags/Raspberry-Pi/" style="font-size: 14px;">Raspberry Pi</a> <a href="/tags/Raspberry-Pi-3/" style="font-size: 19px;">Raspberry Pi 3</a> <a href="/tags/Raspbian/" style="font-size: 14px;">Raspbian</a> <a href="/tags/SD-Card/" style="font-size: 10px;">SD Card</a> <a href="/tags/Scientific/" style="font-size: 10px;">Scientific</a> <a href="/tags/TensorFlow/" style="font-size: 11px;">TensorFlow</a> <a href="/tags/TypeScript/" style="font-size: 14px;">TypeScript</a> <a href="/tags/TypeScript-Tutorials/" style="font-size: 11px;">TypeScript Tutorials</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/X11/" style="font-size: 10px;">X11</a> <a href="/tags/amd64/" style="font-size: 14px;">amd64</a> <a href="/tags/angular4/" style="font-size: 12px;">angular4</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/arm64/" style="font-size: 14px;">arm64</a> <a href="/tags/armbian/" style="font-size: 16px;">armbian</a> <a href="/tags/banana-pi/" style="font-size: 10px;">banana pi</a> <a href="/tags/certificate-ssl/" style="font-size: 10px;">certificate ssl</a> <a href="/tags/clipping-mask/" style="font-size: 10px;">clipping-mask</a> <a href="/tags/collages/" style="font-size: 10px;">collages</a> <a href="/tags/cross-compiler/" style="font-size: 10px;">cross compiler</a> <a href="/tags/debian/" style="font-size: 15px;">debian</a> <a href="/tags/firewall/" style="font-size: 12px;">firewall</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/install/" style="font-size: 11px;">install</a> <a href="/tags/jasmine/" style="font-size: 10px;">jasmine</a> <a href="/tags/jupyter/" style="font-size: 14px;">jupyter</a> <a href="/tags/jupyter-notebook/" style="font-size: 10px;">jupyter notebook</a> <a href="/tags/jupyter-notebook/" style="font-size: 15px;">jupyter-notebook</a> <a href="/tags/karma/" style="font-size: 10px;">karma</a> <a href="/tags/leap-15/" style="font-size: 11px;">leap 15</a> <a href="/tags/leap-42-3/" style="font-size: 11px;">leap 42.3</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lvm2/" style="font-size: 10px;">lvm2</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/micro-SD-Card/" style="font-size: 10px;">micro SD Card</a> <a href="/tags/middleware/" style="font-size: 10px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 17px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 11px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 18px;">nodejs</a> <a href="/tags/nodejs-tutorials/" style="font-size: 10px;">nodejs tutorials</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/odroid/" style="font-size: 11px;">odroid</a> <a href="/tags/odroid-c2/" style="font-size: 12px;">odroid c2</a> <a href="/tags/odroid-c2/" style="font-size: 14px;">odroid-c2</a> <a href="/tags/openSUSE/" style="font-size: 17px;">openSUSE</a> <a href="/tags/opensuse/" style="font-size: 11px;">opensuse</a> <a href="/tags/opensuse-leap-15/" style="font-size: 10px;">opensuse leap 15</a> <a href="/tags/orange-pi/" style="font-size: 10px;">orange pi</a> <a href="/tags/photoshop/" style="font-size: 11px;">photoshop</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">raspberry pi</a> <a href="/tags/security/" style="font-size: 11px;">security</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/synergy/" style="font-size: 10px;">synergy</a> <a href="/tags/terminal/" style="font-size: 11px;">terminal</a> <a href="/tags/tmux/" style="font-size: 11px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/unit-testing/" style="font-size: 10px;">unit testing</a> <a href="/tags/virtualenv/" style="font-size: 14px;">virtualenv</a> <a href="/tags/virtualenvwrapper/" style="font-size: 14px;">virtualenvwrapper</a> <a href="/tags/webdav/" style="font-size: 10px;">webdav</a> <a href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" style="font-size: 10px;">데비안</a> <a href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" style="font-size: 13px;">데이안</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" style="font-size: 19px;">라즈베리파이</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" style="font-size: 14px;">라즈비안</a> <a href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="font-size: 12px;">리눅스</a> <a href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">바나나파이</a> <a href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" style="font-size: 10px;">방화벽</a> <a href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">오렌지파이</a> <a href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" style="font-size: 15px;">우분투</a> <a href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" style="font-size: 10px;">웹토큰</a> <a href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" style="font-size: 12px;">인공지능</a> <a href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" style="font-size: 10px;">전원관리</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" style="font-size: 12px;">파이썬</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" style="font-size: 10px;">파이어월</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">10월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">8월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">7월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">6월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">12월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">11월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">10월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">9월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">7월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">5월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">4월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">12월 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2월 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/24/hello-world/">blog.thinkbee.kr 이전 작업중입니다.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/">HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-config/">MongoDB 구성 설정과 사용자 인증 사용</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/05/python-2019-09-05-OpenSuse-JupyterNotebook-scientific/">openSUSE - 과학계산을 위한 Python, Jupyter Notebook</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

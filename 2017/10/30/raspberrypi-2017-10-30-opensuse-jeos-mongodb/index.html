@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Raspberry Pi 3 64bit OS openSUSE: Build MongoDB 3.4 | Blogging through Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Raspberry Pi 3 64bit OS openSUSE 는 이글은 4개 글타래로 구성되며, openSUSE 설치 및 사용에 대해 작성한다. Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.  https:&#x2F;&#x2F;en.opensuse.org&#x2F;HCL:Raspberry_Pi3   Insta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi 3 64bit OS openSUSE: Build MongoDB 3.4">
+<meta property="og:url" content="http://example.com/2017/10/30/raspberrypi-2017-10-30-opensuse-jeos-mongodb/index.html">
+<meta property="og:site_name" content="Blogging through Programming">
+<meta property="og:description" content="Raspberry Pi 3 64bit OS openSUSE 는 이글은 4개 글타래로 구성되며, openSUSE 설치 및 사용에 대해 작성한다. Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.  https:&#x2F;&#x2F;en.opensuse.org&#x2F;HCL:Raspberry_Pi3   Insta">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-sw-devel_basis.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-sw-gcc.png">
+<meta property="og:image" content="http://example.com/images/opensuse/yast-sw-gcc3.png">
+<meta property="og:image" content="http://example.com/images/opensuse/rpi3-opensuse-machine.JPG">
+<meta property="article:published_time" content="2017-10-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T16:45:45.946Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Raspberry Pi 3">
+<meta property="article:tag" content="openSUSE">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/opensuse/yast-sw-devel_basis.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blogging through Programming" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blogging through Programming</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-raspberrypi-2017-10-30-opensuse-jeos-mongodb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/10/30/raspberrypi-2017-10-30-opensuse-jeos-mongodb/" class="article-date">
+  <time class="dt-published" datetime="2017-10-30T00:00:00.000Z" itemprop="datePublished">2017-10-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a>►<a class="article-category-link" href="/categories/Raspberry-Pi/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Raspberry Pi 3 64bit OS openSUSE: Build MongoDB 3.4
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>Raspberry Pi 3 64bit OS openSUSE</strong> 는 이글은 4개 글타래로 구성되며, openSUSE 설치 및 사용에 대해 작성한다.</p>
+<p>Opensuse 에서 Raspberry Pi 3를 위한 64bit OS openSESE Leap 42.2 을 제공하고 있다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.opensuse.org/HCL:Raspberry_Pi3">https://en.opensuse.org/HCL:Raspberry_Pi3</a></li>
+</ul>
+<ol>
+<li><a href="!--swig%EF%BF%BC32--">Install 64bit openSUSE Leap 42.2 &#x2F; JeOS</a></li>
+<li>openSUSE: Managing Service daemon</li>
+<li>openSUSE: Basic OS Security for Server</li>
+<li>Install &amp; Configuration - Nginx, Node JS</li>
+<li>Build MongoDB 3.4.x</li>
+</ol>
+<h2 id="MongoDB-Community-Edition-설치"><a href="#MongoDB-Community-Edition-설치" class="headerlink" title="MongoDB Community Edition 설치"></a>MongoDB Community Edition 설치</h2><p>Opensuse 용 MongoDB가 제공되지만 AMD64, X64 관련한 플랫폼에 지원될 뿐이다. Raspberry Pi 3에 JeOS를 설치하고 네이티브로 빌드해보기로 했다.</p>
+<h3 id="준비"><a href="#준비" class="headerlink" title="준비"></a>준비</h3><p>MongoDB 빌드를 위해서 git, gcc 등, Scons 가 필요하다.</p>
+<h4 id="컴파일-환경-준비"><a href="#컴파일-환경-준비" class="headerlink" title="컴파일 환경 준비"></a>컴파일 환경 준비</h4><p>최신 <strong>master branch</strong>는,</p>
+<ul>
+<li>최신 C++11 compiler:<ul>
+<li>VS2015 Update 2 or newer</li>
+<li>GCC 5.3.0</li>
+<li>Clang 3.4 (or Apple XCode 5.1.1 Clang) or newer</li>
+</ul>
+</li>
+<li>Python 2.7</li>
+<li>SCons 2.3.5 or newer (for MSVC 2015 support)</li>
+</ul>
+<p><strong>branch 3.2, 3.0</strong> 는</p>
+<ul>
+<li>C++11 compiler:<ul>
+<li>VS2013 Update 4 or newer. Note that VS2015 is currently not compatible with the 3.0 and 3.2 branches. You must use VS2013.</li>
+<li>GCC 4.8.2 or newer. Note that versions of GCC newer than 4.8.2 may produce warnings when building these branches, which are promoted to errors. Please use the –disable-warnings-as-errors build option if necessary to allow the build to succeed despite the warnings.</li>
+</ul>
+</li>
+<li>Python 2.7</li>
+<li>SCons 2.3.0 or newer</li>
+</ul>
+<h3 id="필요한-패키지"><a href="#필요한-패키지" class="headerlink" title="필요한 패키지"></a>필요한 패키지</h3><p>여기서는 터미널에서 openSUSE <code>yast</code> 사용해 관련 패키지를 설치한다. <code>yast</code>를 시작한다.<br><em>YaST -&gt; Software -&gt; Software Management</em> 를 선택한다.</p>
+<p>![][&#x2F;images&#x2F;opensuse&#x2F;yast-sw2.png]</p>
+<h4 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h4><p>gcc 을 선택한다. gcc를 선택하면 gcc-4.8 을 기본으로 설치한다.</p>
+<p>![][&#x2F;images&#x2F;opensuse&#x2F;yast-sw-gcc.png]</p>
+<p>여러 버전을 설치하면 gcc 를 선택하기 위해 <code>update-alternatives</code>을 사용한다. 링크 <a href="/linux/linux-update-alternatives/">update-alternatives</a> 에서 설명을 볼 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-alternatives --install /usr/bin/gcc gcc \</span><br><span class="line">/usr/bin/gcc-4.8 10 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8</span><br><span class="line">$ sudo update-alternatives --install /usr/bin/gcc gcc \</span><br><span class="line">/usr/bin/gcc-6 30 --slave /usr/bin/g++ g++ /usr/bin/g++-6</span><br></pre></td></tr></table></figure>
+
+<h4 id="python"><a href="#python" class="headerlink" title="python"></a>python</h4><p>검색어에 다음 패키지를 넣고 찾아 하나씩 <strong>+</strong> 키로 패키지를 선택한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git python python-pip python-devel python3 python3-pip python3-devel</span><br></pre></td></tr></table></figure>
+
+<p><em>Search Phrase</em>에 다음 패키지를 찾아 개발관련 라이브러리를 설치한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build-essential libboost-filesystem-dev libboost-program-options-dev</span><br><span class="line"> libboost-system-dev libboost-thread-dev -y</span><br></pre></td></tr></table></figure>
+
+<p><em>yast-sw-devel_basis</em> 패키지를 찾아 설치한다.</p>
+<p><img src="/images/opensuse/yast-sw-devel_basis.png">{:width&#x3D;”640”}</p>
+<p><em>Search Phrase</em> 에 gcc 를 넣고 적절한 버전을 선택한다.</p>
+<p><img src="/images/opensuse/yast-sw-gcc.png">{:width&#x3D;”640”}</p>
+<p>그리고 Action 탭에서 설치를 실행한다.</p>
+<p><img src="/images/opensuse/yast-sw-gcc3.png">{:width&#x3D;”640”}</p>
+<p>ssl 지원을 위해서 Debian과 Ubuntu systems에서 SSL 지원을 위해서 <strong>libssl-dev</strong> 가 필요하다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo zypper install libopenssl-devel</span><br></pre></td></tr></table></figure>
+
+<!--
+
+#### zypper 로 설치
+
+
+
+zypper in devel_basis
+
+Opensuse for Ubuntu/Debian users
+>
+개발관련 라이브러리를 설치한다.
+>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git python python-pip python-dev python3 python3-pip python3-dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build-essential libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev -y</span><br></pre></td></tr></table></figure>
+
+<p>–&gt;</p>
+<h4 id="SCons"><a href="#SCons" class="headerlink" title="SCons"></a>SCons</h4><p>mongodb 3.x는 scons를 최신버전으로 요구한다. Suse LEAP은 <code>scons</code> 가 2.3 버전이지만, 여기서 최신 버전 2.5.1 버전을 다운로드해서 설치했다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://prdownloads.sourceforge.net/scons/scons-2.5.1.tar.gz</span><br><span class="line">tar xvf scons-2.5.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> scons-2.5.1</span><br><span class="line">sudo python setup.py install</span><br><span class="line">scons --version</span><br><span class="line">SCons by Steven Knight et al.:</span><br><span class="line">  script: v2.5.1.rel_2.5.1:3735:9dc6cee5c168[MODIFIED], 2016/11/03 14:02:02, by bdbaddog on mongodog</span><br></pre></td></tr></table></figure>
+
+<h3 id="Build-시작"><a href="#Build-시작" class="headerlink" title="Build 시작"></a>Build 시작</h3><p><a target="_blank" rel="noopener" href="https://github.com/mongodb">github mongodb</a> 소스를 사용하고, 라즈베리파이세 Fan을 달라</p>
+<blockquote>
+<p>혹시, 이 글을 보고, 또 필요해서 꼭 라즈베리파이에서 MongoDB를 빌드하고자 하면<br>필자는 빌드를 시작해서 9일이 걸렸다.</p>
+</blockquote>
+<h4 id="소스-다운로드"><a href="#소스-다운로드" class="headerlink" title="소스 다운로드"></a>소스 다운로드</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mongodb/mongo.git mongodb-src</span><br><span class="line">git checkout v3.4.9</span><br></pre></td></tr></table></figure>
+
+<p>pip 패키지 설치</p>
+<p>opensuse에서 배포하는 pip는 7.x 버전으로 최신버전으로 업그레이드한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+<p>최신 3.4 master 브랜치를 설치하려면 소스를 다운로드한 후에 pip로 설치한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r buildscripts/requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>그리고 scons에서 에러코드 점검에 사용하는 다음 패키지를 설치한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user regex</span><br></pre></td></tr></table></figure>
+
+<p>swap이 필요하다. 다음은 block size 1G 크기 파일을 4회에 걸쳐 만들기 때문에 4G 파일이 생성된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/data/swap4G bs=1G count=4</span><br><span class="line">sudo chmod 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br><span class="line">sudo swapon -s</span><br></pre></td></tr></table></figure>
+
+<h4 id="Build-시작-1"><a href="#Build-시작-1" class="headerlink" title="Build 시작"></a>Build 시작</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">~&gt; w</span><br><span class="line"> 11:14:58 up 1 day,  2:26,  2 users,  load average: 7.27, 7.30, 7.52</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">qkboo    pts/0    192.168.11.102   10:30    2.00s  1.56s  0.07s w</span><br><span class="line">qkboo    pts/1    tmux(9980).%0    05:08    6:06m  4:48   0.72s /usr/lib64/gcc/</span><br><span class="line"></span><br><span class="line">~&gt; free</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:        803988     771156      32832          0       6528     355580</span><br><span class="line">-/+ buffers/cache:     409048     394940</span><br><span class="line">Swap:      2594940    1158396    1436544</span><br></pre></td></tr></table></figure>
+
+<p>그리고 드디어, 빌드가 끝나고 나니 <strong>9일</strong>이 걸렸다 Bravo!!!</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Linking build/opt/mongo/mongod</span><br><span class="line">Install file: <span class="string">&quot;build/opt/mongo/mongod&quot;</span> as <span class="string">&quot;mongod&quot;</span></span><br><span class="line">scons: <span class="keyword">done</span> building targets.</span><br><span class="line"></span><br><span class="line">real    13514m39.223s</span><br><span class="line">user    751m26.374s</span><br><span class="line">sys     180m32.031s</span><br></pre></td></tr></table></figure>
+
+<p>빌드한 바이너리는 build&#x2F;opt&#x2F;mongo 밑에 생성된다. 이 바이너리에는 디버깅용 심볼 정보가 포함되어 있다. 이 부분을 제거하기 위해서 <code>strip</code> 명령을 사용한다. 여기서는 <code>mongod</code> 만 빌드해서</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~&gt; <span class="built_in">cd</span> build/opt/mongo</span><br><span class="line">~&gt; strip -s mongod</span><br></pre></td></tr></table></figure>
+
+<h3 id="MongoDB-설치"><a href="#MongoDB-설치" class="headerlink" title="MongoDB 설치"></a>MongoDB 설치</h3><p>소스를 빌드한 바이너리를 설치한다. 먼저 <code>mongod</code> 를 복사한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo <span class="built_in">cp</span> mongo mongod mongos /usr/local/bin/</span><br><span class="line">~&gt; sudo <span class="built_in">chown</span> root:root /usr/local/bin/mongo*</span><br><span class="line">~&gt; sudo <span class="built_in">chmod</span> 755 /usr/local/bin/mongo*</span><br></pre></td></tr></table></figure>
+
+<h4 id="User-mongodb"><a href="#User-mongodb" class="headerlink" title="User mongodb"></a>User mongodb</h4><p>사용자를 추가하기 openSUSE <code>yast</code>라는 시스템 도구로 할 수 있지만 여기선 <code>adduser</code> 명령을 사용해서 사용자 추가한다. 자세한 것은 <a target="_blank" rel="noopener" href="http://www.tecmint.com/add-users-in-linux/">useradd 명령</a>을 참조한다.</p>
+<p><code>useradd</code> 는 홈 디렉토리, 쉘 등에 대한 옵션을 주고 사용자를 등록하는데, 사용자 아이디를 <em>&#x2F;etc&#x2F;passwd</em>, <em>&#x2F;etc&#x2F;shadow</em>, <em>&#x2F;etc&#x2F;group</em>과 <em>&#x2F;etc&#x2F;gshadow</em>에 추가해준다.</p>
+<p>로그인이 필요없는 사용자므로, 로그인, 패스워드, 홈디렉토리를 비활성화한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo useradd -M -N -s /dev/zero -g nogroup mongodb</span><br></pre></td></tr></table></figure>
+
+<h4 id="디렉토리와-설정"><a href="#디렉토리와-설정" class="headerlink" title="디렉토리와 설정"></a>디렉토리와 설정</h4><p>mongod 가 사용하는 로그 디렉토리,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo <span class="built_in">mkdir</span> /var/log/mongodb</span><br><span class="line">~&gt; sudo <span class="built_in">chown</span> mongodb:nogroup /var/log/mongodb</span><br></pre></td></tr></table></figure>
+
+<p>데이터 디렉토리</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo <span class="built_in">mkdir</span> /var/lib/mongodb</span><br><span class="line">~&gt; sudo <span class="built_in">chown</span> mongodb:root /var/lib/mongodb</span><br><span class="line">~&gt; sudo <span class="built_in">chmod</span> 775 /var/lib/mongodb</span><br></pre></td></tr></table></figure>
+
+<p>이제 <code>mongod</code> 데몬을 시작해 보자, 먼저 다음 같이 명령을 입력해 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo /usr/local/bin/mongod --dbpath /var/lib/mongodb</span><br></pre></td></tr></table></figure>
+
+<p>데이터베이스 엔진에서 발생하는 로그가 화면에 출력되는 것을 확인할 수 있다.</p>
+<p><code>mongo</code> 클라이언트 혹은 mongobooster 같은 클라이언트에서 데이터베이스에 접속해 보고 잘 동작하는지 확인한다.</p>
+<p>확인후 log 파일을 지정해 확인한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo /usr/local/bin/mongod --dbpath /var/lib/mongodb/ --logpath /var/log/mongodb/mongod.log</span><br></pre></td></tr></table></figure>
+
+<h4 id="mongod-conf"><a href="#mongod-conf" class="headerlink" title="mongod.conf"></a>mongod.conf</h4><p>보통 MongoDB는 데이터베이스 엔진 실행시 필요한 설정으로 로그 파일, 데이터 디렉토리 등의 내용을 <em>&#x2F;etc&#x2F;mongod.conf</em> 설정 파일에 선언해서 사용한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo vi /etc/mongod.conf</span><br></pre></td></tr></table></figure>
+
+<p>다음 내용으로 작성한다. 설정 파일 내용에 대해서는 <a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/configuration-options">mongodb.conf</a>를 참조한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">storage:</span><br><span class="line">  dbPath: /data/mongodata</span><br><span class="line">  journal:</span><br><span class="line">    enabled: true</span><br><span class="line">#  engine: mmapv1</span><br><span class="line">#  mmapv1:</span><br><span class="line">  wiredTiger:</span><br><span class="line">    engineConfig:</span><br><span class="line">      cacheSizeGB: 0.5</span><br><span class="line"></span><br><span class="line">systemLog:</span><br><span class="line">  destination: file</span><br><span class="line">  logAppend: true</span><br><span class="line">  path: /var/log/mongodb/mongod.log</span><br><span class="line"></span><br><span class="line"># network interfaces</span><br><span class="line">net:</span><br><span class="line">  port: 27017</span><br><span class="line">  bindIp: 0.0.0.0</span><br><span class="line"></span><br><span class="line">security:</span><br><span class="line">  authorization: disabled</span><br></pre></td></tr></table></figure>
+
+<p>설정 파일을 주고 시작해 본다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&gt; sudo /usr/local/bin/mongod --config /etc/mongod.conf</span><br></pre></td></tr></table></figure>
+
+<p>잘 동작한다.</p>
+<h3 id="create-systemd-x2F-service-entry"><a href="#create-systemd-x2F-service-entry" class="headerlink" title="create systemd &#x2F; service entry"></a>create systemd &#x2F; service entry</h3><p>이제 systemd unit 파일 <code>mongod.service</code> 를 생성해서 데몬으로 등록해 보자. <em>&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</em> 디렉토리는 서비스 유닛 파일이 설치되는 곳으로, 활성화 되면 <em>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;</em> 밑에 설치된다.</p>
+<blockquote>
+<p>Ubuntu&#x2F;Debian 계열은 <em>&#x2F;lib&#x2F;systemd&#x2F;system</em> 이다</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~&gt; <span class="built_in">cd</span> /usr/lib/systemd/system</span><br><span class="line">~&gt; sudo vi mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>다음 내용을 입력한다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=High-performance, schema-free document-oriented database</span><br><span class="line">After=network.target</span><br><span class="line">Documentation=https://docs.mongodb.org/manual</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">#User=mongodb</span><br><span class="line">#Group=nogroup</span><br><span class="line">ExecStart=/usr/local/bin/mongod --config /etc/mongod.conf</span><br><span class="line"># file size</span><br><span class="line">LimitFSIZE=infinity</span><br><span class="line"># cpu time</span><br><span class="line">LimitCPU=infinity</span><br><span class="line"># virtual memory size</span><br><span class="line">LimitAS=infinity</span><br><span class="line"># open files</span><br><span class="line">LimitNOFILE=64000</span><br><span class="line"># processes/threads</span><br><span class="line">LimitNPROC=64000</span><br><span class="line"># total threads (user+kernel)</span><br><span class="line">TasksMax=infinity</span><br><span class="line">TasksAccounting=false</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p><code>mongod</code> 에 대한 제약은 <a target="_blank" rel="noopener" href="http://docs.mongodb.org/manual/reference/ulimit/#recommended-settings">Recommended limits for for mongod</a> 를 참조한다.</p>
+<p>서비스 유닛 파일이 제대로 위치하는지 검증하기 위해 다음 명령으로 확인한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl list-unit-files --<span class="built_in">type</span>=service  |grep mongod</span><br><span class="line">mongodb.service             disabled</span><br></pre></td></tr></table></figure>
+
+<p>이제 <code>mongod.service</code> 를 할성화 한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>활성화 되면 <em>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target</em> 밑에 설치된다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl status mongod.service</span><br><span class="line">● mongod.service - High-performance, schema-free document-oriented database</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mongodb.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: inactive (dead)</span><br><span class="line">     Docs: https://docs.mongodb.org/manual</span><br></pre></td></tr></table></figure>
+
+<p>이제 mongodb 를 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>중지는,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop mongod.service</span><br><span class="line">sudo systemctl restart mongod.service</span><br></pre></td></tr></table></figure>
+
+<p>그리고 <em>mongod.service</em> 내용을 수정하면 다시 로딩을 해야 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+
+<p>일단 여기까지 데몬으로 잘 실행된다. 다만 사용자가 아닌 <code>root</code> 에서만… ㅠ.ㅜ</p>
+<!--
+
+#### Data disk
+
+MLC를 지원하는 USB memory 를 장착하고, 2017-04-03-odroid-lvm2 에서 설명한데로 디렉토리를 구성해서 데이터 파일시스템으로 사용하고 있다.
+-->
+
+<h3 id="기념사진"><a href="#기념사진" class="headerlink" title="기념사진"></a>기념사진</h3><p>우분투&#x2F;데비안 계열에 익숙해 있다가 Raspberry Pi 3 에 openSUSE 를 개발자용 패키지들을 설치하고, 맘 먹고 빌드를 시작해서 9일이 걸렸다. <em>9일 동안 꿋꿋이 버텨준</em> <strong>Raspberry Pi 3&#x2F;openSUSE</strong> machine!!!</p>
+<p><img src="/images/opensuse/rpi3-opensuse-machine.JPG">{:width&#x3D;”550”}</p>
+<h2 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h2><p>[^1]: <a target="_blank" rel="noopener" href="http://koenaerts.ca/compile-and-install-mongodb-on-raspberry-pi/">Mongodb on Raspberry pi</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/10/30/raspberrypi-2017-10-30-opensuse-jeos-mongodb/" data-id="cl0196xh6003cjs7g6iejaehq" data-title="Raspberry Pi 3 64bit OS openSUSE: Build MongoDB 3.4" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/30/python-2017-10-30-jupyter-scitific/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">최신</strong>
+      <div class="article-nav-title">
+        
+          Python - 과학계산을 위한 Jupyter(Armbian)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/21/raspberrypi-2017-10-21-opensuse-jeos-nginxjupyter/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">Raspberry Pi 3 64bit OS openSUSE: Nginx, Node JS, Jupyter </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">카테고리</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/NodeJS/">NodeJS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Programming/">Programming</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/Database/">Database</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photoshop/">Photoshop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angular/">Angular</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Angularjs/">Angularjs</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/">Raspberry Pi</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Raspberry-Pi/Linux/Database/">Database</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ARM/" rel="tag">ARM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Armbian/" rel="tag">Armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Artificial-Intelligence/" rel="tag">Artificial Intelligence</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian-Strech/" rel="tag">Debian Strech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON-Web-Token/" rel="tag">JSON Web Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT-Toekn/" rel="tag">JWT Toekn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-15-0/" rel="tag">LEAP 15.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LEAP-42-3/" rel="tag">LEAP 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid/" rel="tag">Odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Odroid-C2/" rel="tag">Odroid C2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Orange-Pi/" rel="tag">Orange Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi/" rel="tag">Raspberry Pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspberry-Pi-3/" rel="tag">Raspberry Pi 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Raspbian/" rel="tag">Raspbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SD-Card/" rel="tag">SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scientific/" rel="tag">Scientific</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript-Tutorials/" rel="tag">TypeScript Tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X11/" rel="tag">X11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd64/" rel="tag">amd64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular4/" rel="tag">angular4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm64/" rel="tag">arm64</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banana-pi/" rel="tag">banana pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate-ssl/" rel="tag">certificate ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/clipping-mask/" rel="tag">clipping-mask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collages/" rel="tag">collages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-compiler/" rel="tag">cross compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewall/" rel="tag">firewall</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/" rel="tag">install</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jasmine/" rel="tag">jasmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/" rel="tag">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter-notebook/" rel="tag">jupyter-notebook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/karma/" rel="tag">karma</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-15/" rel="tag">leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leap-42-3/" rel="tag">leap 42.3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/" rel="tag">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm2/" rel="tag">lvm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-SD-Card/" rel="tag">micro SD Card</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/" rel="tag">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-tutorials/" rel="tag">nodejs tutorials</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid/" rel="tag">odroid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/odroid-c2/" rel="tag">odroid-c2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openSUSE/" rel="tag">openSUSE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse/" rel="tag">opensuse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensuse-leap-15/" rel="tag">opensuse leap 15</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/orange-pi/" rel="tag">orange pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/" rel="tag">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/" rel="tag">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/synergy/" rel="tag">synergy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/" rel="tag">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/" rel="tag">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unit-testing/" rel="tag">unit testing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/" rel="tag">virtualenv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenvwrapper/" rel="tag">virtualenvwrapper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webdav/" rel="tag">webdav</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" rel="tag">데비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" rel="tag">데이안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" rel="tag">라즈베리파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" rel="tag">라즈비안</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" rel="tag">리눅스</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" rel="tag">바나나파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" rel="tag">방화벽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" rel="tag">오렌지파이</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" rel="tag">우분투</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" rel="tag">웹토큰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" rel="tag">인공지능</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" rel="tag">전원관리</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" rel="tag">파이썬</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" rel="tag">파이어월</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ARM/" style="font-size: 10px;">ARM</a> <a href="/tags/Armbian/" style="font-size: 10px;">Armbian</a> <a href="/tags/Artificial-Intelligence/" style="font-size: 12px;">Artificial Intelligence</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Debian-Strech/" style="font-size: 10px;">Debian Strech</a> <a href="/tags/JSON-Web-Token/" style="font-size: 10px;">JSON Web Token</a> <a href="/tags/JWT-Toekn/" style="font-size: 10px;">JWT Toekn</a> <a href="/tags/LEAP-15-0/" style="font-size: 11px;">LEAP 15.0</a> <a href="/tags/LEAP-42-3/" style="font-size: 11px;">LEAP 42.3</a> <a href="/tags/Linux/" style="font-size: 19px;">Linux</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Numpy/" style="font-size: 10px;">Numpy</a> <a href="/tags/Odroid/" style="font-size: 11px;">Odroid</a> <a href="/tags/Odroid-C2/" style="font-size: 10px;">Odroid C2</a> <a href="/tags/Orange-Pi/" style="font-size: 10px;">Orange Pi</a> <a href="/tags/Raspberry-Pi/" style="font-size: 14px;">Raspberry Pi</a> <a href="/tags/Raspberry-Pi-3/" style="font-size: 19px;">Raspberry Pi 3</a> <a href="/tags/Raspbian/" style="font-size: 14px;">Raspbian</a> <a href="/tags/SD-Card/" style="font-size: 10px;">SD Card</a> <a href="/tags/Scientific/" style="font-size: 10px;">Scientific</a> <a href="/tags/TensorFlow/" style="font-size: 11px;">TensorFlow</a> <a href="/tags/TypeScript/" style="font-size: 14px;">TypeScript</a> <a href="/tags/TypeScript-Tutorials/" style="font-size: 11px;">TypeScript Tutorials</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/X11/" style="font-size: 10px;">X11</a> <a href="/tags/amd64/" style="font-size: 14px;">amd64</a> <a href="/tags/angular4/" style="font-size: 12px;">angular4</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/arm64/" style="font-size: 14px;">arm64</a> <a href="/tags/armbian/" style="font-size: 16px;">armbian</a> <a href="/tags/banana-pi/" style="font-size: 10px;">banana pi</a> <a href="/tags/certificate-ssl/" style="font-size: 10px;">certificate ssl</a> <a href="/tags/clipping-mask/" style="font-size: 10px;">clipping-mask</a> <a href="/tags/collages/" style="font-size: 10px;">collages</a> <a href="/tags/cross-compiler/" style="font-size: 10px;">cross compiler</a> <a href="/tags/debian/" style="font-size: 15px;">debian</a> <a href="/tags/firewall/" style="font-size: 12px;">firewall</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/install/" style="font-size: 11px;">install</a> <a href="/tags/jasmine/" style="font-size: 10px;">jasmine</a> <a href="/tags/jupyter/" style="font-size: 14px;">jupyter</a> <a href="/tags/jupyter-notebook/" style="font-size: 10px;">jupyter notebook</a> <a href="/tags/jupyter-notebook/" style="font-size: 15px;">jupyter-notebook</a> <a href="/tags/karma/" style="font-size: 10px;">karma</a> <a href="/tags/leap-15/" style="font-size: 11px;">leap 15</a> <a href="/tags/leap-42-3/" style="font-size: 11px;">leap 42.3</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lvm2/" style="font-size: 10px;">lvm2</a> <a href="/tags/macOS/" style="font-size: 10px;">macOS</a> <a href="/tags/micro-SD-Card/" style="font-size: 10px;">micro SD Card</a> <a href="/tags/middleware/" style="font-size: 10px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 17px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 11px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 18px;">nodejs</a> <a href="/tags/nodejs-tutorials/" style="font-size: 10px;">nodejs tutorials</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/odroid/" style="font-size: 11px;">odroid</a> <a href="/tags/odroid-c2/" style="font-size: 12px;">odroid c2</a> <a href="/tags/odroid-c2/" style="font-size: 14px;">odroid-c2</a> <a href="/tags/openSUSE/" style="font-size: 17px;">openSUSE</a> <a href="/tags/opensuse/" style="font-size: 11px;">opensuse</a> <a href="/tags/opensuse-leap-15/" style="font-size: 10px;">opensuse leap 15</a> <a href="/tags/orange-pi/" style="font-size: 10px;">orange pi</a> <a href="/tags/photoshop/" style="font-size: 11px;">photoshop</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 13px;">raspberry pi</a> <a href="/tags/security/" style="font-size: 11px;">security</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/synergy/" style="font-size: 10px;">synergy</a> <a href="/tags/terminal/" style="font-size: 11px;">terminal</a> <a href="/tags/tmux/" style="font-size: 11px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/unit-testing/" style="font-size: 10px;">unit testing</a> <a href="/tags/virtualenv/" style="font-size: 14px;">virtualenv</a> <a href="/tags/virtualenvwrapper/" style="font-size: 14px;">virtualenvwrapper</a> <a href="/tags/webdav/" style="font-size: 10px;">webdav</a> <a href="/tags/%EB%8D%B0%EB%B9%84%EC%95%88/" style="font-size: 10px;">데비안</a> <a href="/tags/%EB%8D%B0%EC%9D%B4%EC%95%88/" style="font-size: 13px;">데이안</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/" style="font-size: 19px;">라즈베리파이</a> <a href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/" style="font-size: 14px;">라즈비안</a> <a href="/tags/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="font-size: 12px;">리눅스</a> <a href="/tags/%EB%B0%94%EB%82%98%EB%82%98%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">바나나파이</a> <a href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/" style="font-size: 10px;">방화벽</a> <a href="/tags/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%8C%8C%EC%9D%B4/" style="font-size: 10px;">오렌지파이</a> <a href="/tags/%EC%9A%B0%EB%B6%84%ED%88%AC/" style="font-size: 15px;">우분투</a> <a href="/tags/%EC%9B%B9%ED%86%A0%ED%81%B0/" style="font-size: 10px;">웹토큰</a> <a href="/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/" style="font-size: 12px;">인공지능</a> <a href="/tags/%EC%A0%84%EC%9B%90%EA%B4%80%EB%A6%AC/" style="font-size: 10px;">전원관리</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/" style="font-size: 12px;">파이썬</a> <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%96%B4%EC%9B%94/" style="font-size: 10px;">파이어월</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">10월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">8월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">7월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">6월 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">12월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">11월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">10월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">9월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">7월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">5월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">4월 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">12월 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">2월 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/24/hello-world/">blog.thinkbee.kr 이전 작업중입니다.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/linux-2020-02-02-letsencrypt%EB%B0%9C%EA%B8%89/">HTTPS를 위한 공인인증서 - Let&#39;s Encrypt 발급</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-config/">MongoDB 구성 설정과 사용자 인증 사용</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/linux-2019-12-20-mongodb-4-2-install-arm64/">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/05/python-2019-09-05-OpenSuse-JupyterNotebook-scientific/">openSUSE - 과학계산을 위한 Python, Jupyter Notebook</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
