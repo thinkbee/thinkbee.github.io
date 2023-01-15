@@ -96,19 +96,25 @@
           },
         },
       });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
-        });</script></body></html>td class="code"><pre><span class="line">&gt; pip install c:\downloads\opencv_python‑3.3.1‑cp36‑cp36m‑win_amd64.whl</span><br></pre></td></tr></table></figure>
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery��치 </a></h1><div class="content"><h1 id="OpenCV-설치"><a href="#OpenCV-설치" class="headerlink" title="OpenCV 설치"></a>OpenCV 설치</h1><p>OpenCV 를 설치하기 위해서 소스 빌드, 패키지 설치 방법이 있다. 여기서 pip 기반 가상환경 그리고 Anaconda 를 사용한다는 가정에서 윈도우즈, 맥에서 OpenCV 를 설치하는 과정을 살펴보겠다.</p>
+<ul>
+<li><ol>
+<li>윈도우즈에서</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>macOS에서</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Linux에서</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="1-윈도우즈에서-OpenCV-설치"><a href="#1-윈도우즈에서-OpenCV-설치" class="headerlink" title="1) 윈도우즈에서 OpenCV 설치"></a>1) 윈도우즈에서 OpenCV 설치</h2><p>윈도우 기반에서 OpenCV 를 사용하기 위해서 Anaconda 배포본을 사용하는 것이 가장 쉽다.</p>
+<h4 id="whl-파일로-설치"><a href="#whl-파일로-설치" class="headerlink" title="whl 파일로 설치"></a>whl 파일로 설치</h4><p>윈도우에서 opencv를 빌드된 버전을 설치하기 위해서 <a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv">https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv</a> 에 있는 .whl 파일을 다운로드 받느다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pip install c:\downloads\opencv_python‑3.3.1‑cp36‑cp36m‑win_amd64.whl</span><br></pre></td></tr></table></figure>
 
 <h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><p>OpenCV의 main module만 사용한다면 아래처럼 설치하면 됩니다.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pip install opencv-python</span><br></pre></td></tr></table></figure>
