@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Firebase Android codelab 시리즈: 2018-04월 자료   Android Codelab: 프로젝트 시작 Android Codelab: Firebase console Android Codelab: Authentication Android Codelab: Read A message Android Codelab: Send A message A"><meta property="og:type" content="website"><meta property="og:title" content="IT Tech blogging"><meta property="og:url" content="https://blog.thinkbee.kr/android/index.html"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="Firebase Android codelab 시리즈: 2018-04월 자료   Android Codelab: 프로젝트 시작 Android Codelab: Firebase console Android Codelab: Authentication Android Codelab: Read A message Android Codelab: Send A message A"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/img/og_image.png"><meta property="article:published_time" content="2023-01-25T04:16:32.609Z"><meta property="article:modified_time" content="2023-01-18T17:11:36.000Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="Machine learning, Deep learning, Python, Data science, Android, Ubuntu, Linux, macOS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.thinkbee.kr/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/android/index.html"},"headline":"IT Tech blogging","image":["https://blog.thinkbee.kr/img/og_image.png"],"datePublished":"2023-01-25T04:16:32.609Z","dateModified":"2023-01-18T17:11:36.000Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"Firebase Android codelab 시리즈: 2018-04월 자료   Android Codelab: 프로젝트 시작 Android Codelab: Firebase console Android Codelab: Authentication Android Codelab: Read A message Android Codelab: Send A message A"}</script><link rel="canonical" href="https://blog.thinkbee.kr/android/index.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="github 에서 팀 프로젝트를 위해서 팀장이 레포지토리를 생성하고 팀원을 참여자로 추가한다. 그리고 팀원은 fork 를 통해서 클론해서 프로젝트에 참여 작업을 이어 나갈 수 있다.      레포지토리 생성 (팀장)     참여자 관리 (팀장)프로젝트 레포지토리에 팀원을 추가해 준다. 레포지토리 Settings 에서 Collaborators 페이지에서 참여"><meta property="og:type" content="website"><meta property="og:title" content="IT Tech blogging"><meta property="og:url" content="https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="github 에서 팀 프로젝트를 위해서 팀장이 레포지토리를 생성하고 팀원을 참여자로 추가한다. 그리고 팀원은 fork 를 통해서 클론해서 프로젝트에 참여 작업을 이어 나갈 수 있다.      레포지토리 생성 (팀장)     참여자 관리 (팀장)프로젝트 레포지토리에 팀원을 추가해 준다. 레포지토리 Settings 에서 Collaborators 페이지에서 참여"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://www.dataschool.io/content/images/2014/Mar/github1.png"><meta property="og:image" content="https://i.imgur.com/njEUbNe.png"><meta property="og:image" content="https://i.imgur.com/BIuUSdz.png"><meta property="og:image" content="https://i.imgur.com/l3LBGsF.png"><meta property="og:image" content="https://i.imgur.com/Ei9zjF7.png"><meta property="og:image" content="https://i.imgur.com/SqXXmim.png"><meta property="og:image" content="https://i.imgur.com/jwmsa1Q.png"><meta property="og:image" content="https://www.tomasbeuzen.com/post/git-fork-branch-pull/featured.png"><meta property="og:image" content="https://i.imgur.com/njEUbNe.png"><meta property="og:image" content="https://i.imgur.com/Ka8YA2O.png"><meta property="og:image" content="https://i.imgur.com/NrntrqA.png"><meta property="og:image" content="https://i.imgur.com/cziDIiJ.png"><meta property="og:image" content="https://i.imgur.com/sVjAeAM.png"><meta property="og:image" content="https://i.imgur.com/05sEbAG.png"><meta property="og:image" content="https://i.imgur.com/vc0okUz.png"><meta property="og:image" content="https://i.imgur.com/cteKcQc.png"><meta property="og:image" content="https://i.imgur.com/6dg7Cdn.png"><meta property="og:image" content="https://i.imgur.com/sqj5lcK.png"><meta property="og:image" content="https://i.imgur.com/fKlcjUs.png"><meta property="og:image" content="https://i.imgur.com/O8oZbf9.png"><meta property="og:image" content="https://i.imgur.com/wZi41Zp.png"><meta property="og:image" content="https://i.imgur.com/H2d02z9.png"><meta property="og:image" content="https://i.imgur.com/VN8PIvE.png"><meta property="og:image" content="https://i.imgur.com/AfJMbPI.png"><meta property="og:image" content="https://i.imgur.com/i6pg4US.png"><meta property="og:image" content="https://i.imgur.com/8j8gHHe.png"><meta property="og:image" content="https://i.imgur.com/neAvUZC.png"><meta property="og:image" content="https://i.imgur.com/WGRMEPe.png"><meta property="og:image" content="https://i.imgur.com/CIsYfjm.png"><meta property="og:image" content="https://i.imgur.com/P85gWeS.png"><meta property="article:published_time" content="2023-04-29T11:10:12.041Z"><meta property="article:modified_time" content="2023-04-29T11:10:12.041Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="Machine learning, Deep learning, Python, Data science, Android, Ubuntu, Linux, macOS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://www.dataschool.io/content/images/2014/Mar/github1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html"},"headline":"IT Tech blogging","image":["https://www.dataschool.io/content/images/2014/Mar/github1.png","https://i.imgur.com/njEUbNe.png","https://i.imgur.com/BIuUSdz.png","https://i.imgur.com/l3LBGsF.png","https://i.imgur.com/Ei9zjF7.png","https://i.imgur.com/SqXXmim.png","https://i.imgur.com/jwmsa1Q.png","https://www.tomasbeuzen.com/post/git-fork-branch-pull/featured.png","https://i.imgur.com/njEUbNe.png","https://i.imgur.com/Ka8YA2O.png","https://i.imgur.com/NrntrqA.png","https://i.imgur.com/cziDIiJ.png","https://i.imgur.com/sVjAeAM.png","https://i.imgur.com/05sEbAG.png","https://i.imgur.com/vc0okUz.png","https://i.imgur.com/cteKcQc.png","https://i.imgur.com/6dg7Cdn.png","https://i.imgur.com/sqj5lcK.png","https://i.imgur.com/fKlcjUs.png","https://i.imgur.com/O8oZbf9.png","https://i.imgur.com/wZi41Zp.png","https://i.imgur.com/H2d02z9.png","https://i.imgur.com/VN8PIvE.png","https://i.imgur.com/AfJMbPI.png","https://i.imgur.com/i6pg4US.png","https://i.imgur.com/8j8gHHe.png","https://i.imgur.com/neAvUZC.png","https://i.imgur.com/WGRMEPe.png","https://i.imgur.com/CIsYfjm.png","https://i.imgur.com/P85gWeS.png"],"datePublished":"2023-04-29T11:10:12.041Z","dateModified":"2023-04-29T11:10:12.041Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"github 에서 팀 프로젝트를 위해서 팀장이 레포지토리를 생성하고 팀원을 참여자로 추가한다. 그리고 팀원은 fork 를 통해서 클론해서 프로젝트에 참여 작업을 이어 나갈 수 있다.      레포지토리 생성 (팀장)     참여자 관리 (팀장)프로젝트 레포지토리에 팀원을 추가해 준다. 레포지토리 Settings 에서 Collaborators 페이지에서 참여"}</script><link rel="canonical" href="https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
@@ -33,33 +33,110 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item is-active" href="/android">Android</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="content"><h1 id="Firebase-Android-codelab-시리즈"><a href="#Firebase-Android-codelab-시리즈" class="headerlink" title="Firebase Android codelab 시리즈:"></a><strong>Firebase Android codelab</strong> 시리즈:</h1><blockquote>
-<p>2018-04월 자료</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="content"><p>github 에서 팀 프로젝트를 위해서 팀장이 레포지토리를 생성하고 팀원을 참여자로 추가한다. 그리고 팀원은 fork 를 통해서 클론해서 프로젝트에 참여 작업을 이어 나갈 수 있다.</p>
+<img src='https://www.dataschool.io/content/images/2014/Mar/github1.png' width=700>
+
+<br>
+<br>
+
+<h1 id="레포지토리-생성-팀장"><a href="#레포지토리-생성-팀장" class="headerlink" title="레포지토리 생성 (팀장)"></a>레포지토리 생성 (팀장)</h1><img src='https://i.imgur.com/njEUbNe.png' width=700>
+
+<br>
+<br>
+
+<h1 id="참여자-관리-팀장"><a href="#참여자-관리-팀장" class="headerlink" title="참여자 관리 (팀장)"></a>참여자 관리 (팀장)</h1><p>프로젝트 레포지토리에 팀원을 추가해 준다. 레포지토리 Settings 에서 Collaborators 페이지에서 참여자를 관리할 수 있다.</p>
+<img src='https://i.imgur.com/BIuUSdz.png' width=700>
+
+<p>Collaborator 에 추가할 github 사용자를 검색</p>
+<img src='https://i.imgur.com/l3LBGsF.png' width=700>
+
+<p>Collaborators 추가 사용자 목록</p>
+<img src='https://i.imgur.com/Ei9zjF7.png' width=700>
+
+<h3 id="참여자-알림-확인"><a href="#참여자-알림-확인" class="headerlink" title="참여자 알림 확인"></a>참여자 알림 확인</h3><p>사용자는 알림에 Collaborator 에 추가되어 허용할지를 등록</p>
+<img src='https://i.imgur.com/SqXXmim.png' width=700>
+
+
+<p>요청받은 collaborator 을 받아들인다</p>
+<img src='https://i.imgur.com/jwmsa1Q.png' width=700>
+
+
+<br>
+<br>
+
+<h1 id="Fork-amp-Pull-Request-Merge"><a href="#Fork-amp-Pull-Request-Merge" class="headerlink" title="Fork &amp; Pull Request, Merge"></a>Fork &amp; Pull Request, Merge</h1><p>깃헙을 통해 프로젝트를 수행한다면 레포지토리 fork, pull-request, commit 을 통해서 여러 참여자&#x2F;기여자의 코드를 동기화 할 수 있다.</p>
+<p><img src='https://www.tomasbeuzen.com/post/git-fork-branch-pull/featured.png' width=700> <a target="_blank" rel="noopener" href="https://www.tomasbeuzen.com/post/git-fork-branch-pull/">https://www.tomasbeuzen.com/post/git-fork-branch-pull/</a></p>
+<h3 id="팀장이-공유할-레포지토리를-만든다"><a href="#팀장이-공유할-레포지토리를-만든다" class="headerlink" title="팀장이 공유할 레포지토리를 만든다"></a>팀장이 공유할 레포지토리를 만든다</h3><img src='https://i.imgur.com/njEUbNe.png' width=700>
+
+
+
+
+<h3 id="팀원이-프로젝트-레포지토리를-fork-한다"><a href="#팀원이-프로젝트-레포지토리를-fork-한다" class="headerlink" title="팀원이 프로젝트 레포지토리를 fork 한다"></a>팀원이 프로젝트 레포지토리를 fork 한다</h3><img src='https://i.imgur.com/Ka8YA2O.png' width=700>
+
+
+<p>fork 하는 레포지토리 정보를 입력한다</p>
+<img src='https://i.imgur.com/NrntrqA.png' width=700>
+
+
+<h3 id="포크한-레포지토리에-새-파일을-추가한다"><a href="#포크한-레포지토리에-새-파일을-추가한다" class="headerlink" title="포크한 레포지토리에 새 파일을 추가한다."></a>포크한 레포지토리에 새 파일을 추가한다.</h3><p>팀원 레포지토리로 포크한 프로젝트 레포지토리에 새 파일을 추가한다.</p>
+<blockquote>
+<p>github desktop으로 하는 예제는 마지막에 있다.</p>
 </blockquote>
-<ol>
-<li><a href="2018-05-01-android_codelab01-start">Android Codelab: 프로젝트 시작</a></li>
-<li><a href="2018-05-01-android_codelab02">Android Codelab: Firebase console</a></li>
-<li><a href="2018-05-01-android_codelab03-auth">Android Codelab: Authentication</a></li>
-<li><a href="2018-05-01-android_codelab04-message">Android Codelab: Read A message</a></li>
-<li><a href="2018-05-02-android_codelab05-message">Android Codelab: Send A message</a></li>
-<li><a href="2018-05-02-android_codelab06-logging">Android Codelab: Logging User action</a></li>
-<li><a href="2018-05-02-android_codelab07">Android Codelab: Cloud Messaging</a></li>
-<li><a href="2018-05-03-android_codelab08">Android Codelab: Remote Config</a></li>
-<li><a href="2018-05-03-android_codelab09-invite">Android Codelab: App Invites</a></li>
-<li><a href="2018-05-04-android_codelab10">Android Codelab: Track User Flows</a></li>
-<li><a href="2018-05-04-android_codelab11-ads">Android Codelab: Ads</a></li>
-<li><a href="2018-05-04-android_codelab12-crash">Android Codelab: Crash</a></li>
-<li><a href="2018-05-04-android_codelab13-test">Android Codelab: Test Lab</a></li>
-</ol>
-<h2 id="Firebase-소개"><a href="#Firebase-소개" class="headerlink" title="Firebase 소개:"></a><strong>Firebase</strong> 소개:</h2><ul>
-<li><a href="2018-04-20-firebase-start">Firebase 시작하기</a></li>
-<li><a href="2018-04-20-firebase-storage">Firebase Storage 사용하기</a></li>
-<li><a href="2018-04-20-firebase-database">Firebase Database 사용하기</a></li>
-<li><a href="2018-04-20-firebase-cloud_message">Firebase Cloud Messaging 사용하기</a></li>
-</ul>
-</div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://blog.thinkbee.kr/android/index.html">https://blog.thinkbee.kr/android/index.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-01-25</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-19</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'https://blog.thinkbee.kr/android/index.html';
-            this.page.identifier = 'android/index.html';
+<img src='https://i.imgur.com/cziDIiJ.png' width=700>
+
+<h3 id="팀원-포크한-레포지토리에-새-파일이-추가되었다"><a href="#팀원-포크한-레포지토리에-새-파일이-추가되었다" class="headerlink" title="팀원, 포크한 레포지토리에 새 파일이 추가되었다"></a>팀원, 포크한 레포지토리에 새 파일이 추가되었다</h3><img src='https://i.imgur.com/sVjAeAM.png' width=700>
+
+<h3 id="팀원-변경-사항을-Open-Pull-Request-한다"><a href="#팀원-변경-사항을-Open-Pull-Request-한다" class="headerlink" title="팀원, 변경 사항을 Open Pull Request 한다"></a>팀원, 변경 사항을 Open Pull Request 한다</h3><img src='https://i.imgur.com/05sEbAG.png' width=700>
+
+<h3 id="팀원-Pull-Request-내용을-적는다"><a href="#팀원-Pull-Request-내용을-적는다" class="headerlink" title="팀원, Pull Request 내용을 적는다"></a>팀원, Pull Request 내용을 적는다</h3><img src='https://i.imgur.com/vc0okUz.png' width=700>
+
+
+<h3 id="팀원-변경-사항을-Open-Pull-Request-한다-1"><a href="#팀원-변경-사항을-Open-Pull-Request-한다-1" class="headerlink" title="팀원, 변경 사항을 Open Pull Request 한다"></a>팀원, 변경 사항을 Open Pull Request 한다</h3><img src='https://i.imgur.com/cteKcQc.png' width=700>
+
+
+<h3 id="팀장-Pull-Request-를-확인한다"><a href="#팀장-Pull-Request-를-확인한다" class="headerlink" title="팀장, Pull Request 를 확인한다."></a>팀장, Pull Request 를 확인한다.</h3><img src='https://i.imgur.com/6dg7Cdn.png' width=700>
+
+<h3 id="팀장-Pull-Request-를-확인한다-1"><a href="#팀장-Pull-Request-를-확인한다-1" class="headerlink" title="팀장, Pull Request 를 확인한다."></a>팀장, Pull Request 를 확인한다.</h3><img src='https://i.imgur.com/sqj5lcK.png' width=700>
+
+
+<h3 id="팀장-Merge-한다"><a href="#팀장-Merge-한다" class="headerlink" title="팀장, Merge 한다."></a>팀장, Merge 한다.</h3><img src='https://i.imgur.com/fKlcjUs.png' width=700>
+
+<img src='https://i.imgur.com/O8oZbf9.png' width=700>
+
+<p>프로젝트 레포지토리에 팀원이 추가한 파일이 추가 되었다.</p>
+<img src='https://i.imgur.com/wZi41Zp.png' width=700>
+
+
+<h3 id="포크한-레포지토리를-Sync-해서-동기화를-한다"><a href="#포크한-레포지토리를-Sync-해서-동기화를-한다" class="headerlink" title="포크한 레포지토리를 Sync 해서 동기화를 한다."></a>포크한 레포지토리를 Sync 해서 동기화를 한다.</h3><img src='https://i.imgur.com/H2d02z9.png' width=700>
+
+<h3 id="Sync-해서-동기화로-upstream-과-commit-을-일치시킨다"><a href="#Sync-해서-동기화로-upstream-과-commit-을-일치시킨다" class="headerlink" title="Sync 해서 동기화로 upstream 과 commit 을 일치시킨다"></a>Sync 해서 동기화로 upstream 과 commit 을 일치시킨다</h3><img src='https://i.imgur.com/VN8PIvE.png' width=700>
+
+<br>
+<br>
+
+<h1 id="클라이언트에서-fork-레포지토리-작업"><a href="#클라이언트에서-fork-레포지토리-작업" class="headerlink" title="클라이언트에서 fork 레포지토리 작업"></a>클라이언트에서 fork 레포지토리 작업</h1><p>팀 레포지토리에 참여한 사용자가 원격 레포지토리를 클론해서 로컬에서 작업을 할 수 있다. 작업한 결과는 Push를 통해서 원격레포지토리에 동기화를 한다.</p>
+<h3 id="fork한-레포지토리를-로컬에-클론한다"><a href="#fork한-레포지토리를-로컬에-클론한다" class="headerlink" title="fork한 레포지토리를 로컬에 클론한다"></a>fork한 레포지토리를 로컬에 클론한다</h3><p>Github desktop을 이용해서 레포지토리를 선택해서 클론을 수행한다.</p>
+<img src='https://i.imgur.com/AfJMbPI.png' width=700>
+
+
+<p>클론 레포지토리를 저장할 위치를 정한다.</p>
+<img src='https://i.imgur.com/i6pg4US.png' width=700>
+
+<p>Git desktop은 직접 Upstream에 pull request 를 할 수 있도록 지원하고 있지만 여기서는 Push 를 사용하겠다.</p>
+<img src='https://i.imgur.com/8j8gHHe.png' width=700>
+
+
+<h3 id="클론한-로컬-레포지토리에서-새파일-작업을-한다"><a href="#클론한-로컬-레포지토리에서-새파일-작업을-한다" class="headerlink" title="클론한 로컬 레포지토리에서 새파일 작업을 한다"></a>클론한 로컬 레포지토리에서 새파일 작업을 한다</h3><img src='https://i.imgur.com/neAvUZC.png' width=700>
+
+<p>레포지토리에 변경 사항을 커밋을 한다.</p>
+<img src='https://i.imgur.com/WGRMEPe.png' width=700>
+
+<h3 id="로컬의-커밋-변경을-PUSH-한다"><a href="#로컬의-커밋-변경을-PUSH-한다" class="headerlink" title="로컬의 커밋 변경을 PUSH 한다"></a>로컬의 커밋 변경을 PUSH 한다</h3><img src='https://i.imgur.com/CIsYfjm.png' width=700>
+
+<h3 id="github-upstream에-pull-request-한다"><a href="#github-upstream에-pull-request-한다" class="headerlink" title="github upstream에 pull request 한다"></a>github upstream에 pull request 한다</h3><img src='https://i.imgur.com/P85gWeS.png' width=700>
+</div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html">https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-04-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-04-29</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/documents/git/github-fork_pull_request.html';
+            this.page.identifier = 'documents/git/github-fork_pull_request.html';
         };
         (function() {
             var d = document, s = d.createElement('script');  
