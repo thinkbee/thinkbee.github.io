@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>MySQL 5.x 시작 (3) - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="MySQL사용자 관리mysql-server 를 설치하며 만든 root 사용자 패스워드를 사용해서 데이터베이스에 접속한다. 1$ mysql -u root -p  사용자 데이터베이스사용자가 사용할 데이터베이스를 만든다. 12mysql&amp;gt;create database mydb;Query OK, 1 row affected (0.00 sec)  그리고 CREATE"><meta property="og:type" content="article"><meta property="og:title" content="MySQL 5.x 시작 (3)"><meta property="og:url" content="https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="MySQL사용자 관리mysql-server 를 설치하며 만든 root 사용자 패스워드를 사용해서 데이터베이스에 접속한다. 1$ mysql -u root -p  사용자 데이터베이스사용자가 사용할 데이터베이스를 만든다. 12mysql&amp;gt;create database mydb;Query OK, 1 row affected (0.00 sec)  그리고 CREATE"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/img/og_image.png"><meta property="article:published_time" content="2017-03-11T01:00:00.000Z"><meta property="article:modified_time" content="2023-05-12T07:51:58.831Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="linux"><meta property="article:tag" content="mysql"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.thinkbee.kr/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/"},"headline":"MySQL 5.x 시작 (3)","image":["https://blog.thinkbee.kr/img/og_image.png"],"datePublished":"2017-03-11T01:00:00.000Z","dateModified":"2023-05-12T07:51:58.831Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"MySQL사용자 관리mysql-server 를 설치하며 만든 root 사용자 패스워드를 사용해서 데이터베이스에 접속한다. 1$ mysql -u root -p  사용자 데이터베이스사용자가 사용할 데이터베이스를 만든다. 12mysql&gt;create database mydb;Query OK, 1 row affected (0.00 sec)  그리고 CREATE"}</script><link rel="canonical" href="https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-03-11T01:00:00.000Z" title="3/11/2017, 10:00:00 AM">2017-03-11</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-05-12T07:51:58.831Z" title="5/12/2023, 4:51:58 PM">2023-05-12</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">22분안에 읽기 (약 3291 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">MySQL 5.x 시작 (3)</h1><div class="content"><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="사용자-관리"><a href="#사용자-관리" class="headerlink" title="사용자 관리"></a>사용자 관리</h3><p>mysql-server 를 설치하며 만든 root 사용자 패스워드를 사용해서 데이터베이스에 접속한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<h4 id="사용자-데이터베이스"><a href="#사용자-데이터베이스" class="headerlink" title="사용자 데이터베이스"></a>사용자 데이터베이스</h4><p>사용자가 사용할 데이터베이스를 만든다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span><span class="keyword">create</span> database mydb;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<p>그리고 CREATE USER, INSERT 로 새 사용자를 추가할 수 있다.</p>
+<blockquote>
+<p>create user userid@HOST identified by ‘PASSWORD’;</p>
+</blockquote>
+<p>사용자 foo 를 localhost 와 모든 것을 의미하는 패턴 <code>%</code>로 추가하면:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">user</span> foo<span class="variable">@localhost</span> identified <span class="keyword">by</span> <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;foo&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;password&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>혹은</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into user (host, user, password) values (&#x27;localhost&#x27;, &#x27;hiru&#x27;, &#x27;password(&#x27;hirururu&#x27;));</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>사용자 제거<br>mysql &gt; drop user ‘hiru’;<br>mysql &gt; delete from user where user &#x3D;’hiru’</p>
+<p>사용자 생성시 다음같이 1396 에러는 <em>CREATE USER&#x2F;GRANT 명령으로 사용자와 권한을 추가&#x2F;관리해야 하는데 mysql.db, mysql.user 테이블을 직접 조작하다가 일관성이 깨졌기 때문</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create user &#x27;shopuser&#x27;@&#x27;localhost&#x27; identified by &#x27;)12345&#x27;;</span><br><span class="line">ERROR 1396 (HY000): Operation CREATE USER failed for &#x27;shopuser&#x27;@&#x27;localhost&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>제대로 사용자를 삭제하고</p>
+<blockquote>
+<p>drop user shopuser@localhost</p>
+</blockquote>
+<p><code>flush privileges;</code> 로 갱신해 준다.</p>
+<h4 id="권한-주기"><a href="#권한-주기" class="headerlink" title="권한 주기"></a>권한 주기</h4><p>권한을 추가하고 삭제하기 위해서, GRANT와 REVOKE의 명령을 사용한다. GRANT 명령 등으로 데이터베이스 사용자가 데이터베이스 자원에 접근하는 권한을 만들 수 있다.</p>
+<blockquote>
+<p>GRANT ALL privileges ON DB_NAME.TABLE TO USER_ID@[HOST] IDENTIFIED BY ‘PASSWORD’<br>GRANT [SELECT,DELETE,INSERT,UPDATE,] ON DB_NAME.TABLE TO USER_ID@[HOST] IDENTIFIED BY ‘PASSWORD’</p>
+</blockquote>
+<ul>
+<li>DB_NAME,TABLE 등에 <code>*</code> 패턴을 사용할 수 있다.</li>
+<li>HOST: 접근하는 소스 호스트</li>
+<li>PASSWORD: 패스워드</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.w3big.com/ko/mysql/mysql-administration.html">http://www.w3big.com/ko/mysql/mysql-administration.html</a></p>
+<p>현재 머신에서만 접속할 수 있는 사용자 계정, 외부, 원격에서 접속할 수 있는 사용자 계정을 추가해 준다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> use mysql; # mysql <span class="keyword">system</span> db</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> privileges <span class="keyword">ON</span> mydb.<span class="operator">*</span> <span class="keyword">TO</span> foo<span class="variable">@localhost</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;*****&#x27;</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> privileges <span class="keyword">ON</span> mydb.<span class="operator">*</span> <span class="keyword">TO</span> foo@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;*****&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>혹은</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on mydb.* to foo@host identified by &#x27;password&#x27;;</span><br><span class="line">mysql &gt; grant select, insert, update, delete on dbname.table to userid@&#x27;192.168.%&#x27; identified by &#x27;password&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>권한을 확인하는 방법</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">show</span> grants <span class="keyword">for</span> foo<span class="variable">@localhost</span></span><br><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">show</span> grants <span class="keyword">for</span> <span class="string">&#x27;foo&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>변경된 권한을 적용하기</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>권한을 삭제하는 방법</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; revoke all on dbname.table from username@host</span><br></pre></td></tr></table></figure>
+
+<p>추가한 사용자는 SELECT로 확인할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,authentication_string from user where user=&#x27;foo&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="사용자-데이터베이스-사용"><a href="#사용자-데이터베이스-사용" class="headerlink" title="사용자 데이터베이스 사용"></a>사용자 데이터베이스 사용</h4><p>새로 생성한 사용자 ID로 로그인을 해서 데이터베이스 정보를 확인해 보자.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u foo -p</span><br><span class="line">Enter password:</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mydb               |</span><br><span class="line">+--------------------+</span><br></pre></td></tr></table></figure>
+
+<p>그리고 데이터베이스를 사용하려면 <code>use [DATABASE]</code> 로 변경한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mydb;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Character-Set"><a href="#Character-Set" class="headerlink" title="Character Set"></a>Character Set</h4><p>mysql에서 한글이 ?로 표시되는 경우.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> department;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> name <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> ???  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">2</span> <span class="operator">|</span> ???  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<p>my.cnf의 문자셋과 터미널 문자셋이 일치하지 않아서 그렇다. MySQL은 설치시 지정하지 않았다면 기본적으로 문자셋이 ‘latin1’으로 설정되어 있다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;c%&#x27;</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------+----------------------------+</span></span><br><span class="line"><span class="operator">|</span> Variable_name            <span class="operator">|</span> <span class="keyword">Value</span>                      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------+----------------------------+</span></span><br><span class="line"><span class="operator">|</span> character_set_client     <span class="operator">|</span> latin1                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_connection <span class="operator">|</span> latin1                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_database   <span class="operator">|</span> latin1                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_filesystem <span class="operator">|</span> <span class="type">binary</span>                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_results    <span class="operator">|</span> latin1                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_server     <span class="operator">|</span> latin1                     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_set_system     <span class="operator">|</span> utf8                       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> character_sets_dir       <span class="operator">|</span> <span class="operator">/</span>usr<span class="operator">/</span>share<span class="operator">/</span>mysql<span class="operator">/</span>charsets<span class="operator">/</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> collation_connection     <span class="operator">|</span> latin1_swedish_ci          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> collation_database       <span class="operator">|</span> latin1_swedish_ci          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> collation_server         <span class="operator">|</span> latin1_swedish_ci          <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> completion_type          <span class="operator">|</span> NO_CHAIN                   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> concurrent_insert        <span class="operator">|</span> AUTO                       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> connect_timeout          <span class="operator">|</span> <span class="number">10</span>                         <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> core_file                <span class="operator">|</span> OFF                        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------------+----------------------------+</span></span><br><span class="line"><span class="number">15</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<p>MySQL 설정 파일에서 문자셋을 변경할 수 있다. 다믕 같이 자신의 my.cnf 파일을 작성한다. client, mysqld, mysql 에 대해서 utf8 사용을 선언해 준다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">..</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">character-set-client-handshake=FALSE</span><br><span class="line">init_connect=&quot;SET collation_connection = utf8_general_ci&quot;</span><br><span class="line">init_connect=&quot;SET NAMES utf8&quot;</span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_general_ci</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>mysql&gt; show variables like ‘char%’;<br>+————————–+—————————-+<br>| Variable_name | Value |<br>+————————–+—————————-+<br>| character_set_client | utf8 |<br>| character_set_connection | utf8 |<br>| character_set_database | utf8 |<br>| character_set_filesystem | binary |<br>| character_set_results | utf8 |<br>| character_set_server | utf8 |<br>| character_set_system | utf8 |<br>| character_sets_dir | &#x2F;usr&#x2F;share&#x2F;mysql&#x2F;charsets&#x2F; |<br>+————————–+—————————-+<br>8 rows in set (0.00 sec)</p>
+<h3 id="사용자-관리-1"><a href="#사용자-관리-1" class="headerlink" title="사용자 관리"></a>사용자 관리</h3><p>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP<br>-&gt; ON TUTORIALS.*<br>-&gt; TO ‘zara‘@’localhost’<br>-&gt; IDENTIFIED BY ‘zara123’;</p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><p>Structural Query Language로 튜플 간의 관계를 계산해서 결과를 도촐한다.</p>
+<ul>
+<li>SEQUEL: Structured English QUEry Language; part of SYSTEM R, 1974</li>
+<li>SQL&#x2F;86: ANSI &amp; ISO standard</li>
+<li>SQL&#x2F;89: ANSI &amp; ISO standard</li>
+<li>SQL&#x2F;92 or SQL2: ANSI &amp; ISO standard</li>
+<li>SQL3: in the works…</li>
+<li>SQL2 supported by ORACLE, SYBASE, INFORMIX, IBM DB2, SQL SERVER, OPENINGRES,…</li>
+</ul>
+<h3 id="SQL의-구성"><a href="#SQL의-구성" class="headerlink" title="SQL의 구성"></a>SQL의 구성</h3><ul>
+<li>SQL consists of the following parts:</li>
+<li>Data Definition Language (DDL)</li>
+<li>Interactive Data Manipulation Language (Interactive DML)</li>
+<li>Embedded Data Manipulation Language (Embedded DML)</li>
+<li>Views</li>
+<li>Integrity</li>
+<li>Transaction Control</li>
+<li>Authorization</li>
+<li>Catalog and Dictionary Facilities</li>
+</ul>
+<h3 id="교수-학습-연습"><a href="#교수-학습-연습" class="headerlink" title="교수 학습 연습"></a>교수 학습 연습</h3><p>데이터 유형</p>
+<p><a target="_blank" rel="noopener" href="http://www.w3big.com/ko/mysql/mysql-data-types.html">http://www.w3big.com/ko/mysql/mysql-data-types.html</a></p>
+<h4 id="table-professor"><a href="#table-professor" class="headerlink" title="table professor"></a>table professor</h4><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scode</td>
+<td>varchar(4)</td>
+<td>학번, 기본키</td>
+</tr>
+<tr>
+<td>sname</td>
+<td>varchar(20)</td>
+<td>이름</td>
+</tr>
+<tr>
+<td>sdept</td>
+<td>varchar(20)</td>
+<td>학과</td>
+</tr>
+<tr>
+<td>sphone</td>
+<td>varchar(15)</td>
+<td>전화번호</td>
+</tr>
+</tbody></table>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> professor (</span><br><span class="line">    pcode <span class="type">varchar</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    pname <span class="type">varchar</span>(<span class="number">10</span>),</span><br><span class="line">    pdept <span class="type">varchar</span>(<span class="number">12</span>),</span><br><span class="line">    pphone <span class="type">varchar</span>(<span class="number">8</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="table-student"><a href="#table-student" class="headerlink" title="table student"></a>table student</h5><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scode</td>
+<td>varchar(4)</td>
+<td>학번, 기본키</td>
+</tr>
+<tr>
+<td>sname</td>
+<td>varchar(20)</td>
+<td>이름</td>
+</tr>
+<tr>
+<td>sdept</td>
+<td>varchar(20)</td>
+<td>학과</td>
+</tr>
+<tr>
+<td>sphone</td>
+<td>varchar(15)</td>
+<td>전화번호</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>create student table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student (</span><br><span class="line">    scode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    sname <span class="type">char</span>(<span class="number">10</span>),</span><br><span class="line">    sdept <span class="type">char</span>(<span class="number">12</span>),</span><br><span class="line">    sphone <span class="type">char</span>(<span class="number">8</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="table-course"><a href="#table-course" class="headerlink" title="table course"></a>table course</h5><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ccode</td>
+<td>varchar(4)</td>
+<td>과목코드, 기본키</td>
+</tr>
+<tr>
+<td>cname</td>
+<td>varchar(20)</td>
+<td>과목명</td>
+</tr>
+<tr>
+<td>ctime</td>
+<td>int</td>
+<td>강의 시수</td>
+</tr>
+<tr>
+<td>croom</td>
+<td>varchar(15)</td>
+<td>강의실</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>create course table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> course (</span><br><span class="line">    ccode <span class="type">varchar</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    cname <span class="type">varchar</span>(<span class="number">10</span>),</span><br><span class="line">    ctime <span class="type">integer</span>,</span><br><span class="line">    croom <span class="type">varchar</span>(<span class="number">8</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="table-lecture"><a href="#table-lecture" class="headerlink" title="table lecture"></a>table lecture</h5><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lpcode</td>
+<td>varchar(4)</td>
+<td>교수코드, 기본키</td>
+</tr>
+<tr>
+<td>lccode</td>
+<td>varchar(4)</td>
+<td>과목코드, 기본키</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>create lecture table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> lecture (</span><br><span class="line">    lpcode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    lccode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (lpcode, lccode)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="table-advice"><a href="#table-advice" class="headerlink" title="table advice"></a>table advice</h5><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apcode</td>
+<td>varchar(4)</td>
+<td>교수코드, 기본키</td>
+</tr>
+<tr>
+<td>asccode</td>
+<td>varchar(4)</td>
+<td>학번, 기본키</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>create advice table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> advise (</span><br><span class="line">    apcode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    ascode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (apcode, ascode)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="table-register"><a href="#table-register" class="headerlink" title="table register"></a>table register</h5><blockquote>
+<p>파일 Python-Database-class-student.sql</p>
+<table>
+<thead>
+<tr>
+<th>컬럼명</th>
+<th>테이터 타입</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rscode</td>
+<td>varchar(4)</td>
+<td>학번, 기본키</td>
+</tr>
+<tr>
+<td>rcccode</td>
+<td>varchar(4)</td>
+<td>과목코드, 기본키</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>create register table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> register (</span><br><span class="line">    rscode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    rccode <span class="type">char</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (rscode, rccode)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="데이터-입력"><a href="#데이터-입력" class="headerlink" title="데이터 입력"></a>데이터 입력</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P001&#x27;</span>,<span class="string">&#x27;김 구&#x27;</span>,<span class="string">&#x27;컴퓨터공학과&#x27;</span>,<span class="string">&#x27;0001&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P002&#x27;</span>,<span class="string">&#x27;안창호&#x27;</span>,<span class="string">&#x27;컴퓨터공학과&#x27;</span>,<span class="string">&#x27;0002&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P003&#x27;</span>,<span class="string">&#x27;이육사&#x27;</span>,<span class="string">&#x27;국문학과&#x27;</span>,<span class="string">&#x27;0003&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P004&#x27;</span>,<span class="string">&#x27;박종화&#x27;</span>,<span class="string">&#x27;국문학과&#x27;</span>,<span class="string">&#x27;0004&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P005&#x27;</span>,<span class="string">&#x27;심 훈&#x27;</span>,<span class="string">&#x27;사학과&#x27;</span>,<span class="string">&#x27;0005&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> professor (pcode, pname, pdept, pphone)\</span><br><span class="line">        <span class="keyword">VALUES</span> (<span class="string">&#x27;P006&#x27;</span>,<span class="string">&#x27;한용운&#x27;</span>,<span class="string">&#x27;사학과&#x27;</span>,<span class="string">&#x27;0006&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="외부-데이터-파일-이용"><a href="#외부-데이터-파일-이용" class="headerlink" title="외부 데이터 파일 이용"></a>외부 데이터 파일 이용</h4><p>파일에 필드 간의 ‘,’로 구분한 데이터 파일이 있다. 물론 필드 구별 문자는 데이터의 내용에 따라 사용자가 임의로 정 할 수 있다.<br>파일: studens.txt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">S001, 박소명, 컴퓨터공학과, 123-4567</span><br><span class="line">S002, 최민국, 컴퓨터공학과, 234-5678</span><br><span class="line">S003, 이승호, 국문학과, 345-6789</span><br><span class="line">S004, 정수봉, 국문학과, 456-7890</span><br><span class="line">S005, 김상진, 사학과, 567-8901</span><br><span class="line">S006, 황정숙, 사학과, 678-9012</span><br></pre></td></tr></table></figure>
+
+<p>studnets.txt 파일을 읽어들이는 것은 스크립트 파일을 작성하거나 mysql에서 직접 실행할 수 있다.<br>먼저 스크립트 파일 students.sql은 다음과 같다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mydb;</span><br><span class="line">load data <span class="keyword">local</span> infile &quot;student.txt&quot; <span class="keyword">into</span> <span class="keyword">table</span> student</span><br><span class="line">fields terminated <span class="keyword">by</span> <span class="string">&#x27;,&#x27;</span> ;</span><br></pre></td></tr></table></figure>
+
+<p>이제 mysql 클라이언트에서 데이터를 읽어 들인다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span>source students.sql;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="데이터-조회"><a href="#데이터-조회" class="headerlink" title="데이터 조회"></a>데이터 조회</h3><blockquote>
+<p>SELECT [DISTINCT] select _expr essi on<br>FROM table_list<br>WHERE where_definition<br>ORDER BY col_name [ASC|DESC]<br>GROUP BY col _name_list<br>LIMIT [offset ], rows</p>
+</blockquote>
+<p>예제-1) 전체 교수 리스트를 출력하는 SQL 검색 문을 작성하라.<br>mysql &gt; sel ect * fromprof;</p>
+<p>예제-2) 전체 교수 리스트를 이름순서로 출력하는 검색 문을 작성하라.<br>mysql &gt; sel ect * fromprof order by pname;</p>
+<p>예제-5) 전체 교수 리스트를 이름 역순으로 출력하는 검색 문을 작성하라.<br>mysql &gt; sel ect * fromprof order by pname desc;</p>
+<p>전체 교수 리스트를 학과별로 출력하는 검색 문을 작성하라.<br>mysql &gt; sel ect * fromprof order by pdept, pname;</p>
+<p>예제-4) 국문학과 교수 리스트를 이름순서로 출력하는 검색 문을 작성하라.<br>mysql&gt; select * from professor where pdept &#x3D;’국문학과’;</p>
+<h4 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h4><p>“FROM 테이블명 AS 별명” 구문은 SQL 문장에서 별명으로 테이블을 참조하 는 역할은 한다.</p>
+<p>예제-6) MySQL 과목을 강의하는 교수님의 이름, 전화번호와 강의실을 검색 하는 문장을 작성하라.<br>mysql&gt; select p.pname, p.pphone, c.croom from professor p, course c, lecture l<br>where c.cname&#x3D;’MySQL’ and c.ccode&#x3D;l.lccode<br>and l.lpcode&#x3D;p.pcode;</p>
+<p>예제-7) ‘김구’ 교수님이 강의하는 과목명, 강의 시수와 강의실을 검색하는 문장을 작성하라.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> c.cname, c.ctime, c.croom</span><br><span class="line"><span class="keyword">from</span> professor <span class="keyword">as</span> p, course <span class="keyword">as</span> c, lecture <span class="keyword">as</span> l</span><br><span class="line"><span class="keyword">where</span> p.pname <span class="operator">=</span> <span class="string">&#x27;김 구&#x27;</span> <span class="keyword">and</span> p.pcode <span class="operator">=</span> l.lpcode</span><br><span class="line">     <span class="keyword">and</span> l.lccode <span class="operator">=</span> c.ccode;</span><br></pre></td></tr></table></figure>
+
+<p>예제-8) 각 학생이 수강 신청한 과목에 대해서 학생이름, 전화번호, 과목명, 강의실, 강의 시수를 검색하는 문장을 작성하라.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.sname, s.sphone, c.cname, c.ctime, c.croom</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> s , course <span class="keyword">as</span> c, register <span class="keyword">as</span> r</span><br><span class="line"><span class="keyword">where</span> s.scode <span class="operator">=</span> r.rscode <span class="keyword">and</span> r.rccode <span class="operator">=</span> c.ccode</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> s.sname, c.cname;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sub-query"><a href="#sub-query" class="headerlink" title="sub-query"></a>sub-query</h4><p>예제-9) 각 학생이 신청한 총 학점을 구하는 검색식을 작성하라.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.sname, s.sdept, s.sphone, <span class="built_in">sum</span>(c.ctime)</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> s , course <span class="keyword">as</span> c, register <span class="keyword">as</span> r</span><br><span class="line"><span class="keyword">where</span> s.scode <span class="operator">=</span> r.rscode <span class="keyword">and</span> r.rccode <span class="operator">=</span> c.ccode</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> s.sname;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>WHERE 조건절에 해당하는 결과를 GROUP BY 구절에 명시된 s.sname 필드에 따라 그룹으로 결과를 분류하고 난 후, SELECT 필드에 SUM(c.cti me) 함수를 사용해서 c.cti me 필드에 대한 합을 구함으로써 각 학 생이 신청한 총 학점를 구할 수 있다.</li>
+</ul>
+<p>예제-10) 각 학과별 교수님은 몇 분인지 구하는 검색식을 작성하라.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pdept, <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">from</span> professor</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> pdept;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LIMIT-구절"><a href="#LIMIT-구절" class="headerlink" title="LIMIT 구절"></a>LIMIT 구절</h4><p>예제-11) 페이지 크기가 2 일 때, (예제-8)의 결과에서 두 번째 페이지를 검색하는 SQL문장은 작성하라.<br>select s.sname, s.sphone, c.cname, c.ctime, c.croom fromstudent as s , course as c, regi ster as r<br>where s.scode &#x3D; r.rscode and r.rccode &#x3D; c.ccode order by s.sname, c.cname<br>￼￼limit 2, 2;</p>
+<ul>
+<li>마지막 행의 limit 2, 2구절에서, 첫 번째 인자는 오프셋(offset)으로 검 색 결과 레코드들의 순번을 의미한다. 오프셋 값은 0 부터 지정하기 때문에 오프셋값2는전체레코드중에서세번째레코드를가리킨다. 두번째는 인자는 출력하는 레코드 수(rows)를 의미한다. 따라서, 레코드 수 2 는 2 개 의 레코드를 출력하라는 의미가 된다.</li>
+</ul>
+<h3 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h3><blockquote>
+<p>UPDATE tbl_name<br>SET col_name1 &#x3D; expr1, col_name2 &#x3D; expr2, …<br>[WHERE where_definition] [LIMIT rows];</p>
+</blockquote>
+<p>예제-12) 교수테이블에서 ‘김 구’ 선생님의 이름을 ‘하은용’ 교수님으로 변 경하는 문장을 작성하라.<br>update prof set pname &#x3D;’하은용’ where pname &#x3D;’김구’;</p>
+<p>예제-13) 지도 테이블의 교수코드가 ‘P007’ 인 레코드들을 모두 ‘P005’ 로 변경하라.<br>update advise set apcode &#x3D;’P005’ where apcode &#x3D;’P007’;</p>
+<p>예제-14) 강의 시수가 2인 과목들의 강의 시수를 하나 증가 시키고, 강의실 을 Lab1로 변경하라.<br>update course set ctime&#x3D;ctime + 1, croom&#x3D;’Lab1’ where ctime&#x3D;2;</p>
+<h3 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h3><blockquote>
+<p>DELETE FROM tbl_name<br>[WHERE where_definition] [LIMIT rows]</p>
+</blockquote>
+<p>예제-15 ) 국문학과 학생 레코드를 삭제하는 문장을 작성하라.<br>delete fromstudent where sdept &#x3D;’국문학과’;</p>
+<h2 id="PyMySQL-튜토리얼"><a href="#PyMySQL-튜토리얼" class="headerlink" title="PyMySQL 튜토리얼"></a>PyMySQL 튜토리얼</h2><p>PyMySQL 설치</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install PyMySQL</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>만약 pip 로 설치가 안되면 다음 같이 setup.py를 이용해 직접 설치 할 수 있다.<br>$ # X.X is the desired PyMySQL version (e.g. 0.5 or 0.6).<br>$ curl -L <a target="_blank" rel="noopener" href="https://github.com/PyMySQL/PyMySQL/tarball/pymysql-X.X">https://github.com/PyMySQL/PyMySQL/tarball/pymysql-X.X</a> | tar xz<br>$ cd PyMySQL*<br>$ python setup.py install<br>$ # The folder PyMySQL* can be safely removed now.</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> users (</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span> <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="string">&#x27;email&#x27;</span> <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">COLLATE</span> utf8_bin <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span> <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">COLLATE</span> utf8_bin <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8_bin AUTO_INCREMENT<span class="operator">=</span><span class="number">1</span> ;</span><br></pre></td></tr></table></figure>
+
+<p>데이터베이스 삭제</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database mydb;</span><br></pre></td></tr></table></figure>
+
+<h4 id="사용자-비밀번호-변경"><a href="#사용자-비밀번호-변경" class="headerlink" title="사용자 비밀번호 변경"></a>사용자 비밀번호 변경</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> password <span class="keyword">for</span> <span class="string">&#x27;&#x27;</span>myid<span class="string">&#x27;&#x27;</span>@<span class="string">&#x27;&#x27;</span>localhost<span class="string">&#x27;&#x27;</span> <span class="operator">=</span> password(<span class="string">&#x27;&#x27;</span>password<span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="테이블-생성"><a href="#테이블-생성" class="headerlink" title="테이블 생성"></a>테이블 생성</h4><p>show 명령으로 데이터베이스 자원 현환을 볼 수 있다.</p>
+<blockquote>
+<p>mysql&gt; help show</p>
+</blockquote>
+<p>다음은 데이터베이스 목록을 보고, ‘mydb’를 사용합니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> databases;</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> Database           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="operator">|</span> information_schema <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> mydb               <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> mysql              <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> performance_schema <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span>use mydb</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>테이블 현황</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> tables;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span> Tables_in_mydb <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="operator">|</span> test           <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<p>테이블 만들기</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> users (\</span><br><span class="line">    id <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,\</span><br><span class="line">    email <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">COLLATE</span> utf8_bin <span class="keyword">NOT</span> <span class="keyword">NULL</span>,\</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">COLLATE</span> utf8_bin <span class="keyword">NOT</span> <span class="keyword">NULL</span>,\</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (id)\</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8_bin\</span><br><span class="line">AUTO_INCREMENT<span class="operator">=</span><span class="number">1</span> ;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mysql&gt; 터미널에서 여러 줄의 명령을 입력하기 위해서 줄의 끝에 ‘&#39;를 사용해서 여러줄을 입력했다.</li>
+</ul>
+<p>이럴게 만들어진 테이블은 show 명령으로 작성 스크립트를 확인할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show create table <span class="built_in">users</span>;</span><br><span class="line">| Table | Create Table                                                         | <span class="built_in">users</span> | CREATE TABLE `<span class="built_in">users</span>` (</span><br><span class="line">  `<span class="built_in">id</span>` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `email` varchar(255) COLLATE utf8_bin NOT NULL,</span><br><span class="line">  `password` varchar(255) COLLATE utf8_bin NOT NULL,</span><br><span class="line">  PRIMARY KEY (`<span class="built_in">id</span>`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |</span><br><span class="line"></span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>테이블의 구성 요소는 desc 명령을 확인할 수 있다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">desc</span> users;</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+--------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> Field    <span class="operator">|</span> Type         <span class="operator">|</span> <span class="keyword">Null</span> <span class="operator">|</span> Key <span class="operator">|</span> <span class="keyword">Default</span> <span class="operator">|</span> Extra          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+--------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="operator">|</span> id       <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)      <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span> PRI <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> auto_increment <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email    <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">255</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> password <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">255</span>) <span class="operator">|</span> <span class="keyword">NO</span>   <span class="operator">|</span>     <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span>                <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+--------------+------+-----+---------+----------------+</span></span><br><span class="line"><span class="number">3</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="데이터-입력-1"><a href="#데이터-입력-1" class="headerlink" title="데이터 입력"></a>데이터 입력</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> users <span class="keyword">values</span> (<span class="number">0</span>, <span class="string">&#x27;aaa@example.com&#x27;</span>, <span class="string">&#x27;sldfjslfj&#x27;</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> users <span class="keyword">values</span> (<span class="number">0</span>, <span class="string">&#x27;bbb@example.com&#x27;</span>, <span class="string">&#x27;sldfjslfj&#x27;</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> users <span class="keyword">values</span> (<span class="number">0</span>, <span class="string">&#x27;ccc@example.com&#x27;</span>, <span class="string">&#x27;sldfjslfj&#x27;</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">insert</span> <span class="keyword">into</span> users <span class="keyword">values</span> (<span class="number">0</span>, <span class="string">&#x27;ddd@example.com&#x27;</span>, <span class="string">&#x27;sldfjslfj&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Alter"><a href="#Alter" class="headerlink" title="Alter"></a>Alter</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> #컬럼 추가</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">add</span> first_name <span class="type">varchar</span>(<span class="number">10</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">add</span> last_name <span class="type">char</span>(<span class="number">10</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">add</span> point <span class="type">int</span>(<span class="number">5</span>);</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">add</span> gener <span class="type">int</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">mysql<span class="operator">&gt;</span> #컬럼 삭제</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> users <span class="keyword">drop</span> gener;</span><br></pre></td></tr></table></figure>
+
+<h1 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://pythonschool.net/category/databases.html">https://pythonschool.net/category/databases.html</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>MySQL 5.x 시작 (3)</p><p><a href="https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/">https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2017-03-11</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-05-12</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/linux/">linux</a><a class="link-muted mr-2" rel="tag" href="/tags/mysql/">mysql</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/Nodejs/nodejs/nodejs-patterns/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">NodeJS - Patterns</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/Database/Databases/mysql5-2-install-src/"><span class="level-item">MySQL 5.x 소스 빌드 (2)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/Programming/Database/Databases/mysql5-3-start/';
+            this.page.identifier = 'Programming/Database/Databases/mysql5-3-start/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#MySQL"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">MySQL</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#사용자-관리"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">사용자 관리</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#사용자-데이터베이스"><span class="level-left"><span class="level-item">1.1.1.1</span><span class="level-item">사용자 데이터베이스</span></span></a></li><li><a class="level is-mobile" href="#권한-주기"><span class="level-left"><span class="level-item">1.1.1.2</span><span class="level-item">권한 주기</span></span></a></li><li><a class="level is-mobile" href="#사용자-데이터베이스-사용"><span class="level-left"><span class="level-item">1.1.1.3</span><span class="level-item">사용자 데이터베이스 사용</span></span></a></li><li><a class="level is-mobile" href="#Character-Set"><span class="level-left"><span class="level-item">1.1.1.4</span><span class="level-item">Character Set</span></span></a></li></ul></li><li><a class="level is-mobile" href="#사용자-관리-1"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">사용자 관리</span></span></a></li></ul></li><li><a class="level is-mobile" href="#SQL"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">SQL</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#SQL의-구성"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">SQL의 구성</span></span></a></li><li><a class="level is-mobile" href="#교수-학습-연습"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">교수 학습 연습</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#table-professor"><span class="level-left"><span class="level-item">1.2.2.1</span><span class="level-item">table professor</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#table-student"><span class="level-left"><span class="level-item">1.2.2.1.1</span><span class="level-item">table student</span></span></a></li><li><a class="level is-mobile" href="#table-course"><span class="level-left"><span class="level-item">1.2.2.1.2</span><span class="level-item">table course</span></span></a></li><li><a class="level is-mobile" href="#table-lecture"><span class="level-left"><span class="level-item">1.2.2.1.3</span><span class="level-item">table lecture</span></span></a></li><li><a class="level is-mobile" href="#table-advice"><span class="level-left"><span class="level-item">1.2.2.1.4</span><span class="level-item">table advice</span></span></a></li><li><a class="level is-mobile" href="#table-register"><span class="level-left"><span class="level-item">1.2.2.1.5</span><span class="level-item">table register</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#데이터-입력"><span class="level-left"><span class="level-item">1.2.3</span><span class="level-item">데이터 입력</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#외부-데이터-파일-이용"><span class="level-left"><span class="level-item">1.2.3.1</span><span class="level-item">외부 데이터 파일 이용</span></span></a></li></ul></li><li><a class="level is-mobile" href="#데이터-조회"><span class="level-left"><span class="level-item">1.2.4</span><span class="level-item">데이터 조회</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#JOIN"><span class="level-left"><span class="level-item">1.2.4.1</span><span class="level-item">JOIN</span></span></a></li><li><a class="level is-mobile" href="#sub-query"><span class="level-left"><span class="level-item">1.2.4.2</span><span class="level-item">sub-query</span></span></a></li><li><a class="level is-mobile" href="#LIMIT-구절"><span class="level-left"><span class="level-item">1.2.4.3</span><span class="level-item">LIMIT 구절</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Update"><span class="level-left"><span class="level-item">1.2.5</span><span class="level-item">Update</span></span></a></li><li><a class="level is-mobile" href="#Delete"><span class="level-left"><span class="level-item">1.2.6</span><span class="level-item">Delete</span></span></a></li></ul></li><li><a class="level is-mobile" href="#PyMySQL-튜토리얼"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">PyMySQL 튜토리얼</span></span></a><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#사용자-비밀번호-변경"><span class="level-left"><span class="level-item">1.3.1.1</span><span class="level-item">사용자 비밀번호 변경</span></span></a></li><li><a class="level is-mobile" href="#테이블-생성"><span class="level-left"><span class="level-item">1.3.1.2</span><span class="level-item">테이블 생성</span></span></a></li><li><a class="level is-mobile" href="#데이터-입력-1"><span class="level-left"><span class="level-item">1.3.1.3</span><span class="level-item">데이터 입력</span></span></a></li><li><a class="level is-mobile" href="#Alter"><span class="level-left"><span class="level-item">1.3.1.4</span><span class="level-item">Alter</span></span></a></li></ul></ul></li></ul><li><a class="level is-mobile" href="#참조"><span class="level-left"><span class="level-item">2</span><span class="level-item">참조</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/Programming/Python/python/pandas-numpy-display_format/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T15:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/uncategorized/hello-world/">blog 안내</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/github/github/hexo03-icarus-install_new/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/Programming/Python/python/python-packaging-start/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/Programming/git/Programming/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">140</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">213</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

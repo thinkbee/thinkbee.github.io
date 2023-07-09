@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>openSUSE: firewalld - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="firewalld 를 이용해서 방화벽을 구성해 보자.  RedHat, Ubuntu, OpenSUSE LEAP 15.0 등은 시스템 기본 파이어월 관리자로 firewalld 를 제공한다고 한다.  firewalldfirewalld 는 …. firewalld는 ufw 처럼 iptables 을 구성할 수 있다.  [그림. Firewall Stack (redhat"><meta property="og:type" content="article"><meta property="og:title" content="openSUSE: firewalld"><meta property="og:url" content="https://blog.thinkbee.kr/OS/Linux/firewalld/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="firewalld 를 이용해서 방화벽을 구성해 보자.  RedHat, Ubuntu, OpenSUSE LEAP 15.0 등은 시스템 기본 파이어월 관리자로 firewalld 를 제공한다고 한다.  firewalldfirewalld 는 …. firewalld는 ufw 처럼 iptables 을 구성할 수 있다.  [그림. Firewall Stack (redhat"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-Security_Guide-en-US/images/eee9192950e07b21f5c95b3ced63ae09/RHEL_Security-Guide_453350_0717_ECE_firewalld-comparison-rhel7.png"><meta property="article:published_time" content="2019-12-10T00:00:00.000Z"><meta property="article:modified_time" content="2023-05-14T06:09:40.803Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Firewall"><meta property="article:tag" content="방화벽"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-Security_Guide-en-US/images/eee9192950e07b21f5c95b3ced63ae09/RHEL_Security-Guide_453350_0717_ECE_firewalld-comparison-rhel7.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/OS/Linux/firewalld/"},"headline":"openSUSE: firewalld","image":["https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-Security_Guide-en-US/images/eee9192950e07b21f5c95b3ced63ae09/RHEL_Security-Guide_453350_0717_ECE_firewalld-comparison-rhel7.png"],"datePublished":"2019-12-10T00:00:00.000Z","dateModified":"2023-05-14T06:09:40.803Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"firewalld 를 이용해서 방화벽을 구성해 보자.  RedHat, Ubuntu, OpenSUSE LEAP 15.0 등은 시스템 기본 파이어월 관리자로 firewalld 를 제공한다고 한다.  firewalldfirewalld 는 …. firewalld는 ufw 처럼 iptables 을 구성할 수 있다.  [그림. Firewall Stack (redhat"}</script><link rel="canonical" href="https://blog.thinkbee.kr/OS/Linux/firewalld/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-12-10T00:00:00.000Z" title="12/10/2019, 9:00:00 AM">2019-12-10</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-05-14T06:09:40.803Z" title="5/14/2023, 3:09:40 PM">2023-05-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Linux/">Linux</a></span><span class="level-item">8분안에 읽기 (약 1129 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">openSUSE: firewalld</h1><div class="content"><p><strong>firewalld</strong> 를 이용해서 방화벽을 구성해 보자.</p>
+<ul>
+<li>RedHat, Ubuntu, OpenSUSE LEAP 15.0 등은 시스템 기본 파이어월 관리자로 firewalld 를 제공한다고 한다.</li>
+</ul>
+<h2 id="firewalld"><a href="#firewalld" class="headerlink" title="firewalld"></a>firewalld</h2><p>firewalld 는 ….</p>
+<p>firewalld는 ufw 처럼 <code>iptables</code> 을 구성할 수 있다.</p>
+<p><img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-Security_Guide-en-US/images/eee9192950e07b21f5c95b3ced63ae09/RHEL_Security-Guide_453350_0717_ECE_firewalld-comparison-rhel7.png"></p>
+<figure>[그림. Firewall Stack (redhat.com)]</figure>
+
+<p>네트워크를 지역 관리가 가능해서 다른 네트워크, 지역에 따라 다른 규칙으로 구성해서 사용할 수 있다.<br>For example “Home” and “Office” where all communications with local machines are allowed, and “Public Wi-Fi” where no communication with the same subnet would be allowed.</p>
+<p><a target="_blank" rel="noopener" href="https://www.ctrl.blog/entry/ufw-vs-firewalld">https://www.ctrl.blog/entry/ufw-vs-firewalld</a></p>
+<h3 id="firewalld-설치"><a href="#firewalld-설치" class="headerlink" title="firewalld 설치"></a>firewalld 설치</h3><p>OpenSUSE LEAP 15.0, RedHat, Ubuntu 등은 시스템 기본 파이어월 관리자로 firewalld 를 제공한다고 한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="Start-firewalld"><a href="#Start-firewalld" class="headerlink" title="Start firewalld"></a>Start <code>firewalld</code></h3><p>To start firewalld, enter the following command as root:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld</span><br></pre></td></tr></table></figure>
+
+<p>root 사용자로 시작한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable firewalld</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p>For more information about the service status, use the systemctl status sub-command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status firewalld</span><br><span class="line">● firewalld.service - firewalld - dynamic firewall daemon</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Thu 1970-01-01 09:01:48 KST; 48 years 6 months ago</span><br><span class="line"></span><br><span class="line">sudo firewall-cmd --state</span><br></pre></td></tr></table></figure>
+
+<h4 id="Stop-firewalld"><a href="#Stop-firewalld" class="headerlink" title="Stop firewalld"></a>Stop <code>firewalld</code></h4><p>To stop firewalld, enter the following command as root:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+<p>To prevent firewalld from starting automatically at system start, enter the following command as root:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<p>To make sure firewalld is not started by accessing the firewalld D-Bus interface and also if other services require firewalld, enter the following command as root:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="사용해-보기"><a href="#사용해-보기" class="headerlink" title="사용해 보기"></a>사용해 보기</h3><p><code>firewalld</code> 는 명령라인 firewall-cmd 와 GUI로 firewall-config 명령을 지원한다.</p>
+<h4 id="Zone-설정"><a href="#Zone-설정" class="headerlink" title="Zone 설정"></a>Zone 설정</h4><p>Get a list of all supported zones</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-zones</span><br></pre></td></tr></table></figure>
+
+<p>List all zones with the enabled features.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --list-all-zones</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">public</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces:</span><br><span class="line">  sources:</span><br><span class="line">  services: ssh dhcpv6-client http https</span><br><span class="line">  ports:</span><br><span class="line">  protocols:</span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports:</span><br><span class="line">  source-ports:</span><br><span class="line">  icmp-blocks:</span><br><span class="line">  rich rules:</span><br></pre></td></tr></table></figure>
+
+<p>기본으로 제공하는 Zone</p>
+<ul>
+<li>drop: Any incoming network packets are dropped, there is no reply. Only outgoing network connections are possible.</li>
+<li>block: Any incoming network connections are rejected with an icmp-host-prohibited message for IPv4 and icmp6-adm-prohibited for IPv6. Only network connections initiated within this system are possible.</li>
+<li>public: For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</li>
+<li>external: For use on external networks with masquerading enabled especially for routers. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</li>
+<li>dmz: For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.</li>
+<li>work<br>For use in work areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</li>
+<li>home<br>For use in home areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</li>
+<li>internal<br>For use on internal networks. You mostly trust the other computers on the networks to not harm your computer. Only selected incoming connections are accepted.</li>
+<li>trusted<br>All network connections are accepted.</li>
+</ul>
+<p>Zone</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --get-default-zone</span><br><span class="line">public</span><br></pre></td></tr></table></figure>
+
+<h4 id="서비스"><a href="#서비스" class="headerlink" title="서비스"></a>서비스</h4><p>This command prints a space separated list.</p>
+<p>Get a list of all supported services</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --get-services</span><br></pre></td></tr></table></figure>
+
+<p>This command prints a space separated list.</p>
+<p>Get a list of all supported icmptypes</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --get-icmptypes</span><br></pre></td></tr></table></figure>
+
+<p>서비스를 제거하려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># firewall-cmd --zone=public --remove-service=http</span><br><span class="line">success</span><br><span class="line">root@odroidc2:/home/qkboo# firewall-cmd --zone=public --remove-service=https</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<h4 id="Http-Ssh-방화벽-활성화"><a href="#Http-Ssh-방화벽-활성화" class="headerlink" title="Http, Ssh 방화벽 활성화"></a>Http, Ssh 방화벽 활성화</h4><p>http, https 를 공개 서비스를 지원하는 기본 존인 public에 추가한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --add-service=ssh</span><br><span class="line">sudo firewall-cmd --add-service=http</span><br><span class="line">sudo firewall-cmd --add-service=https</span><br></pre></td></tr></table></figure>
+
+<p>sudo firewall-cmd –zone&#x3D;public –add-service&#x3D;http –permanent</p>
+<p>방화벽을 갱신한다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
+
+<p>혹은 zone을 지정해 추가한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=web --add-service=ssh</span><br><span class="line">sudo firewall-cmd --zone=web --add-service=http</span><br><span class="line">sudo firewall-cmd --zone=web --add-service=https</span><br><span class="line">sudo firewall-cmd --zone=web --list-all</span><br></pre></td></tr></table></figure>
+
+<p>Likewise, we can add the DNS service to our “privateDNS” zone:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=privateDNS --add-service=dns</span><br><span class="line">sudo firewall-cmd --zone=privateDNS --list-all</span><br></pre></td></tr></table></figure>
+
+<p>Zone 에 구성한 서비스 등은 런타임 혹은 완전히 방화벽에 구성할 수 있다.</p>
+<p>To change settings in both modes, you can use two methods:<br>Change runtime settings and then make them permanent as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd &lt;other options&gt;</span><br><span class="line">firewall-cmd --runtime-to-permanent</span><br></pre></td></tr></table></figure>
+
+<p>Set permanent settings and reload the settings into runtime mode:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent &lt;other options&gt;</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>모든 구성 내용 확인:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-cmd --list-all</span><br><span class="line">public</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces:</span><br><span class="line">  sources:</span><br><span class="line">  services: ssh dhcpv6-client http https</span><br><span class="line">  ports:</span><br><span class="line">  protocols:</span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports:</span><br><span class="line">  source-ports:</span><br><span class="line">  icmp-blocks:</span><br><span class="line">  rich rules:</span><br></pre></td></tr></table></figure>
+
+<p>특정 zone 에 대한 내역을 출력한다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-cmd --zone=public --list-all</span><br><span class="line">public</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces:</span><br><span class="line">  sources:</span><br><span class="line">  services: ssh dhcpv6-client http https</span><br><span class="line">  ports:</span><br><span class="line">  protocols:</span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports:</span><br><span class="line">  source-ports:</span><br><span class="line">  icmp-blocks:</span><br><span class="line">  rich rules:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h2><p><a target="_blank" rel="noopener" href="https://www.linode.com/docs/security/firewalls/introduction-to-firewalld-on-centos/">https://www.linode.com/docs/security/firewalls/introduction-to-firewalld-on-centos/</a></p>
+<p><a target="_blank" rel="noopener" href="https://fedoraproject.org/wiki/Firewalld?rd=FirewallD">FirewallD</a></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_firewalls#sec-Getting_started_with_firewalld">RedHat: Getting started with firewalld</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7">How to set up firewalld on CentOS 7</a></p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.hogarthuk.com/?q=node/9">Firewalld configuration and usage</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>openSUSE: firewalld</p><p><a href="https://blog.thinkbee.kr/OS/Linux/firewalld/">https://blog.thinkbee.kr/OS/Linux/firewalld/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-12-10</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-05-14</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a><a class="link-muted mr-2" rel="tag" href="/tags/Firewall/">Firewall</a><a class="link-muted mr-2" rel="tag" href="/tags/%EB%B0%A9%ED%99%94%EB%B2%BD/">방화벽</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/Database/2019-12-20-mongodb-4.2-install_arm64/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">MongoDB Community Edition 4.2 설치 - ARM64 Ubuntu/Debian Armbian</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/Database/mongodb-armbinan/"><span class="level-item">Armbian 기반 MongoDB 4.2 설치</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/OS/Linux/firewalld/';
+            this.page.identifier = 'OS/Linux/firewalld/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/Programming/Python/pandas-numpy-display_format/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T15:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/uncategorized/hello-world/">blog 안내</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/github/hexo03-icarus-install_new/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/Programming/Python/python-packaging-start/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/Programming/git/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">140</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">213</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

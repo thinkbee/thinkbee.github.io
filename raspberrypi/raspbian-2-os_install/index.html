@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Raspberry Pi : Install Raspbian - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:type" content="article"><meta property="og:title" content="Raspberry Pi : Install Raspbian"><meta property="og:url" content="https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp;amp; Configuration - Nginx"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/mac-diskutility.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/win32diskimager.png"><meta property="og:image" content="https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"><meta property="article:published_time" content="2018-06-22T00:10:00.000Z"><meta property="article:modified_time" content="2023-01-11T20:50:38.000Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="Linux"><meta property="article:tag" content="라즈베리파이"><meta property="article:tag" content="Raspberry Pi"><meta property="article:tag" content="Raspbian"><meta property="article:tag" content="라즈비안"><meta property="article:tag" content="Raspberry Pi 3"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/"},"headline":"Raspberry Pi : Install Raspbian","image":["https://blog.thinkbee.kr/images/opensuse/etcher-image-writing.png","https://blog.thinkbee.kr/images/raspberrypi/rpi-usb-serial.png","https://blog.thinkbee.kr/images/opensuse/opensuse-boot33.png","https://blog.thinkbee.kr/images/mac-diskutility.png","https://blog.thinkbee.kr/images/raspberrypi/sdcardformatter-main.png","https://blog.thinkbee.kr/images/win32diskimager.png","https://blog.thinkbee.kr/images/raspberypi/rpi-usb-serial.png"],"datePublished":"2018-06-22T00:10:00.000Z","dateModified":"2023-01-11T20:50:38.000Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.  Raspberry Pi 설치준비 Install Raspbian OS Managing Service daemon Basic OS Security for Server Install &amp; Configuration - Nginx"}</script><link rel="canonical" href="https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-06-22T00:10:00.000Z" title="6/22/2018, 9:10:00 AM">2018-06-22</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-01-11T20:50:38.000Z" title="1/12/2023, 5:50:38 AM">2023-01-12</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Raspberry-Pi/">Raspberry Pi</a></span><span class="level-item">23분안에 읽기 (약 3456 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">Raspberry Pi : Install Raspbian</h1><div class="content"><p>Install Rasbperry Pi OS 글타래는 아래 같이 구성되며 OS 설치, Service 구성 및 사용에 대해 작성한다.</p>
+<ol>
+<li><strong><a href="!--swig%EF%BF%BC30--">Raspberry Pi 설치준비</a></strong></li>
+<li><strong>Install Raspbian OS</strong></li>
+<li>Managing Service daemon</li>
+<li>Basic OS Security for Server</li>
+<li><a href="!--swig%EF%BF%BC31--">Install &amp; Configuration - Nginx, Node JS, Jupyter</a></li>
+</ol>
+<blockquote>
+<p>2017-10-30: swap 추가, timezone 수정<br>{:.right-history}</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="Install-Raspbian-OS"><a href="#Install-Raspbian-OS" class="headerlink" title="Install Raspbian OS"></a>Install Raspbian OS</h2><p>Raspberry Pi(라즈베리파이)에 Raspbian, Ubuntu 등을 설치하고 <em>Serial Console</em> 을 이용해서, 라즈베리파이를 처음 설정하고 <em>SSH</em> 구성을 활성화 하겠다.</p>
+<p>라즈베리파이에 OS를 설치하기 위해서는 <strong>NOOBS</strong>를 사용하거나 <strong>오에스 이미지</strong>를 다운받아 SD Card에 구워서 사용한다. 라즈베리파이는 다음과 같은 OS 배포본을 사용할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>운영체제</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Raspbian (Debian)</td>
+<td>Raspberry Pi + Debian의 합성어, 가장 범용 OS.</td>
+</tr>
+<tr>
+<td>Arch Linux (A non-Linux Distribution)</td>
+<td>ARM 프로세서를 지원하는 Arch Linux</td>
+</tr>
+<tr>
+<td>RISC OS</td>
+<td>ARM 프로세서를 위한 실시가(RTOS) 운영체제</td>
+</tr>
+<tr>
+<td>OpenElec</td>
+<td>XBMC 미디어 센터 지원을 위한 운영체제</td>
+</tr>
+<tr>
+<td>RaspBMC</td>
+<td>XBMC 미디어 센터 지원을 위한 운영체제</td>
+</tr>
+<tr>
+<td>Pidora</td>
+<td>Pi + Fedora 운영체제</td>
+</tr>
+</tbody></table>
+<p>**Raspbian(라즈비안)**은 라즈베리파이를 위한 데비안 리눅스로 가장 대중적인 데비안 리눅스, 우분투와 같은 사용자 경험을 제공해 주고 있다.</p>
+<h3 id="Raspberry-Pi-준비"><a href="#Raspberry-Pi-준비" class="headerlink" title="Raspberry Pi 준비"></a>Raspberry Pi 준비</h3><p>설치에 앞서 준비해야 할 것 이 있습니다.</p>
+<ul>
+<li>Raspberry Pi 1, 2, 3</li>
+<li>OS 설치 SD Memory Card: 8GB 이상, Class6 이상</li>
+<li>USB to Serial Cable</li>
+</ul>
+<h4 id="SDCard에-대해"><a href="#SDCard에-대해" class="headerlink" title="SDCard에 대해"></a>SDCard에 대해</h4><p>라즈베리파이는 SD 호환 카드에서 작동하도록 되어 있다.</p>
+<ul>
+<li><p>NOOBS를 이용한다면 최소 8GB</p>
+</li>
+<li><p>다른 버전은 최소 4GB</p>
+</li>
+<li><p>Class 4는 4MB&#x2F;s 쓰기 속도, Class 10은 10MB&#x2F;s 쓰기가 가능하지만 Class 10이 Class 4를 앞선다는 것을 보장하진 않는다. 라즈베리파이는 Class 6의 8GB 사용을 권장하고 있다.</p>
+</li>
+<li><p>Mac: SDCardFormatter</p>
+</li>
+</ul>
+<h4 id="SDCard-사용시-주의"><a href="#SDCard-사용시-주의" class="headerlink" title="SDCard 사용시 주의"></a>SDCard 사용시 주의</h4><ul>
+<li>정품 SD Card 사용을 권장</li>
+<li>전원은 품질이 좋아야. 라즈베리파이 보드의 TP1, TP2 전력을 측정해서 4.75v 이하면 품질이 좋은 전원으로 바꾸길.</li>
+<li>더불어 좋은 품질의 USB 케이블을 사용해야 한다.</li>
+<li>종료시 <strong>sudo halt</strong> 를 이용하도록</li>
+<li>오버클록은 지양하도록</li>
+</ul>
+<br>
+### Download and Install
+
+<p>OS 설치와 서비스 설치는 크게 아래 과정을 거친다.</p>
+<ul>
+<li>(1). Download OS Image, Etcher, sdFormatter</li>
+<li>(2). OS image 파일을 SD Card에 쓴다.</li>
+</ul>
+<p>SD Card로 부팅후에</p>
+<ul>
+<li>(1). 모니터 혹은 시리얼 콘솔에서 <code>raspi-conifg</code> 로 시스템 구성을 마무리</li>
+<li>(2). 서비스 설치</li>
+</ul>
+<h4 id="1-Download-OS-Image-Etcher-sdFormatter"><a href="#1-Download-OS-Image-Etcher-sdFormatter" class="headerlink" title="(1). Download OS Image, Etcher, sdFormatter"></a>(1). Download OS Image, Etcher, sdFormatter</h4><p>라즈베리안 OS를 다운로드,</p>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspbian/">Raspberry Pi Raspbian Download</a> 링크에서 다운 받을 수 있다.</p>
+<blockquote>
+<p>토렌트와 zip 형식으로 다운 받을 수 있습니다.</p>
+</blockquote>
+<p>다운로드된 파일은 <em>yyyy-mm-dd-raspbian-wheezy.zip</em> 형식으로 다운로드가 된다. 디스크 이미지 파일 <em>yyyy-mm-dd-raspbian-wheezy.img</em> 이 zip으로 압축되어 있는데,이 이미지 파일을 SD Card에 복사해야 한다.</p>
+<p>디스크 이미지를 쓰기위한 프로그램으로 오에스 이미지를 SD Card, Disk 등에 쓴다. 보통 아래 프로그램을 이용한다.</p>
+<ul>
+<li>Windows : Win32DiskImager</li>
+<li>Linux: ImageWriter</li>
+<li>macOS: <code>dd</code> 명령</li>
+<li>모든 플랫폼: Etcher</li>
+<li>SD Memory Card Formatter 5.0 for SD&#x2F;SDHC&#x2F;SDXC</li>
+</ul>
+<p>이 글에서는 디스크 이미지 쓰기<a target="_blank" rel="noopener" href="http://etcher.io/">Etcher</a> 프로그램을 이용해서 오에스 이미지 파일을 SD Card에 쓰겠다.</p>
+<blockquote>
+<p>macOS, Windows, Linux 지원</p>
+</blockquote>
+<p>여기까지 필요한 준비 사항은:</p>
+<ul>
+<li>Raspbian OS Image</li>
+<li>SD Card Formatter</li>
+</ul>
+<h4 id="OS-image-파일을-SD-Card-쓰기"><a href="#OS-image-파일을-SD-Card-쓰기" class="headerlink" title="OS image 파일을 SD Card 쓰기"></a>OS image 파일을 SD Card 쓰기</h4><p>Etcher를 실행하고</p>
+<p><img src="/images/opensuse/etcher-image-writing.png">{:width&#x3D;”640”}</p>
+<h5 id="dd-를-사용한다면"><a href="#dd-를-사용한다면" class="headerlink" title="dd 를 사용한다면,"></a><code>dd</code> 를 사용한다면,</h5><p>다운받은 <code>.zip</code> 파일을 <code>unzip</code>으로 풀어 dd&#96;로 SD Card에 이미지를 쓴다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -p 2017-06-21-raspbian-stretch-lite.zip | sudo dd of=/dev/rdisk1 bs=4M; sync</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MacOS는 dd의 bs 옵션이 소문자로 받는다: <code>bs=4m</code></p>
+</blockquote>
+<p>다쓴 SD Card를 마운트 한다.</p>
+<h4 id="ssh-활성화"><a href="#ssh-활성화" class="headerlink" title="ssh 활성화"></a>ssh 활성화</h4><p>Raspbian 2016-11-25일 릴리즈 이후 기본으로 ssh가 비활성화 되어 있다. 그래서 처음 부팅후 ssh 접속이 필요하다면 부트 파티션에 <code>ssh</code> 파일을 생성해 주면된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /boot</span><br><span class="line">$ touch ssh</span><br></pre></td></tr></table></figure>
+
+<br>
+#### Serial console
+
+<p>여기서는 <strong>Serial console</strong>에서 네트워크 확인 및 초기 설정을 하고 <strong>ssh</strong> 로 서버에 로그인해서 시스템 구성을 진행한다.</p>
+<blockquote>
+<p>SD Card를 라즈베리파이에 꽃고 HDMI, Keyboard 및 Mouse 가 별도로 준비되어 있으면 직접 모니터를 보고 작업을 진행하면 좋다.</p>
+</blockquote>
+<p>USB to Serial 케이블을 사용해서 Raspberry Pi의 Serial Console에 연결한다.</p>
+<p><img src="/images/raspberrypi/rpi-usb-serial.png">{:width&#x3D;”640”}</p>
+<p>그리고 시리얼 포트를 통해 tty 연결을 위해 터미널 프로그램에서 baud rate 115200 으로 연결한다. 아래는 macOS의 <code>screen</code> CLI 명령으로 usb serial 포트에 연결하고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/cu.usbserial 115200</span><br></pre></td></tr></table></figure>
+
+<p>이제 SD Card를 넣고 부팅을 하면, 터미널에 부트 단계가 진행되고 처음 5분 정도 소요된다.</p>
+<p><img src="/images/opensuse/opensuse-boot33.png">{:width&#x3D;”640”}</p>
+<p>Raspberry Pi를 위한 이미지는 처음 계정은 <code>root/linux</code> 이다.</p>
+<p>터미널에서 uname 은 <strong>aarch64</strong> 임을 확인 할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root<span class="comment"># uname -a</span></span><br><span class="line">Linux homepi 4.4.90-18.32-default <span class="comment">#1 SMP Fri Oct 6 13:30:08 UTC 2017 (465b410) aarch64 aarch64 aarch64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
+
+<p>처음으로 라즈베리파이에서 64bit 환경으로 운영해 볼 수 있게 됐다.</p>
+<h4 id="Raspbian-OS-Image-복사"><a href="#Raspbian-OS-Image-복사" class="headerlink" title="Raspbian OS Image 복사"></a>Raspbian OS Image 복사</h4><p>맥&#x2F;리눅스에서 dd 명령을 이용해서 이미지를 복사할 수 있습니다.</p>
+<blockquote>
+<p>sudo dd bs&#x3D;1m if&#x3D;path_of_your_image.img of&#x3D;&#x2F;dev&#x2F;diskn</p>
+<ul>
+<li>bs: 한번에 읽어들일 사이즈를 의미</li>
+</ul>
+</blockquote>
+<p>마지막 옵션인 ‘diskn’의 n은 SD Card의 번호로 SDCard Formater에서 기억하란 번호입니다. 여기서 번호가 2로 가정합니다.<br>그리고 Mac OSX는 디스크가 &#x2F;dev 경로에 두 가지 종류가 있습니다.</p>
+<ul>
+<li>&#x2F;dev&#x2F;disk# 버퍼 디바이스로 데이터가 부가적인 처리를 통해 사용합니다.</li>
+<li>&#x2F;dev&#x2F;rdisk# 저수준 경로로 빠르고 dd 명령을 사용할 때 완벽합니다.</li>
+</ul>
+<blockquote>
+<p>Class 4 SD card는 rdisk 경로를 사용할 때 20배 빠릅니다.</p>
+</blockquote>
+<p>먼저 포맷터로 포맷한 디스크 마운트를 해제합니다. 맥의 디스크유틸리티를 이용해서 마운트를 해제합니다.<br><img src="/images/mac-diskutility.png"></p>
+<p>이미지가 있는 곳에서 dd 명령으로 라즈비안을 복사합니다.3.2GB 크기를 복사해서 9분~15분 정도의 시간이 소요됩니다.</p>
+<p>zip 압축 파일을 입력으로 다음 같이 dd 명령으로 sd card에 쓴다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -p 2016-05-27-raspbian-jessie.zip | sudo dd of=/dev/rdisk1 bs=1m</span><br></pre></td></tr></table></figure>
+
+<p>압축을 푼후</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$sudo dd bs=1m if=2015-02-16-raspbian-wheezy.img of=/dev/rdisk2</span><br><span class="line">3125+0 records in</span><br><span class="line">3125+0 records out</span><br><span class="line">3276800000 bytes transferred i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n 551.608702 secs (5940443 bytes/sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rdisk 이용시 에러가 발생하면 disk를 사용합니다.</p>
+</blockquote>
+<p>다음 링크에 설명한 방법을 바탕으로 설명해보겠습니다.<br>참조: <a target="_blank" rel="noopener" href="http://elinux.org/RPi_Easy_SD_Card_Setup">http://elinux.org/RPi_Easy_SD_Card_Setup</a></p>
+<h5 id="Mac-diskutil-과-dd-이용"><a href="#Mac-diskutil-과-dd-이용" class="headerlink" title="Mac diskutil 과 dd 이용"></a>Mac diskutil 과 dd 이용</h5><p>diskutil로 디스크 목록 확인해 SD카드 번호 확인</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil unmountDisk /dev/disk1</span><br></pre></td></tr></table></figure>
+
+<p>이미지 쓰기</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd bs=1m if=image.img of=/dev/rdisk[n] conv=noerror,sync</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>위 명령으로도 ‘Permission Denied’ 가 나오면, 이것은 SD 카드의 파티션 테이블이 덮어쓰기를 막고 있다는 의미로 이 경우 파티션 테이블을 제거해야 한다. 다음 같이 zero로 SDCard를 덮어쓰면 all partitions, master boot records, and data를 지운다.</p>
+</blockquote>
+<p>진행 상황을 보려면 <em>status&#x3D;progress</em> 로 알 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd bs=1m if=image.img of=/dev/rdisk[n] conv=noerror,sync status=progress</span><br></pre></td></tr></table></figure>
+
+<p>SD card를 포맷하려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo dd if=/dev/zero of=/dev/rdisk1 bs=4k count=1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>bs: 한번에 읽어들일 byte를 의미</li>
+<li>count: block 수 입니다.</li>
+</ul>
+<p>혹은 랜덤 데이터로 지우려면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$dd if=/dev/urandom of=/dev/sda bs=4k</span><br></pre></td></tr></table></figure>
+
+<p>Mac의 diskutil을 사용하면</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil partitionDisk /dev/disk3 1 MBR &quot;Free Space&quot; &quot;%noformat%&quot; 100%</span><br></pre></td></tr></table></figure>
+
+<p>다운로드한 이미지는 zip 압축 파일로 저장된다. 다음 같이 명령 파이프를 이용하면 압축 파일을 풀지않고 디스크에 이미지를 쓸 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -p 2016-09-23-raspbian-jessie.zip* | sudo dd of=/dev/rdisk1 bs=4m</span><br><span class="line">password: ****</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>이미지를 <em>dd</em> 명령으로 작성한 후에 카드를 추출한다:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo diskutil eject /dev/rdisk3</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">https://www.raspberrypi.org/documentation/installation/installing-images/mac.md</a></p>
+</blockquote>
+<h5 id="clone-disk"><a href="#clone-disk" class="headerlink" title="clone disk"></a>clone disk</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd if=/dev/diskX conv=sync,noerror bs=4m | gzip -c  &gt; /path/to/backup.img.gz</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>반대로 디스크를 디스크이미지로 만들려면 다음 같이 dd 를 사용할 수 있습니다.<br>쓰기 전에 sd card의 마운트한 파티션을 마운트를 해제해야 합니다.</p>
+<p>$sudo dd bs&#x3D;1m if&#x3D;2015-02-16-raspbian-wheezy.img of&#x3D;&#x2F;dev&#x2F;rdisk2</p>
+</blockquote>
+<h4 id="SDFormatter-이용"><a href="#SDFormatter-이용" class="headerlink" title="SDFormatter 이용"></a>SDFormatter 이용</h4><p>SDCard Formatter 를 이용해서 SD Card를 포맷할 수 있습니다. 윈도우즈, 리눅스 및 맥을 지원합니다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sdcard.org/downloads/formatter_4/">https://www.sdcard.org/downloads/formatter_4/</a></li>
+</ul>
+<ol>
+<li>오에스에 맞는 버전을 다운로드하고 실행하면 설치를 합니다.</li>
+<li>SD Card를 컴퓨터에 삽입합니다.</li>
+<li>SDFormatter를 실행하고 다음 화면 처럼 SD card를 포맷할 수 있습니다.</li>
+</ol>
+<ul>
+<li>SDFormatter 라는 프로그램을 설치하여, 옵션의 FORMAT SIZE ADJUSTMENT 설정을 ON 으로 하여 SD카드를 포맷</li>
+</ul>
+<p><img src="/images/raspberrypi/sdcardformatter-main.png" alt="SDCard Formatter 실행"></p>
+<blockquote>
+<p>SDCard Formatter에서 디스크 선택시 디스크 번호를 잘 기억해 두세요.</p>
+</blockquote>
+<h3 id="윈도우즈에서-라즈비안-복사하기"><a href="#윈도우즈에서-라즈비안-복사하기" class="headerlink" title="윈도우즈에서 라즈비안 복사하기"></a>윈도우즈에서 라즈비안 복사하기</h3><p>윈도우XP&#x2F;7&#x2F;8 에서 다운로드한 라즈비안 OS를 SD카드로 복사하겠습니다. 아래 링크에서 ‘Win32 Disk Imager’를 다운받아 사용해야 합니다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a></li>
+</ul>
+<p>win32diskimager를 실행하고 다운받은 ‘2015-03-15-raspbian-wheezy.zip’ 파일을 선택하고 SD카드 위치를 선택해 주면 됩니다.</p>
+<p><img src="/images/win32diskimager.png"></p>
+<p>그리고 Write버튼을 눌러주고 기다리면 복사를 시작합니다.</p>
+<h2 id="부팅"><a href="#부팅" class="headerlink" title="부팅"></a>부팅</h2><h3 id="IP-강제-지정"><a href="#IP-강제-지정" class="headerlink" title="IP 강제 지정"></a>IP 강제 지정</h3><p>CD Card를 마운트 하면 boot 파티션이 마운트 된다. boot 파티션에 있는 <em>cmdline.txt</em> 에 <code>ip=</code> 옵션을 추가해 강제로 IP 주소를 지정할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait **ip=192.168.0.203**</span><br></pre></td></tr></table></figure>
+
+<h3 id="Serial-Console"><a href="#Serial-Console" class="headerlink" title="Serial Console"></a>Serial Console</h3><p><img src="/images/raspberypi/rpi-usb-serial.png"></p>
+<p>Raspbian 은 boot 파티션에 있는 <em>cmdline.txt</em> 옵션으로 기본적으로 serial console을 사용하도록 하고 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait</span><br></pre></td></tr></table></figure>
+
+<h4 id="Mac-Serial"><a href="#Mac-Serial" class="headerlink" title="Mac Serial"></a>Mac Serial</h4><p>보통 FTDI USB 케이브을 다음 두 제품이 대부분이다.</p>
+<ul>
+<li>Prolific PL2303: <a target="_blank" rel="noopener" href="http://www.prolific.com.tw/us/showproduct.aspx?p_id=229&pcid=41">PL2303 MacOSX</a></li>
+<li>FTDI USB Serial: FTDIUSBSerialDriver_v2_3.zip</li>
+</ul>
+<blockquote>
+<p>macOS Maverick 이후 FTDI 드라이버가 포함되어 있다.<br>혹시 새 버전을 설치하거나 이전 버전이 설치되어 삭제하려면 [^6]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Library/Extensions/</span><br><span class="line">$ sudo rm -r PL2303.kext</span><br><span class="line">$ sudo rm -r ProlificUsbSerial.kext</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>FTDI 케이블을 사용한다고 가정하고 맥에 USB to Serial 케이블을 연결하면 <em>&#x2F;dev</em> 장치에 <em>cu.</em>, <em>tty.</em> 장치 드라이버가 생성된다. 두 장치는 다른 점이 있다.[^5]</p>
+<ul>
+<li>&#x2F;dev&#x2F;tty.* 장치는 DCD (data-carrier-detect) 신호를 대기한다, 이것은 누군가 호출해 온다는 의미이다.</li>
+<li>&#x2F;dev&#x2F;cu.* 장치는 DCD를 추정하지 않고 항상 즉시 연결한다(응답 혹은 성공)</li>
+</ul>
+<p>FTDI 로 시리얼을 사용시는 <em>cu.</em> 장치를 사용하면 된다.</p>
+<blockquote>
+<p>일반적으로</p>
+</blockquote>
+<h4 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h4><p>Mac에서 <code>screen</code> 사용시</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen /dev/cu.usbserial-XXXXXXXX 115200</span><br></pre></td></tr></table></figure>
+
+<p>시리얼 터미널에서 빠져나오려면 ‘ctrl-a, ctrl-&#39; 를 순서데로 입력</p>
+<h3 id="Linux-Serial-terminal"><a href="#Linux-Serial-terminal" class="headerlink" title="Linux Serial terminal"></a>Linux Serial terminal</h3><p>Linux machine에서 Usb to serial 케이블을 사용할 수 있는지 콘솔 메시지에서 Serial console이 있는 지 확인한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg | egrep --color &#x27;serial&#x27;</span><br><span class="line">[ 1969.914088] usbcore: registered new interface driver usbserial</span><br><span class="line">[ 1969.914139] usbcore: registered new interface driver usbserial_generic</span><br><span class="line">[ 1969.914175] usbserial: USB Serial support registered for generic</span><br><span class="line">[ 1969.918325] usbserial: USB Serial support registered for pl2303</span><br></pre></td></tr></table></figure>
+
+<p>장치 드라이버는 보통 <em>&#x2F;dev&#x2F;ttyUSB0</em> 장치로 연결된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /dev/ttyUSB*</span><br><span class="line">/dev/ttyUSB0</span><br></pre></td></tr></table></figure>
+
+<h4 id="dterm"><a href="#dterm" class="headerlink" title="dterm"></a>dterm</h4><p>dtermAUR is a tiny serial communication program. If you invoke it without parameters, it will connect to &#x2F;dev&#x2F;ttyS0 at 9600 baud by default. The following example connect to &#x2F;dev&#x2F;ttyS0 at 115200 baud, with 8 data bits, no parity bit and 1 stop bit-times:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dterm 115200 8 n 1</span><br></pre></td></tr></table></figure>
+
+<p>See its homepage[1] for more examples.</p>
+<h4 id="Minicom"><a href="#Minicom" class="headerlink" title="Minicom"></a>Minicom</h4><p>minicom can be obtained from the official repositories. Start Minicom in setup mode:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ minicom -s</span><br></pre></td></tr></table></figure>
+
+<p>Using the textual navigation menu, change the serial port settings to the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Serial Device: /dev/ttyS0</span><br><span class="line">Bps/Par/Bits: 9600 8N1</span><br></pre></td></tr></table></figure>
+
+<p>Press Enter to exit the menus (pressing Esc will not save changes). Remove the modem Init and Reset strings, as we are not connecting to a modem. To do this, under the Modem and Dialing menu, delete the Init and Reset strings. Optionally save the configuration by choosing save setup as dfl from the main menu. Restart minicom with the serial cable connected to the target machine. To end the session, press Ctrl+A followed by Ctrl+X.</p>
+<h4 id="picocom"><a href="#picocom" class="headerlink" title="picocom"></a>picocom</h4><p>picocom is a tiny dumb-terminal emulation program that is very like minicom, but instead of mini, it is pico. The following example connect to ttyS0 at 9600 bps:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ picocom -b 9600 /dev/ttyS0</span><br></pre></td></tr></table></figure>
+
+<p>Note: if the backspace key won’t work properly try out this option: ‘–omap delbs’<br>See its manual for detailed usage.</p>
+<h4 id="Screen"><a href="#Screen" class="headerlink" title="Screen"></a>Screen</h4><p>screen is able to connect to a serial port. It will connect at 9600 baud by default:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen /dev/ttyS0 115200</span><br></pre></td></tr></table></figure>
+
+<p>To end the session, press Ctrl+a followed by k.</p>
+<p>여러 사용자로 열려면 <strong>-R</strong> 옵션을 주고 다시 연다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -R /dev/tty.usbserial-XXXXXXXX 115200</span><br></pre></td></tr></table></figure>
+
+<p>screen 명령 사용중 어떤 상황에서 세션이 멈춘 경우 종료 명령이 안된다. 이 경우 screen 세션을 찾고 가제 종료를 시도해 본다.</p>
+<p>Type screen -list to identify the detached screen session.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ screen -list</span><br><span class="line">    There are screens on:</span><br><span class="line">         20751.Melvin_Peter_V42  (Detached)</span><br><span class="line">Note: 20751.Melvin_Peter_V42 is your session id.</span><br></pre></td></tr></table></figure>
+
+<p>Get attached to the detached screen session<br>screen -r 20751.Melvin_Peter_V42<br>Once connected to the session press Ctrl + A then type :quit</p>
+<p>Attached session 종료</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ screen -ls</span><br><span class="line">There is a screen on:</span><br><span class="line">  2667.ttys003.gogangtaeui-MacBook-Pro  (Attached)</span><br><span class="line">1 Socket in /var/folders/02/4qk5tfw527b9zqx92gtv4m980000gn/T/.screen.</span><br></pre></td></tr></table></figure>
+
+<p>screen -S sessionname -p 0 -X quit</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a target="_blank" rel="noopener" href="http://www.mostlynetworks.com/2014/11/os-x-yosemite-prolific-usb-drivers/">http://www.mostlynetworks.com/2014/11/os-x-yosemite-prolific-usb-drivers/</a><br><a target="_blank" rel="noopener" href="http://www.mostlynetworks.com/2015/01/fixing-prolific-driver-os-x/">http://www.mostlynetworks.com/2015/01/fixing-prolific-driver-os-x/</a><br><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/disk_cloning">https://wiki.archlinux.org/index.php/disk_cloning</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/working_with_the_serial_console">Archlinux-Working with serial console</a></li>
+</ul>
+<p>[^5]: <a target="_blank" rel="noopener" href="https://pbxbook.com/other/mac-tty.html">Mac tty</a><br>[^6]: <a target="_blank" rel="noopener" href="http://sewellsupport.com/Uninstall-Pl-2303-on-Mac-OSX.aspx">Uninstall PL-2303 on macOS X</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Raspberry Pi : Install Raspbian</p><p><a href="https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/">https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-06-22</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-12</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Linux/">Linux</a><a class="link-muted mr-2" rel="tag" href="/tags/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4/">라즈베리파이</a><a class="link-muted mr-2" rel="tag" href="/tags/Raspberry-Pi/">Raspberry Pi</a><a class="link-muted mr-2" rel="tag" href="/tags/Raspbian/">Raspbian</a><a class="link-muted mr-2" rel="tag" href="/tags/%EB%9D%BC%EC%A6%88%EB%B9%84%EC%95%88/">라즈비안</a><a class="link-muted mr-2" rel="tag" href="/tags/Raspberry-Pi-3/">Raspberry Pi 3</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/raspberrypi/raspbian-1-prepare/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Raspberry Pi : Raspbian 설치준비</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/openapi-openweathermap/"><span class="level-item">[Open API] OpenweatherMap Open API</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/raspberrypi/raspbian-2-os_install/';
+            this.page.identifier = 'raspberrypi/raspbian-2-os_install/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/python/pandas-numpy-display_format/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T15:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/hello-world/">blog 안내</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/github/hexo03-icarus-install_new/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/python/python-packaging-start/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/Programming/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">140</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">213</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

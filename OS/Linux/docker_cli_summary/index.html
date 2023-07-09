@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Docker CLI 요약 - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="docker cli 명령을 정리"><meta property="og:type" content="article"><meta property="og:title" content="Docker CLI 요약"><meta property="og:url" content="https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="docker cli 명령을 정리"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://www.simplilearn.com/ice9/free_resources_article_thumb/DockerArchitecture_1.png"><meta property="article:published_time" content="2023-05-14T06:00:00.000Z"><meta property="article:modified_time" content="2023-05-14T06:43:14.993Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="Docker"><meta property="article:tag" content="CLI"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://www.simplilearn.com/ice9/free_resources_article_thumb/DockerArchitecture_1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/"},"headline":"Docker CLI 요약","image":["https://www.simplilearn.com/ice9/free_resources_article_thumb/DockerArchitecture_1.png"],"datePublished":"2023-05-14T06:00:00.000Z","dateModified":"2023-05-14T06:43:14.993Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"docker cli 명령을 정리"}</script><link rel="canonical" href="https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T06:00:00.000Z" title="5/14/2023, 3:00:00 PM">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-05-14T06:43:14.993Z" title="5/14/2023, 3:43:14 PM">2023-05-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Linux/">Linux</a></span><span class="level-item">7분안에 읽기 (약 1061 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">Docker CLI 요약</h1><div class="content"><p>docker cli 명령을 정리</p>
+<p><img src='https://www.simplilearn.com/ice9/free_resources_article_thumb/DockerArchitecture_1.png' width=600 alt='docker architecture'> <a target="_blank" rel="noopener" href="https://www.simplilearn.com/tutorials/docker-tutorial/docker-architecture">이미지 소스</a></p>
+<h2 id="docker-cli"><a href="#docker-cli" class="headerlink" title="docker cli"></a>docker cli</h2><p>docker cli는 <code>docker</code> 명령 뒤에 docker commands 로 도커를 제어한다. 그리고 대상 컨테이너를 지정하고 컨테이너에서 실행 할 수 있는 명령형식으로 구성되어 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker [docker commands] [container] [container <span class="built_in">command</span>] </span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/cli/">Use the Docker command line docker</a></p>
+<h2 id="search-이미지-검색"><a href="#search-이미지-검색" class="headerlink" title="search 이미지 검색"></a>search 이미지 검색</h2><p>Docker hub에서 이미지를 검색한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search busybox</span><br></pre></td></tr></table></figure>
+
+<p>Docker hub에서 상위 몇개 정도만 검색하고 싶을때 limit 옵션을 사용한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search busybox --<span class="built_in">limit</span> 5</span><br></pre></td></tr></table></figure>
+
+<p>Docker hub에서는 이미지 중 별점을 검색한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 최소 별정 50인 이미지</span></span><br><span class="line">docker search busybox --filter=stars=50</span><br><span class="line"></span><br><span class="line"><span class="comment"># 별점이 3인 이미지</span></span><br><span class="line">docker search --filter stars=50 busybox</span><br></pre></td></tr></table></figure>
+
+<p>정규 빌드 버전만 지시하려면 <code>is-official</code> 옵션 사용</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker search --filter is-official=true --filter stars=50 busybox</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>--format</code> 옵션을 사용해 출력되는 내용을 필터링 할 수 있다. 다음은 별점만 출력하는 예이다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search --format &quot;&#123;&#123;.Name&#125;&#125;: &#123;&#123;.StarCount&#125;&#125;&quot; nginx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="pull-이미지를-다운로드-한다"><a href="#pull-이미지를-다운로드-한다" class="headerlink" title="pull 이미지를 다운로드 한다"></a>pull 이미지를 다운로드 한다</h2><p>Docker image를 내려 받는다. 이미지 이름 뒤에 <code>:[version]</code> 을 붙이면 지정한 버전을 내려 받고, latest 를 붙이면 최신 버전을 대상으로 한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx:latest</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="images-다운로드-이미지"><a href="#images-다운로드-이미지" class="headerlink" title="images 다운로드 이미지"></a>images 다운로드 이미지</h2><p>Docker에서 다운로드 받는 이미지를 확인한다. docker images는 모든 이미지를 보여준다. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images</span></span><br></pre></td></tr></table></figure>
+
+
+<p>특정 이미지만 지시할 수 있다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images nginx</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="run-이미지를-컨테이너로-실행한다"><a href="#run-이미지를-컨테이너로-실행한다" class="headerlink" title="run 이미지를 컨테이너로 실행한다."></a>run 이미지를 컨테이너로 실행한다.</h2><p>Docker image를 컨테이너로 생성하고, 실행합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:8080 nginx</span><br></pre></td></tr></table></figure>
+
+<p>옵션:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">`-p`: Local과 Container 와 port를 연결하는 옵션</span><br><span class="line">`-i`: interactive (대화방식)</span><br><span class="line">`-t`: Pseudo-tty (콘솔 및 터미널 환경)</span><br><span class="line">`— name`: 실행 컨테이너 이름을 지정합니다.</span><br><span class="line">`-d`: 백그라운드에서 실행되는 옵션입니다.</span><br></pre></td></tr></table></figure>
+
+<p>docker image를 실행하고 bash 쉘을 연다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name nginx nginx bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="ps-컨테이너-목록을-확인"><a href="#ps-컨테이너-목록을-확인" class="headerlink" title="ps 컨테이너 목록을 확인"></a>ps 컨테이너 목록을 확인</h2><p>Docker 컨테이너 목록을 확인합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps -a</span></span><br></pre></td></tr></table></figure>
+
+<p>옵션:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`-a` : 실행 중이 아닌 컨테이너까지 확인</span><br><span class="line">`-q` : 컨테이너의 CONTAINER ID 만 표시</span><br></pre></td></tr></table></figure>
+
+<h2 id="start-컨테이너를-시작한다"><a href="#start-컨테이너를-시작한다" class="headerlink" title="start 컨테이너를 시작한다."></a>start 컨테이너를 시작한다.</h2><p>중단되어 있는 컨테이너를 실행합니다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker start nginx</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="attach-컨테이너-연결"><a href="#attach-컨테이너-연결" class="headerlink" title="attach 컨테이너 연결"></a>attach 컨테이너 연결</h2><p>실행중인 Docker Container 의  standard input, output,  error streams 에 연결한다. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach nginx</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/attach/">docker attach</a> 명령 사용 사례.</p>
+<h2 id="exec-컨테이너-명령-실행"><a href="#exec-컨테이너-명령-실행" class="headerlink" title="exec 컨테이너 명령 실행"></a>exec 컨테이너 명령 실행</h2><p>Docker Container의 쉘의 명령어을 실행할 수 있다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec nginx ls</span><br></pre></td></tr></table></figure>
+
+<p>옵션</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d, --detach : 명령을 detach mode, 백그라운드로 실행</span><br><span class="line">-e, --env : 환경변수 설정하고 실행</span><br><span class="line">-it [SHELL]: iteractive tty 옵션. 사용할 shell을 지시한다, 보통  bash</span><br><span class="line">-u, --user: User ID, UID</span><br><span class="line">-w, --workdir: 작업 디렉토리 지정</span><br></pre></td></tr></table></figure>
+
+<p>다음은 nginx 컨테이너의 bash 쉘을 실행한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it nginx bash</span><br></pre></td></tr></table></figure>
+
+<p>다음은 nginx 컨테이너를 qkboo 사용자 쉘로 연결한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it -u qkboo nginx bash</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="inspect-컨테이너-상세-정보"><a href="#inspect-컨테이너-상세-정보" class="headerlink" title="inspect 컨테이너 상세 정보"></a>inspect 컨테이너 상세 정보</h2><p>Docker Container에 상세 정보를 확인 한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect nginx</span><br></pre></td></tr></table></figure>
+
+<p>옵션</p>
+<p><code>--format</code> : 필터링</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect  --format=&#x27;&#123;&#123;range .NetworkSettings.Networks&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="stop-컨테이너-종료"><a href="#stop-컨테이너-종료" class="headerlink" title="stop 컨테이너 종료"></a>stop 컨테이너 종료</h2><p>ps 명령으로 실행중인 컨테이너 아이디와 이름을 확인하고 아이디를 준다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">docker stop e417951d25fd</span><br></pre></td></tr></table></figure>
+
+
+<p>이름으로 종료시  <code>--name</code> 옵션 사용</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop --name nginx2</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="rm-컨테이너를-삭제한다"><a href="#rm-컨테이너를-삭제한다" class="headerlink" title="rm 컨테이너를 삭제한다."></a>rm 컨테이너를 삭제한다.</h2><p>Docker Container 삭제합니다. 삭제할때는 실행 상태가 아닌 컨테이너만 가능합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm nginx</span><br></pre></td></tr></table></figure>
+
+<p>강제 삭제시 <code>-f</code> 옵션 사용.</p>
+<h2 id="rmi-이미지를-삭제한다"><a href="#rmi-이미지를-삭제한다" class="headerlink" title="rmi 이미지를 삭제한다."></a>rmi 이미지를 삭제한다.</h2><p>Docker image를 삭제 하는데 이미지가 중첩된 경우가 많기 때문에 링크 같이 untag 한 후 사용한다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rmi/#examples">rim example</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rmi fd484f19954f</span><br><span class="line"></span><br><span class="line">docker rmi test2:latest</span><br></pre></td></tr></table></figure>
+
+<p>혹은 <code>-f</code> 옵션으로 중첩된 이미지를 모두 함께 삭제 할 수 있다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi -f fd484f19954f</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/cli/">Use the Docker command line docker</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@jyson88/docker-cli-%EC%A0%95%EB%A6%AC-cb031c281e2f">Docker CLI 정리, blog</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Docker CLI 요약</p><p><a href="https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/">https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-05-14</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-05-14</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Docker/">Docker</a><a class="link-muted mr-2" rel="tag" href="/tags/CLI/">CLI</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/Python/jupyterlab_extension_build_npm_error/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Jupyterlab 의 extension 을 설치하고 build 시 npm 에러.</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/Database/mysql-admin-cli/"><span class="level-item">MySqLI CLI 주요 명령</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/OS/Linux/docker_cli_summary/';
+            this.page.identifier = 'OS/Linux/docker_cli_summary/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#docker-cli"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">docker cli</span></span></a></li><li><a class="level is-mobile" href="#search-이미지-검색"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">search 이미지 검색</span></span></a></li><li><a class="level is-mobile" href="#pull-이미지를-다운로드-한다"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">pull 이미지를 다운로드 한다</span></span></a></li><li><a class="level is-mobile" href="#images-다운로드-이미지"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">images 다운로드 이미지</span></span></a></li><li><a class="level is-mobile" href="#run-이미지를-컨테이너로-실행한다"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">run 이미지를 컨테이너로 실행한다.</span></span></a></li><li><a class="level is-mobile" href="#ps-컨테이너-목록을-확인"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">ps 컨테이너 목록을 확인</span></span></a></li><li><a class="level is-mobile" href="#start-컨테이너를-시작한다"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">start 컨테이너를 시작한다.</span></span></a></li><li><a class="level is-mobile" href="#attach-컨테이너-연결"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">attach 컨테이너 연결</span></span></a></li><li><a class="level is-mobile" href="#exec-컨테이너-명령-실행"><span class="level-left"><span class="level-item">1.9</span><span class="level-item">exec 컨테이너 명령 실행</span></span></a></li><li><a class="level is-mobile" href="#inspect-컨테이너-상세-정보"><span class="level-left"><span class="level-item">1.10</span><span class="level-item">inspect 컨테이너 상세 정보</span></span></a></li><li><a class="level is-mobile" href="#stop-컨테이너-종료"><span class="level-left"><span class="level-item">1.11</span><span class="level-item">stop 컨테이너 종료</span></span></a></li><li><a class="level is-mobile" href="#rm-컨테이너를-삭제한다"><span class="level-left"><span class="level-item">1.12</span><span class="level-item">rm 컨테이너를 삭제한다.</span></span></a></li><li><a class="level is-mobile" href="#rmi-이미지를-삭제한다"><span class="level-left"><span class="level-item">1.13</span><span class="level-item">rmi 이미지를 삭제한다.</span></span></a></li></ul><li><a class="level is-mobile" href="#참고"><span class="level-left"><span class="level-item">2</span><span class="level-item">참고</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/Programming/Python/pandas-numpy-display_format/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T15:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/uncategorized/hello-world/">blog 안내</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/github/hexo03-icarus-install_new/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/Programming/Python/python-packaging-start/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/Programming/git/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">140</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">213</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

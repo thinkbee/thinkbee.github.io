@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>NodeJS / Process management - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="nodejs app을 단일 node 명령으로 실행후 백그라운드 혹은 시스템 데몬으로 다룰 수 있도록 해주는 프로세스 관리 유틸리티를 알아보자:  nodemon pm2 forever  1. nodemon1nodemon .&amp;#x2F;server.js localhost 8080  express appnodemon으로 express 의 기본 템플릿을 시작시 bin&amp;amp;#x2F"><meta property="og:type" content="article"><meta property="og:title" content="NodeJS / Process management"><meta property="og:url" content="https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="nodejs app을 단일 node 명령으로 실행후 백그라운드 혹은 시스템 데몬으로 다룰 수 있도록 해주는 프로세스 관리 유틸리티를 알아보자:  nodemon pm2 forever  1. nodemon1nodemon .&amp;#x2F;server.js localhost 8080  express appnodemon으로 express 의 기본 템플릿을 시작시 bin&amp;amp;#x2F"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://blog.thinkbee.kr/img/og_image.png"><meta property="article:published_time" content="2018-04-05T00:00:00.000Z"><meta property="article:modified_time" content="2023-01-13T16:52:15.000Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="nodejs"><meta property="article:tag" content="nvm"><meta property="article:tag" content="nodemon"><meta property="article:tag" content="pm2"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog.thinkbee.kr/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/"},"headline":"NodeJS / Process management","image":["https://blog.thinkbee.kr/img/og_image.png"],"datePublished":"2018-04-05T00:00:00.000Z","dateModified":"2023-01-13T16:52:15.000Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://blog.thinkbee.kr/images/thinkbee_logo.png"}},"description":"nodejs app을 단일 node 명령으로 실행후 백그라운드 혹은 시스템 데몬으로 다룰 수 있도록 해주는 프로세스 관리 유틸리티를 알아보자:  nodemon pm2 forever  1. nodemon1nodemon .&#x2F;server.js localhost 8080  express appnodemon으로 express 의 기본 템플릿을 시작시 bin&amp;#x2F"}</script><link rel="canonical" href="https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-05T00:00:00.000Z" title="4/5/2018, 9:00:00 AM">2018-04-05</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-01-13T16:52:15.000Z" title="1/14/2023, 1:52:15 AM">2023-01-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Nodejs/">Nodejs</a></span><span class="level-item">6분안에 읽기 (약 959 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">NodeJS / Process management</h1><div class="content"><p>nodejs app을 단일 <code>node</code> 명령으로 실행후 백그라운드 혹은 시스템 데몬으로 다룰 수 있도록 해주는 프로세스 관리 유틸리티를 알아보자:</p>
+<ol>
+<li>nodemon</li>
+<li>pm2</li>
+<li>forever</li>
+</ol>
+<h2 id="1-nodemon"><a href="#1-nodemon" class="headerlink" title="1. nodemon"></a>1. nodemon</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodemon ./server.js localhost 8080</span><br></pre></td></tr></table></figure>
+
+<h4 id="express-app"><a href="#express-app" class="headerlink" title="express app"></a>express app</h4><p>nodemon으로 express 의 기본 템플릿을 시작시 <em>bin&#x2F;www</em> 를 실행애 주어야 한다. <em>app.js</em> 만 실행시 www 에 명시한 포트가 인식 안된다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nodemon bin/www</span><br></pre></td></tr></table></figure>
+
+<p>혹은 PORT 변수를 입력하고 실행한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ PORT=3000 DB_USERNAME=<span class="string">&#x27;mongo&#x27;</span> DB_PASSWORD=<span class="string">&#x27;&#x27;</span> DB_SERVER=<span class="string">&#x27;localhost&#x27;</span> DATABASE=<span class="string">&#x27;student&#x27;</span> nodemon server.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-pm2-설치"><a href="#2-pm2-설치" class="headerlink" title="2. pm2 설치"></a>2. pm2 설치</h2><p>pm2는 nodejs app을 실행하고 관리할 수 있는 전문적인 도구이다.<br>node.js 앱을 시스템 서비스로 등록하기 위해서 <strong>pm2</strong> 를 설치한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure>
+
+<p>예를 들어 express 앱이 있으면 다음 같이 pm2로 시작한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd www-app</span><br><span class="line">pm2 start -n &quot;www-app&quot; bin/www</span><br></pre></td></tr></table></figure>
+
+<h3 id="pm2-log-format"><a href="#pm2-log-format" class="headerlink" title="pm2 log format"></a>pm2 log format</h3><p>pm2 이전 버전은 시작시 timestamp를 로그에 저장하고 싶으면 시작시 <code>--log-date-format</code> 옵션을 이용</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js --log-date-format &#x27;DD-MM HH:mm:ss.SSS&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>시작 설정 파일에 <code>log_date_format</code> 옵션을 줄 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;log_date_format&quot;   : &quot;DD-MM HH:mm:ss.SSS&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>pm2 2.x 이후 부터는 log 의 형식을 <code>--format</code> 옵션을 지정할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs --format</span><br></pre></td></tr></table></figure>
+
+<h3 id="pm2-startup"><a href="#pm2-startup" class="headerlink" title="pm2 startup"></a>pm2 startup</h3><p>startup 시 pm2 start 로 생성되는 .pm2 디렉토리의 pid 와 app.js 파일을 실행해 준다.</p>
+<p>pm2 startup systemd 로 스타트를 하면 2개의 프로세스가 만들어 진다.</p>
+<p>방법은,,,</p>
+<ol>
+<li>먼저 앱을 시작해 둔다.</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start -n <span class="string">&quot;www-app&quot;</span> bin/www</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>dump를 생성한다.</li>
+</ol>
+<p>pm2로 현재 실행중인 프로세스 정보를 <code>save</code>로 덤프하게 저장한다. <code>systemd</code> 서비스 스크립을 작성하는데 유용하다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>pm2 startup 명령</li>
+</ol>
+<p><code>pm2 startup</code> 명령은 pm2로 실행중인 프로세스를 systemd 서비스 유니트 파일로 제어 할 수 있다. 명령을 실행하면 <code>sudo</code> 명령으로 실행할 수 있는 스크립을 출력해 준다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 startup systemd</span><br><span class="line">...</span><br><span class="line">sudo <span class="built_in">env</span> PATH=<span class="variable">$PATH</span>:/home/foo/.nvm/versions/node/v8.8.1/bin /home/foo/.nvm/versions/node/v8.8.1/lib/node_modules/pm2/bin/pm2 startup systemd -u foo --hp /home/foo</span><br></pre></td></tr></table></figure>
+
+<p>이 스크립을 실행해 주면 <strong>pm2-foo.service</strong> 서비스 유니 파일이 생성된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Target path</span><br><span class="line">/etc/systemd/system/pm2-foo.service</span><br></pre></td></tr></table></figure>
+
+<p>이 서비스 파일을 활성화하고 시작해준다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> pm2-foo</span><br></pre></td></tr></table></figure>
+
+<p>이제 시스템을 재시작해도 pm2 로 실행중인 프로세스는 자동으로 시작된다.</p>
+<h2 id="3-forever"><a href="#3-forever" class="headerlink" title="3. forever"></a>3. forever</h2><p><a target="_blank" rel="noopener" href="https://github.com/foreverjs/forever">https://github.com/foreverjs/forever</a></p>
+<h4 id="백그라운드-로그-출력"><a href="#백그라운드-로그-출력" class="headerlink" title="백그라운드 로그 출력"></a>백그라운드 로그 출력</h4><p>nodejs app을 백그라운드로 실행하기 위해서 로그 정보를 생성할 수 있다.</p>
+<p>The forever process will continue to run outputting log messages to the console.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forever -o out.log -e err.log my-script.js</span><br></pre></td></tr></table></figure>
+
+<h4 id="Daemon으로-실행하기"><a href="#Daemon으로-실행하기" class="headerlink" title="Daemon으로 실행하기"></a>Daemon으로 실행하기</h4><p>forever 프로세스는 대상 프로세스를 백그라운드로 실행할 수 있는 데몬으로 동작이 가능하다. 이것은 <code>nohup</code> 같은 시스템 도구 없이도 가능다. 데몬 실행을 위해 -o -l, &amp; -e 를 사용하도록 권장한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ forever start -l forever.log -o out.log -e err.log my-daemon.js</span><br><span class="line">        forever stop my-daemon.js</span><br></pre></td></tr></table></figure>
+
+<p>그리고 <code>-m</code> 옵션으로 재시작 횟수를 지정할 수 있다.</p>
+<p>here are several examples designed to test the fault tolerance of forever. Here’s a simple usage example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ forever -m 5 examples/error-on-timer.js</span><br></pre></td></tr></table></figure>
+
+<h4 id="설정파일-지원"><a href="#설정파일-지원" class="headerlink" title="설정파일 지원"></a>설정파일 지원</h4><p>forever에 스크립트 경로와 함께 JSON 설정 파일을 전달해 스크립트의 구성요소를 제공할 수 있다. 예를 들어 아래 같은 앱 디렉토리에 <code>developement.json</code> 설정 파일이 있다고 하자,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── forever</span><br><span class="line">│   └── development.json</span><br><span class="line">└── index.js</span><br></pre></td></tr></table></figure>
+
+<p><code>developement.json</code> 설정 파일은 아래 같은 내용으로 구성할 수 있다:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forever/development.json</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// Comments are supported</span></span><br><span class="line">  <span class="attr">&quot;uid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;app&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;append&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;watch&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;script&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;sourceDir&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/home/myuser/app&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>NodeJS / Process management</p><p><a href="https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/">https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-04-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-01-14</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/nodejs/">nodejs</a><a class="link-muted mr-2" rel="tag" href="/tags/nvm/">nvm</a><a class="link-muted mr-2" rel="tag" href="/tags/nodemon/">nodemon</a><a class="link-muted mr-2" rel="tag" href="/tags/pm2/">pm2</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/openapi-aladin-books-416cbdcc5f2d/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">[Open API] Alading Bookstore Open API</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/nodejs/2017-12-20-mongodb-mongoose-middleware-871f925b40c0/"><span class="level-item">NodeJS - mongoose middleware</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://blog.thinkbee.kr/nodejs/nodejs-processmanaging-90d48834639e/';
+            this.page.identifier = 'nodejs/nodejs-processmanaging-90d48834639e/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/python/pandas-numpy-display_format-5e6e2759a37b/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T15:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/hello-world-99588d6e8cae/">blog 안내</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/github/hexo03-icarus-install_new-17451b868f1a/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/python/python-packaging-start-48993e24137b/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/Programming/bitbucket-ssh_key%EB%93%B1%EB%A1%9D-131a9df6053f/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">140</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">213</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>
