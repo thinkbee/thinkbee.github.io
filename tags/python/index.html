@@ -33,7 +33,1199 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">태그</a></li><li class="is-active"><a href="#" aria-current="page">python</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-09T17:00:00.000Z" title="7/10/2023, 2:00:00 AM">2023-07-10</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-09T17:08:01.148Z" title="7/10/2023, 2:08:01 AM">2023-07-10</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">7분안에 읽기 (약 1027 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/pandas-numpy-display_format-5e6e2759a37b/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><div class="content"><p>numpy 와 pandas 에서 수를 출력할 때 형식, 크기 및 범위를 설정할 수 있다. 간단히 보면 아래 테이블 같이 형식을 바꿔준다.</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">태그</a></li><li class="is-active"><a href="#" aria-current="page">python</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-12T17:00:00.000Z" title="7/13/2023, 2:00:00 AM">2023-07-13</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-12T17:57:34.916Z" title="7/13/2023, 2:57:34 AM">2023-07-13</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">10분안에 읽기 (약 1462 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/pd-Stack_Unstack_Melt-9d0bcd365efe/">Pandas - Pivot, Stack, Unstack, Melt</a></p><div class="content"><p>Pandas 에서 2차원 data를 Stack, unstack, melt 를 이용해 복합 인덱스를 사용할 수 있고 Pivot 을 이용해 특정 데이터 중심의 2차원 데이터로 생성할 수 있다.</p>
+<ol>
+<li>Pivot</li>
+<li>Stack &amp; Unstack</li>
+<li>Melt</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<h1 id="2차원-테이블"><a href="#2차원-테이블" class="headerlink" title="2차원 테이블"></a>2차원 테이블</h1><p>행과 열로 구성된 데이터 집합</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(</span><br><span class="line">    &#123;<span class="string">&#x27;foo&#x27;</span> : [<span class="string">&#x27;One&#x27;</span>,<span class="string">&#x27;One&#x27;</span>,<span class="string">&#x27;One&#x27;</span>,<span class="string">&#x27;Two&#x27;</span>,<span class="string">&#x27;Two&#x27;</span>,<span class="string">&#x27;Two&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;bar&#x27;</span>: [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],</span><br><span class="line">        <span class="string">&#x27;baz&#x27;</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>] ,</span><br><span class="line">        <span class="string">&#x27;zoo&#x27;</span>: [<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;z&#x27;</span>,<span class="string">&#x27;q&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;t&#x27;</span>]&#125;</span><br><span class="line">)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>foo</th>
+      <th>bar</th>
+      <th>baz</th>
+      <th>zoo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>One</td>
+      <td>A</td>
+      <td>1</td>
+      <td>x</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>One</td>
+      <td>B</td>
+      <td>2</td>
+      <td>y</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>One</td>
+      <td>C</td>
+      <td>3</td>
+      <td>z</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Two</td>
+      <td>A</td>
+      <td>4</td>
+      <td>q</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Two</td>
+      <td>B</td>
+      <td>5</td>
+      <td>w</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Two</td>
+      <td>C</td>
+      <td>6</td>
+      <td>t</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h1 id="Pivot"><a href="#Pivot" class="headerlink" title="Pivot"></a>Pivot</h1><p>피봇&#x2F;피봇 테이블은 2차원 데이터 열에서 공통된 부분을 중심으로 새 테이블 집합을 형성하게 해준다.  피봇은 index, columns, values 라는 이름을 가진 세 가지 parameter를 취한다. 이러한 각 파라미터의 값으로 원래 표에 열 이름을 지정해야 한다.</p>
+<img src='https://pandas.pydata.org/docs/_images/reshaping_pivot.png'>
+
+<p>foo, bar, baz, zoo 컬럼 중에서 foo 에 대해서 정리를 하고 bar 를 컬럼으로 지정하면 아래와 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_pivot = df.pivot_table(index=<span class="string">&#x27;foo&#x27;</span>, columns=<span class="string">&#x27;bar&#x27;</span>, values=<span class="string">&#x27;baz&#x27;</span>)</span><br><span class="line">df_pivot</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>bar</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+    <tr>
+      <th>foo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>One</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Two</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="ex-nba-데이터를-포지션의-연령별-연봉-테이블로-전환"><a href="#ex-nba-데이터를-포지션의-연령별-연봉-테이블로-전환" class="headerlink" title="ex) nba 데이터를 포지션의 연령별 연봉 테이블로 전환"></a>ex) nba 데이터를 포지션의 연령별 연봉 테이블로 전환</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dfnba = pd.read_csv(<span class="string">&#x27;../data/nba.csv&#x27;</span>)</span><br><span class="line">dfnba</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Number</th>
+      <th>Position</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>College</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Avery Bradley</td>
+      <td>Boston Celtics</td>
+      <td>0.0</td>
+      <td>PG</td>
+      <td>25.0</td>
+      <td>6-2</td>
+      <td>180.0</td>
+      <td>Texas</td>
+      <td>7730337.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jae Crowder</td>
+      <td>Boston Celtics</td>
+      <td>99.0</td>
+      <td>SF</td>
+      <td>25.0</td>
+      <td>6-6</td>
+      <td>235.0</td>
+      <td>Marquette</td>
+      <td>6796117.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John Holland</td>
+      <td>Boston Celtics</td>
+      <td>30.0</td>
+      <td>SG</td>
+      <td>27.0</td>
+      <td>6-5</td>
+      <td>205.0</td>
+      <td>Boston University</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>R.J. Hunter</td>
+      <td>Boston Celtics</td>
+      <td>28.0</td>
+      <td>SG</td>
+      <td>22.0</td>
+      <td>6-5</td>
+      <td>185.0</td>
+      <td>Georgia State</td>
+      <td>1148640.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jonas Jerebko</td>
+      <td>Boston Celtics</td>
+      <td>8.0</td>
+      <td>PF</td>
+      <td>29.0</td>
+      <td>6-10</td>
+      <td>231.0</td>
+      <td>NaN</td>
+      <td>5000000.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>453</th>
+      <td>Shelvin Mack</td>
+      <td>Utah Jazz</td>
+      <td>8.0</td>
+      <td>PG</td>
+      <td>26.0</td>
+      <td>6-3</td>
+      <td>203.0</td>
+      <td>Butler</td>
+      <td>2433333.0</td>
+    </tr>
+    <tr>
+      <th>454</th>
+      <td>Raul Neto</td>
+      <td>Utah Jazz</td>
+      <td>25.0</td>
+      <td>PG</td>
+      <td>24.0</td>
+      <td>6-1</td>
+      <td>179.0</td>
+      <td>NaN</td>
+      <td>900000.0</td>
+    </tr>
+    <tr>
+      <th>455</th>
+      <td>Tibor Pleiss</td>
+      <td>Utah Jazz</td>
+      <td>21.0</td>
+      <td>C</td>
+      <td>26.0</td>
+      <td>7-3</td>
+      <td>256.0</td>
+      <td>NaN</td>
+      <td>2900000.0</td>
+    </tr>
+    <tr>
+      <th>456</th>
+      <td>Jeff Withey</td>
+      <td>Utah Jazz</td>
+      <td>24.0</td>
+      <td>C</td>
+      <td>26.0</td>
+      <td>7-0</td>
+      <td>231.0</td>
+      <td>Kansas</td>
+      <td>947276.0</td>
+    </tr>
+    <tr>
+      <th>457</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>458 rows × 9 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.options.display.float_format = <span class="string">&quot;&#123;:,.2f&#125;&quot;</span>.<span class="built_in">format</span></span><br></pre></td></tr></table></figure>
+
+<p>컬럼의 데이터에 공통된 모습이 많이 보인다. 이 중에서 포지션을 기준으로 나이에 따른 연봉을 본다고 가정하면 포지션을 인덱스로하고 나이를 컬럼으로 지정하면 아래와 같다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 포지션의 연령별 연봉 테이블</span></span><br><span class="line">dfnba.pivot_table(index=<span class="string">&#x27;Position&#x27;</span>, columns=<span class="string">&#x27;Age&#x27;</span>, values=<span class="string">&#x27;Salary&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Age</th>
+      <th>19.00</th>
+      <th>20.00</th>
+      <th>21.00</th>
+      <th>22.00</th>
+      <th>23.00</th>
+      <th>24.00</th>
+      <th>25.00</th>
+      <th>26.00</th>
+      <th>27.00</th>
+      <th>28.00</th>
+      <th>...</th>
+      <th>31.00</th>
+      <th>32.00</th>
+      <th>33.00</th>
+      <th>34.00</th>
+      <th>35.00</th>
+      <th>36.00</th>
+      <th>37.00</th>
+      <th>38.00</th>
+      <th>39.00</th>
+      <th>40.00</th>
+    </tr>
+    <tr>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>C</th>
+      <td>NaN</td>
+      <td>5,143,140.00</td>
+      <td>1,571,000.00</td>
+      <td>3,476,698.20</td>
+      <td>2,121,999.50</td>
+      <td>4,532,003.33</td>
+      <td>10,881,995.00</td>
+      <td>3,041,850.82</td>
+      <td>5,004,260.50</td>
+      <td>7,635,761.83</td>
+      <td>...</td>
+      <td>10,338,218.00</td>
+      <td>8,208,695.50</td>
+      <td>9,500,000.00</td>
+      <td>6,258,000.00</td>
+      <td>7,448,760.00</td>
+      <td>947,276.00</td>
+      <td>NaN</td>
+      <td>222,888.00</td>
+      <td>NaN</td>
+      <td>5,250,000.00</td>
+    </tr>
+    <tr>
+      <th>PF</th>
+      <td>NaN</td>
+      <td>2,369,838.00</td>
+      <td>2,397,408.00</td>
+      <td>1,601,105.80</td>
+      <td>2,399,120.50</td>
+      <td>2,577,551.44</td>
+      <td>2,195,476.60</td>
+      <td>7,228,086.75</td>
+      <td>9,217,098.43</td>
+      <td>5,268,839.17</td>
+      <td>...</td>
+      <td>5,323,787.00</td>
+      <td>14,346,365.00</td>
+      <td>2,630,241.40</td>
+      <td>6,469,277.50</td>
+      <td>2,624,593.50</td>
+      <td>2,877,470.00</td>
+      <td>6,666,667.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>8,500,000.00</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>NaN</td>
+      <td>3,316,290.00</td>
+      <td>1,944,080.00</td>
+      <td>2,381,130.00</td>
+      <td>1,627,769.00</td>
+      <td>4,652,526.50</td>
+      <td>5,422,085.80</td>
+      <td>10,038,174.80</td>
+      <td>5,944,070.17</td>
+      <td>5,021,965.17</td>
+      <td>...</td>
+      <td>7,467,596.40</td>
+      <td>4,082,425.33</td>
+      <td>2,226,179.67</td>
+      <td>8,395,104.00</td>
+      <td>NaN</td>
+      <td>2,170,465.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>947,726.00</td>
+      <td>250,750.00</td>
+    </tr>
+    <tr>
+      <th>SF</th>
+      <td>NaN</td>
+      <td>1,979,976.00</td>
+      <td>1,404,480.00</td>
+      <td>2,401,364.60</td>
+      <td>2,760,134.36</td>
+      <td>5,067,491.60</td>
+      <td>3,382,640.73</td>
+      <td>7,322,325.20</td>
+      <td>10,532,567.00</td>
+      <td>1,996,608.71</td>
+      <td>...</td>
+      <td>10,960,320.25</td>
+      <td>9,720,195.75</td>
+      <td>NaN</td>
+      <td>261,894.00</td>
+      <td>947,276.00</td>
+      <td>1,721,559.75</td>
+      <td>25,000,000.00</td>
+      <td>3,376,000.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>SG</th>
+      <td>1,930,440.00</td>
+      <td>1,749,840.00</td>
+      <td>2,215,710.43</td>
+      <td>2,055,241.00</td>
+      <td>1,388,251.18</td>
+      <td>3,205,720.53</td>
+      <td>1,782,834.89</td>
+      <td>9,872,690.29</td>
+      <td>4,815,524.62</td>
+      <td>6,354,000.00</td>
+      <td>...</td>
+      <td>7,085,000.00</td>
+      <td>2,041,138.00</td>
+      <td>2,233,533.33</td>
+      <td>12,579,269.50</td>
+      <td>3,512,173.75</td>
+      <td>3,311,138.00</td>
+      <td>NaN</td>
+      <td>1,880,638.00</td>
+      <td>4,088,019.00</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div>
+
+
+
+<h1 id="Stack-amp-Unstack"><a href="#Stack-amp-Unstack" class="headerlink" title="Stack &amp; Unstack"></a>Stack &amp; Unstack</h1><p>2차원 테이블은 행 과 열이 순차적 값으로 교차하게 되어 있다. 스택은 컬럼의 값을 아래-위로 배치를 시킨다고 상상이 된다. 그래서 스택과 언스택은 이렇게 생각된다.</p>
+<ul>
+<li>stack : 2차원 컬럼의 내용을 수직방향으로 쌓는 구조, 즉 새로운 인덱스가 더해진다.</li>
+<li>unstack : 인덱스 구성요소를 한 단계 컬럼으로 만들며 수평방향으로 쌓게 한다.</li>
+</ul>
+<p>stack</p>
+<p><img src='https://pandas.pydata.org/docs/_images/reshaping_stack.png'> <a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/user_guide/reshaping.html">pandas reshaping</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_single_level = pd.DataFrame(</span><br><span class="line">    [[<span class="string">&#x27;Mostly cloudy&#x27;</span>, <span class="number">10</span>], [<span class="string">&#x27;Sunny&#x27;</span>, <span class="number">12</span>]],</span><br><span class="line">    index=[<span class="string">&#x27;London&#x27;</span>, <span class="string">&#x27;Oxford&#x27;</span>],</span><br><span class="line">    columns=[<span class="string">&#x27;Weather&#x27;</span>, <span class="string">&#x27;Wind&#x27;</span>]</span><br><span class="line">)</span><br><span class="line">df_single_level</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Weather</th>
+      <th>Wind</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>London</th>
+      <td>Mostly cloudy</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>Oxford</th>
+      <td>Sunny</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>index와 weather, wind 라는 컬럼을 stack을 호출하면 weather-wind 관련 인덱스를 생성하고 데이터를 나열한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_single_level.stack()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>London  Weather    Mostly cloudy
+        Wind                  10
+Oxford  Weather            Sunny
+        Wind                  12
+dtype: object
+</code></pre>
+<p>다른 데이터를 살펴보자.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MultiIndex</span></span><br><span class="line">tuples = <span class="built_in">list</span>(</span><br><span class="line">    <span class="built_in">zip</span>(</span><br><span class="line">        *[</span><br><span class="line">            [<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>, <span class="string">&quot;baz&quot;</span>, <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;qux&quot;</span>, <span class="string">&quot;qux&quot;</span>],</span><br><span class="line">            [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>],</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line">index = pd.MultiIndex.from_tuples(tuples, names=[<span class="string">&quot;first&quot;</span>, <span class="string">&quot;second&quot;</span>])</span><br><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">8</span>, <span class="number">2</span>), index=index, columns=[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-1.301694</td>
+      <td>-0.013259</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.197846</td>
+      <td>0.879890</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>0.718211</td>
+      <td>-0.739434</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.140217</td>
+      <td>0.071260</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">foo</th>
+      <th>one</th>
+      <td>-1.142268</td>
+      <td>-2.606413</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1.119145</td>
+      <td>0.109402</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">qux</th>
+      <th>one</th>
+      <td>-0.504167</td>
+      <td>-1.703280</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1.064976</td>
+      <td>1.011060</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>위 데이터는 stack()을 하면 A, B 컬럼이 MultiIndex 로 추가되며 A, B 컬럼 데이터 포인트가 배치된다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.stack()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>first  second   
+bar    one     A   -1.301694
+               B   -0.013259
+       two     A   -0.197846
+               B    0.879890
+baz    one     A    0.718211
+               B   -0.739434
+       two     A   -0.140217
+               B    0.071260
+foo    one     A   -1.142268
+               B   -2.606413
+       two     A    1.119145
+               B    0.109402
+qux    one     A   -0.504167
+               B   -1.703280
+       two     A    1.064976
+               B    1.011060
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2 = df[:<span class="number">4</span>]</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-1.301694</td>
+      <td>-0.013259</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.197846</td>
+      <td>0.879890</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>0.718211</td>
+      <td>-0.739434</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.140217</td>
+      <td>0.071260</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stacked = df2.stack()</span><br><span class="line">stacked</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>first  second   
+bar    one     A   -1.301694
+               B   -0.013259
+       two     A   -0.197846
+               B    0.879890
+baz    one     A    0.718211
+               B   -0.739434
+       two     A   -0.140217
+               B    0.071260
+dtype: float64
+</code></pre>
+<p>Unstack</p>
+<p><img src='https://pandas.pydata.org/docs/_images/reshaping_unstack.png'> <a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/user_guide/reshaping.html">pandas reshaping</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stacked</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>first  second   
+bar    one     A   -1.301694
+               B   -0.013259
+       two     A   -0.197846
+               B    0.879890
+baz    one     A    0.718211
+               B   -0.739434
+       two     A   -0.140217
+               B    0.071260
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stacked.unstack()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-1.301694</td>
+      <td>-0.013259</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.197846</td>
+      <td>0.879890</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>0.718211</td>
+      <td>-0.739434</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.140217</td>
+      <td>0.071260</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>레벨을 지정</p>
+<img src='https://pandas.pydata.org/docs/_images/reshaping_unstack_1.png'>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stacked.unstack(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>second</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>A</th>
+      <td>-1.301694</td>
+      <td>-0.197846</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>-0.013259</td>
+      <td>0.879890</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>A</th>
+      <td>0.718211</td>
+      <td>-0.140217</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>-0.739434</td>
+      <td>0.071260</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stacked.unstack(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-1.301694</td>
+      <td>-0.013259</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.197846</td>
+      <td>0.879890</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>0.718211</td>
+      <td>-0.739434</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.140217</td>
+      <td>0.071260</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Melt"><a href="#Melt" class="headerlink" title="Melt"></a>Melt</h1><p>melt() 는 ID 변수를 기준으로 원래 데이터셋에 있던 여러개의 칼럼 이름을 ‘variable’ 칼럼에 위에서 아래로 길게 쌓아놓고, ‘value’ 칼럼에 ID와 variable에 해당하는 값을 넣어주는 식으로 데이터를 재구조화합니다.  </p>
+<img src='https://pandas.pydata.org/docs/_images/reshaping_melt.png'>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cheese = pd.DataFrame(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;first&quot;</span>: [<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Mary&quot;</span>],</span><br><span class="line">        <span class="string">&quot;last&quot;</span>: [<span class="string">&quot;Doe&quot;</span>, <span class="string">&quot;Bo&quot;</span>],</span><br><span class="line">        <span class="string">&quot;height&quot;</span>: [<span class="number">5.5</span>, <span class="number">6.0</span>],</span><br><span class="line">        <span class="string">&quot;weight&quot;</span>: [<span class="number">130</span>, <span class="number">150</span>],</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">cheese</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>first</th>
+      <th>last</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>5.50</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>6.00</td>
+      <td>150</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># colums중 height, weight 를 row 로 융합</span></span><br><span class="line">cheese.melt(id_vars=[<span class="string">&#x27;first&#x27;</span>,<span class="string">&#x27;last&#x27;</span>]) <span class="comment"># first, last 인덱스로 나머지 컬럼은 value 로 치환</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>first</th>
+      <th>last</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>height</td>
+      <td>5.50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>height</td>
+      <td>6.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>weight</td>
+      <td>130.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>weight</td>
+      <td>150.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cheese.melt(id_vars=[<span class="string">&#x27;first&#x27;</span>,<span class="string">&#x27;last&#x27;</span>], value_name=<span class="string">&#x27;quantity&#x27;</span>) </span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>first</th>
+      <th>last</th>
+      <th>variable</th>
+      <th>quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>height</td>
+      <td>5.50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>height</td>
+      <td>6.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>weight</td>
+      <td>130.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>weight</td>
+      <td>150.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.stack.html">pandas.DataFrame.stack</a></li>
+</ol>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-09T17:00:00.000Z" title="7/10/2023, 2:00:00 AM">2023-07-10</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-09T17:08:01.148Z" title="7/10/2023, 2:08:01 AM">2023-07-10</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">7분안에 읽기 (약 1027 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/pandas-numpy-display_format-5e6e2759a37b/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><div class="content"><p>numpy 와 pandas 에서 수를 출력할 때 형식, 크기 및 범위를 설정할 수 있다. 간단히 보면 아래 테이블 같이 형식을 바꿔준다.</p>
 <table>
 <thead>
 <tr>
@@ -700,104 +1892,7 @@
 
 <p>Anaconda 로 지정한 로컬 디렉토리로 이동하면 해당 파이썬 환경이 사용된다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base) qkboo@desktop-goyangi:~/Jupyter-ML$ pyenv which python</span><br><span class="line">/home/qkboo/.pyenv/versions/anaconda3-2021.05/bin/python</span><br></pre></td></tr></table></figure>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-07T00:00:00.000Z" title="9/7/2021, 9:00:00 AM">2021-09-07</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-05-12T07:39:30.831Z" title="5/12/2023, 4:39:30 PM">2023-05-12</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">11분안에 읽기 (약 1684 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/pyenv_3Venv_Anaconda-3193bd01844a/">pyenv 와 Anaconda 병행 사용</a></p><div class="content"><h1 id="PyEnv-Anaconda"><a href="#PyEnv-Anaconda" class="headerlink" title="PyEnv + Anaconda"></a>PyEnv + Anaconda</h1><p>개발환경은</p>
-<ul>
-<li>Ubuntu 16.04 or later</li>
-<li>Windows 7 or later</li>
-<li>macOS 10.12.6 (Sierra) or later (no GPU support)</li>
-<li>Raspbian 9.0 or later</li>
-</ul>
-<p>pyenv 와 pyenv-virtualenv 기반으로 Anaconda 를 사용하려고 한다. pyenv로 배포본을 관리를 하고, pyenv-virtualenv와 conda 환경의 가상환경을 이용한다.</p>
-<ol>
-<li>pyenv-Anaconda 환경</li>
-</ol>
-<ul>
-<li>ananconda 와 miniconda</li>
-</ul>
-<ol start="2">
-<li><a href="#2.-anaconda-&-miniconda-%EB%B3%B5%ED%95%A9%ED%99%98%EA%B2%BD">anaconda &amp; miniconda 복합환경</a></li>
-</ol>
-<hr>
-<h1 id="1-pyenv-Anaconda-설치"><a href="#1-pyenv-Anaconda-설치" class="headerlink" title="1. pyenv - Anaconda 설치"></a>1. pyenv - Anaconda 설치</h1><p>설치할 anaconda 버전을 확이한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install -l |grep anaconda</span><br></pre></td></tr></table></figure>
-
-<p>anaconda 를 설치한다 - 시간이 많이 걸린다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install anaconda3-5.3.1</span><br><span class="line">Downloading Anaconda3-5.3.1-MacOSX-x86_64.sh.sh...</span><br><span class="line">-&gt; https://repo.continuum.io/archive/Anaconda3-5.3.1-MacOSX-x86_64.sh</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>anaconda3-5.3.1 버전을 전역에서 사용하도록 한다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv global anaconda3-5.3.1</span><br></pre></td></tr></table></figure>
-
-<p>global로 지정하고 버전을 확인해 보면</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv versions</span><br><span class="line">  system</span><br><span class="line">  3.8.1</span><br><span class="line">* anaconda3-5.3.1 (<span class="built_in">set</span> by /Users/qkboo/.pyenv/version)</span><br></pre></td></tr></table></figure>
-
-<p>일반적으로 Anaconda 만을 사용한다면 설치후 사용자 쉘 환경에서 conda 를 사용하기 위해서 환경변수를 초기화 해야 하는데 다음 명령으로 실행한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ conda init bash</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/condabin/conda</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/bin/conda</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/bin/conda-env</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/bin/activate</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/bin/deactivate</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/etc/profile.d/conda.sh</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/etc/fish/conf.d/conda.fish</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/shell/condabin/Conda.psm1</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/shell/condabin/conda-hook.ps1</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/xontrib/conda.xsh</span><br><span class="line">no change     /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/etc/profile.d/conda.csh</span><br><span class="line">modified      /Users/qkboo/.bash_profile</span><br><span class="line"></span><br><span class="line">==&gt; For changes to take effect, close and re-open your current shell. &lt;==</span><br></pre></td></tr></table></figure>
-
-<p>위 명령은 아래 환경 변수가 작용해서 conda 의 가상환경을 다루는 쉘 스크립을 실행해 준다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NACONDA_HOME=/Users/who/anaconda3</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$ANACONDA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> ANACONDA_HOME</span><br><span class="line"><span class="built_in">export</span> PATH</span><br></pre></td></tr></table></figure>
-
-<p>쉘을 다시 열면 쉘 프롬프트가 변경된다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(base) qkboo@ ~$</span><br></pre></td></tr></table></figure>
-
-<h3 id="pyenv-기반-Anaconda-사용"><a href="#pyenv-기반-Anaconda-사용" class="headerlink" title="pyenv 기반 Anaconda 사용"></a>pyenv 기반 Anaconda 사용</h3><p>그런데 pyenv 에서 다른 배포본과 Ananconda 를 같이 사용한다면 conda 초기 환경이 아주 불편할 수 있어서 아래 같이 conda 가상환경 시작을 불가능하게 해야 한다.</p>
-<p>init conda, the following command write scripts into your shell init file automatically</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda init</span><br><span class="line"></span><br><span class="line"># disable init of env &quot;base&quot;</span><br><span class="line">conda config --set auto_activate_base false</span><br></pre></td></tr></table></figure>
-
-<p>보통 conda init 를 해주면 쉘 스크립의 마지막 위치에 삽입된다. 그러므로 <code>.bash_profile</code> 에 있는 pyenv 초기화가 항상 마지막에 실행되도록 하자.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="pyenv-와-anaconda-환경의-전환-정리"><a href="#pyenv-와-anaconda-환경의-전환-정리" class="headerlink" title="pyenv 와 anaconda 환경의 전환 정리"></a>pyenv 와 anaconda 환경의 전환 정리</h4><p>Examples of managing virtual environments.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># virtual environments from pyenv</span><br><span class="line">pyenv install 3.6.9</span><br><span class="line">pyenv virtualenv 3.6.9 new-env</span><br><span class="line">pyenv activate new-env</span><br><span class="line">pyenv deactive</span><br><span class="line"># You can also use `pyenv local`</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># virtual environments from conda</span><br><span class="line">conda create -n new-env python=3.6</span><br><span class="line">conda env list</span><br><span class="line">conda activate new-env</span><br><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>anaconda 패키지와 환경관리를 할 수 있는 conda 명령어 몇가지를 소개</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 아나콘다의 버전 확인</span><br><span class="line">conda --version</span><br><span class="line"></span><br><span class="line">// 아나콘다 버전 업데이트</span><br><span class="line">conda update conda</span><br><span class="line"></span><br><span class="line">// 설치된 패키지 리스트</span><br><span class="line">conda list</span><br><span class="line"></span><br><span class="line">// conda 통해 설치 가능한 패키지 검색</span><br><span class="line">conda search <span class="string">&quot;tensorflow&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="conda에서-개발-준비하기"><a href="#conda에서-개발-준비하기" class="headerlink" title="conda에서 개발 준비하기"></a>conda에서 개발 준비하기</h3><p>Anaconda 설치가 완료되면 conda 명령으로 TensorFlow를 사용할 환경을 구성하고 사용해 보자.</p>
-<h4 id="가상환경-생성"><a href="#가상환경-생성" class="headerlink" title="가상환경 생성"></a>가상환경 생성</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ conda create -n tensorflow_env</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">The following packages will be downloaded:</span><br><span class="line"></span><br><span class="line">    package                    |            build</span><br><span class="line">    ---------------------------|-----------------</span><br><span class="line">    pip-20.0.2                 |           py37_1         1.9 MB</span><br><span class="line">    tensorboard-2.0.0          |     pyhb38c66f_1         3.3 MB</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">The following NEW packages will be INSTALLED:</span><br><span class="line"></span><br><span class="line">    _tflow_select:        2.3.0-mkl</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">Proceed ([y]/n)?</span><br></pre></td></tr></table></figure>
-
-<p>또한 <code>python=</code> 인자로 파이썬 버전을 지정할 수 있다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conda create -n tensorflow python=3.8</span><br></pre></td></tr></table></figure>
-
-<p>현재 생성한 가상환경을 확인해 보자,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base)$ conda env list</span><br><span class="line"># conda environments:</span><br><span class="line">#</span><br><span class="line">base                  *  /Users/qkboo/.pyenv/versions/anaconda3-5.3.1</span><br><span class="line">deep-learning            /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/envs/deep-learning</span><br></pre></td></tr></table></figure>
-
-<p>새로만든 conda 가상환경을 활성화 한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ conda activate tensorflow_env</span><br><span class="line">(tensorflow_env) qkboo@ ~$</span><br></pre></td></tr></table></figure>
-
-<p>가상환경에서 Jupyter Notebook 을 설치한다.</p>
-<h3 id="jupyter-notebook-설치"><a href="#jupyter-notebook-설치" class="headerlink" title="jupyter notebook 설치"></a>jupyter notebook 설치</h3><p>활성화한 가상환경에서 Jupyter Notebook 을 설치한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow_env)$ conda install jupyter notebook</span><br></pre></td></tr></table></figure>
-
-<p>필요시 nb-extension 설치</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(tensorflow_env)$ conda install -c anaconda-nb-extensions nb_conda</span><br><span class="line">Collecting package metadata (repodata.json): <span class="keyword">done</span></span><br><span class="line">Solving environment: <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Package Plan ##</span></span><br><span class="line"></span><br><span class="line">  environment location: /Users/qkboo/.pyenv/versions/anaconda3-5.3.1/envs/deep_learning</span><br><span class="line"></span><br><span class="line">  added / updated specs:</span><br><span class="line">    - nb_conda</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-anaconda-amp-miniconda-복합환경"><a href="#2-anaconda-amp-miniconda-복합환경" class="headerlink" title="2. anaconda &amp; miniconda 복합환경"></a>2. anaconda &amp; miniconda 복합환경</h1><p>현재 시스템에 pyenv로 파이썬 환경이 anaconda, miniconda 그리고 python 3.9 등이 중복되어 설치되어 있다. pyenv 가 중심이 되어 conda 를 다루기 위해서 miniconda 를 우선으로 구성되어 있다. shell 스크립트 부분이다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="line"># !! Contents within this block are managed by &#x27;conda init&#x27; !!</span><br><span class="line">__conda_setup=&quot;$(&#x27;/Users/qkboo/.pyenv/versions/miniconda3-latest/bin/conda&#x27; &#x27;shell.bash&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    eval &quot;$__conda_setup&quot;</span><br><span class="line">else</span><br><span class="line">    if [ -f &quot;/Users/qkboo/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh&quot; ]; then</span><br><span class="line">        . &quot;/Users/qkboo/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh&quot;</span><br><span class="line">    else</span><br><span class="line">        export PATH=&quot;/Users/qkboo/.pyenv/versions/miniconda3-latest/bin:$PATH&quot;</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line">unset __conda_setup</span><br><span class="line"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span><br><span class="line"></span><br><span class="line"># Pyenv</span><br><span class="line">export PYENV_ROOT=&quot;$HOME/.pyenv&quot;</span><br><span class="line">export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>현재 pyenv 로 설치한 파이썬 환경을 살펴보면,</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">qkboo@ ~$ pyenv versions</span><br><span class="line">  system</span><br><span class="line">  3.8.1</span><br><span class="line">* 3.8.7 (set by /Users/qkboo/.pyenv/version)</span><br><span class="line">  3.8.7/envs/opencv4</span><br><span class="line">  3.8.7/envs/tf2_build</span><br><span class="line">  3.9.1</span><br><span class="line">  anaconda3-5.3.1</span><br><span class="line">  anaconda3-5.3.1/envs/opencv3</span><br><span class="line">  anaconda3-5.3.1/envs/opencv4</span><br><span class="line">  anaconda3-5.3.1/envs/py27</span><br><span class="line">  miniconda3-latest</span><br><span class="line">  miniconda3-latest/envs/deep_learning</span><br><span class="line">  miniconda3-latest/envs/django3</span><br><span class="line">  miniconda3-latest/envs/tf24_cpu</span><br><span class="line">  miniconda3-latest/envs/tf2_p37</span><br><span class="line">  miniconda3-latest/envs/tkinter</span><br><span class="line">  opencv4</span><br><span class="line">  tf2_build</span><br></pre></td></tr></table></figure>
-
-<p>conda 툴을 사용하는 anaconda, miniconda 가 혼재된 환경에서 pyenv로 가상환경을 즉시 활성화 시키면 conda 명령 실행에 혼선을 일으킨다. 예를 들어 위의 가상환경 <strong>anaconda3-5.3.1&#x2F;envs&#x2F;opencv4</strong> 을 pyenv로 활성화 하고 python, conda 명령을 실행해 보면</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">pyenv shell opencv4</span></span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">pyenv version</span></span><br><span class="line">opencv4 (set by PYENV_VERSION environment variable)</span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash"><span class="built_in">which</span> python</span></span><br><span class="line">/Users/qkboo/.pyenv/shims/python</span><br></pre></td></tr></table></figure>
-
-<p>가상환경의 python 위치를 확인해 보고, conda 명령을 찾아 보자,</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">pyenv <span class="built_in">which</span> python</span></span><br><span class="line">/Users/qkboo/.pyenv/versions/opencv4/bin/python</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pyenv <span class="built_in">which</span> conda</span></span><br><span class="line">pyenv: conda: command not found</span><br><span class="line"></span><br><span class="line">The `conda&#x27; command exists in these Python versions:</span><br><span class="line">  anaconda3-5.3.1</span><br><span class="line">  miniconda3-latest</span><br></pre></td></tr></table></figure>
-
-<p>pyenv 환경 아래 2개의 conda 때문에 혼선이 나타난다.</p>
-<p>예를 들어 현재 쉘 환경에서 파이썬 환경 <em>ananconda3-5.3.1</em> 을 사용하도록 하고, conda 를 확인해 보면 명확하게 해당 파이썬 환경의 anaconda 의 가상환경을 가르키지만! conda env 명령의 결과는 다르게 나타낸다.<br>anaconda 뒤에 minicond를 설치해서 miniconda 가상환경이 우선으로 나타난다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">pyenv shell anaconda3-5.3.1</span></span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">pyenv <span class="built_in">which</span> conda</span></span><br><span class="line">/Users/qkboo/.pyenv/versions/anaconda3-5.3.1/bin/conda</span><br><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">conda <span class="built_in">env</span> list</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">conda environments:</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">base                  *  /Users/qkboo/.pyenv/versions/miniconda3-latest</span></span><br><span class="line">deep_learning            /Users/qkboo/.pyenv/versions/miniconda3-latest/envs/deep_learning</span><br><span class="line">django3                  /Users/qkboo/.pyenv/versions/miniconda3-latest/envs/django3</span><br><span class="line">tf24_cpu                 /Users/qkboo/.pyenv/versions/miniconda3-latest/envs/tf24_cpu</span><br><span class="line">tf2_p37                  /Users/qkboo/.pyenv/versions/miniconda3-latest/envs/tf2_p37</span><br><span class="line">tkinter                  /Users/qkboo/.pyenv/versions/miniconda3-latest/envs/tkinter</span><br></pre></td></tr></table></figure>
-
-<p>그래서 가상환경 활성화시 가상환경 디렉토리를 지정해서 사용하자!</p>
-<p>그래서 anaconda 와 miniconda 환경을 활성화 시키려면 shell, local, system 명령을 통해 설치된 <strong>파이썬 환경</strong>을 활성화 하고, 해당 파이썬 환경에서 가상환경을 다루는 것이 좋다.</p>
-<p>예를 들어 현재 쉘 환경에서 파이썬 환경 <em>ananconda3-5.3.1</em> 을 사용하도록 실제 가상환경 위치를 지정해서 활성화 한다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~$ </span><span class="language-bash">conda activate .pyenv/versions/anaconda3-5.3.1/envs/opencv4/</span></span><br><span class="line">(opencv4) ~$</span><br></pre></td></tr></table></figure>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/tags/python/page/0/">이전</a></div><div class="pagination-next"><a href="/tags/python/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/tags/python/">1</a></li><li><a class="pagination-link" href="/tags/python/page/2/">2</a></li><li><a class="pagination-link" href="/tags/python/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">143</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">215</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gtko"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">30</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">27</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Photoshop/"><span class="level-start"><span class="level-item">Photoshop</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">71</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4883770640" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-12T10:00:00.000Z">2023-07-12</time></p><p class="title"><a href="/vscode-language-server-24eec7ce2732/">VSCode 에서 languageserver 확인</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/pandas-numpy-display_format-5e6e2759a37b/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/hexo03-icarus-install_new-17451b868f1a/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/python-packaging-start-48993e24137b/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-06-25T06:00:00.000Z">2023-06-25</time></p><p class="title"><a href="/bitbucket-ssh_key%EB%93%B1%EB%A1%9D-131a9df6053f/">bitbuket 에 SSH key 등록하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/git/">git</a></p></div></article></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.thinkbee.kr" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Thinkbee.kr</span></span><span class="level-right"><span class="level-item tag">www.thinkbee.kr</span></span></a></li></ul></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/tags/python/page/0/">이전</a></div><div class="pagination-next"><a href="/tags/python/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/tags/python/">1</a></li><li><a class="pagination-link" href="/tags/python/page/2/">2</a></li><li><a class="pagination-link" href="/tags/python/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">144</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">215</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gtko"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">30</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">27</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Photoshop/"><span class="level-start"><span class="level-item">Photoshop</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">72</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4883770640" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-12T17:00:00.000Z">2023-07-13</time></p><p class="title"><a href="/pd-Stack_Unstack_Melt-9d0bcd365efe/">Pandas - Pivot, Stack, Unstack, Melt</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-12T10:00:00.000Z">2023-07-12</time></p><p class="title"><a href="/vscode-language-server-24eec7ce2732/">VSCode 에서 languageserver 확인</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T17:00:00.000Z">2023-07-10</time></p><p class="title"><a href="/pandas-numpy-display_format-5e6e2759a37b/">Pandas/Numpy 숫자의 출력 옵션 조정</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T10:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/hexo03-icarus-install_new-17451b868f1a/">Hexo - icarus theme 설치: git기반</a></p><p class="categories"><a href="/categories/github/">github</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-07-09T00:00:00.000Z">2023-07-09</time></p><p class="title"><a href="/python-packaging-start-48993e24137b/">Python - 파이썬 프로젝트 패키징과 배포하기</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">링크</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://www.thinkbee.kr" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Thinkbee.kr</span></span><span class="level-right"><span class="level-item tag">www.thinkbee.kr</span></span></a></li></ul></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2023 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
