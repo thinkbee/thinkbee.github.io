@@ -33,7 +33,7 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">태그</a></li><li class="is-active"><a href="#" aria-current="page">jupyterlab</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-14T07:00:00.000Z" title="7/14/2023, 4:00:00 PM">2023-07-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-15T07:34:13.868Z" title="7/15/2023, 4:34:13 PM">2023-07-15</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">5분안에 읽기 (약 782 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyterlab-multiprocess_print-483b37e7a2c3/">Jupyter 기반 환경에서 Multiprocess 실행시 print 출력 차이.</a></p><div class="content"><p>jupyter notebook에서 실행하면 차일드 프로세스로 실행한 print() 로 출력하는 결과를 확인할 수 업다. print 는 std out 에 출력하도록 되어 있다. 자식 프로세스에서 print 를 호출하면 <code>spawn</code> 을 사용해서 호출되어서 출력되지 않는다.  </p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">태그</a></li><li class="is-active"><a href="#" aria-current="page">jupyterlab</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-14T07:00:00.000Z" title="7/14/2023, 4:00:00 PM">2023-07-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-15T07:53:24.628Z" title="7/15/2023, 4:53:24 PM">2023-07-15</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">7분안에 읽기 (약 999 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyterlab-multiprocess_print-483b37e7a2c3/">Jupyter 기반 환경에서 Multiprocess 실행시 print 출력 차이.</a></p><div class="content"><p>jupyter notebook에서 실행하면 차일드 프로세스로 실행한 print() 로 출력하는 결과를 확인할 수 업다. print 는 std out 에 출력하도록 되어 있다. 자식 프로세스에서 print 를 호출하면 <code>spawn</code> 을 사용해서 호출되어서 출력되지 않는다.  </p>
 <h1 id="차일드-프로세스-print-문제"><a href="#차일드-프로세스-print-문제" class="headerlink" title="차일드 프로세스 print 문제"></a>차일드 프로세스 print 문제</h1><p>아래 코드는 아주 간단하게 메인 프로세스에서 새 프로세스를 생성하고 실행한다. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    proc = Process(target=func, args=(<span class="string">&#x27;Hello multiproess&#x27;</span>,))</span><br><span class="line">    proc.start()</span><br><span class="line">    proc.join()</span><br></pre></td></tr></table></figure>
 
@@ -50,6 +50,10 @@
 </ol>
 <h1 id="해결-방법"><a href="#해결-방법" class="headerlink" title="해결 방법"></a>해결 방법</h1><ol>
 <li>메시지 버퍼가 사라지기 전에 flush 를 한다.</li>
+<li>fork 기반의 프로세스를 생성한다.</li>
+</ol>
+<h2 id="1-flush-사용"><a href="#1-flush-사용" class="headerlink" title="1. flush 사용"></a>1. flush 사용</h2><ol>
+<li>메시지 버퍼가 사라지기 전에 flush 를 한다.</li>
 </ol>
 <p>이를 해결하기 위해 모든 print 의 출력은 즉시 flush 되도록 flush&#x3D;True 옵션을 사용할 수 있다고 한다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="built_in">print</span>(msg, flush=Yes)</span><br></pre></td></tr></table></figure>
@@ -57,17 +61,36 @@
 <blockquote>
 <p>이 방법은 VS code 현재 jupyter 확장에서는 효과가 없다.</p>
 </blockquote>
-<ol start="2">
-<li>fork 기반의 프로세스를 생성한다.</li>
-</ol>
-<p>지원되는 프로세스 시작 방법은 아래 같이 확인이 가능하다. </p>
+<h3 id="flush-란"><a href="#flush-란" class="headerlink" title="flush 란?"></a>flush 란?</h3><p>std io 의 버퍼 처리 흐름은 글 <a target="_blank" rel="noopener" href="https://velog.io/@jinh2352/%ED%8C%8C%EC%9D%BC-IO-%EB%B2%84%ED%8D%BC%EB%A7%81">파일 I&#x2F;O 버퍼링</a> 을 살펴보고,</p>
+<img src='https://images.velog.io/images/jinh2352/post/f7beb0b1-fb84-4f74-adcf-5956f80833ab/image.png' width=550>
+
+
+<p>python에서 print 같은 표준 출력의 flush에 대해서 이글 <a target="_blank" rel="noopener" href="https://www.msdotnet.co.in/2020/04/print-function-in-python-language-with.html"></a> 의 그림을 참고한다.</p>
+<img src='https://1.bp.blogspot.com/-UrjeTkA4kVA/XpcsMVPBIHI/AAAAAAAAHRg/EDERNZm9L4MIEWEtyIiJ42par-sIChx3wCLcBGAsYHQ/s640/FLUSH%2BIN%2BPYTHON.JPG' width=550>
+
+
+<h2 id="2-fork-기반의-프로세스를-생성한다"><a href="#2-fork-기반의-프로세스를-생성한다" class="headerlink" title="2. fork 기반의 프로세스를 생성한다."></a>2. fork 기반의 프로세스를 생성한다.</h2><p>지원되는 프로세스 시작 방법은 아래 같이 확인이 가능하다. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line"></span><br><span class="line">mp.get_start_method()       <span class="comment"># 현재 start 메서드</span></span><br><span class="line">mp.get_all_start_methods()  <span class="comment"># 모든 start 메서드</span></span><br></pre></td></tr></table></figure>
 
 <p>아래 같이 start method 를 <code>fork</code> 로 강제 사용할 수 있다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing <span class="keyword">as</span> mp</span><br><span class="line"></span><br><span class="line">mp.set_start_method(<span class="string">&#x27;fork&#x27;</span>)       <span class="comment"># 현재 start 메서드</span></span><br></pre></td></tr></table></figure>
 
-<p>브라우저 기반의 jupyter 실행환경은  <code>&#39;fork&#39;, &#39;spawn&#39;, &#39;forkserver&#39;</code> 를 모두 가능하다.</p>
-<p>하지만 현재 VS code 의 jupyter 확장은 에서는 <code>spawn</code> 만 지원하고 있다.</p>
+<p>브라우저 기반의 jupyter 실행환경은  <code>&#39;fork&#39;, &#39;spawn&#39;, &#39;forkserver&#39;</code> 를 모두 가능하다. 하지만 현재 VS code 의 jupyter 확장은 에서는 <code>spawn</code> 만 지원하고 있다.</p>
+<h2 id="fork-spawn"><a href="#fork-spawn" class="headerlink" title="fork, spawn"></a>fork, spawn</h2><p>링크 <a href="#footnote2">침고2</a> 에 있는 글에서 Fork, Spawn 에 대한 설명을 읽어보자.</p>
+<p>Forking</p>
+<ul>
+<li>포크한 부모 프로세스의 이미지를 그래도 사용한다.</li>
+</ul>
+<img src='https://d33wubrfki0l68.cloudfront.net/8c3a4605e6d501f6a448faafd71cd2047d9d2e07/b9b18/blog/assets/2019-11-13-python-forkserver-preload/python-forkserver-0.png' width=550>
+
+
+<p>Spwaning</p>
+<ul>
+<li>포크한 부모 프로세스와 다르게 새 이미지로 갱신한다.</li>
+</ul>
+<img src='https://d33wubrfki0l68.cloudfront.net/8d5e9dd98d91090aeecb72cf9e956b3afe679fd6/3b168/blog/assets/2019-11-13-python-forkserver-preload/python-forkserver-1.png' width=500>
+
+
 <h1 id="sleep-으로-지연하면"><a href="#sleep-으로-지연하면" class="headerlink" title="sleep 으로 지연하면?"></a>sleep 으로 지연하면?</h1><p>VS code 환경에서 아래 같이 sleep 으로 지연을 주어 봤지만 해결이 안된다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">msg</span>):</span><br><span class="line">    <span class="built_in">print</span>(msg, flush=<span class="literal">True</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    proc = mp.Process(target=func, args=(<span class="string">&#x27;Hello multiproess&#x27;</span>,))</span><br><span class="line">    proc.start()</span><br><span class="line">    proc.join()</span><br></pre></td></tr></table></figure>
 
@@ -86,6 +109,8 @@
 <p>만약 VS code 에서 Multiprocess 디버깅시 다른 logger 라이브러리 등을 이용해야 할 것 같다.</p>
 <hr>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a name='footnote1'>참고1</a> :  <a target="_blank" rel="noopener" href="https://superfastpython.com/multiprocessing-print/">How to print() from a Child Process in Python</a></p>
+<p><a name='footnote2'>참고2</a> : <a target="_blank" rel="noopener" href="https://sunyzero.tistory.com/191">fork, vfork 그리고 posix_spawn 이야기</a></p>
+<p><a name='footnote2'>참고3</a> : <a target="_blank" rel="noopener" href="https://bnikolic.co.uk/blog/python/parallelism/2019/11/13/python-forkserver-preload.html">foring, spawning 이미지</a></p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-12T10:00:00.000Z" title="7/12/2023, 7:00:00 PM">2023-07-12</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-12T17:37:18.317Z" title="7/13/2023, 2:37:18 AM">2023-07-13</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">2분안에 읽기 (약 354 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/vscode-language-server-24eec7ce2732/">VSCode 에서 languageserver 확인</a></p><div class="content"><p>VS Code에서 Jupyterlab 3.x를 사용하는데 classic jupyter notebook 에서 가능하던 content assistance 기능이 작동을 하지 않았다. </p>
 <h1 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h1><p>Jupyterlab, classic jupyter notebook 에서 가능하던 content assistance 기능으로 속성&#x2F;모듈&#x2F;함수&#x2F;도움말 등의 지원이 가능했다.</p>
 <ul>
