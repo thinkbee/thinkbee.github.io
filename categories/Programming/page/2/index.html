@@ -46,7 +46,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error readable-stream@4.3.0: The engine &quot;node&quot; is incompatible with this module. Expected version &quot;^12.22.0 || ^14.17.0 || &gt;=16.0.0&quot;. Got &quot;14.15.0&quot;</span><br><span class="line">error Found incompatible module.</span><br></pre></td></tr></table></figure>
 
 <p><u>nodejs 버전을 업그레이드</u> 하고 빌드를 수행하니 잘 된다.</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T00:00:00.000Z" title="5/14/2023, 9:00:00 AM">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-15T21:10:03.034Z" title="7/16/2023, 6:10:03 AM">2023-07-16</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">6분안에 읽기 (약 960 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/mysql-admin-cli-c4134cfe1788/">MySqLI CLI 주요 명령</a></p><div class="content"><p>mysql CLI 에서 사용하는 관리자 명령을 요약한다. create user, grant, drop, delete, remove</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T00:00:00.000Z" title="5/14/2023, 9:00:00 AM">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-16T11:42:05.282Z" title="7/16/2023, 8:42:05 PM">2023-07-16</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">7분안에 읽기 (약 1035 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/mysql-admin-cli-c4134cfe1788/">MySqLI CLI 주요 명령</a></p><div class="content"><p>mysql CLI 에서 사용하는 관리자 명령을 요약한다. create user, grant, drop, delete, remove</p>
 <h1 id="MySqLI-CLI-Client-로-접속하기"><a href="#MySqLI-CLI-Client-로-접속하기" class="headerlink" title="MySqLI CLI Client 로 접속하기"></a>MySqLI CLI Client 로 접속하기</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql [-h서버] -u아이디 -p 데이터베이스명</span><br></pre></td></tr></table></figure>
 
 
@@ -115,14 +115,22 @@
 <h2 id="사용자-추가"><a href="#사용자-추가" class="headerlink" title="사용자 추가"></a>사용자 추가</h2><p>사용자를 생성시 호스트 주소에 ‘%’, ‘localhost’로 호스트 범위를 지정한다</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
 
-<h2 id="grant-명령-권한-부여"><a href="#grant-명령-권한-부여" class="headerlink" title="grant 명령: [권한 부여]"></a>grant 명령: <strong>[권한 부여]</strong></h2><p>사용자가 특정 자원에 접근하기 위해서  grant 명령 사용</p>
-<p>사용자가 접근할 수 있는 스키마 범위를 grant 명령으로 지정한다. 아래는 userid 사용자가 특정 sampledb 에만 모든 권한을 부여하고 있다.</p>
+<h2 id="grant-명령-권한-부여"><a href="#grant-명령-권한-부여" class="headerlink" title="grant 명령: [권한 부여]"></a>grant 명령: <strong>[권한 부여]</strong></h2><p>사용자가 특정 자원에 접근하기 위해서  grant 명령 사용.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> DB이름.테이블이름 <span class="keyword">TO</span> 아이디@호스트 IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;비밀번호&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> option;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ALL PRIVILEGES : 모든 권한 추가 </li>
+<li>SELECT, INSERT, UPDATE, DELETE, … : 권한을 일부분을 추가 </li>
+<li>with grant option : GRANT를 사용할 수 있는 권한 추가</li>
+</ul>
+<p>아래는 userid 사용자가 특정 sampledb 에만 모든 권한을 부여하고 있다.</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> sampledb.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">mysql<span class="operator">&gt;</span> FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
 
-<p>다음 GRANT 명령에서 <code>ALL PRIVILEGES ON *.*</code> 는  모든 권한(ALL PRIVILEGES)을 모든 스카마의 모든 테이블 <code>*.*</code> 에 준다는 의미. <code>WITH GRANT OPTION</code> 의 의미는 다른 사용자에게 자신이 가진 권한을 주거나 회수할 수 있다는 의미.</p>
+<p>다음 GRANT 명령에서 <code>ALL PRIVILEGES ON *.*</code> 는  모든 권한(ALL PRIVILEGES)을 모든 스카마의 모든 테이블 <code>*.*</code> 에 준다는 의미. </p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">mysql<span class="operator">&gt;</span> FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-
-<p>ALL PRIVILEGES 부분에는 SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER 등 권한 명칭을 콤마로 분리해서 나열하는 방식으로 특정 권한만을 줄 수도 있다.</p>
+<ul>
+<li><code>WITH GRANT OPTION</code> 의 의미는 다른 사용자에게 자신이 가진 권한을 주거나 회수할 수 있다는 의미.</li>
+<li><code>ALL PRIVILEGES</code> 부분에는 SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER 등 권한 명칭을 콤마로 분리해서 나열하는 방식으로 특정 권한만을 줄 수도 있다.</li>
+</ul>
 <p><strong>[권한 제거]</strong></p>
 <p>권한을 없앨때는 REVOKE 명령을 사용합니다. </p>
 <p>아래 명령으로 ‘localhost’ 에서 접속가능한 ‘testdbuser’ 에게서 모든 권한을 제외한다.</p>
@@ -133,6 +141,11 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">DROP</span> <span class="keyword">USER</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 
+<h2 id="권한-조회"><a href="#권한-조회" class="headerlink" title="권한 조회"></a>권한 조회</h2><p>사용자별 권한 확인</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> <span class="string">&#x27;USERID&#x27;</span>@<span class="string">&#x27;HOST&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>접속된 계정 권한 확인</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SHOW</span> GRANTS <span class="keyword">FOR</span> <span class="built_in">CURRENT_USER</span>;</span><br></pre></td></tr></table></figure>
 
 
 <br>
