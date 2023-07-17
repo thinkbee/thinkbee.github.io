@@ -11679,6 +11679,13 @@ figure.highlight.foldable div.level-left {
   }
 }
 body {
+  background-image: url("/images/vlcsnap-2023-05-16-14h44m58s614.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+body {
   counter-reset: card;
 }
 ::selection {
