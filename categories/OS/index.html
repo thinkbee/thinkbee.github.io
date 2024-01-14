@@ -328,7 +328,7 @@
 <li><a href="/2016/12/20/raspberrypi/sdcard-usage/">SD Card 포맷 및 디스크 이미지 사용하기, qkboo</a></li>
 <li><a href="/2017/04/03/linux/2017-04-03-odroid-lvm2/">Linux LVM2,qkboo</a></li>
 </ul>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-25T06:00:00.000Z" title="1/25/2023, 3:00:00 PM">2023-01-25</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-01-14T07:03:26.576Z" title="1/14/2024, 4:03:26 PM">2024-01-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Windows/">Windows</a></span><span class="level-item">12분안에 읽기 (약 1797 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/wsl2-usage-2b45762ab581/">WSL2 잘 사용하기</a></p><div class="content"><p>WSL2 이용 Linux 사용시 쓸만한 팁</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-25T06:00:00.000Z" title="1/25/2023, 3:00:00 PM">2023-01-25</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-01-14T07:29:57.116Z" title="1/14/2024, 4:29:57 PM">2024-01-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Windows/">Windows</a></span><span class="level-item">12분안에 읽기 (약 1778 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/wsl2-usage-2b45762ab581/">WSL2 잘 사용하기</a></p><div class="content"><p>WSL2 이용 Linux 사용시 쓸만한 팁</p>
 <ol>
 <li>wsl 사용 명령</li>
 <li>WSL 쉘 사용</li>
@@ -344,14 +344,11 @@
 <figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Restart-Service</span> LxssManager</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="wsl-종료"><a href="#wsl-종료" class="headerlink" title="wsl 종료"></a>wsl 종료</h4><p>하위 시스템 배포본을 지정해 종료한다.</p>
+<h4 id="wsl-종료"><a href="#wsl-종료" class="headerlink" title="wsl 종료"></a>wsl 종료</h4><p>하위 시스템 배포본을 지정해 종료하려면 <code>-t &lt;Distro&gt;</code> 명령을 사용한다.</p>
 <figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; wsl <span class="literal">-l</span></span><br><span class="line">Ubuntu<span class="literal">-20</span>.<span class="number">04</span>(기본값)</span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span>&gt; wsl <span class="literal">-t</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span></span><br></pre></td></tr></table></figure>
 
 
-<h4 id="wsl-shutdown"><a href="#wsl-shutdown" class="headerlink" title="wsl shutdown"></a>wsl shutdown</h4><p>특정 하위 시스템을 종료 시키려면 <code>--shutdown</code> 명령을 사용한다.</p>
-<figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; wsl <span class="literal">-t</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span> <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
-
-<p>모든 하위 시스템을 종료 시키려면 <code>--shutdown</code> 명령을 사용한다. <code>--shutdown</code> 명령은 실행 중인 모든 배포과 WSL 2 경량 유틸리티 가상 머신을 즉시 종료한다.</p>
+<h4 id="wsl-shutdown"><a href="#wsl-shutdown" class="headerlink" title="wsl shutdown"></a>wsl shutdown</h4><p>모든 하위 시스템을 종료 시키려면 <code>--shutdown</code> 명령을 사용한다. <code>--shutdown</code> 명령은 실행 중인 모든 배포과 WSL 2 경량 유틸리티 가상 머신을 즉시 종료한다.</p>
 <figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; wsl <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="Unregister"><a href="#Unregister" class="headerlink" title="Unregister"></a>Unregister</h4><p>Window store 에서 설치한 배포본을 삭제해도 wsl 의 Distro 목록에는 남아 있다. 이것은 <code>--unregistre</code> 명령으로 제거할 수 있다.</p>
