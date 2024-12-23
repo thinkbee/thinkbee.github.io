@@ -460,7 +460,7 @@
 <p>서버에도 클라이언트와 동일하게 <code>ssh-keygen</code> 명령으로 비밀키와 공개키를 생성한다.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(SERVER)$ ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;USER@server&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>scp -i <del>&#x2F;Documents&#x2F;ncloud-key&#x2F;qkbooo-ncloud.pem ~&#x2F;.ssh&#x2F;id_rsa.pub <a href="mailto:&#114;&#x6f;&#111;&#x74;&#64;&#50;&#x31;&#x30;&#x2e;&#x38;&#x39;&#x2e;&#x31;&#x39;&#48;&#x2e;&#x31;&#x37;&#51;">&#114;&#x6f;&#111;&#x74;&#64;&#50;&#x31;&#x30;&#x2e;&#x38;&#x39;&#x2e;&#x31;&#x39;&#48;&#x2e;&#x31;&#x37;&#51;</a>:</del>&#x2F; -p 2525</p>
+<p>scp -i <del>&#x2F;Documents&#x2F;ncloud-key&#x2F;qkbooo-ncloud.pem ~&#x2F;.ssh&#x2F;id_rsa.pub <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#x32;&#49;&#48;&#x2e;&#56;&#57;&#46;&#x31;&#x39;&#x30;&#46;&#x31;&#55;&#x33;">&#x72;&#x6f;&#x6f;&#116;&#64;&#x32;&#49;&#48;&#x2e;&#56;&#57;&#46;&#x31;&#x39;&#x30;&#46;&#x31;&#55;&#x33;</a>:</del>&#x2F; -p 2525</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh userid@SERVER</span><br><span class="line">(SERVER) $ <span class="built_in">cat</span> client.pub &gt;&gt; .ssh/authorized_keys; <span class="built_in">rm</span> client.pub</span><br></pre></td></tr></table></figure>
 
 <h2 id="포트변경-사용"><a href="#포트변경-사용" class="headerlink" title="포트변경 사용"></a>포트변경 사용</h2><h4 id="rsync-포트-사용"><a href="#rsync-포트-사용" class="headerlink" title="rsync 포트 사용"></a>rsync 포트 사용</h4><p>rsync에서 다른 ssh 포트를 사용하고 있을 경우 아래와 같이 옵션을 붙여준다.</p>
