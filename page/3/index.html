@@ -33,7 +33,353 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-23T01:00:00.000Z" title="12/23/2024, 10:00:00 AM">2024-12-23</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-12-23T14:36:49.756Z" title="12/23/2024, 11:36:49 PM">2024-12-23</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a></span><span class="level-item">35분안에 읽기 (약 5197 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Image_Segmentation-4f9d5782ee2d/">[요약] Image Segmentation</a></p><div class="content"><p>Image Segmentation:</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-01-31T00:00:00.000Z" title="1/31/2025, 9:00:00 AM">2025-01-31</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-02-12T04:55:28.299Z" title="2/12/2025, 1:55:28 PM">2025-02-12</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">한 시간안에 읽기 (약 7012 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llama_billossom_rtx3080ti-e816dc0fd375/">Local LLM 실험: llama-3-Korean-Bllossom-8B, RTX 3080 TI</a></p><div class="content"><p>RTX 3080TI 를 사용해서 LLM 모델을 Local 로 돌려보고 있다. </p>
+<p>wikidoc 의 <a target="_blank" rel="noopener" href="https://wikidocs.net/226033">https://wikidocs.net/226033</a> 질문지와 2~3개 질문을 추가해서 진행했다.</p>
+<p>시스템 사양</p>
+<ul>
+<li>AMD Ryzen 7 5800X3D</li>
+<li>RAM 64GB</li>
+<li>RTX 3080 TI</li>
+</ul>
+<br>
+
+<h1 id="llama-3-Korean-Bllossom-8B"><a href="#llama-3-Korean-Bllossom-8B" class="headerlink" title="llama-3-Korean-Bllossom-8B"></a>llama-3-Korean-Bllossom-8B</h1><p><a target="_blank" rel="noopener" href="https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B">https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B</a></p>
+<h3 id="누구"><a href="#누구" class="headerlink" title="누구?"></a>누구?</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">누구냐 너</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">안녕하세요! 저는 인공지능이므로 실제 인물이 아니에요. 제가 제공할 수 있는 정보와 도움을 주기 위해 만들어졌어요. 어떤 질문이나 도움이 필요하신가요?</span><br></pre></td></tr></table></figure>
+
+
+
+<p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">니가 이해할 수 있는 언어는 어떠 언어들이야?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">저는 다양한 언어로 커뮤니케이션을 할 수 있어요. 주요 언어로는 영어, 한국어, 일본어, 중국어, 스페인어, 프랑스어 등이 있어요. 다른 언어로 질문이 있으시면, 해당 언어로 대화할 수 있도록 최선을 다해 드리겠습니다.</span><br></pre></td></tr></table></figure>
+
+
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 221 | processing task</span><br><span class="line">slot update_slots: id  0 | task 221 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 334</span><br><span class="line">slot update_slots: id  0 | task 221 | kv cache rm [310, end)</span><br><span class="line">slot update_slots: id  0 | task 221 | prompt processing progress, n_past = 334, n_tokens = 24, progress = 0.071856</span><br><span class="line">slot update_slots: id  0 | task 221 | prompt done, n_past = 334, n_tokens = 24</span><br><span class="line">slot      release: id  0 | task 221 | stop processing: n_past = 404, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 221 |</span><br><span class="line">prompt eval time =     734.61 ms /    24 tokens (   30.61 ms per token,    32.67 tokens per second)</span><br><span class="line">       eval time =    8394.14 ms /    71 tokens (  118.23 ms per token,     8.46 tokens per second)</span><br><span class="line">      total time =    9128.75 ms /    95 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="데이터"><a href="#데이터" class="headerlink" title="데이터"></a>데이터</h3><p>질문:</p>
+<p> “언제까지의 데이터를 학습했지?”</p>
+<p>답:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">저는 2021년 5월까지의 데이터를 학습했어요. 이 데이터는 인공지능의 학습에 사용되는 정보로, 그 이후에 일어난 사건이나 정보는 학습되지 않았습니다. 다른 정보나 도움이 필요하신가요?</span><br></pre></td></tr></table></figure>
+
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 221 | processing task</span><br><span class="line">slot update_slots: id  0 | task 221 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 334</span><br><span class="line">slot update_slots: id  0 | task 221 | kv cache rm [310, end)</span><br><span class="line">slot update_slots: id  0 | task 221 | prompt processing progress, n_past = 334, n_tokens = 24, progress = 0.071856</span><br><span class="line">slot update_slots: id  0 | task 221 | prompt done, n_past = 334, n_tokens = 24</span><br><span class="line">slot      release: id  0 | task 221 | stop processing: n_past = 404, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 221 |</span><br><span class="line">prompt eval time =     734.61 ms /    24 tokens (   30.61 ms per token,    32.67 tokens per second)</span><br><span class="line">       eval time =    8394.14 ms /    71 tokens (  118.23 ms per token,     8.46 tokens per second)</span><br><span class="line">      total time =    9128.75 ms /    95 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="창조능력"><a href="#창조능력" class="headerlink" title="창조능력"></a>창조능력</h3><p>질문: </p>
+<p>“‘고구마’로 삼행시를 지어줘”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">고구마의 맛이 나</span><br><span class="line">고구마의 맛이 나</span><br><span class="line">고구마의 맛이 나</span><br><span class="line"></span><br><span class="line">(삼행시의 기본 형식은 한 가지만, 여러 번 반복하는 것입니다. 이 경우는 &#x27;고구마&#x27;라는 주제에 대해 한 가지만 표현해 보았습니다.)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 293 | processing task</span><br><span class="line">slot update_slots: id  0 | task 293 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 428</span><br><span class="line">slot update_slots: id  0 | task 293 | kv cache rm [404, end)</span><br><span class="line">slot update_slots: id  0 | task 293 | prompt processing progress, n_past = 428, n_tokens = 24, progress = 0.056075</span><br><span class="line">slot update_slots: id  0 | task 293 | prompt done, n_past = 428, n_tokens = 24</span><br><span class="line">slot      release: id  0 | task 293 | stop processing: n_past = 494, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 293 |</span><br><span class="line">prompt eval time =     792.08 ms /    24 tokens (   33.00 ms per token,    30.30 tokens per second)</span><br><span class="line">       eval time =    7918.76 ms /    67 tokens (  118.19 ms per token,     8.46 tokens per second)</span><br><span class="line">      total time =    8710.84 ms /    91 tokens</span><br><span class="line">srv  update_slots: all slots are idle</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="끝말잇기"><a href="#끝말잇기" class="headerlink" title="끝말잇기"></a>끝말잇기</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">끝말잇기를 하자. 내가 먼저 할게.</span><br><span class="line"></span><br><span class="line">기차</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">기차를 타고...</span><br><span class="line"></span><br><span class="line">너?</span><br><span class="line"></span><br><span class="line">&gt; 대구를 가서</span><br><span class="line"></span><br><span class="line">대구에서 물이나?</span><br><span class="line"></span><br><span class="line">&gt; 마셔볼까?</span><br><span class="line"></span><br><span class="line">마셔보자!</span><br></pre></td></tr></table></figure>
+
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 418 | processing task</span><br><span class="line">slot update_slots: id  0 | task 418 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 629</span><br><span class="line">slot update_slots: id  0 | task 418 | kv cache rm [614, end)</span><br><span class="line">slot update_slots: id  0 | task 418 | prompt processing progress, n_past = 629, n_tokens = 15, progress = 0.023847</span><br><span class="line">slot update_slots: id  0 | task 418 | prompt done, n_past = 629, n_tokens = 15</span><br><span class="line">slot      release: id  0 | task 418 | stop processing: n_past = 634, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 418 |</span><br><span class="line">prompt eval time =     468.93 ms /    15 tokens (   31.26 ms per token,    31.99 tokens per second)</span><br><span class="line">       eval time =     608.27 ms /     6 tokens (  101.38 ms per token,     9.86 tokens per second)</span><br><span class="line">      total time =    1077.20 ms /    21 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="문제-만들기1"><a href="#문제-만들기1" class="headerlink" title="문제 만들기1"></a>문제 만들기1</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">초등 국어 문제 3개 만들어줘, 힌트 정답 해설 포함</span><br></pre></td></tr></table></figure>
+
+<p>답:</p>
+<ol>
+<li>문제: “토끼가 어디 있었는지 기억해?”</li>
+</ol>
+<p>힌트: ????</p>
+<p>정답: 집에</p>
+<p>해설: 이 문제는 간단한 주장형 문제입니다. 토끼는 ‘토끼’라는 단어의 어미가 잘못된 것임을 암시하는 문제입니다.</p>
+<ol start="2">
+<li>문제: “새로운 학교에 들어간 소년이 가방에 넣은 물건은 무엇일까요?”</li>
+</ol>
+<p>힌트: ?????</p>
+<p>정답: 스무개</p>
+<p>해설: 이 문제는 단어의 의미와 관련된 문제입니다. ‘새로운 학교에 들어간 소년이 가방에 넣은 물건’이란 표현은 ‘가방’이라는 단어의 의미를 이용한 트릭입니다. ‘가방’에 들어가는 물건은 ‘사물’들로, 그 중에서도 ‘스무개’라는 단어의 의미가 일치합니다.</p>
+<ol start="3">
+<li>문제: “다음 글의 의미와 가장 잘 어울리는 단어는?”</li>
+</ol>
+<p>힌트: ????</p>
+<p>문제: “다음 글에서 제시된 문제를 해결하기 위해 필요한 가장 중요한 요소는 무엇일까요? 한 강아장이 주인에게 ‘뭘 먹었어?’라고 묻었다가, 그 주인은 ‘배가 부르면 배가 불어질 거예요’라고 대답했다.”</p>
+<p>정답: 배</p>
+<p>해설: 이 문제는 문장의 의미를 이해하고, 그 의미와 일치하는 단어를 찾는 문제입니다. 배가 부르면 배가 불어질 거예요라는 주인의 대답이 배라는 단어와 잘 어울리는 단서를 제공합니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 425 | processing task</span><br><span class="line">slot update_slots: id  0 | task 425 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 664</span><br><span class="line">slot update_slots: id  0 | task 425 | kv cache rm [634, end)</span><br><span class="line">slot update_slots: id  0 | task 425 | prompt processing progress, n_past = 664, n_tokens = 30, progress = 0.045181</span><br><span class="line">slot update_slots: id  0 | task 425 | prompt done, n_past = 664, n_tokens = 30</span><br><span class="line">slot      release: id  0 | task 425 | stop processing: n_past = 1021, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 425 |</span><br><span class="line">prompt eval time =    1001.50 ms /    30 tokens (   33.38 ms per token,    29.96 tokens per second)</span><br><span class="line">       eval time =   43976.36 ms /   358 tokens (  122.84 ms per token,     8.14 tokens per second)</span><br><span class="line">      total time =   44977.86 ms /   388 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="문제만들기2"><a href="#문제만들기2" class="headerlink" title="문제만들기2"></a>문제만들기2</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">고등학교 지구과학 문제 3개를 만들어져, 힌트, 정답과 해설을 포함해줘</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<ol>
+<li>문제:<br>“다음 중 지구의 궤도에 따라서 궤도형이 변화하는 요인은 무엇일까요?”</li>
+</ol>
+<p>힌트: ????</p>
+<p>정답: 지구의 자전 속도 변화</p>
+<p>해설: 지구의 궤도형 변화는 지구의 자전 속도 변화에 의해 발생합니다. 지구의 자전 속도가 변화하면, 지구의 자전축의 방향이 변화하여 지구의 궤도형이 변화하게 됩니다. 이로 인해 지구의 자전축이 전락하는 경우도 있습니다. 따라서 지구의 궤도형 변화는 지구의 자전 속도 변화에 의해 발생하는 요소입니다.</p>
+<ol start="2">
+<li>문제:<br>“다음 그림과 같은 형태의 지질학적 현상을 설명하는 데 필요한 요인은 무엇일까요?”</li>
+</ol>
+<p>힌트: ????</p>
+<p>[그림: 해양판이 서로 충돌하는 모습]</p>
+<p>정답: 대륙형 해양판의 충돌</p>
+<p>해설: 이 문제는 지질학적 현상을 설명하는 데 필요한 요인을 찾아야 합니다. 그림에서 볼 수 있듯이, 해양판이 서로 충돌하여 대륙 형성하는 과정을 보여주고 있습니다. 이 과정을 설명하는 데 필요한 요인은 대륙형 해양판의 충돌입니다.</p>
+<ol start="3">
+<li>문제:<br>“다음 단어들이 의미상 일치하는 것은 무엇일까요?”</li>
+</ol>
+<p>힘, 에너지, 힘, 에너지, 힘, 에너지…</p>
+<p>힌트: ????</p>
+<p>정답: 물리학</p>
+<p>해설: 이 문제는 단어들 사이의 의미 상 일치를 찾는 문제입니다. 힘과 에너지는 물리학에서 중요한 개념입니다. 물리학에서 힘과 에너지는 상호연관된 개념으로, 힘은 물체에 작용하는 외력이고, 에너지는 물체의 상태 변화를 설명하는 개념입니다. 따라서 이 단어들이 의미상 일치하는 것은 물리학입니다.</p>
+<p>(참고로, 문제에 실제 그림이나 이미지 추가가 가능합니다. 해당 문제들은 가상으로 만든 예시입니다.)</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 784 | processing task</span><br><span class="line">slot update_slots: id  0 | task 784 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1057</span><br><span class="line">slot update_slots: id  0 | task 784 | kv cache rm [934, end)</span><br><span class="line">slot update_slots: id  0 | task 784 | prompt processing progress, n_past = 1057, n_tokens = 123, progress = 0.116367</span><br><span class="line">slot update_slots: id  0 | task 784 | prompt done, n_past = 1057, n_tokens = 123</span><br><span class="line">slot      release: id  0 | task 784 | stop processing: n_past = 1525, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 784 |</span><br><span class="line">prompt eval time =     585.00 ms /   123 tokens (    4.76 ms per token,   210.26 tokens per second)</span><br><span class="line">       eval time =   59199.24 ms /   469 tokens (  126.22 ms per token,     7.92 tokens per second)</span><br><span class="line">      total time =   59784.24 ms /   592 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="판단"><a href="#판단" class="headerlink" title="판단"></a>판단</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">철수는 하루에 치킨 100마리를 튀기고 민수는 하루에 치킨 60마리를 튀긴다. 누가 더 일을 잘하지?</span><br></pre></td></tr></table></figure>
+
+<p>답:</p>
+<p>이 문제는 ‘일을 잘하는 사람’을 평가하는 기준에 따라 답이 달라질 수 있습니다. 일반적으로 일의 양을 비교하기 위해 가장 간단한 방법은, 각 사람의 일의 단위(마리, 개, …)를 기준으로 비교하는 것입니다. 따라서, 치킨의 양을 단위로 비교하면 다음과 같습니다.</p>
+<p>철수: 하루에 치킨 100마리 튀기기<br>민수: 하루에 치킨 60마리 튀기기</p>
+<p>따라서, 철수가 하루에 치킨 100마리를 튀기므로 민수보다 일을 더 많이 합니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 1254 | processing task</span><br><span class="line">slot update_slots: id  0 | task 1254 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1573</span><br><span class="line">slot update_slots: id  0 | task 1254 | kv cache rm [1462, end)</span><br><span class="line">slot update_slots: id  0 | task 1254 | prompt processing progress, n_past = 1573, n_tokens = 111, progress = 0.070566</span><br><span class="line">slot update_slots: id  0 | task 1254 | prompt done, n_past = 1573, n_tokens = 111</span><br><span class="line">slot      release: id  0 | task 1254 | stop processing: n_past = 1708, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1254 |</span><br><span class="line">prompt eval time =     535.79 ms /   111 tokens (    4.83 ms per token,   207.17 tokens per second)</span><br><span class="line">       eval time =   17555.45 ms /   136 tokens (  129.08 ms per token,     7.75 tokens per second)</span><br><span class="line">      total time =   18091.24 ms /   247 tokens</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="문장장-교정"><a href="#문장장-교정" class="headerlink" title="문장장 교정"></a>문장장 교정</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">다음 텍스트를 자연스럽게 교정해 줘.</span><br><span class="line"></span><br><span class="line">이번 장에서 여러분은 커널을 디버깅을 하는 데 있어 여러 가지 접근 방법이 있다는 것을 배웠다. 우리는 어떤 상황에서 어떤 접근 방법을 사용해야 할지 빠르게 결정할 수 있도록 그런 접근 방법들을 분류도 해봤다. 모든 도구 혹은 기법이 모든 시나리오 혹은 상황에 도움이 되지 않는다는 것이 핵심 포인트 중 하나다. 예를 들어서 KASAN 같은 강력한 메모리 체커는 개발 단계 및 유닛 테스트 단계에서는 정말 유용하지만 시스템 테스트나 제품화 단계에서는 일반적으로 사용이 불가능 하다 (다(프로덕션 커널은 디버그 커널과 달리 KASAN 사용이 비활성화 되도록 환경 설정이 되기 때문이다.)</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>이번 장에서 여러분은 커널을 디버깅하는 데 있어 여러 가지 접근 방법이 있다는 것을 배웠다. 우리는 어떤 상황에서 어떤 접근 방법을 사용해야 할지를 빠르게 결정할 수 있도록 그런 접근 방법들을 분류해봤다. 모든 도구나 기법이 모든 시나리오나 상황에 도움이 되지 않는다는 것이 핵심 포인트 중 하나다. 예를 들어, KASAN 같은 강력한 메모리 체커는 개발 단계 및 유닛 테스트 단계에서는 정말 유용하지만, 시스템 테스트나 제품화 단계에서는 일반적으로 사용이 불가능하다. (프로덕션 커널은 디버그 커널과 달리 KASAN 사용이 비활성화되도록 환경 설정이 된다.)</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 1391 | processing task</span><br><span class="line">slot update_slots: id  0 | task 1391 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1912</span><br><span class="line">slot update_slots: id  0 | task 1391 | kv cache rm [1708, end)</span><br><span class="line">slot update_slots: id  0 | task 1391 | prompt processing progress, n_past = 1912, n_tokens = 204, progress = 0.106695</span><br><span class="line">slot update_slots: id  0 | task 1391 | prompt done, n_past = 1912, n_tokens = 204</span><br><span class="line">slot      release: id  0 | task 1391 | stop processing: n_past = 2082, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1391 |</span><br><span class="line">prompt eval time =     563.75 ms /   204 tokens (    2.76 ms per token,   361.86 tokens per second)</span><br><span class="line">       eval time =   21495.76 ms /   171 tokens (  125.71 ms per token,     7.96 tokens per second)</span><br><span class="line">      total time =   22059.51 ms /   375 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="영문-번역"><a href="#영문-번역" class="headerlink" title="영문 번역"></a>영문 번역</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">We both worked with young moms who go completely dark for a few hours in the evening, when they are with their families and putting their kids to bed.</span><br><span class="line"></span><br><span class="line">위 문장을 한국어로 번역해</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>우리는 가족과 함께 아이들을 취침시키는 저녁 몇 시간 동안 완전히 어두워지는 젊은 엄마들을 함께 작업했습니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 1563 | processing task</span><br><span class="line">slot update_slots: id  0 | task 1563 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 2132</span><br><span class="line">slot update_slots: id  0 | task 1563 | kv cache rm [2082, end)</span><br><span class="line">slot update_slots: id  0 | task 1563 | prompt processing progress, n_past = 2132, n_tokens = 50, progress = 0.023452</span><br><span class="line">slot update_slots: id  0 | task 1563 | prompt done, n_past = 2132, n_tokens = 50</span><br><span class="line">slot      release: id  0 | task 1563 | stop processing: n_past = 2162, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1563 |</span><br><span class="line">prompt eval time =     492.98 ms /    50 tokens (    9.86 ms per token,   101.42 tokens per second)</span><br><span class="line">       eval time =    3919.04 ms /    31 tokens (  126.42 ms per token,     7.91 tokens per second)</span><br><span class="line">      total time =    4412.02 ms /    81 tokens</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="명령-에러-처리"><a href="#명령-에러-처리" class="headerlink" title="명령 에러 처리"></a>명령 에러 처리</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e 명령 실행 시에만 E319: Sorry, the command is not available in this version 메시지가 나온다.</span><br></pre></td></tr></table></figure>
+
+<p>답:</p>
+<img src='https://i.imgur.com/Iq9veyM.png' width=80%>
+
+
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 1595 | processing task</span><br><span class="line">slot update_slots: id  0 | task 1595 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 2203</span><br><span class="line">slot update_slots: id  0 | task 1595 | kv cache rm [2162, end)</span><br><span class="line">slot update_slots: id  0 | task 1595 | prompt processing progress, n_past = 2203, n_tokens = 41, progress = 0.018611</span><br><span class="line">slot update_slots: id  0 | task 1595 | prompt done, n_past = 2203, n_tokens = 41</span><br><span class="line">slot      release: id  0 | task 1595 | stop processing: n_past = 2594, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1595 |</span><br><span class="line">prompt eval time =     481.22 ms /    41 tokens (   11.74 ms per token,    85.20 tokens per second)</span><br><span class="line">       eval time =   51900.49 ms /   392 tokens (  132.40 ms per token,     7.55 tokens per second)</span><br><span class="line">      total time =   52381.70 ms /   433 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="지명과-특산물"><a href="#지명과-특산물" class="headerlink" title="지명과 특산물"></a>지명과 특산물</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">다음 지문을 읽고 문제에 답하시오.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">1950년 7월, 한국 전쟁 초기에 이승만 대통령은 맥아더 장군에게 유격대원들을 북한군의 후방에 침투시키는 방안을 제안했다. 이후, 육군본부는 육본직할 유격대와 육본 독립 유격대를 편성했다. 국군은 포항과 인접한 장사동 지역에 상륙작전을 수행할 부대로 독립 제1유격대대를 선정했다. 육군본부는 독립 제1유격대대에 동해안의 장사동 해안에 상륙작전을 감행하여 북한군 제2군단의 보급로를 차단하고 국군 제1군단의 작전을 유리하게 하기 위한 작전명령(육본 작명 제174호)을 하달했다. 9월 14일, 독립 제1유격대대는 부산에서 LST 문산호에 승선하여 영덕군의 장사동으로 출항했다.</span><br><span class="line"></span><br><span class="line">1950년 9월 15일, 독립 제1유격대대는 장사동 해안에 상륙을 시도하였으나 태풍 케지아로 인한 높은 파도와 안개로 인해 어려움을 겪었다. LST 문산호는 북한군의 사격과 파도로 인해 좌초되었고, 상륙부대는 09:00시경에 전원이 상륙을 완료하였다. 그 후, 15:00시경에 200고지를 점령하였고, 다양한 무기와 장비를 노획하였다. 9월 16일과 17일에는 독립 제1유격대대가 여러 위치에서 북한군과의 전투를 벌였으며, 미 구축함과의 연락 두절로 인해 추가적인 어려움을 겪었다.</span><br><span class="line"></span><br><span class="line">장사동에서 위급한 상황에 처한 독립 제1유격대대를 구출하기 위해 해군본부는 LT-1(인왕호)를 급파했으나, LST 문산호의 구출에 실패했다. 해군본부는 상륙부대의 철수를 지원하기 위해 LST 조치원호를 현지로 보냈다. 9월 18일, 이명흠 부대장은 유엔 해군과의 협력 하에 부족한 식량과 탄약 지원을 받았다. 9월 19일, 유엔군의 함포지원과 함께 LST 조치원호가 도착하여 철수 작전을 시작했다. 스피어 소령은 직접 해안에 상륙하여 구조작전을 지시하였다. 9월 20일, 725명이 부산항으로 복귀했으나, 32명이 장사동 해안에 남아 북한군의 포로가 되었거나 탈출하여 국군에 합류하였다.</span><br><span class="line"></span><br><span class="line">장사리 전투가 인천 상륙작전의 양동작전으로 알려졌으나, 이 전투가 드라마틱한 요소로 인해 과장되었으며, 실제로는 인천 상륙작전과 큰 관련이 없다. 또한, 북한이나 중국의 군사적 상황을 고려할 때, 장사리에서의 전투가 낙동강 전선에 영향을 끼칠 가능성은 낮다.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">문제</span><br><span class="line">1. 지문에 나오는 지명을 모두 쓰시오.</span><br><span class="line">2. 그중 대게로 유명한 곳은?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<ol>
+<li><p>지명:</p>
+<ul>
+<li>포항</li>
+<li>장사동</li>
+<li>부산</li>
+<li>영덕군</li>
+<li>부산항</li>
+<li>인천</li>
+<li>장사리</li>
+<li>낙동강</li>
+</ul>
+</li>
+<li><p>대게로 유명한 곳:</p>
+<ul>
+<li>장사동</li>
+</ul>
+</li>
+</ol>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 1988 | processing task</span><br><span class="line">slot update_slots: id  0 | task 1988 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 3380</span><br><span class="line">slot update_slots: id  0 | task 1988 | kv cache rm [2594, end)</span><br><span class="line">slot update_slots: id  0 | task 1988 | prompt processing progress, n_past = 3380, n_tokens = 786, progress = 0.232544</span><br><span class="line">slot update_slots: id  0 | task 1988 | prompt done, n_past = 3380, n_tokens = 786</span><br><span class="line">slot      release: id  0 | task 1988 | stop processing: n_past = 3443, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1988 |</span><br><span class="line">prompt eval time =    1318.08 ms /   786 tokens (    1.68 ms per token,   596.32 tokens per second)</span><br><span class="line">       eval time =    8644.67 ms /    64 tokens (  135.07 ms per token,     7.40 tokens per second)</span><br><span class="line">      total time =    9962.75 ms /   850 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="강수량과-그-영향"><a href="#강수량과-그-영향" class="headerlink" title="강수량과 그 영향"></a>강수량과 그 영향</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">겨울철 강수량이 그 다음 해의 농수산물 수확량에 미치는 영향은?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>겨울철 강수량은 그 다음 해의 농수산물 수확량에 미치는 영향은 크게 두 가지로 나눌 수 있습니다:</p>
+<ol>
+<li><p><strong>영양 공급</strong>:</p>
+<ul>
+<li>겨울철 강수량이 충분하면 토양의 수분 상태가 안정되며, 봄철 심화 작업을 할 때 필요한 물이 충분히 공급됩니다. 이는 식물의 성장에 필요한 수분과 영양분을 보다 충분히 공급할 수 있습니다. 이는 특히 겨울철에 고정산(예: 사탕수수, 벼)을 심는 경우에서 중요합니다.</li>
+</ul>
+</li>
+<li><p><strong>병해충 관리</strong>:</p>
+<ul>
+<li>충분한 강수량은 병해충의 번식과 생장에 영향을 미칩니다. 예를 들어, 많은 병해충이 건조한 상태에서 번식하게 되므로, 겨울철 강수량이 충분하면 병해충의 발병이 줄어들 수 있습니다. 이는 작물의 수확량과 질을 보다 높이는 데 도움이 됩니다.</li>
+</ul>
+</li>
+</ol>
+<p>그러나, 너무 많은 강수량은 문제를 일으킬 수도 있습니다. 과도한 강수량은 토양의 유실을 유발할 수 있으며, 이는 농작물의 성장에 부정적인 영향을 미칠 수 있습니다. 따라서, 농업 생산성에 긍정적인 영향을 미치는 적절한 강수량이 필요한 것입니다.</p>
+<p>따라서, 겨울철 강수량은 그 다음 해의 농수산물 수확량에 긍정적인 영향을 미칠 수 있지만, 과도한 강수량은 부정적인 영향을 미칠 수 있습니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 2053 | processing task</span><br><span class="line">slot update_slots: id  0 | task 2053 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 3477</span><br><span class="line">slot update_slots: id  0 | task 2053 | kv cache rm [3443, end)</span><br><span class="line">slot update_slots: id  0 | task 2053 | prompt processing progress, n_past = 3477, n_tokens = 34, progress = 0.009779</span><br><span class="line">slot update_slots: id  0 | task 2053 | prompt done, n_past = 3477, n_tokens = 34</span><br><span class="line">slot      release: id  0 | task 2053 | stop processing: n_past = 3840, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 2053 |</span><br><span class="line">prompt eval time =     536.93 ms /    34 tokens (   15.79 ms per token,    63.32 tokens per second)</span><br><span class="line">       eval time =   50936.36 ms /   364 tokens (  139.94 ms per token,     7.15 tokens per second)</span><br><span class="line">      total time =   51473.29 ms /   398 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="라니냐-발생-가능성"><a href="#라니냐-발생-가능성" class="headerlink" title="라니냐 발생 가능성"></a>라니냐 발생 가능성</h3><p>질문: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024년 겨울에 라니냐가 발생할 수 있을것 같아?</span><br></pre></td></tr></table></figure>
+
+
+<p>답: 중단됨</p>
+<p>2024년 겨울에 라니냐(La Niña)가 발생할 가능성이 있는지에 대한 예측은 현재로서는 불확실합니다. 라니냐는 태평양 남부의 수온과 대기 압력 패턴이 특정한 방식으로 변형되는 현상으로, 전 세계 기후와 기상 조건에 영향을 미칩니다. 이러한 현상은 전 세계적으로 일관된 예측 시스템이 개발되기 어려운 특성을 가지고 있기 때문에, 예측은 매우 복잡하고 불확실성이 큽니다.</p>
+<p>라니냐의 발생 가능성을 예측하는 것은 다양한 기상학적 모델과 지질학적 관찰을 통해 이루어지며, 이에 따라 세계 기상 기구는 라니냐의 발생 가능성을 매년 예측합니다. 그러나 이러한 예측은 다년간의 변동성을 가지고 있어, 정확한 예측을 하기 어렵습니다.</p>
+<p>따라서, 2024년 겨울에 라니냐가 발생할 가능성에 대한 정보는 현재로서는</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 2418 | processing task</span><br><span class="line">slot update_slots: id  0 | task 2418 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 3868</span><br><span class="line">slot update_slots: id  0 | task 2418 | kv cache rm [3840, end)</span><br><span class="line">slot update_slots: id  0 | task 2418 | prompt processing progress, n_past = 3868, n_tokens = 28, progress = 0.007239</span><br><span class="line">slot update_slots: id  0 | task 2418 | prompt done, n_past = 3868, n_tokens = 28</span><br><span class="line">slot update_slots: id  0 | task 2418 | slot context shift, n_keep = 1, n_left = 4094, n_discard = 2047</span><br><span class="line">/mnt/d/DeepSeek_R1/llama.cpp/ggml/src/ggml-cuda/cpy.cu:504: ggml_cuda_cpy: unsupported type combination (q4_0 to f32)</span><br><span class="line"></span><br><span class="line">srv  cancel_tasks: cancel task, id_task = 2418</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<blockquote>
+<p>여기서 중단되어 보여서 재시작후 다음 질문을 진행했다.</p>
+</blockquote>
+<h3 id="경제-이론"><a href="#경제-이론" class="headerlink" title="경제 이론"></a>경제 이론</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">현대 화폐 이론에 대해서 설명해줘</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>현대 화폐 이론은 화폐의 경제적 역할과 기능을 분석하는 학문 분야를 의미합니다. 화폐는 단순히 상품 교환 수단 이상으로, 경제적 시스템의 핵심 구성 요소로 작용합니다. 현대 화폐 이론은 화폐의 생성, 분배, 사용, 그리고 화폐 시스템의 안정성과 효율성을 다루는 학문 분야입니다. 다음은 주요 개념과 이론들을 설명한 내용입니다.</p>
+<ol>
+<li><p><strong>화폐의 생성</strong>:</p>
+<ul>
+<li><p><strong>중앙화폐 시스템</strong>:</p>
+<ul>
+<li>중앙은행이 화폐를 보조하는 중앙화폐 시스템은 화폐의 수요를 조절하고, 공급을 관리하는 방식입니다. 이는 인플레이션과 디플레이션을 막아야 하며, 중앙은행의 통제력을 통해 경제적 안정성을 유지합니다.</li>
+</ul>
+</li>
+<li><p><strong>프라이빗화폐 시스템</strong>:</p>
+<ul>
+<li>프라이빗 은행들이 화폐를 발행하는 프라이빗화폐 시스템은 시장에서 화폐의 수요를 조절하며, 시장의 효율성을 극대화합니다. 그러나 이는 중앙은행의 통제력이 약화될 수 있으며, 금융 불안정성을 초래할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>화폐의 분배</strong>:</p>
+<ul>
+<li><strong>공급와 수요의 균형</strong>:<ul>
+<li>화폐의 공급과 수요의 균형이 중요한 문제입니다. 화폐의 과잣 공급은 인플레이션을 유발하며, 과소 공급은 디플레이션을 유발합니다. 중앙은행은 이를 조절하기 위해 다양한 정책을 채택합니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>화폐의 사용</strong>:</p>
+<ul>
+<li><p><strong>화폐의 저장 가치</strong>:</p>
+<ul>
+<li>화폐는 단기적으로나 장기적으로 사용할 수 있는 가치를 가집니다. 화폐의 가치는 인플레이션과 디플레이션에 따라 변동하며, 이는 화폐의 사용 효율성에 영향을 미칩니다.</li>
+</ul>
+</li>
+<li><p><strong>화폐의 상대 가치</strong>:</p>
+<ul>
+<li>화폐의 상대 가치는 시간이 지나면서 변동할 수 있으며, 이는 인플레이션과 디플레이션의 결과입니다. 상대 가치의 변동은 소비자와 생산자의 결정에 영향을 미칩니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>화폐 시스템의 안정성과 효율성</strong>:</p>
+<ul>
+<li><p><strong>안정성</strong>:</p>
+<ul>
+<li>화폐 시스템의 안정성은 화폐의 공급과 수요의 균형, 그리고 화폐의 가치 변동을 통해 평가됩니다. 안정적인 화폐 시스템은 경제적 불안정성을 최소화합니다.</li>
+</ul>
+</li>
+<li><p><strong>효율성</strong>:</p>
+<ul>
+<li>화폐의 효율성은 화폐가 경제적 자원 배분에 얼마나 효과적으로 사용되는지를 의미합니다. 효율적인 화폐 시스템은 자원 배분의 효율성을 극대화합니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>현대 화폐 이론은 이러한 다양한 요소를 고려하여 화폐의 역할과 기능을 분석하고, 경제적 안정성과 효율성을 유지하는 방안을 모색합니다. 이를 통해 화폐가 경제적 시스템의 중요한 역할을 다하고, 경제적 발전과 안정성을 도모합니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 0 | processing task</span><br><span class="line">slot update_slots: id  0 | task 0 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4152</span><br><span class="line">slot update_slots: id  0 | task 0 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 2104</span><br><span class="line">slot update_slots: id  0 | task 0 | kv cache rm [0, end)</span><br><span class="line">slot update_slots: id  0 | task 0 | prompt processing progress, n_past = 2048, n_tokens = 2048, progress = 0.973384</span><br><span class="line">slot update_slots: id  0 | task 0 | kv cache rm [2048, end)</span><br><span class="line">slot update_slots: id  0 | task 0 | prompt processing progress, n_past = 2104, n_tokens = 56, progress = 1.000000</span><br><span class="line">slot update_slots: id  0 | task 0 | prompt done, n_past = 2104, n_tokens = 56</span><br><span class="line">slot      release: id  0 | task 0 | stop processing: n_past = 2815, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 0 |</span><br><span class="line">prompt eval time =    2778.84 ms /  2104 tokens (    1.32 ms per token,   757.15 tokens per second)</span><br><span class="line">       eval time =   95351.01 ms /   712 tokens (  133.92 ms per token,     7.47 tokens per second)</span><br><span class="line">      total time =   98129.84 ms /  2816 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="크롤링"><a href="#크롤링" class="headerlink" title="크롤링"></a>크롤링</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">have you got any crawling ability from some url?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>I’m not capable of crawling URLs or collecting data from websites. I’m an AI designed to provide information and answer questions based on my training data, but I don’t have the ability to perform web scraping or crawling. Additionally, I comply with the terms of service and applicable laws, including those related to data privacy and intellectual property.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 714 | processing task</span><br><span class="line">slot update_slots: id  0 | task 714 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4883</span><br><span class="line">slot update_slots: id  0 | task 714 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 2835</span><br><span class="line">slot update_slots: id  0 | task 714 | kv cache rm [2815, end)</span><br><span class="line">slot update_slots: id  0 | task 714 | prompt processing progress, n_past = 2835, n_tokens = 20, progress = 0.007055</span><br><span class="line">slot update_slots: id  0 | task 714 | prompt done, n_past = 2835, n_tokens = 20</span><br><span class="line">slot      release: id  0 | task 714 | stop processing: n_past = 2902, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 714 |</span><br><span class="line">prompt eval time =     786.86 ms /    20 tokens (   39.34 ms per token,    25.42 tokens per second)</span><br><span class="line">       eval time =    9169.41 ms /    68 tokens (  134.84 ms per token,     7.42 tokens per second)</span><br><span class="line">      total time =    9956.27 ms /    88 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="외부-파일-처리-여부"><a href="#외부-파일-처리-여부" class="headerlink" title="외부 파일 처리 여부"></a>외부 파일 처리 여부</h3><p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">너는 외부 텍스트 파일을 읽고 질문에 답해 줄 수 있어?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>네. 외부 텍스트 파일을 읽고 질문에 답변을 제공하는 기능은 제가 수행할 수 있습니다. 그러나, 이 기능을 사용하려면 다음과 같은 제한이 있습니다:</p>
+<ol>
+<li><strong>권한 문제</strong>: 외부 파일을 읽고 처리하는 과정에서 데이터의 소유권 및 사용권이 명확해야 합니다.</li>
+<li><strong>보안 문제</strong>: 외부 파일이 악의적으로 사용될 수 있으므로, 데이터의 보안과 개인정보 보호를 고려해야 합니다.</li>
+<li><strong>법적 문제</strong>: 특정 법적 제한이나 지적 재산권 문제가 있는 경우에는 처리할 수 없습니다.</li>
+</ol>
+<p>외부 텍스트 파일을 읽고 질문에 답변을 제공할 수 있는 경우, 파일이 명시적으로 공개되거나 저작권 문제가 없는 경우에 한해 사용할 수 있습니다. 파일이 저작권 문제를 포함하거나, 개인정보나 민감한 데이터를 포함하는 경우에는 처리할 수 없습니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 783 | processing task</span><br><span class="line">slot update_slots: id  0 | task 783 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4978</span><br><span class="line">slot update_slots: id  0 | task 783 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 2930</span><br><span class="line">slot update_slots: id  0 | task 783 | kv cache rm [2902, end)</span><br><span class="line">slot update_slots: id  0 | task 783 | prompt processing progress, n_past = 2930, n_tokens = 28, progress = 0.009556</span><br><span class="line">slot update_slots: id  0 | task 783 | prompt done, n_past = 2930, n_tokens = 28</span><br><span class="line">slot      release: id  0 | task 783 | stop processing: n_past = 3131, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 783 |</span><br><span class="line">prompt eval time =    1107.79 ms /    28 tokens (   39.56 ms per token,    25.28 tokens per second)</span><br><span class="line">       eval time =   27565.01 ms /   202 tokens (  136.46 ms per token,     7.33 tokens per second)</span><br><span class="line">      total time =   28672.80 ms /   230 tokens</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>질문:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">너는 pdf 파일을 읽고 질문에 답해 줄 수 있어?</span><br></pre></td></tr></table></figure>
+
+
+<p>답:</p>
+<p>저는 pdf 파일을 직접 읽고 질문에 답해 줄 수 없습니다. pdf 파일을 읽고 이해하는 과정은 인공지능 기술에서 매우 복잡하며, 현재의 인공지능 기술로는 직접 pdf 파일을 읽고 이해하는 것은 제한적입니다. 그러나, pdf 파일의 텍스트를 추출하고 해당 텍스트를 기반으로 질문에 답할 수 있습니다. pdf 파일에서 텍스트를 추출하기 위해서는 pdf 파일을 이미지에서 텍스트로 변환하는 추가적인 작업이 필요할 수 있습니다. 이 과정에서 사용되는 기술들은 OCR(광학적 인식 기술) 등을 포함할 수 있습니다. OCR은 이미지를 텍스트로 변환하는 기술로, pdf 파일을 OCR을 통해 텍스트로 변환한 후 이를 분석하여 질문에 답할 수 있습니다.</p>
+<p>처리:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 986 | processing task</span><br><span class="line">slot update_slots: id  0 | task 986 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 5204</span><br><span class="line">slot update_slots: id  0 | task 986 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 3156</span><br><span class="line">slot update_slots: id  0 | task 986 | kv cache rm [3131, end)</span><br><span class="line">slot update_slots: id  0 | task 986 | prompt processing progress, n_past = 3156, n_tokens = 25, progress = 0.007921</span><br><span class="line">slot update_slots: id  0 | task 986 | prompt done, n_past = 3156, n_tokens = 25</span><br><span class="line">slot      release: id  0 | task 986 | stop processing: n_past = 3331, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 986 |</span><br><span class="line">prompt eval time =    1003.58 ms /    25 tokens (   40.14 ms per token,    24.91 tokens per second)</span><br><span class="line">       eval time =   24281.49 ms /   176 tokens (  137.96 ms per token,     7.25 tokens per second)</span><br><span class="line">      total time =   25285.07 ms /   201 tokens</span><br></pre></td></tr></table></figure>
+
+
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-23T01:00:00.000Z" title="12/23/2024, 10:00:00 AM">2024-12-23</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-12-23T14:36:49.756Z" title="12/23/2024, 11:36:49 PM">2024-12-23</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a></span><span class="level-item">35분안에 읽기 (약 5197 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/Image_Segmentation-4f9d5782ee2d/">[요약] Image Segmentation</a></p><div class="content"><p>Image Segmentation:</p>
 <p><a target="_blank" rel="noopener" href="https://storm.genie.stanford.edu/article/image-segmentation%0A-410216">https://storm.genie.stanford.edu/article/image-segmentation%0A-410216</a></p>
 <p>이미지 분할(Image Sementation)의 주요 목적은 특정 영역 분리와 식별이다. 이미지 안의 여러 사물에서 관심 영역을 분리함으로써 사용자는 관련 정보를 추출하고 해당 영역을 정량적으로 분석할 수 있게 된다. </p>
 <h1 id="이미지-분할-Image-Sementation-이란"><a href="#이미지-분할-Image-Sementation-이란" class="headerlink" title="이미지 분할 (Image Sementation) 이란"></a>이미지 분할 (Image Sementation) 이란</h1><p>이미지 분할 (Segmentation) 은 이미지 안의 개체를 분석에 필요한 대상을 다중 분할 또는 영역으로 나누는데 관련한 컴퓨터 비전과 인공지능의 중대한 기술이다. </p>
@@ -148,182 +494,7 @@
 <p>[17] An overview of intelligent image segmentation using active contour models: <a target="_blank" rel="noopener" href="https://www.oaepublish.com/articles/ir.2023.02">https://www.oaepublish.com/articles/ir.2023.02</a></p>
 <p>[19] Medical Image Segmentation and Its Real-World Applications: <a target="_blank" rel="noopener" href="https://medium.com/@jervisaldanha/medical-image-segmentation-and-its-real-world-applications-unet-and-beyond-9cd06eeebcb6">https://medium.com/@jervisaldanha/medical-image-segmentation-and-its-real-world-applications-unet-and-beyond-9cd06eeebcb6</a></p>
 <p>[A1] ISBI 2015, <a target="_blank" rel="noopener" href="http://brainiac2.mit.edu/isbi_challenge/">http://brainiac2.mit.edu/isbi_challenge/</a><br>[A2] <a target="_blank" rel="noopener" href="http://lmb.informatik.uni-freiburg.de/people/ronneber/isbi2015/">http://lmb.informatik.uni-freiburg.de/people/ronneber/isbi2015/</a><br>[A3] “Machine Perception of Three-Dimensional Solids”, Larry Roberts, : <a target="_blank" rel="noopener" href="https://bit.ly/3ZPSBHF">https://bit.ly/3ZPSBHF</a><br>[A4] “The Dawn of Computer Vision:”, <a target="_blank" rel="noopener" href="https://www.turingpost.com/p/cvhistory2">https://www.turingpost.com/p/cvhistory2</a></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-10-23T08:02:31.157Z" title="10/23/2024, 5:02:31 PM">2024-10-23</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-10-31T16:48:18.663Z" title="11/1/2024, 1:48:18 AM">2024-11-01</time>&nbsp;업데이트 됨</span><span class="level-item">11분안에 읽기 (약 1601 단어)</span></div></div><div class="content"><table>
-<thead>
-<tr>
-<th>명령</th>
-<th>설명</th>
-<th>ex</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>echo</td>
-<td>출력하고자 하는 변수를 출력할 때 사용하는 명령어이다. 파이썬의 print와 같은 명령어이다.</td>
-<td>echo $b</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td>현재 디렉토리를 확인하는 명령어이다.</td>
-<td><code>$ pwd</code></td>
-</tr>
-<tr>
-<td>whoami</td>
-<td>접속한 사용자가 누구인지 확인하는 명령어이다.</td>
-<td><code>$ whoami</code></td>
-</tr>
-<tr>
-<td>mv</td>
-<td>파일의 이름을 바꾸거나 파일을 다른 디렉토리로 이동하는 명령어이다.</td>
-<td>mv 기존파일명 새로운파일명</td>
-</tr>
-<tr>
-<td>chown</td>
-<td>파일이나 디렉토리의 소유자를 변경하는 명령어이다. 소유자와 파일에 관련된 권한 정보는 ls -l 명령어로 확인할 수 있다.</td>
-<td>chown 그룹:소유자</td>
-</tr>
-<tr>
-<td>su</td>
-<td>접속 유저를 바꾸는 명령어</td>
-<td><code>su - 유저이름</code><br> 접속 유저를 root 유저로 바꾸자. <code>$ su -</code></td>
-</tr>
-<tr>
-<td>whatis</td>
-<td>명령어의 간단한 설명을 확인할 수 있다.</td>
-<td><code>$ whatis mkdir</code></td>
-</tr>
-<tr>
-<td>man</td>
-<td>명령어의 메뉴얼을 확인할 수 있다. <br>메뉴얼을 확인하고는 q를 눌러 메뉴얼 화면에서 빠져나와야 한다.</td>
-<td><code>$ man mkdir</code></td>
-</tr>
-<tr>
-<td>cd</td>
-<td>Change Directory 명령어로 디렉토리를 이동하는 명령어이다.</td>
-<td><code>$ cd ..</code>, <code>$cd /home</code></td>
-</tr>
-<tr>
-<td>ls</td>
-<td>현재 디렉토리에 있는 폴더와 파일을 확인하는 명령어<br>-l 옵션: 폴더, 파일들의 정보를 자세히 출력한다.<br>-d 옵션: 디렉토리를 검색하는 옵션</td>
-<td><code>$ ls -l *.txt</code></td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td>현재 디렉토리에 새로운 디렉토리를 생성하는 명령어이다.<br>-p 옵션: 디렉토리를 만들면서 한번에 하위 디렉토리를 생성하는 옵션</td>
-<td><code>mkdir -p /test01/test02/test03</code></td>
-</tr>
-<tr>
-<td>touch</td>
-<td>파일의 용량이 0인 파일을 생성하는 명령어이다.<br>여러 파일을 한 번에 생성할 수 있는데 각 파일은 공백(화이트 스페이스)로 구분한다.</td>
-<td><code>$ touch a.txt b.txt c.txt e.txt f.txt</code></td>
-</tr>
-<tr>
-<td>rm</td>
-<td>파일이나 디렉토리를 삭제하는 명령어이다.<br>리눅스는 휴지통이 있지만 명령어로 삭제할 때는 파일이 바로 삭제되기 때문에 복구할 수 없다.<br>-r 옵션: 현재 디렉토리 밑에 있는 모든 파일과 디렉토리를 삭제한다.<br>-f 옵션: 삭제 여부를 물어보지 않고 삭제한다.<br>-rf 옵션: 현재 디렉토리 밑에 있는 파일과 디렉토리를 삭제 여부를 뭍지 않고 삭제한다.</td>
-<td><code>$touch bbb.txt</code><br> <code>$rm bbb.txt</code></td>
-</tr>
-<tr>
-<td>rmdir</td>
-<td>디렉토리를 삭제하는 명령어이다.</td>
-<td><code>$rmdir ddd</code></td>
-</tr>
-<tr>
-<td>alias</td>
-<td>자주 수행하는 명령어들을 쉽게 사용할 수 있도록 설정하는 명령어이다.<br>alias 사용자명령어&#x3D;”리눅스 명령어”</td>
-<td><code>$ alias ll=&#39;ls -alF&#39;</code></td>
-</tr>
-<tr>
-<td>unalias</td>
-<td>alias 명령을 삭제한다.</td>
-<td><code>$ unalias ll</code></td>
-</tr>
-<tr>
-<td>cat</td>
-<td>파일의 내용을 화면에 출력하는 명령어이다.</td>
-<td><code>$ cat emp.txt</code></td>
-</tr>
-<tr>
-<td>명령어 &gt;&gt; 파일</td>
-<td>redirection 화면에 출력되는 결과를 파일로 저장하는 명령어이다.<br>기존에 같은 파일의 이름이 없으면 파일을 생성하고 있으면 기존 파일 뒤에 덧붙인다.</td>
-<td><code>$ cat emp.txt &gt;&gt; emp2.txt</code></td>
-</tr>
-<tr>
-<td>명령어 &gt; 파일</td>
-<td>파일을 생성하는데 기존에 같은 이름의 파일이 있으면 그냥 덮어쓴다.</td>
-<td><code>$ cat &gt; test.txt</code><br>현재 터미널 입력을 파일로 생성한다.</td>
-</tr>
-<tr>
-<td>more</td>
-<td>문서의 내용을 화면에 출력할 때 페이지 단위로 볼 수 있는 명령어이다. 문서 내 이동<br>Space: 전진키<br>b: 후진키<br>f: 다음 페이지</td>
-<td><code>more emp2.txt</code></td>
-</tr>
-<tr>
-<td>head</td>
-<td>문서의 상위 몇 줄을 출력하는 명령어이다.</td>
-<td><code>$ head -20 jobs.txt</code></td>
-</tr>
-<tr>
-<td>tail</td>
-<td>문서 하위 몇 줄을 출력하는 명령어이다.</td>
-<td><code>$ tail -10 jobs.txt</code></td>
-</tr>
-<tr>
-<td>wc</td>
-<td>파일 안의 단어의 개수 또는 라인수를 출력하는 명령어이다. <br>-l: 라인 수만 출력한다.<br>-w: 단어의 개수만 출력한다.<br>-c: 철자의 개수만 출력한다.</td>
-<td><code>$ wc jobs.txt</code> <br>순서대로 라인 수, 단어의 개수, 철자의 개수를 의미한다.</td>
-</tr>
-<tr>
-<td>grep ‘단어’ 파일명</td>
-<td>파일 안에 포함된 특정 단어나 구문을 검색하는 명령어이다.<br>-i: 대소문자를 구분하지 않고 검색한다.</td>
-<td><code>$ grep &#39;SCOTT&#39; emp.txt</code> <br> emp.txt에서 SCOTT이라는 단어가 포함된 행을 출력한다.</td>
-</tr>
-<tr>
-<td>명령어 <code>|</code> 명령어</td>
-<td>pipe 명령어. <code>|</code> 로 표현하며 앞의 명령어와 뒤의 명령어를 연결하여 사용할 때 사용한다.</td>
-<td>&#96;$ ls -l</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>데이터를 특정 컬럼을 기준으로 정렬하는 명령어이다.<br>-k: 내림차순 정렬<br>-rk: 오름차순 정렬<br>-n: 숫자를 정렬할 때 사용하는 옵션이다.</td>
-<td><code>$ sort -nk 6 emp.txt</code></td>
-</tr>
-<tr>
-<td>awk</td>
-<td>특정 컬럼을 출력하고자 할 때 사용하는 명령어이다.<br>awk 조건 컬럼선택 대상파일</td>
-<td>예제1. emp.txt에서 직업만 출력하자. <code>$ awk &#39;&#123;print $3&#125;&#39; emp.txt</code><br>3번 컬럼이 SALESMAN 이면 출력 <code>awk &#39;$3==&quot;SALESMAN&quot; &#123;print $2, $3&#125;&#39; emp.txt</code><br><code>$n</code> 컬럼,  $0은 모든 컬럼을 의미한다.<br>출력은 ‘{print 컬럼번호컬럼번호}’로 출력한다.</td>
-</tr>
-<tr>
-<td>uniq</td>
-<td>중복된 라인을 제거하는 명령어이다.</td>
-<td>결과에서 중복을 제거해서 출력하자.<br>&#96;$ awk ‘{print $3}’ emp.txt</td>
-</tr>
-<tr>
-<td>diff 파일1 파일2</td>
-<td>두 파일간의 차이점을 찾아서 알려주는 명령어이다.</td>
-<td><code>$ diff emp.txt emp2.txt </code></td>
-</tr>
-<tr>
-<td>find</td>
-<td>검색하고자 하는 파일을 찾을 때 사용하는 명령어이다.</td>
-<td><code>$ find /root -name &#39;emp.txt&#39; -print</code></td>
-</tr>
-<tr>
-<td>cp</td>
-<td>파일을 복사하는 명령어이다.</td>
-<td><code>$ cp emp.txt emp400.txt</code></td>
-</tr>
-<tr>
-<td>tar</td>
-<td>tar은 여러 파일을 하나로 합쳐주는 명령어이다. 압축을 하려면 -z 옵션을 사용해야 한다.<br>-c: 여러 개의 파일을 하나로 만드는 옵션<br>-v: 압축되는 과정을 출력하라는 옵션<br>-f: 생성되는 파일명을 지정<br>-x: 묶어있는 파일을 풀라는 옵션<br>-C: 압축이 풀릴 위치를 지정하는 옵션<br>-z: 실제 파일 크기를 압축하는 옵션</td>
-<td>tar cvf 압축파일명 압축파일대상 <br>tar xvf 압축파일명 압축을 해제할 위치</td>
-</tr>
-<tr>
-<td>sed</td>
-<td>sed 명령어는 검색 뿐만 아니라 내용을 변경할 수 있다. 반면 grep 명령어는 파일의 특정 내용을 검색하는 기능만 가진다.</td>
-<td>sed ‘s&#x2F;기존데이터&#x2F;변경데이터’ 파일명</td>
-</tr>
-</tbody></table>
-<hr>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">이전</a></div><div class="pagination-next"><a href="/page/4/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/85/">85</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">170</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">252</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T00:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_billossom_rtx3080ti-e816dc0fd375/">Local LLM 실험: llama-3-Korean-Bllossom-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-12-23T01:00:00.000Z">2024-12-23</time></p><p class="title"><a href="/Image_Segmentation-4f9d5782ee2d/">[요약] Image Segmentation</a></p><p class="categories"><a href="/categories/AI/">AI</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">90</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">이전</a></div><div class="pagination-next"><a href="/page/4/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/86/">86</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">171</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T00:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_billossom_rtx3080ti-e816dc0fd375/">Local LLM 실험: llama-3-Korean-Bllossom-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">90</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
