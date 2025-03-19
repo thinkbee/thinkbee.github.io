@@ -33,7 +33,52 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">카테고리</a></li><li class="is-active"><a href="#" aria-current="page">Programming</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-05T10:00:00.000Z" title="2024. 3. 5. 오후 7:00:00">2024-03-05</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-03-06T00:58:30.985Z" title="2024. 3. 6. 오전 9:58:30">2024-03-06</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">6분안에 읽기 (약 909 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/mariadb-transfer_to_other-a78fa3ae97d8/">MariaDb 10 이전하기</a></p><div class="content"><p>기존 MariaDB 10 에서 다른 서버로 데이터&#x2F;사용자 등을 이전하기. 이전은 2가지 방법을 제시한다.</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">카테고리</a></li><li class="is-active"><a href="#" aria-current="page">Programming</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-03-19T00:00:00.000Z" title="2025. 3. 19. 오전 9:00:00">2025-03-19</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-03-19T21:16:03.486Z" title="2025. 3. 20. 오전 6:16:03">2025-03-20</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">3분안에 읽기 (약 465 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><div class="content"><p>Jupyter-lab 의 kernel 은 Jupyterlab 과 실행 환경과 직간접으로 연결을 해준다.</p>
+<p>ipykernel 은 jupyter에 대해서 iPython을 제공한다.</p>
+<p>ipython은 jupyterlab에 kernel을 통해서 python 혹은 virtualenv 의 개발환경을 제공한다.</p>
+<h1 id="kernel"><a href="#kernel" class="headerlink" title="kernel"></a>kernel</h1><p>jupyter-lab 을 실행하면 커널 launcher 화면에 kernel이 출력된다.</p>
+<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-overview-ui.png' width=70%>
+
+
+<p>실행중인 커널은 사이트 바에서 확인 가능하다.</p>
+<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-running-ui-shutdown-single.png' width=70%>
+
+
+<p>jupyter 명령으로 커널을 관리할 수 있다.</p>
+<h2 id="jupyter-명령"><a href="#jupyter-명령" class="headerlink" title="jupyter 명령"></a>jupyter 명령</h2><p>jupyter 명령에서  kernels 를 생성, 제거 관리를 할 수 있다.</p>
+<p>현재 kernel 목록을 확인 가능하다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter kernelspec list</span><br><span class="line">  python3    /home/user/.pyenv/versions/MyEnv/share/jupyter/kernels/python3</span><br></pre></td></tr></table></figure>
+
+<h4 id="새-kernel-생성성"><a href="#새-kernel-생성성" class="headerlink" title="새 kernel 생성성"></a>새 kernel 생성성</h4><p>가상환경 TestEnv 가 있다고 가정한다. </p>
+<p>TestEnv 의 python 환경을 jupyterlab 에서 사용하려면 </p>
+<p>해당 가상환경을 jupyterlab 커널에서 사용하게 하려면 커널을 생성해 주어야 한다.</p>
+<p>그러기 위해서 ipykernel 이 필요하다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipykernel</span><br></pre></td></tr></table></figure>
+
+<p>ipykernel 로 새 kernel 생성:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --name &#123;MACHINE_NAME&#125; --display-name &quot;&#123;DISPLAY_NAME&#125;&quot; --user</span><br></pre></td></tr></table></figure>
+
+<p>다음 명령에서 <code>--user</code>을 사용하면 사용자의 <code>~.local/share</code> 공간에 커널이 추가 되고 사용자의 jupyterlab 에서 모두 사용할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python -m ipykernel install --name testenv_kernel --display-name &quot;Test Env&quot; --user</span><br><span class="line">Installed kernelspec testenv_kernel in /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br></pre></td></tr></table></figure>
+
+<p>kernelspec 으로 확인 할 수 있고,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~$ jupyter kernelspec list</span><br><span class="line">Available kernels:</span><br><span class="line">  python3           /home/qkboo/.pyenv/versions/3.12.8/envs/TestEnv/share/jupyter/kernels/python3</span><br><span class="line">  testenv_kernel    /home/qkboo/.local/share/jupyter/kernels/testenv_kernel</span><br><span class="line">(TestEnv) qkboo:~$</span><br></pre></td></tr></table></figure>
+
+<p>Jupyterlab 의 launcher 화면에도 새 커널을 확인할 수 있다.</p>
+<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-user-installed-example.png' width=80%>
+
+
+<h4 id="kernel-제거"><a href="#kernel-제거" class="headerlink" title="kernel 제거"></a>kernel 제거</h4><p><code>kernelspec uninstall</code> 명령을 사용해서 사용자 커널을 제거할 수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec uninstall &#123;KERNEL_NAME&#125;</span><br></pre></td></tr></table></figure>
+
+<p>testenv_kernel 을 삭제해 보자</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec uninstall testenv_kernel</span><br><span class="line">Kernel specs to remove:</span><br><span class="line">  testenv_kernel        /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br><span class="line">Remove 1 kernel specs [y/N]: y</span><br><span class="line">Removed /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="—-참고-—"><a href="#—-참고-—" class="headerlink" title="— 참고 —"></a>— 참고 —</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.posit.co/ide/server-pro/user/jupyter-lab/guide/jupyter-kernel-management.html">https://docs.posit.co/ide/server-pro/user/jupyter-lab/guide/jupyter-kernel-management.html</a></li>
+</ol>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-05T10:00:00.000Z" title="2024. 3. 5. 오후 7:00:00">2024-03-05</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-03-06T00:58:30.985Z" title="2024. 3. 6. 오전 9:58:30">2024-03-06</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">6분안에 읽기 (약 909 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/mariadb-transfer_to_other-a78fa3ae97d8/">MariaDb 10 이전하기</a></p><div class="content"><p>기존 MariaDB 10 에서 다른 서버로 데이터&#x2F;사용자 등을 이전하기. 이전은 2가지 방법을 제시한다.</p>
 <ol>
 <li>데이터베이스 덤프만 이전: mysqldump 이용</li>
 <li>데이터베이스 데이터 폴더 복제: rsync 이용</li>
@@ -468,156 +513,7 @@
 </ul>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-27T12:00:00.000Z" title="2023. 7. 27. 오후 9:00:00">2023-07-27</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-08-04T22:17:06.063Z" title="2023. 8. 5. 오전 7:17:06">2023-08-05</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">1분안에 읽기 (약 211 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyterlab_upgrade_3_to_4-10265c5617ef/">Jupyterlab 4 업그레이드 주의 사항.</a></p><div class="content"><p>Jupyter 3.x 를 사용중에 Jupyter 4.0 출시를 했다고 해서 가상환경을 만들고 jupyterlab 4.0 을 설치했었다. 조금 더 UI 가 명확해 보이고 괜잖았는데 한글 입력시 글가가 깨져서 입력되거나 혹은 현재 편집중인 Cell 의 위치가 달라져 보이는 이상한 증상이 있어서 4.0 업그레이드 버전 사용을 안했는데 이유는 Node.js 버전 문제로 보인다.</p>
 <h1 id="Node-js-버전"><a href="#Node-js-버전" class="headerlink" title="Node.js 버전"></a>Node.js 버전</h1><p>기존에 jupyterlab 3.6 에서 Node.js 14 버전을 사용하고 있었다. Jupyterlab 4.x 버전의 주피터 확장 모듈 빌드도 문제가 없었는데 위에 언급한 이상한 현상이 발생해서 Jupyterlab 4.x 가상환경에서 Node.Js 버전을 18버전으로 업그레이후 후에는 문제없이 사용중이다.</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-18T04:00:00.000Z" title="2023. 7. 18. 오후 1:00:00">2023-07-18</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-07-18T04:55:01.905Z" title="2023. 7. 18. 오후 1:55:01">2023-07-18</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">5분안에 읽기 (약 820 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022-03-01-oracle_xe_installation-b90fe1d48548/">Oracle XE Database 설치 - Windows</a></p><div class="content"><p>Oracle XE Database 설치를 알아본다.</p>
-<ol>
-<li>Oracle XE 설치</li>
-<li>Uninstall</li>
-</ol>
-<hr>
-<h1 id="1-오라클-XE-설치"><a href="#1-오라클-XE-설치" class="headerlink" title="1. 오라클 XE 설치"></a>1. 오라클 XE 설치</h1><p>XE 는 Express Edition 의 약어입니다.</p>
-<img src='https://i.imgur.com/Rf6hGib.png'>
-
-<p>오라클 18c 버전은 설치 파일이 용량이 2G가 넘기 때문에 다운로드부터 설치까지 수분~수십분 이상이 소요</p>
-<blockquote>
-<p>설치에 문제가 생기는 원인들</p>
-<ul>
-<li>컴퓨터 이름이 한글로 되어 있을 떄</li>
-<li>오라클을 한번 설치한 적이 있을 경우<ul>
-<li>oracle home 에서<ul>
-<li><code>./deinstall/deinstall</code></li>
-<li>regedit를 이용하여 기록을 삭제</li>
-<li>방법 명령창에서 <code>sc delete OracleServiceXE</code> 를 수행)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="XE-라이센스"><a href="#XE-라이센스" class="headerlink" title="XE 라이센스"></a>XE 라이센스</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.oracle.com/downloads/licenses/oracle-free-license.html">https://www.oracle.com/downloads/licenses/oracle-free-license.html</a></li>
-</ul>
-<h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>최신 버전은 다운로드 페이지에서 직접 다운로드 할 수 있다.</p>
-<ul>
-<li>2022&#x2F;3월 현재 21c 버전을 다운로드 할 수 있다.</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/kr/database/technologies/xe-downloads.html">https://www.oracle.com/kr/database/technologies/xe-downloads.html</a></p>
-<p>이전 버전은 로그인후 다운로드 할 수 있다. 회원가입후 로그인한다.</p>
-<img src='https://i.imgur.com/fF9cEQu.png'>
-
-<h3 id="회원가입"><a href="#회원가입" class="headerlink" title="회원가입"></a>회원가입</h3><p>무료 Oracle 계정은 이메일 인증을 통해서 계정 생성이 가능하다.</p>
-<h3 id="XE-시스템-제약"><a href="#XE-시스템-제약" class="headerlink" title="XE 시스템 제약"></a>XE 시스템 제약</h3><ul>
-<li>운영체제: Windows 10, Linux (우분투, 레드햇, CentOS 등)</li>
-<li>최대 12GB 사용자 데이터</li>
-<li>최대 2GB 데이터베이스 RAM</li>
-<li>최대 CPU 스레드 2개</li>
-<li>최대 3개의 PDB (Up to 3 Pluggable Databases)</li>
-</ul>
-<h2 id="Oracle-XE-21c-설치"><a href="#Oracle-XE-21c-설치" class="headerlink" title="Oracle XE 21c 설치"></a>Oracle XE 21c 설치</h2><p>다운로드한 설치 파일을 실행한다.</p>
-<img src='https://i.imgur.com/PXPKa6P.png' width=500>
-
-
-<p>라이센스</p>
-<img src='https://i.imgur.com/Wze4aUE.png'>
-
-<p>설치 위치</p>
-<img src='https://i.imgur.com/ndZbANv.png'>
-
-<p>SYS, SYSTEM, PDBADMIN 계정 비밀번호입력:  관리자 계정 비밀번호를 정하여 주는 것으로 오라클 관리자 계정 아이디는 ‘SYSTEM’ 이다.</p>
-<ul>
-<li>혼란을 방지하기 위해 <code>Manager1</code> 으로 입력하자.<img src='https://i.imgur.com/KDCI9O1.png'></li>
-</ul>
-<p>설치 시작</p>
-<img src='https://i.imgur.com/nFJaZDQ.png'>
-
-<img src='https://i.imgur.com/6iCBpuM.png'>
-
-
-<p>윈도우 보안 경고에서 Java 허용</p>
-<img src='https://i.imgur.com/gY9STAx.png'>
-
-<p>구성요소 구성</p>
-<img src='https://i.imgur.com/PTzdNSg.png'>
-
-
-<p>설치 완료</p>
-<img src='https://i.imgur.com/zNmwfSc.png'>
-
-<p>오라클 XE 설치후 시작메뉴</p>
-<img src='https://i.imgur.com/EZtcmIg.png'>
-
-
-<h2 id="설치후-확인"><a href="#설치후-확인" class="headerlink" title="설치후 확인"></a>설치후 확인</h2><h3 id="서비스-상태-확인"><a href="#서비스-상태-확인" class="headerlink" title="서비스 상태 확인"></a>서비스 상태 확인</h3><ol>
-<li>Oracle XE 설치 완료되면, 윈도우 cmd 창에서 <code>sc query</code> 명령어를 통해 설치를 확인할 수 있다.</li>
-</ol>
-<img src='https://i.imgur.com/brxBr09.png'>
-
-<ol start="2">
-<li>윈도우 메뉴 중 ‘앱 및 기능’ 목록 확인</li>
-</ol>
-<h3 id="데이터베이스-연결-확인"><a href="#데이터베이스-연결-확인" class="headerlink" title="데이터베이스 연결 확인"></a>데이터베이스 연결 확인</h3><p>tnslistener 사용</p>
-<ul>
-<li>Oracle XE 설치후 DB 연결을 위해 꼭 필요한 서비스인 ‘TNSListener’가 자동설치 되는데, cmd 창에서 연결 상태 확인이 가능하다.</li>
-</ul>
-<ol>
-<li><code>tnsping</code></li>
-</ol>
-<ul>
-<li>cmd 창에서 tnsping 명령어 이용. </li>
-<li>‘tnsping 127.0.0.1’을 실행하면 아래와 같이 TNSListener, 연결 상태를 확인할 수 있다.</li>
-</ul>
- <img src='https://i.imgur.com/dDbATrW.png'>
- 
-<ol start="2">
-<li>lsnrctl</li>
-</ol>
-<img src='https://i.imgur.com/7LEXTf2.png'>
-
-
-<h3 id="접속-에러"><a href="#접속-에러" class="headerlink" title="접속 에러"></a>접속 에러</h3><ol>
-<li>접속에러 : TNS-12541 TNS 리스너 에러<ul>
-<li><a target="_blank" rel="noopener" href="https://shanepark.tistory.com/223">https://shanepark.tistory.com/223</a></li>
-</ul>
-</li>
-</ol>
-<img src='https://i.imgur.com/2SrHP1S.png'>
-
-<p>윈도우 컴퓨터 이름 에러일 가능성이 크다.<br>    1. 내 컴퓨터 -&gt; 속성 에서 컴퓨터 이름 확인<br>    2. listener.ora 에서 HOST 이름 변경</p>
-<ol start="2">
-<li>오라클 서비스 재시작<ul>
-<li>윈도우 서비스 Oracle TNS Listener 실행 확인</li>
-<li>윈도우의 서비스에서 OracleServiceXE 서비스 재시작</li>
-</ul>
-</li>
-</ol>
-<p>작업관리자 혹은 서비스 매니져에서 사용 가능.</p>
-<ul>
-<li>작업관리자 : Ctrl+Shift+ESC </li>
-<li>서비스 매니져 : Win + R 에서 services.msc</li>
-</ul>
-<h3 id="listener-ora-tnsnames-ora"><a href="#listener-ora-tnsnames-ora" class="headerlink" title="listener.ora, tnsnames.ora"></a>listener.ora, tnsnames.ora</h3><p>tnsnames.ora 와 listener.ora 파일의 HOST 를 localhost 로 변경한다.</p>
-<p>tnsnames.ora</p>
-<img src='https://i.imgur.com/NNPOodj.png'>
-
-
-<p>listener.ora</p>
-<img src='https://i.imgur.com/vTKEofw.png'>
-
-
-<h1 id="2-Uninstall"><a href="#2-Uninstall" class="headerlink" title="2 Uninstall"></a>2 Uninstall</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinw/deinstalling-oracle-database-xe.html">https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinw/deinstalling-oracle-database-xe.html</a></li>
-</ul>
-<hr>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li>IT CookBook, 오라클로 배우는 데이터베이스 개론과 실습(2판)-설치<ul>
-<li><a target="_blank" rel="noopener" href="https://download.hanbit.co.kr/exam/4502/">https://download.hanbit.co.kr/exam/4502/</a></li>
-</ul>
-</li>
-<li>Oracle Database가 갑자기 안될 때 TNS-12541, TNS-12560, TNS-00511 에러 해결<ul>
-<li><a target="_blank" rel="noopener" href="https://shanepark.tistory.com/223">https://shanepark.tistory.com/223</a></li>
-</ul>
-</li>
-</ul>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/Programming/page/0/">이전</a></div><div class="pagination-next"><a href="/categories/Programming/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/Programming/">1</a></li><li><a class="pagination-link" href="/categories/Programming/page/2/">2</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/Programming/page/9/">9</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">171</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T00:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_billossom_rtx3080ti-e816dc0fd375/">Local LLM 실험: llama-3-Korean-Bllossom-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">90</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/Programming/page/0/">이전</a></div><div class="pagination-next"><a href="/categories/Programming/page/2/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/Programming/">1</a></li><li><a class="pagination-link" href="/categories/Programming/page/2/">2</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/Programming/page/10/">10</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">172</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">91</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">29</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,

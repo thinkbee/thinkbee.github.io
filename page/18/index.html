@@ -33,7 +33,179 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T12:00:00.000Z" title="2023. 5. 14. 오후 9:00:00">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-06-20T02:39:28.664Z" title="2023. 6. 20. 오전 11:39:28">2023-06-20</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">1분안에 읽기 (약 223 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyterlab_extension_build_npm_error-1b7523ac01f3/">Jupyterlab 의 extension 을 설치하고 build 시 npm 에러.</a></p><div class="content"><p>jupyterlab 의 확장 모듈을 다운받아 설치시 nodejs 실행 환경이 제공되야 한다.</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-20T01:00:00.000Z" title="2023. 5. 20. 오전 10:00:00">2023-05-20</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-06-26T02:09:11.390Z" title="2023. 6. 26. 오전 11:09:11">2023-06-26</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/git/">git</a></span><span class="level-item">13분안에 읽기 (약 1908 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/github-ssh_key%EB%93%B1%EB%A1%9D-654a33b9f5e1/">github 에 SSH key 등록하기</a></p><div class="content"><p>github, bitbucket 같은 클라우드 사이트에 Client 프로그램으로 SSH 접속을 위해서는 SSH 키 쌍 생성하고 클라우드 사이트에 등록해야 한다.</p>
+<p>보통 github, bitbucket 등 같은 SSH 접근을 지원하는 사이트는 ssh-agent forwarding 방식을 사용한다.</p>
+<img src='https://miro.medium.com/v2/resize:fit:934/1*pWygndnde0yNc-B8G8lg_g.png' width=600>
+
+<ol>
+<li>클라이언트에서 ssh 키 쌍을 생성</li>
+<li>클라이언트에 개인키를 ssh-agent 에 등록</li>
+<li>클라우드 서비스에 공개키를 등록</li>
+<li>클라이언트 프로그램에서 ssh 사용시 ssh-agent 등록한 개인키로 암호화</li>
+</ol>
+<p>여기서는 github 에 ssh key 등록 과정을 요약하고 있다. </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh">Connect with SSH</a></li>
+<li>github을 예로 들었지만 bitbucket 도 유사한 과정을 거친다.</li>
+<li><a href="/2023/06/25/Programming/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbucket 에 SSH key 등록하기</a></li>
+</ul>
+<br>
+
+<h1 id="SSH-구성과-SSH-인증"><a href="#SSH-구성과-SSH-인증" class="headerlink" title="SSH 구성과 SSH 인증"></a>SSH 구성과 SSH 인증</h1><p>먼저 ssh host key 를 생성하고 github 과 사용할 개인 key 를 만든다. 개인키를 ssh-agent 방식으로 등록하고 공개키를 github 에 등록하면 된다.</p>
+<h2 id="ssh-agent-키-관리"><a href="#ssh-agent-키-관리" class="headerlink" title="ssh-agent 키 관리"></a>ssh-agent 키 관리</h2><p>로컬 머신에서 사용하는 SSH Key 쌍에 대한 접근을 ssh-agent 를 통해서 진행한다. <a target="_blank" rel="noopener" href="https://docs.github.com/ko/authentication/connecting-to-github-with-ssh/managing-deploy-keys">managing deploy keys</a> 에 설명되어 있다.</p>
+<ul>
+<li>에이전트 전달은 로컬 개발 컴퓨터에서 사용하는 것과 동일한 SSH 키를 사용합니다.</li>
+<li>단 사용자 클라이언트에 SSH에 있어야 합니다</li>
+</ul>
+<h2 id="SSH-Client-Keys"><a href="#SSH-Client-Keys" class="headerlink" title="SSH Client Keys"></a>SSH Client Keys</h2><p>저장소에 접근하는 url은 HTTPS or SSH 에 따라 달라진다.</p>
+<ol>
+<li>HTTPS</li>
+</ol>
+<p><code>https://&lt;repo_owner&gt;@github.com/&lt;accountname&gt;/&lt;reponame&gt;.git</code></p>
+<ol start="2">
+<li>SSH</li>
+</ol>
+<p><code>git@github.com:&lt;repo_owner&gt;/&lt;reponame&gt;.git</code></p>
+<p>or </p>
+<p><code>ssh://git@github.com/&lt;repo_owner&gt;/&lt;reponame&gt;.git</code></p>
+<p>github은 암호 알고리즘으로 keys: Ed25519, ECDSA, RSA, and DSA 를 지원한다.</p>
+<p>예를 들어 아래 같이 생성한 공개키를 사용할 수 있다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Ed25519 (ed25519) / 256</span></span><br><span class="line">$ ssh-keygen -t ed25519 -b 256</span><br><span class="line"></span><br><span class="line"><span class="comment"># ECDSA (ecdsa) / 256</span></span><br><span class="line">$ ssh-keygen -t ecdsa -b 256</span><br><span class="line"></span><br><span class="line"><span class="comment"># RSA (rsa) / 2048</span></span><br><span class="line">$ ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="개별키-생성"><a href="#개별키-생성" class="headerlink" title="개별키 생성"></a>개별키 생성</h2><p>ssh 를 사용해서 github 에 접근하려면 사용하는 클라이언트에서 SSH 로 개인키와 공개키를 생성해야 한다. SSH 키를 생성하려면 아래 과정이 필요하다.</p>
+<ol>
+<li>Open SSH 설치</li>
+<li>SSH 서비스</li>
+<li>SSH 키 생성</li>
+</ol>
+<p>여기서 Linux&#x2F;macOS 그리고 Windows 11 에서 키 쌍을 생성해서 github에 SSH Key를 등록하는 과정을 살펴보겠다.</p>
+<br>
+
+<h1 id="Windows-11에서-키-생성"><a href="#Windows-11에서-키-생성" class="headerlink" title="Windows 11에서 키 생성"></a>Windows 11에서 키 생성</h1><p>Windows 11 에서 Git 이 설치되어 있다고 가정.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">get-command</span> git</span><br><span class="line"></span><br><span class="line">Application     git.exe                                            <span class="number">2.38</span>.<span class="number">1.1</span>   C:\Program Files\Git\cmd\git.exe</span><br></pre></td></tr></table></figure>
+
+<p>Openssh 확인</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh <span class="literal">-V</span></span><br><span class="line">OpenSSH_for_Windows_8.<span class="number">6</span>p1, LibreSSL <span class="number">3.4</span>.<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>ssh 명령 위치 확인</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Get-Command</span> ssh</span><br></pre></td></tr></table></figure>
+
+<p>결과 ssh 명령을 git config 로 ssh 명령을 지정</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="literal">--global</span> core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe</span><br></pre></td></tr></table></figure>
+
+<h2 id="SSH-agent-시작"><a href="#SSH-agent-시작" class="headerlink" title="SSH agent 시작"></a>SSH agent 시작</h2><p>git 이 ssh 키를 사용하려면 SSH agent 가 시작되어야 한다. 보통 Git for windows 와 Windows 11 이후 Windows OpenSSH 를 사용하므로</p>
+<p>Windows OpenSSH 사용자는 다음 같이 agent를 확인하고 시작한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Get-Service</span> ssh<span class="literal">-agent</span></span><br><span class="line"></span><br><span class="line">Status   Name               DisplayName</span><br><span class="line"><span class="literal">------</span>   <span class="literal">----</span>               <span class="literal">-----------</span></span><br><span class="line">Stopped  ssh<span class="literal">-agent</span>          OpenSSH Authentication Agent</span><br></pre></td></tr></table></figure>
+
+<p>ssh-agent 서비스를 시작 하려면 Windows service에서 OpenSSH Authenticate Agent 서비스를 시작해 두어야 한다.</p>
+<img src='https://i.imgur.com/UlidUNe.png'>
+
+<p>속성에서 시작으로 한다.</p>
+<img src='https://i.imgur.com/mHNWVfS.png' width=300>
+
+<p>서비스가 정상적으로 시작되면 아래 명령으로 시작&#x2F;종료 그리고 재시작을 할 수 있다. - 시작 안되어 있으면 알수없는 에러가 난다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Start-Service</span> ssh<span class="literal">-agent</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Git for windows</strong> 를 사용하면 Git for windows의 bash 터미널 에서 다음 같이 확인하고 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -a | grep ssh-agent</span><br></pre></td></tr></table></figure>
+
+<p>ssh-agent 를 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(ssh-agent)</span><br></pre></td></tr></table></figure>
+
+<p>에이젼트가 시작되면 git client 에서 ssh 정보를 얻을 수 있다.</p>
+<h2 id="github에서-사용할-SSH-key-pair를-생성"><a href="#github에서-사용할-SSH-key-pair를-생성" class="headerlink" title="github에서 사용할 SSH key pair를 생성"></a>github에서 사용할 SSH key pair를 생성</h2><p>ssh-keygen.exe로 키 쌍, 비밀키&#x2F;공개키를 생성한다. 키를 생성시 bitbucket 계정의 e-mail 을 포함해 생성한다. 생성시 사용자 홈 디렉토리 <code>.ssh</code> 디렉토리에서 작업한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh-keygen.exe -t ed25519  -b 4096 -C <span class="string">&quot;EMAIL&quot;</span> -f <span class="string">&quot;KEY_FILE&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>EMAIL: github 계정 이메일</li>
+<li>KEY_FILE: 파일 이름. 보통 bitbucket_work</li>
+</ul>
+<blockquote>
+<p>참고: Ed25519 알고리즘을 지원하지 않는 레거시 시스템을 사용하는 경우 다음을 사용합니다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;EMAIL&quot;</span> -f <span class="string">&quot;KEY_FILE&quot;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><code>.ssh</code> 디렉토리에 키 쌍 KEY_FILE 과 KEY_FILE.pub 이 생성된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; dir .ssh</span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\daddy\.ssh</span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">-a---        2023-06-25  오후 6:11           3381 bitbucket_work</span><br><span class="line">-a---        2023-06-25  오후 6:11            744 bitbucket_work.pub</span><br><span class="line">-a---        2020-11-08 오전 12:12           1675 id_rsa</span><br><span class="line">-a---        2020-11-08 오전 12:12            404 id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>이제 키를 SSH Agent 에 등록하자.</p>
+<h2 id="SSH-Agent-에-키-등록"><a href="#SSH-Agent-에-키-등록" class="headerlink" title="SSH Agent 에 키 등록"></a>SSH Agent 에 키 등록</h2><p>키 파일을 SSH Agent 에 등록한다. KEY_FILE 은 비밀키 파일을 지정하면 된다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh<span class="literal">-add</span> ~/.ssh/KEY_FILE</span><br></pre></td></tr></table></figure>
+
+<p>그리고 명확하게 github 에 해당 키를 사용하도록 <code>~/.ssh/config</code> 에 아래 같이 등록한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  AddKeysToAgent yes</span><br><span class="line">  IdentityFile ~/.ssh/KEY_FILE</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="macOS-x2F-Linux"><a href="#macOS-x2F-Linux" class="headerlink" title="macOS &#x2F; Linux"></a>macOS &#x2F; Linux</h1><p>Openssh 확인</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -V</span><br><span class="line">OpenSSH_8.2p1 macOS, OpenSSL 1.1.1f  31 Mar 2020</span><br></pre></td></tr></table></figure>
+
+<p>ssh 명령이 없으면 macOS는 brew 로 설치한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssh</span><br></pre></td></tr></table></figure>
+
+<p>Linux 는 apt, dnf, pacman 을 사용해 설치한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update &amp;&amp; sudo apt install openssh-client</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="SSH-agent-시작-1"><a href="#SSH-agent-시작-1" class="headerlink" title="SSH agent 시작"></a>SSH agent 시작</h2><p>git 에서 ssh 키를 사용하려면 SSH agent 가 시작한다. bash 터미널 에서 다음 같이 확인하고 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -a | grep ssh-agent</span><br></pre></td></tr></table></figure>
+
+<p>ssh-agent 를 시작한다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(ssh-agent)</span><br></pre></td></tr></table></figure>
+
+<p>이 명령을 <code>~/.bashrc</code>, <code>~/.zshrc</code>, <code>~/.profile,</code> 등에 등록해 둔다. 에이젼트가 시작되면 git client 에서 ssh 정보를 얻을 수 있다.</p>
+<h2 id="github에-사용할-SSH-key-pair를-생성"><a href="#github에-사용할-SSH-key-pair를-생성" class="headerlink" title="github에 사용할 SSH key pair를 생성"></a>github에 사용할 SSH key pair를 생성</h2><p>ssh-keygen.exe로 키 쌍, 비밀키&#x2F;공개키를 생성한다. </p>
+<ul>
+<li>키를 생성시 bitbucket 계정의 e-mail 을 포함해 생성한다. </li>
+<li>사용자 홈 디렉토리 <code>.ssh</code> 디렉토리에서 작업한다.</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;EMAIL&quot;</span> -f <span class="string">&quot;KEY_FILE&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>EMAIL: bitbucket 계정 이메일</li>
+<li>KEY_FILE: 파일 이름. 보통 bitbucket_work</li>
+</ul>
+<blockquote>
+<p>참고: Ed25519 알고리즘을 지원하지 않는 레거시 시스템을 사용하는 경우 다음을 사용합니다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;$ ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;EMAIL&quot;</span> -f <span class="string">&quot;KEY_FILE&quot;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><code>.ssh</code> 디렉토리에 키 쌍 KEY_FILE 과 KEY_FILE.pub 이 생성된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l .ssh</span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">-a---        2023-06-25  오후 6:11           3381 bitbucket_work</span><br><span class="line">-a---        2023-06-25  오후 6:11            744 bitbucket_work.pub</span><br><span class="line">-a---        2020-11-08 오전 12:12           1675 id_rsa</span><br><span class="line">-a---        2020-11-08 오전 12:12            404 id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>이제 키 쌍를 SSH Agent 에 등록하자.</p>
+<h2 id="SSH-Agent-에-키-등록-1"><a href="#SSH-Agent-에-키-등록-1" class="headerlink" title="SSH Agent 에 키 등록"></a>SSH Agent 에 키 등록</h2><p>키 파일을 SSH Agent 에 등록한다. KEY_FILE 은 비밀키 파일을 지정하면 된다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.ssh/KEY_FILE</span><br></pre></td></tr></table></figure>
+
+<p>그리고 명확하게 bitbucket 에 해당 키를 사용하도록 <code>~/.ssh/config</code> 에 아래 같이 등록한다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  AddKeysToAgent yes</span><br><span class="line">  IdentityFile ~/.ssh/KEY_FILE</span><br></pre></td></tr></table></figure>
+
+
+<br>
+
+<h1 id="github-에-public-key-등록하기"><a href="#github-에-public-key-등록하기" class="headerlink" title="github 에 public key 등록하기"></a>github 에 public key 등록하기</h1><p>github 계정의 SSH and GPG keys에서 등록해 주어야 한다. 키 쌍 중 공개키 KEY_FILE.pub 내용을 등록해 준다.</p>
+<ol>
+<li>Settings -&gt; Personal Settings</li>
+</ol>
+<img src='https://i.imgur.com/RGgEsIq.png' width=400>
+' >
+
+<p>cat 명령 등으로 내용을 복사한다. 사이트의 Add key 창에 붙여 넣는다.</p>
+<img src='https://i.imgur.com/RVOEj5A.png' width=400>
+
+
+<p>클라이언트에서 github SSH 접속이 가능한지 테스트한다. 단, 모든 SSH 연결은 최초 접속시 호스트 접속시 접속 여부를 묻는 다이얼로그가 나온다. </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/ko/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection">https://docs.github.com/ko/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection</a></li>
+</ul>
+<p>결과적으로 아래 같이 결과가 출력되면 성공한 상태다.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ $ ssh -T git@github.com</span><br><span class="line"></span><br><span class="line">Hi USER! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<p>이제 git 클라이언트에서 <code>HTTPS</code>, <code>SSH</code> 를 통해서 github 과 ssh 연결이 가능하다. git 클라이언트로 push, pull 등을 수행할 수 있다.</p>
+<hr>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh">Connect with SSH, github</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/ko/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection">SSH 연결 테스트, github</a></li>
+<li><a href="/2023/06/25/Programming/bitbucket-ssh_key%EB%93%B1%EB%A1%9D/">bitbucket 에 SSH key 등록하기</a></li>
+</ol>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T12:00:00.000Z" title="2023. 5. 14. 오후 9:00:00">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-06-20T02:39:28.664Z" title="2023. 6. 20. 오전 11:39:28">2023-06-20</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">1분안에 읽기 (약 223 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyterlab_extension_build_npm_error-1b7523ac01f3/">Jupyterlab 의 extension 을 설치하고 build 시 npm 에러.</a></p><div class="content"><p>jupyterlab 의 확장 모듈을 다운받아 설치시 nodejs 실행 환경이 제공되야 한다.</p>
 <h1 id="jupyterlab-확장-build-error"><a href="#jupyterlab-확장-build-error" class="headerlink" title="jupyterlab 확장 build error"></a>jupyterlab 확장 build error</h1><p>jupyterlab 의 확장 모듈을 다운받아 설치하다 보면 npm 과 연계한 프로그램이 많다. 아래 같은 nodejs 관련 에러를 발생한다.</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">daddy&gt; jupyter lab build</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">An error occurred.</span><br><span class="line">RuntimeError: npm dependencies failed to install</span><br><span class="line">See the log file <span class="keyword">for</span> details:  C:\Users\USERID\AppData\Local\Temp\jupyterlab<span class="literal">-debug-4kr1lkn1</span>.log</span><br></pre></td></tr></table></figure>
 
@@ -46,119 +218,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error readable-stream@4.3.0: The engine &quot;node&quot; is incompatible with this module. Expected version &quot;^12.22.0 || ^14.17.0 || &gt;=16.0.0&quot;. Got &quot;14.15.0&quot;</span><br><span class="line">error Found incompatible module.</span><br></pre></td></tr></table></figure>
 
 <p><u>nodejs 버전을 업그레이드</u> 하고 빌드를 수행하니 잘 된다.</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-14T06:00:00.000Z" title="2023. 5. 14. 오후 3:00:00">2023-05-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2023-08-04T22:10:28.743Z" title="2023. 8. 5. 오전 7:10:28">2023-08-05</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Linux/">Linux</a></span><span class="level-item">7분안에 읽기 (약 1118 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/docker_cli_summary-84ee2a15f3e2/">Docker CLI 요약</a></p><div class="content"><p>docker cli 명령을 정리</p>
-<p><img src='https://www.simplilearn.com/ice9/free_resources_article_thumb/DockerArchitecture_1.png' width=600 alt='docker architecture'> <a target="_blank" rel="noopener" href="https://www.simplilearn.com/tutorials/docker-tutorial/docker-architecture">이미지 소스</a></p>
-<p>비슷한 문서:</p>
-<ul>
-<li><a href="/ubuntu-20.04-cheat_sheet-230a7dc631bf/">Ubuntu 20.04 - Cheat sheet</a></li>
-<li><a href="/linux-system-cheat-2be979083953/">Linux system cheat</a></li>
-<li><a href="/2017-05-05-tmux-cheatsheet-38c090793298/">Tmux cheat sheet, 2017</a></li>
-</ul>
-<h2 id="docker-cli"><a href="#docker-cli" class="headerlink" title="docker cli"></a>docker cli</h2><p>docker cli는 <code>docker</code> 명령 뒤에 docker commands 로 도커를 제어한다. 그리고 대상 컨테이너를 지정하고 컨테이너에서 실행 할 수 있는 명령형식으로 구성되어 있다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker [docker commands] [container] [container <span class="built_in">command</span>] </span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/cli/">Use the Docker command line docker</a></p>
-<h2 id="search-이미지-검색"><a href="#search-이미지-검색" class="headerlink" title="search 이미지 검색"></a>search 이미지 검색</h2><p>Docker hub에서 이미지를 검색한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search busybox</span><br></pre></td></tr></table></figure>
-
-<p>Docker hub에서 상위 몇개 정도만 검색하고 싶을때 limit 옵션을 사용한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search busybox --<span class="built_in">limit</span> 5</span><br></pre></td></tr></table></figure>
-
-<p>Docker hub에서는 이미지 중 별점을 검색한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 최소 별정 50인 이미지</span></span><br><span class="line">docker search busybox --filter=stars=50</span><br><span class="line"></span><br><span class="line"><span class="comment"># 별점이 3인 이미지</span></span><br><span class="line">docker search --filter stars=50 busybox</span><br></pre></td></tr></table></figure>
-
-<p>정규 빌드 버전만 지시하려면 <code>is-official</code> 옵션 사용</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker search --filter is-official=true --filter stars=50 busybox</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>--format</code> 옵션을 사용해 출력되는 내용을 필터링 할 수 있다. 다음은 별점만 출력하는 예이다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search --format &quot;&#123;&#123;.Name&#125;&#125;: &#123;&#123;.StarCount&#125;&#125;&quot; nginx</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="pull-이미지를-다운로드-한다"><a href="#pull-이미지를-다운로드-한다" class="headerlink" title="pull 이미지를 다운로드 한다"></a>pull 이미지를 다운로드 한다</h2><p>Docker image를 내려 받는다. 이미지 이름 뒤에 <code>:[version]</code> 을 붙이면 지정한 버전을 내려 받고, latest 를 붙이면 최신 버전을 대상으로 한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx:latest</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="images-다운로드-이미지"><a href="#images-다운로드-이미지" class="headerlink" title="images 다운로드 이미지"></a>images 다운로드 이미지</h2><p>Docker에서 다운로드 받는 이미지를 확인한다. docker images는 모든 이미지를 보여준다. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images</span></span><br></pre></td></tr></table></figure>
-
-
-<p>특정 이미지만 지시할 수 있다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker images nginx</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="run-이미지를-컨테이너로-실행한다"><a href="#run-이미지를-컨테이너로-실행한다" class="headerlink" title="run 이미지를 컨테이너로 실행한다."></a>run 이미지를 컨테이너로 실행한다.</h2><p>Docker image를 컨테이너로 생성하고, 실행합니다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:8080 nginx</span><br></pre></td></tr></table></figure>
-
-<p>옵션:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">`-p`: Local과 Container 와 port를 연결하는 옵션</span><br><span class="line">`-i`: interactive (대화방식)</span><br><span class="line">`-t`: Pseudo-tty (콘솔 및 터미널 환경)</span><br><span class="line">`— name`: 실행 컨테이너 이름을 지정합니다.</span><br><span class="line">`-d`: 백그라운드에서 실행되는 옵션입니다.</span><br></pre></td></tr></table></figure>
-
-<p>docker image를 실행하고 bash 쉘을 연다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name nginx nginx bash</span><br></pre></td></tr></table></figure>
-
-<h2 id="ps-컨테이너-목록을-확인"><a href="#ps-컨테이너-목록을-확인" class="headerlink" title="ps 컨테이너 목록을 확인"></a>ps 컨테이너 목록을 확인</h2><p>Docker 컨테이너 목록을 확인합니다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker ps -a</span></span><br></pre></td></tr></table></figure>
-
-<p>옵션:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`-a` : 실행 중이 아닌 컨테이너까지 확인</span><br><span class="line">`-q` : 컨테이너의 CONTAINER ID 만 표시</span><br></pre></td></tr></table></figure>
-
-<h2 id="start-컨테이너를-시작한다"><a href="#start-컨테이너를-시작한다" class="headerlink" title="start 컨테이너를 시작한다."></a>start 컨테이너를 시작한다.</h2><p>중단되어 있는 컨테이너를 실행합니다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker start nginx</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="attach-컨테이너-연결"><a href="#attach-컨테이너-연결" class="headerlink" title="attach 컨테이너 연결"></a>attach 컨테이너 연결</h2><p>실행중인 Docker Container 의  standard input, output,  error streams 에 연결한다. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach nginx</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/attach/">docker attach</a> 명령 사용 사례.</p>
-<h2 id="exec-컨테이너-명령-실행"><a href="#exec-컨테이너-명령-실행" class="headerlink" title="exec 컨테이너 명령 실행"></a>exec 컨테이너 명령 실행</h2><p>Docker Container의 쉘의 명령어을 실행할 수 있다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec nginx ls</span><br></pre></td></tr></table></figure>
-
-<p>옵션</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d, --detach : 명령을 detach mode, 백그라운드로 실행</span><br><span class="line">-e, --env : 환경변수 설정하고 실행</span><br><span class="line">-it [SHELL]: iteractive tty 옵션. 사용할 shell을 지시한다, 보통  bash</span><br><span class="line">-u, --user: User ID, UID</span><br><span class="line">-w, --workdir: 작업 디렉토리 지정</span><br></pre></td></tr></table></figure>
-
-<p>다음은 nginx 컨테이너의 bash 쉘을 실행한다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it nginx bash</span><br></pre></td></tr></table></figure>
-
-<p>다음은 nginx 컨테이너를 qkboo 사용자 쉘로 연결한다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it -u qkboo nginx bash</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="inspect-컨테이너-상세-정보"><a href="#inspect-컨테이너-상세-정보" class="headerlink" title="inspect 컨테이너 상세 정보"></a>inspect 컨테이너 상세 정보</h2><p>Docker Container에 상세 정보를 확인 한다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect nginx</span><br></pre></td></tr></table></figure>
-
-<p>옵션</p>
-<p><code>--format</code> : 필터링</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect  --format=&#x27;&#123;&#123;range .NetworkSettings.Networks&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="logs-명령"><a href="#logs-명령" class="headerlink" title="logs 명령"></a>logs 명령</h2><p>Docker 컨테이너에서 sysout 또는 syserr 로그를 보려면 logs 명령을 사용한다.</p>
-<p>docker logs <container_id></p>
-<h2 id="stop-컨테이너-종료"><a href="#stop-컨테이너-종료" class="headerlink" title="stop 컨테이너 종료"></a>stop 컨테이너 종료</h2><p>ps 명령으로 실행중인 컨테이너 아이디와 이름을 확인하고 아이디를 준다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">docker stop e417951d25fd</span><br></pre></td></tr></table></figure>
-
-
-<p>이름으로 종료시  <code>--name</code> 옵션 사용</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop --name nginx2</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="rm-컨테이너를-삭제한다"><a href="#rm-컨테이너를-삭제한다" class="headerlink" title="rm 컨테이너를 삭제한다."></a>rm 컨테이너를 삭제한다.</h2><p>Docker Container 삭제합니다. 삭제할때는 실행 상태가 아닌 컨테이너만 가능합니다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm nginx</span><br></pre></td></tr></table></figure>
-
-<p>강제 삭제시 <code>-f</code> 옵션 사용.</p>
-<h2 id="rmi-이미지를-삭제한다"><a href="#rmi-이미지를-삭제한다" class="headerlink" title="rmi 이미지를 삭제한다."></a>rmi 이미지를 삭제한다.</h2><p>Docker image를 삭제 하는데 이미지가 중첩된 경우가 많기 때문에 링크 같이 untag 한 후 사용한다.</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/rmi/#examples">rim example</a></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rmi fd484f19954f</span><br><span class="line"></span><br><span class="line">docker rmi test2:latest</span><br></pre></td></tr></table></figure>
-
-<p>혹은 <code>-f</code> 옵션으로 중첩된 이미지를 모두 함께 삭제 할 수 있다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi -f fd484f19954f</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/cli/">Use the Docker command line docker</a></li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@jyson88/docker-cli-%EC%A0%95%EB%A6%AC-cb031c281e2f">Docker CLI 정리, blog</a></li>
-</ul>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/17/">이전</a></div><div class="pagination-next"><a href="/page/19/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/17/">17</a></li><li><a class="pagination-link is-current" href="/page/18/">18</a></li><li><a class="pagination-link" href="/page/19/">19</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/86/">86</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">171</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T00:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_billossom_rtx3080ti-e816dc0fd375/">Local LLM 실험: llama-3-Korean-Bllossom-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">90</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/17/">이전</a></div><div class="pagination-next"><a href="/page/19/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/17/">17</a></li><li><a class="pagination-link is-current" href="/page/18/">18</a></li><li><a class="pagination-link" href="/page/19/">19</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/86/">86</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">172</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-01T00:00:00.000Z">2025-02-01</time></p><p class="title"><a href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-01-31T10:00:00.000Z">2025-01-31</time></p><p class="title"><a href="/llama_qwen2_5_rtx3080ti-929883fc2d56/">Local LLM 실험: Qwen2.5-32B-Instruct, RTX 3080 TI</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">56</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">91</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">29</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
