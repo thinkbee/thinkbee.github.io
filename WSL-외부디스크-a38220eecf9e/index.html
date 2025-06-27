@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>WSL 외부디스크 마운트 - IT Tech blogging</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="thinkbee blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="thinkbee blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="WSL을 사용해 외부 디스크를 Linux 에서 마운트 할 수 있다.  https:&amp;#x2F;&amp;#x2F;learn.microsoft.com&amp;#x2F;ko-kr&amp;#x2F;windows&amp;#x2F;wsl&amp;#x2F;wsl2-mount-disk   파워셀에서 사용 가능한 디스크를 검색해 DeviceID 를 찾는다.  1GET-CimInstance -query &amp;quot;SELECT * from Win32_DiskDriv"><meta property="og:type" content="article"><meta property="og:title" content="WSL 외부디스크 마운트"><meta property="og:url" content="https://thinkbee.github.io/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/"><meta property="og:site_name" content="IT Tech blogging"><meta property="og:description" content="WSL을 사용해 외부 디스크를 Linux 에서 마운트 할 수 있다.  https:&amp;#x2F;&amp;#x2F;learn.microsoft.com&amp;#x2F;ko-kr&amp;#x2F;windows&amp;#x2F;wsl&amp;#x2F;wsl2-mount-disk   파워셀에서 사용 가능한 디스크를 검색해 DeviceID 를 찾는다.  1GET-CimInstance -query &amp;quot;SELECT * from Win32_DiskDriv"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://learn.microsoft.com/ko-kr/windows/wsl/media/wslmountsimple.png"><meta property="article:published_time" content="2025-06-24T23:00:00.000Z"><meta property="article:modified_time" content="2025-06-27T00:58:13.355Z"><meta property="article:author" content="Gangtai Goh"><meta property="article:tag" content="WSL2"><meta property="article:tag" content="WSL"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://learn.microsoft.com/ko-kr/windows/wsl/media/wslmountsimple.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://thinkbee.github.io/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/"},"headline":"WSL 외부디스크 마운트","image":["https://learn.microsoft.com/ko-kr/windows/wsl/media/wslmountsimple.png"],"datePublished":"2025-06-24T23:00:00.000Z","dateModified":"2025-06-27T00:58:13.355Z","author":{"@type":"Person","name":"Gangtai Goh"},"publisher":{"@type":"Organization","name":"IT Tech blogging","logo":{"@type":"ImageObject","url":"https://thinkbee.github.io/images/thinkbee_logo.png"}},"description":"WSL을 사용해 외부 디스크를 Linux 에서 마운트 할 수 있다.  https:&#x2F;&#x2F;learn.microsoft.com&#x2F;ko-kr&#x2F;windows&#x2F;wsl&#x2F;wsl2-mount-disk   파워셀에서 사용 가능한 디스크를 검색해 DeviceID 를 찾는다.  1GET-CimInstance -query &quot;SELECT * from Win32_DiskDriv"}</script><link rel="canonical" href="https://thinkbee.github.io/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/vs2015.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-5ZH90CZ414" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-5ZH90CZ414');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1465716454138955" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-06-24T23:00:00.000Z" title="6/25/2025, 8:00:00 AM">2025-06-25</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-06-27T00:58:13.355Z" title="6/27/2025, 9:58:13 AM">2025-06-27</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Windows/">Windows</a></span><span class="level-item">2분안에 읽기 (약 330 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">WSL 외부디스크 마운트</h1><div class="content"><p>WSL을 사용해 외부 디스크를 Linux 에서 마운트 할 수 있다.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ko-kr/windows/wsl/wsl2-mount-disk">https://learn.microsoft.com/ko-kr/windows/wsl/wsl2-mount-disk</a></li>
+</ul>
+<ol>
+<li>파워셀에서 사용 가능한 디스크를 검색해 DeviceID 를 찾는다.</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">GET-CimInstance</span> <span class="literal">-query</span> <span class="string">&quot;SELECT * from Win32_DiskDrive&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>다음 같은 결과에서 <code>\\.\PHYSICALDRIVE1</code> 형식의 외부 디스크의 DeviceID 를 확인한다.</p>
+<img src='https://learn.microsoft.com/ko-kr/windows/wsl/media/wslmountsimple.png' width=500>
+
+
+
+<ol start="2">
+<li>디스크를 WSL 에 탑재한다.</li>
+</ol>
+<p>PowerShell을 사용하여 위에서 찾은 디스크 경로를 사용하여 디스크를 탑재하고 다음을 실행할 수 있다. DeviceID 가 <code>\\.\PHYSICALDRIVE1</code> 이라고 가정한다.</p>
+<ol start="3">
+<li>디스크가 식별되면 다음을 실행합니다.</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--mount</span> \\.\PHYSICALDRIVE1 <span class="literal">--bare</span></span><br></pre></td></tr></table></figure>
+
+<p><code>--bare</code> 를 선택하면 해당 배포본의 파일시스템을 자동 선택한다.</p>
+<p>다음 같이 파티션 번호과 형식을 지정할 수 있다</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--mount</span> &lt;DiskPath&gt; <span class="literal">--partition</span> &lt;PartitionNumber&gt; <span class="literal">--type</span> &lt;Filesystem&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>WSL 배포본에서 mount</li>
+</ol>
+<p><code>lsblk</code> 로 파티션 확인</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ lsblk</span><br><span class="line">NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span><br><span class="line">sda      8:0    0 388.4M  1 disk</span><br><span class="line">sdb      8:16   0   186M  1 disk</span><br><span class="line">sdc      8:32   0     4G  0 disk [SWAP]</span><br><span class="line">sdd      8:48   0     1T  0 disk /mnt/wslg/distro</span><br><span class="line">                                 /</span><br><span class="line">sde      8:64   0 476.9G  0 disk</span><br><span class="line">└─sde1   8:65   0 476.9G  0 part</span><br></pre></td></tr></table></figure>
+
+<p>적절한 위치로 마운트 한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mount /dev/sde1 /mnt/disk</span><br></pre></td></tr></table></figure>
+
+
+<p>WSL 내부에서 fstab 을 수정해 입력한다. <code>sudo blkid</code> 명령으로 연결된 디스크의 파티션 UUID를 확인합니다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=&lt;Your-Partition-UUID&gt; /mnt/disk ext4 defaults 0 2</span><br></pre></td></tr></table></figure>
+
+
+<ol start="5">
+<li>디스크 분리</li>
+</ol>
+<p>분리</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--unmount</span> &lt;DiskPath&gt;</span><br></pre></td></tr></table></figure></div><div class="article-licensing box"><div class="licensing-title"><p>WSL 외부디스크 마운트</p><p><a href="https://thinkbee.github.io/WSL-외부디스크-a38220eecf9e/">https://thinkbee.github.io/WSL-외부디스크-a38220eecf9e/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Gangtai Goh</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2025-06-25</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2025-06-27</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/WSL2/">WSL2</a><a class="link-muted mr-2" rel="tag" href="/tags/WSL/">WSL</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=63bf627f1bc5280019aabbcc&amp;product=sop" defer></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">이 글이 마음에 드시나요? 다음을 통해 후원하실 수 있습니다: </h3><div class="buttons is-centered"><a class="button donate" href="https://www.buymeacoffee.com/gangtaigoh" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>커피 한 잔 사주기</span></a><a class="button donate" href="/patreon.com/user?u=86716526" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/pyenv-doctor-ea932b0ee5ca/"><span class="level-item">pyenv-doctor</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://thinkbee.github.io/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/';
+            this.page.identifier = 'WSL-외부디스크-a38220eecf9e/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'qkboo-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-25T00:00:00.000Z">2025-03-25</time></p><p class="title"><a href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">174</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-right",
+        content: {
+          message: "이 웹 사이트는 귀하의 경험을 향상시키기 위해 Cookie를 사용합니다.",
+          dismiss: "무시",
+          allow: "허용",
+          deny: "거부",
+          link: "더 알아보기",
+          policy: "Cookie 정책",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>
