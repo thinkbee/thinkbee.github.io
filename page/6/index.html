@@ -33,7 +33,182 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-14T01:00:00.000Z" title="3/14/2024, 10:00:00 AM">2024-03-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-03-14T02:18:48.789Z" title="3/14/2024, 11:18:48 AM">2024-03-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Windows/">Windows</a></span><span class="level-item">6분안에 읽기 (약 827 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/WSL2-Host_port_forward-37fb5a5a6c2f/">Window Host에서 WSL 서비스로 port forward 사용</a></p><div class="content"><p>윈도우에서 WSL2 사이에 port forward 를 통해서 WSL에서 사용중인 서비스에 접속하고 사용할 수 있다.</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-10-23T08:02:31.157Z" title="10/23/2024, 5:02:31 PM">2024-10-23</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-10-31T16:48:18.663Z" title="11/1/2024, 1:48:18 AM">2024-11-01</time>&nbsp;업데이트 됨</span><span class="level-item">11분안에 읽기 (약 1601 단어)</span></div></div><div class="content"><table>
+<thead>
+<tr>
+<th>명령</th>
+<th>설명</th>
+<th>ex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>echo</td>
+<td>출력하고자 하는 변수를 출력할 때 사용하는 명령어이다. 파이썬의 print와 같은 명령어이다.</td>
+<td>echo $b</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>현재 디렉토리를 확인하는 명령어이다.</td>
+<td><code>$ pwd</code></td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>접속한 사용자가 누구인지 확인하는 명령어이다.</td>
+<td><code>$ whoami</code></td>
+</tr>
+<tr>
+<td>mv</td>
+<td>파일의 이름을 바꾸거나 파일을 다른 디렉토리로 이동하는 명령어이다.</td>
+<td>mv 기존파일명 새로운파일명</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>파일이나 디렉토리의 소유자를 변경하는 명령어이다. 소유자와 파일에 관련된 권한 정보는 ls -l 명령어로 확인할 수 있다.</td>
+<td>chown 그룹:소유자</td>
+</tr>
+<tr>
+<td>su</td>
+<td>접속 유저를 바꾸는 명령어</td>
+<td><code>su - 유저이름</code><br> 접속 유저를 root 유저로 바꾸자. <code>$ su -</code></td>
+</tr>
+<tr>
+<td>whatis</td>
+<td>명령어의 간단한 설명을 확인할 수 있다.</td>
+<td><code>$ whatis mkdir</code></td>
+</tr>
+<tr>
+<td>man</td>
+<td>명령어의 메뉴얼을 확인할 수 있다. <br>메뉴얼을 확인하고는 q를 눌러 메뉴얼 화면에서 빠져나와야 한다.</td>
+<td><code>$ man mkdir</code></td>
+</tr>
+<tr>
+<td>cd</td>
+<td>Change Directory 명령어로 디렉토리를 이동하는 명령어이다.</td>
+<td><code>$ cd ..</code>, <code>$cd /home</code></td>
+</tr>
+<tr>
+<td>ls</td>
+<td>현재 디렉토리에 있는 폴더와 파일을 확인하는 명령어<br>-l 옵션: 폴더, 파일들의 정보를 자세히 출력한다.<br>-d 옵션: 디렉토리를 검색하는 옵션</td>
+<td><code>$ ls -l *.txt</code></td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>현재 디렉토리에 새로운 디렉토리를 생성하는 명령어이다.<br>-p 옵션: 디렉토리를 만들면서 한번에 하위 디렉토리를 생성하는 옵션</td>
+<td><code>mkdir -p /test01/test02/test03</code></td>
+</tr>
+<tr>
+<td>touch</td>
+<td>파일의 용량이 0인 파일을 생성하는 명령어이다.<br>여러 파일을 한 번에 생성할 수 있는데 각 파일은 공백(화이트 스페이스)로 구분한다.</td>
+<td><code>$ touch a.txt b.txt c.txt e.txt f.txt</code></td>
+</tr>
+<tr>
+<td>rm</td>
+<td>파일이나 디렉토리를 삭제하는 명령어이다.<br>리눅스는 휴지통이 있지만 명령어로 삭제할 때는 파일이 바로 삭제되기 때문에 복구할 수 없다.<br>-r 옵션: 현재 디렉토리 밑에 있는 모든 파일과 디렉토리를 삭제한다.<br>-f 옵션: 삭제 여부를 물어보지 않고 삭제한다.<br>-rf 옵션: 현재 디렉토리 밑에 있는 파일과 디렉토리를 삭제 여부를 뭍지 않고 삭제한다.</td>
+<td><code>$touch bbb.txt</code><br> <code>$rm bbb.txt</code></td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>디렉토리를 삭제하는 명령어이다.</td>
+<td><code>$rmdir ddd</code></td>
+</tr>
+<tr>
+<td>alias</td>
+<td>자주 수행하는 명령어들을 쉽게 사용할 수 있도록 설정하는 명령어이다.<br>alias 사용자명령어&#x3D;”리눅스 명령어”</td>
+<td><code>$ alias ll=&#39;ls -alF&#39;</code></td>
+</tr>
+<tr>
+<td>unalias</td>
+<td>alias 명령을 삭제한다.</td>
+<td><code>$ unalias ll</code></td>
+</tr>
+<tr>
+<td>cat</td>
+<td>파일의 내용을 화면에 출력하는 명령어이다.</td>
+<td><code>$ cat emp.txt</code></td>
+</tr>
+<tr>
+<td>명령어 &gt;&gt; 파일</td>
+<td>redirection 화면에 출력되는 결과를 파일로 저장하는 명령어이다.<br>기존에 같은 파일의 이름이 없으면 파일을 생성하고 있으면 기존 파일 뒤에 덧붙인다.</td>
+<td><code>$ cat emp.txt &gt;&gt; emp2.txt</code></td>
+</tr>
+<tr>
+<td>명령어 &gt; 파일</td>
+<td>파일을 생성하는데 기존에 같은 이름의 파일이 있으면 그냥 덮어쓴다.</td>
+<td><code>$ cat &gt; test.txt</code><br>현재 터미널 입력을 파일로 생성한다.</td>
+</tr>
+<tr>
+<td>more</td>
+<td>문서의 내용을 화면에 출력할 때 페이지 단위로 볼 수 있는 명령어이다. 문서 내 이동<br>Space: 전진키<br>b: 후진키<br>f: 다음 페이지</td>
+<td><code>more emp2.txt</code></td>
+</tr>
+<tr>
+<td>head</td>
+<td>문서의 상위 몇 줄을 출력하는 명령어이다.</td>
+<td><code>$ head -20 jobs.txt</code></td>
+</tr>
+<tr>
+<td>tail</td>
+<td>문서 하위 몇 줄을 출력하는 명령어이다.</td>
+<td><code>$ tail -10 jobs.txt</code></td>
+</tr>
+<tr>
+<td>wc</td>
+<td>파일 안의 단어의 개수 또는 라인수를 출력하는 명령어이다. <br>-l: 라인 수만 출력한다.<br>-w: 단어의 개수만 출력한다.<br>-c: 철자의 개수만 출력한다.</td>
+<td><code>$ wc jobs.txt</code> <br>순서대로 라인 수, 단어의 개수, 철자의 개수를 의미한다.</td>
+</tr>
+<tr>
+<td>grep ‘단어’ 파일명</td>
+<td>파일 안에 포함된 특정 단어나 구문을 검색하는 명령어이다.<br>-i: 대소문자를 구분하지 않고 검색한다.</td>
+<td><code>$ grep &#39;SCOTT&#39; emp.txt</code> <br> emp.txt에서 SCOTT이라는 단어가 포함된 행을 출력한다.</td>
+</tr>
+<tr>
+<td>명령어 <code>|</code> 명령어</td>
+<td>pipe 명령어. <code>|</code> 로 표현하며 앞의 명령어와 뒤의 명령어를 연결하여 사용할 때 사용한다.</td>
+<td>&#96;$ ls -l</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>데이터를 특정 컬럼을 기준으로 정렬하는 명령어이다.<br>-k: 내림차순 정렬<br>-rk: 오름차순 정렬<br>-n: 숫자를 정렬할 때 사용하는 옵션이다.</td>
+<td><code>$ sort -nk 6 emp.txt</code></td>
+</tr>
+<tr>
+<td>awk</td>
+<td>특정 컬럼을 출력하고자 할 때 사용하는 명령어이다.<br>awk 조건 컬럼선택 대상파일</td>
+<td>예제1. emp.txt에서 직업만 출력하자. <code>$ awk &#39;&#123;print $3&#125;&#39; emp.txt</code><br>3번 컬럼이 SALESMAN 이면 출력 <code>awk &#39;$3==&quot;SALESMAN&quot; &#123;print $2, $3&#125;&#39; emp.txt</code><br><code>$n</code> 컬럼,  $0은 모든 컬럼을 의미한다.<br>출력은 ‘{print 컬럼번호컬럼번호}’로 출력한다.</td>
+</tr>
+<tr>
+<td>uniq</td>
+<td>중복된 라인을 제거하는 명령어이다.</td>
+<td>결과에서 중복을 제거해서 출력하자.<br>&#96;$ awk ‘{print $3}’ emp.txt</td>
+</tr>
+<tr>
+<td>diff 파일1 파일2</td>
+<td>두 파일간의 차이점을 찾아서 알려주는 명령어이다.</td>
+<td><code>$ diff emp.txt emp2.txt </code></td>
+</tr>
+<tr>
+<td>find</td>
+<td>검색하고자 하는 파일을 찾을 때 사용하는 명령어이다.</td>
+<td><code>$ find /root -name &#39;emp.txt&#39; -print</code></td>
+</tr>
+<tr>
+<td>cp</td>
+<td>파일을 복사하는 명령어이다.</td>
+<td><code>$ cp emp.txt emp400.txt</code></td>
+</tr>
+<tr>
+<td>tar</td>
+<td>tar은 여러 파일을 하나로 합쳐주는 명령어이다. 압축을 하려면 -z 옵션을 사용해야 한다.<br>-c: 여러 개의 파일을 하나로 만드는 옵션<br>-v: 압축되는 과정을 출력하라는 옵션<br>-f: 생성되는 파일명을 지정<br>-x: 묶어있는 파일을 풀라는 옵션<br>-C: 압축이 풀릴 위치를 지정하는 옵션<br>-z: 실제 파일 크기를 압축하는 옵션</td>
+<td>tar cvf 압축파일명 압축파일대상 <br>tar xvf 압축파일명 압축을 해제할 위치</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>sed 명령어는 검색 뿐만 아니라 내용을 변경할 수 있다. 반면 grep 명령어는 파일의 특정 내용을 검색하는 기능만 가진다.</td>
+<td>sed ‘s&#x2F;기존데이터&#x2F;변경데이터’ 파일명</td>
+</tr>
+</tbody></table>
+<hr>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-14T01:00:00.000Z" title="3/14/2024, 10:00:00 AM">2024-03-14</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-03-14T02:18:48.789Z" title="3/14/2024, 11:18:48 AM">2024-03-14</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/OS/">OS</a><span> / </span><a class="link-muted" href="/categories/OS/Windows/">Windows</a></span><span class="level-item">6분안에 읽기 (약 827 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/WSL2-Host_port_forward-37fb5a5a6c2f/">Window Host에서 WSL 서비스로 port forward 사용</a></p><div class="content"><p>윈도우에서 WSL2 사이에 port forward 를 통해서 WSL에서 사용중인 서비스에 접속하고 사용할 수 있다.</p>
 <ul>
 <li>원격에서 WSL2에 SSH서비스로 접근하고자 할 때</li>
 <li>원격에서 WSL2에 서비로 동작하는 django 등 서비스에 접근하고자 할 때</li>
@@ -69,83 +244,7 @@
 <figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 포트 포워드 삭제</span></span><br><span class="line">netsh interface portproxy delete v4tov4 listenport=<span class="number">5000</span> listenaddress=<span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 방화벽 삭제</span></span><br><span class="line">netsh advfirewall firewall delete rule name=<span class="string">&quot;TCP/5000&quot;</span></span><br></pre></td></tr></table></figure>
 
 
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-03-05T10:00:00.000Z" title="3/5/2024, 7:00:00 PM">2024-03-05</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2024-03-06T00:58:30.985Z" title="3/6/2024, 9:58:30 AM">2024-03-06</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Database/">Database</a></span><span class="level-item">6분안에 읽기 (약 909 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/mariadb-transfer_to_other-a78fa3ae97d8/">MariaDb 10 이전하기</a></p><div class="content"><p>기존 MariaDB 10 에서 다른 서버로 데이터&#x2F;사용자 등을 이전하기. 이전은 2가지 방법을 제시한다.</p>
-<ol>
-<li>데이터베이스 덤프만 이전: mysqldump 이용</li>
-<li>데이터베이스 데이터 폴더 복제: rsync 이용</li>
-</ol>
-<h1 id="준비"><a href="#준비" class="headerlink" title="준비"></a>준비</h1><ol>
-<li>기존서버: 현재 운영중인 mariadb 데이터베이스</li>
-<li>대상서버: 새로 설치한 mariadb 데이터베이스</li>
-</ol>
-<p>양쪽 서버의 mariadb 를 모두 종료한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl stop mariadb</span><br><span class="line"></span><br><span class="line">OR</span><br><span class="line"></span><br><span class="line">$ systemctl stop mysql</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="데이터베이스-덤프만-이전"><a href="#데이터베이스-덤프만-이전" class="headerlink" title="데이터베이스 덤프만 이전"></a>데이터베이스 덤프만 이전</h1><p>데이터베이스 시스템의 데이터베이스를 덤프를 통해서 백업하고 리스토어한다.</p>
-<h2 id="기존-데이터베이스-덤프"><a href="#기존-데이터베이스-덤프" class="headerlink" title="- 기존 데이터베이스 덤프"></a>- 기존 데이터베이스 덤프</h2><p>모든 데이터베이스를 덤프해서 사용.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mysqldump -u [user] -p --all-databases &gt; all_databases.sql</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>지정한 데이터베이스만 덤프하려면<br><br></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p --opt [database name] &gt; database_name.sql</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>덤프 후에 덤프 파일을 대상 서버에 이전한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ scp all_databases.sql user@192.168.1.10:~/</span><br><span class="line">$ scp database_name.sql user@192.168.1.10:~/</span><br></pre></td></tr></table></figure>
-
-<h2 id="대상-서버에서-갱신"><a href="#대상-서버에서-갱신" class="headerlink" title="- 대상 서버에서 갱신"></a>- 대상 서버에서 갱신</h2><p>덤프 파일을 데이터베이스에 리스토어 한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mariadb -u [user] -p --all-databases &lt; all_databases.sql  <span class="comment"># 모든 데이터베이스</span></span><br><span class="line">$ mariadb -u [user] -p newdatabase &lt; database_name.sql      <span class="comment"># 단일 파일</span></span><br></pre></td></tr></table></figure>
-
-<p>덤프 파일을 리스토어 한 후에 접속해서 데이터베이스가 들어 있는지 확인.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u user -p</span><br><span class="line">&gt; show databases;</span><br></pre></td></tr></table></figure>
-
-
-<p>대상 서버에 사용자 허용 범위 설정</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">User</span>, Host <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> Host <span class="operator">&lt;&gt;</span> <span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">User</span>, Host <span class="keyword">FROM</span> mysql.user <span class="keyword">WHERE</span> Host <span class="operator">&lt;&gt;</span> <span class="string">&#x27;localhost&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> <span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;user&#x27;</span>@<span class="string">&#x27;192.168.1.%&#x27;</span> </span><br><span class="line">        IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
-
-
-<br>
-
-<h1 id="데이터베이스-사용자와-권한을-모두-옮기기"><a href="#데이터베이스-사용자와-권한을-모두-옮기기" class="headerlink" title="데이터베이스, 사용자와 권한을 모두 옮기기"></a>데이터베이스, 사용자와 권한을 모두 옮기기</h1><p>기존 데이터베이스 서버의 데이터베이스, 사용자, 권한과 데이터 구조 등을 모두 새 서버에 이전하려고 하면 데이터베이스 시스템이 다루고 있는 모든 파일 시스템을 대상 서버에 복제를 하면 된다. 보통 rsync 를 통해서 모든 파일을 소스에서 타겟 서버로 이전을 한다.</p>
-<ol>
-<li>대상서버 데이터 폴더 준비</li>
-<li>기존서버에서 rsync 로 대상서버로 데이터 폴더 전송</li>
-<li>대상서버 mariadb 종료 및 my.cnf 에 데이터 폴더 위치 확인</li>
-<li>대상서버 데이터 폴더 권한을 mysql 로 변경</li>
-</ol>
-<h3 id="1-대상-서버-데이터-폴더와-복사"><a href="#1-대상-서버-데이터-폴더와-복사" class="headerlink" title="1. 대상 서버 데이터 폴더와 복사"></a>1. 대상 서버 데이터 폴더와 복사</h3><p>옮기는 서버가 192.168.1.10 이고 사용자 계정 user 를 사용한다고 가정하자.</p>
-<p>기존서버에서 mariadb 를 종료한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ susdo systemctl stop mariadb</span><br></pre></td></tr></table></figure>
-
-<p>먼저 대상서버의 data 폴더를 준비하고 사용자 계정 user 가 사용할 수 있게 한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">mkdir</span> -p /data/maria_db</span><br><span class="line">$ sudo <span class="built_in">chown</span> user:user /data/maria_db</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-기존서버에서-대상서버로-데이터-폴더-복제"><a href="#2-기존서버에서-대상서버로-데이터-폴더-복제" class="headerlink" title="2. 기존서버에서 대상서버로 데이터 폴더 복제"></a>2. 기존서버에서 대상서버로 데이터 폴더 복제</h3><p>기존서버에서 mariadb 를 종료한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ susdo systemctl stop mariadb</span><br></pre></td></tr></table></figure>
-
-<p>기존서버 데이터 폴더를 대상서버로 모두 복제한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync -avz /var/lib/mysql/* user@192.168.1.10:/data/maria_db/ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-대상서버-폴더-권한-및-시작"><a href="#3-대상서버-폴더-권한-및-시작" class="headerlink" title="3. 대상서버 폴더 권한 및 시작"></a>3. 대상서버 폴더 권한 및 시작</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">chown</span> mysql:mysql -R /data/maria_db</span><br></pre></td></tr></table></figure>
-
-<p>&#x2F;etc&#x2F;mysql&#x2F;my.cnf 의 데이터 폴더 위치를 조정한다.</p>
-<p>mariadb 를 재시작한다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ susdo systemctl start mariadb</span><br></pre></td></tr></table></figure>
-
-<p>에러가 없이 잘 시작되면 데이터 폴더 이전이 잘 된것으로 보인다.</p>
-<h3 id="4-확인"><a href="#4-확인" class="headerlink" title="4. 확인"></a>4. 확인</h3><p>클라이언트로 mariadb 에 root 계정으로 접속해 본다.  이 계정의 비밀번호는 이전서버의 root 계정과 비밀번호일 것이다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mariadb -u root -p</span><br></pre></td></tr></table></figure>
-
-
-<p>기존 서버의 데이터베이스 계정 student 가 있다고 가정하고 클라이언트로 접속해 본다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mariadb -u student -p</span><br></pre></td></tr></table></figure>
-
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/5/">이전</a></div><div class="pagination-next"><a href="/page/7/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><a class="pagination-link is-current" href="/page/6/">6</a></li><li><a class="pagination-link" href="/page/7/">7</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/87/">87</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">174</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-25T00:00:00.000Z">2025-03-25</time></p><p class="title"><a href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-02-02T01:00:00.000Z">2025-02-02</time></p><p class="title"><a href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">10</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">57</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">92</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">30</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/5/">이전</a></div><div class="pagination-next"><a href="/page/7/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><a class="pagination-link is-current" href="/page/6/">6</a></li><li><a class="pagination-link" href="/page/7/">7</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/88/">88</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">175</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-10T00:00:00.000Z">2025-04-10</time></p><p class="title"><a href="/llm-01LLM_Models-806075edcbe4/">LLM01 - Models</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-25T00:00:00.000Z">2025-03-25</time></p><p class="title"><a href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">57</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">92</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">30</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
