@@ -33,76 +33,517 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-03-25T00:00:00.000Z" title="3/25/2025, 9:00:00 AM">2025-03-25</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-03-27T00:49:57.727Z" title="3/27/2025, 9:49:57 AM">2025-03-27</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">2분안에 읽기 (약 244 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><div class="content"><p>pyenv 에 doctor 명령이 생겼다.</p>
-<ul>
-<li>pyenv 설치 구성을 검증한다.</li>
-<li>python 버전을 빌드하기 위한 개발 도구들</li>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-04-11T00:00:00.000Z" title="4/11/2025, 9:00:00 AM">2025-04-11</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-06-29T04:07:47.489Z" title="6/29/2025, 1:07:47 PM">2025-06-29</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">21분안에 읽기 (약 3205 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llm-02LLM%ED%99%9C%EC%9A%A9-6bf20c6c19f9/">LLM02 - 활용방법</a></p><div class="content"><p>대형언어모델을 운용할 때 사용하는 다양한 활용 방법을 요약했다.</p>
+<h1 id="LLM-활용"><a href="#LLM-활용" class="headerlink" title="LLM 활용"></a>LLM 활용</h1><p>Open-source LLMs</p>
+<img src='https://python.langchain.com/assets/images/OSS_LLM_overview-9444c9793c76bd4785a5b0cd020c14ef.png'>
+
+<p>2025 년 주요 LLM base models</p>
+<p><img src='https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk1JmwPe5tLC6-XHppDpkBwOXd1t-WL4Pu871KVEdheZm03QYtJPD4WU1OXmG_ZiQDp-zHiN9BU5CruVQslAXf4QfqZd5mYPY4oUGbONPORbmVy9AZcy0hUh3QzsiBZ5ca46m1uw?key=INQ3nGlG9V9oPWqw4SkZT1dt'> [<a target="_blank" rel="noopener" href="https://blog.n8n.io/open-source-llm//]">https://blog.n8n.io/open-source-llm/\]</a></p>
+<h3 id="LLM의-주요-활용-분야"><a href="#LLM의-주요-활용-분야" class="headerlink" title="LLM의 주요 활용 분야"></a>LLM의 주요 활용 분야</h3><p>LLM은 그 자체로도 강력하지만, 다른 기술과 결합하거나 특정 목적에 맞춰 미세 조정될 때 더욱 큰 시너지를 낼 수 있습니다. 주요 활용 분야는 다음과 같습니다.</p>
+<h4 id="1-콘텐츠-생성-및-요약"><a href="#1-콘텐츠-생성-및-요약" class="headerlink" title="1. 콘텐츠 생성 및 요약"></a>1. 콘텐츠 생성 및 요약</h4><ul>
+<li><strong>보고서, 기사, 블로그 게시물 작성:</strong> 주어진 주제나 키워드를 바탕으로 자연스럽고 설득력 있는 글을 자동으로 생성합니다.</li>
+<li><strong>마케팅 문구 및 광고 카피:</strong> 제품이나 서비스의 특징을 분석하여 매력적인 광고 문구를 제안합니다.</li>
+<li><strong>창의적인 글쓰기:</strong> 시, 소설, 시나리오 등 문학 작품 창작에 도움을 주거나 새로운 아이디어를 제시합니다.</li>
+<li><strong>텍스트 요약 및 정보 추출:</strong> 긴 문서나 여러 개의 문서를 핵심 내용만 간추려 요약하거나 특정 정보를 추출합니다.</li>
+<li><strong>번역:</strong> 자연스럽고 정확한 언어 번역을 제공하며, 문맥을 이해하여 문화적 뉘앙스까지 반영하려 노력합니다.</li>
 </ul>
-<p>doctor 명령을 사용하려면 시스템에 개발도구와 빌드도구가 설치되어야 한다.</p>
-<h1 id="준비"><a href="#준비" class="headerlink" title="준비"></a>준비</h1><p>pyenv 의 시스템 빌드환경에 필요한 도구를 설치가 필요하다.</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">https://github.com/pyenv/pyenv/wiki#suggested-build-environment</a></li>
+<h4 id="2-고객-서비스-및-상호작용"><a href="#2-고객-서비스-및-상호작용" class="headerlink" title="2. 고객 서비스 및 상호작용"></a>2. 고객 서비스 및 상호작용</h4><ul>
+<li><strong>챗봇 및 가상 비서:</strong> 고객 문의에 실시간으로 응답하고, FAQ를 기반으로 정보를 제공하며, 기본적인 상담 업무를 처리합니다.</li>
+<li><strong>개인화된 추천 시스템:</strong> 사용자의 선호도나 과거 행동을 분석하여 맞춤형 제품, 콘텐츠, 서비스를 추천합니다.</li>
+<li><strong>음성 인식 및 합성:</strong> 음성 명령을 텍스트로 변환하거나 텍스트를 자연스러운 음성으로 변환하여 상호작용을 돕습니다.</li>
 </ul>
-<p>Ubuntu&#x2F;Linux</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \</span><br><span class="line">libbz2-dev libreadline-dev libsqlite3-dev curl git \</span><br><span class="line">libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev</span><br></pre></td></tr></table></figure>
-
-
-<p>macOS</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install openssl readline sqlite3 xz zlib tcl-tk@8 libb2</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="pyenv-doctor-사용"><a href="#pyenv-doctor-사용" class="headerlink" title="pyenv doctor 사용"></a>pyenv doctor 사용</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv doctor</span><br><span class="line">Cloning /home/USER/.pyenv/plugins/pyenv-doctor/bin/.....</span><br><span class="line">Installing python-pyenv-doctor...</span><br><span class="line">Installed python-pyenv-doctor to /tmp/pyenv-doctor.20250327094025.5063/prefix</span><br><span class="line">Congratulations! You are ready to build pythons!</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="기타"><a href="#기타" class="headerlink" title="기타"></a>기타</h1><p>시스템에 빌드 도구가 설치되지 않으면 doctor 명령을 실행하면 다양한 에러를 낸다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv doctor</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">configure: error: GNU readline is not installed.</span><br><span class="line">Problem(s) detected while checking system.</span><br><span class="line"></span><br><span class="line">See https://github.com/pyenv/pyenv/wiki/Common-build-problems for known solutions.</span><br></pre></td></tr></table></figure>
-
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-03-19T00:00:00.000Z" title="3/19/2025, 9:00:00 AM">2025-03-19</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-03-19T21:16:03.486Z" title="3/20/2025, 6:16:03 AM">2025-03-20</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Python/">Python</a></span><span class="level-item">3분안에 읽기 (약 465 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><div class="content"><p>Jupyter-lab 의 kernel 은 Jupyterlab 과 실행 환경과 직간접으로 연결을 해준다.</p>
-<p>ipykernel 은 jupyter에 대해서 iPython을 제공한다.</p>
-<p>ipython은 jupyterlab에 kernel을 통해서 python 혹은 virtualenv 의 개발환경을 제공한다.</p>
-<h1 id="kernel"><a href="#kernel" class="headerlink" title="kernel"></a>kernel</h1><p>jupyter-lab 을 실행하면 커널 launcher 화면에 kernel이 출력된다.</p>
-<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-overview-ui.png' width=70%>
-
-
-<p>실행중인 커널은 사이트 바에서 확인 가능하다.</p>
-<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-running-ui-shutdown-single.png' width=70%>
-
-
-<p>jupyter 명령으로 커널을 관리할 수 있다.</p>
-<h2 id="jupyter-명령"><a href="#jupyter-명령" class="headerlink" title="jupyter 명령"></a>jupyter 명령</h2><p>jupyter 명령에서  kernels 를 생성, 제거 관리를 할 수 있다.</p>
-<p>현재 kernel 목록을 확인 가능하다.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter kernelspec list</span><br><span class="line">  python3    /home/user/.pyenv/versions/MyEnv/share/jupyter/kernels/python3</span><br></pre></td></tr></table></figure>
-
-<h4 id="새-kernel-생성성"><a href="#새-kernel-생성성" class="headerlink" title="새 kernel 생성성"></a>새 kernel 생성성</h4><p>가상환경 TestEnv 가 있다고 가정한다. </p>
-<p>TestEnv 의 python 환경을 jupyterlab 에서 사용하려면 </p>
-<p>해당 가상환경을 jupyterlab 커널에서 사용하게 하려면 커널을 생성해 주어야 한다.</p>
-<p>그러기 위해서 ipykernel 이 필요하다</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipykernel</span><br></pre></td></tr></table></figure>
-
-<p>ipykernel 로 새 kernel 생성:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --name &#123;MACHINE_NAME&#125; --display-name &quot;&#123;DISPLAY_NAME&#125;&quot; --user</span><br></pre></td></tr></table></figure>
-
-<p>다음 명령에서 <code>--user</code>을 사용하면 사용자의 <code>~.local/share</code> 공간에 커널이 추가 되고 사용자의 jupyterlab 에서 모두 사용할 수 있다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python -m ipykernel install --name testenv_kernel --display-name &quot;Test Env&quot; --user</span><br><span class="line">Installed kernelspec testenv_kernel in /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br></pre></td></tr></table></figure>
-
-<p>kernelspec 으로 확인 할 수 있고,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~$ jupyter kernelspec list</span><br><span class="line">Available kernels:</span><br><span class="line">  python3           /home/qkboo/.pyenv/versions/3.12.8/envs/TestEnv/share/jupyter/kernels/python3</span><br><span class="line">  testenv_kernel    /home/qkboo/.local/share/jupyter/kernels/testenv_kernel</span><br><span class="line">(TestEnv) qkboo:~$</span><br></pre></td></tr></table></figure>
-
-<p>Jupyterlab 의 launcher 화면에도 새 커널을 확인할 수 있다.</p>
-<img src='https://docs.posit.co/ide/server-pro/user/images/jupyterlab/jupyterlab-kernel-user-installed-example.png' width=80%>
-
-
-<h4 id="kernel-제거"><a href="#kernel-제거" class="headerlink" title="kernel 제거"></a>kernel 제거</h4><p><code>kernelspec uninstall</code> 명령을 사용해서 사용자 커널을 제거할 수 있다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec uninstall &#123;KERNEL_NAME&#125;</span><br></pre></td></tr></table></figure>
-
-<p>testenv_kernel 을 삭제해 보자</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec uninstall testenv_kernel</span><br><span class="line">Kernel specs to remove:</span><br><span class="line">  testenv_kernel        /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br><span class="line">Remove 1 kernel specs [y/N]: y</span><br><span class="line">Removed /home/user/.local/share/jupyter/kernels/testenv_kernel</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="—-참고-—"><a href="#—-참고-—" class="headerlink" title="— 참고 —"></a>— 참고 —</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://docs.posit.co/ide/server-pro/user/jupyter-lab/guide/jupyter-kernel-management.html">https://docs.posit.co/ide/server-pro/user/jupyter-lab/guide/jupyter-kernel-management.html</a></li>
+<h4 id="3-교육-및-학습"><a href="#3-교육-및-학습" class="headerlink" title="3. 교육 및 학습"></a>3. 교육 및 학습</h4><ul>
+<li><strong>개인 맞춤형 학습 콘텐츠:</strong> 학생의 학습 수준과 목표에 맞춰 최적화된 학습 자료나 문제 풀이를 제공합니다.</li>
+<li><strong>튜터링 및 질의응답:</strong> 특정 개념에 대한 질문에 답변하고, 예시를 들어 설명하며 학습을 돕습니다.</li>
+<li><strong>언어 학습:</strong> 외국어 학습 시 발음 교정, 문법 오류 수정, 회화 연습 상대 등의 역할을 수행합니다.</li>
+</ul>
+<h4 id="4-코드-생성-및-개발"><a href="#4-코드-생성-및-개발" class="headerlink" title="4. 코드 생성 및 개발"></a>4. 코드 생성 및 개발</h4><ul>
+<li><strong>코드 자동 완성 및 생성:</strong> 개발자가 코드를 작성할 때 다음 코드를 예측하여 자동 완성하거나, 특정 기능에 대한 코드를 생성합니다.</li>
+<li><strong>버그 수정 및 코드 최적화:</strong> 기존 코드의 오류를 찾아내고 수정 방법을 제안하거나, 성능 개선을 위한 최적화 방안을 제시합니다.</li>
+<li><strong>설명서 작성:</strong> 코드에 대한 주석이나 API 문서 등을 자동으로 생성하여 개발 생산성을 높입니다.</li>
+</ul>
+<h4 id="5-데이터-분석-및-인사이트-도출"><a href="#5-데이터-분석-및-인사이트-도출" class="headerlink" title="5. 데이터 분석 및 인사이트 도출"></a>5. 데이터 분석 및 인사이트 도출</h4><ul>
+<li><strong>비정형 데이터 분석:</strong> 고객 피드백, 소셜 미디어 게시물 등 비정형 텍스트 데이터에서 유의미한 패턴이나 트렌드를 발견합니다.</li>
+<li><strong>시장 조사:</strong> 방대한 양의 시장 보고서나 뉴스 기사를 분석하여 시장 동향이나 경쟁사 정보를 파악합니다.</li>
+</ul>
+<h4 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h4><ul>
+<li><strong>생산성 향상:</strong> 반복적이거나 시간이 많이 소요되는 작업을 자동화하여 효율성을 극대화합니다.</li>
+<li><strong>비용 절감:</strong> 특정 업무에 필요한 인력이나 자원을 줄일 수 있습니다.</li>
+<li><strong>새로운 가치 창출:</strong> 기존에는 불가능했거나 비효율적이었던 작업을 가능하게 하여 새로운 비즈니스 모델을 창출합니다.</li>
+<li><strong>개인화된 경험 제공:</strong> 사용자 개개인의 니즈에 맞는 맞춤형 서비스를 제공하여 만족도를 높입니다.</li>
+</ul>
+<h4 id="한계"><a href="#한계" class="headerlink" title="한계"></a>한계</h4><ul>
+<li>환각(Hallucination): 사실이 아닌 정보를 그럴듯하게 생성하여 제공할 수 있습니다.</li>
+<li>편향성: 학습 데이터에 존재하는 편향이 모델에 반영되어 차별적이거나 부적절한 결과를 초래할 수 있습니다.</li>
+<li>최신 정보 부족: 학습 시점 이후의 최신 정보를 반영하지 못할 수 있습니다.</li>
+<li>복잡한 추론의 한계: 아직까지는 인간 수준의 복잡한 논리적 추론이나 문제 해결 능력에는 한계가 있습니다.</li>
+<li>데이터 보안 및 프라이버시: 민감한 정보를 다룰 때 데이터 유출이나 오용의 위험이 존재합니다.</li>
+</ul>
+<p>크게 Finetuning 과 RAG 가 있다.</p>
+<h1 id="LLM-응용-전략"><a href="#LLM-응용-전략" class="headerlink" title="LLM 응용 전략"></a>LLM 응용 전략</h1><p>실제 서비스나 애플리케이션에 적용할 때 중요한 전략인 RAG(Retrieval-Augmented Generation), Fine-tuning, Agent에 대해 살펴보자</p>
+<ol>
+<li>Fineturning</li>
+<li>RAG</li>
+<li>Agent</li>
 </ol>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/">이전</a></div><div class="pagination-next"><a href="/page/3/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link is-current" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/88/">88</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">175</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">253</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-10T00:00:00.000Z">2025-04-10</time></p><p class="title"><a href="/llm-01LLM_Models-806075edcbe4/">LLM01 - Models</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-25T00:00:00.000Z">2025-03-25</time></p><p class="title"><a href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-19T00:00:00.000Z">2025-03-19</time></p><p class="title"><a href="/jupyter-kernelspec-394edf611c5b/">jupyterlab - kernel 관리</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-11T00:00:00.000Z">2025-03-11</time></p><p class="title"><a href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><p class="categories"><a href="/categories/Programming-Python/">Programming, Python</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">57</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">92</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">30</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+<h2 id="1-Fineturning"><a href="#1-Fineturning" class="headerlink" title="1. Fineturning"></a>1. Fineturning</h2><p>파인튜닝은 LLM 모델을 특별한 상황에 더 맞도록 훈련을 시키는 방법</p>
+<p>Fine-tuning은 미리 학습된 LLM(Pre-trained LLM)을 특정 데이터셋(도메인 특화 데이터, 작업별 데이터, 지역 데이터 등)으로 추가 학습시키는 과정으로 이를 통해 모델의 파라미터를 조정하여 특정 작업이나 특정 도메인에 더욱 집중해서 성능을 발휘하도록 만드는 기술이다.</p>
+<h4 id="작동-방식"><a href="#작동-방식" class="headerlink" title="작동 방식:"></a>작동 방식:</h4><ol>
+<li><p>사전 학습된 LLM 선택: GPT-3, Llama, BERT 등 이미 대량의 데이터로 학습된 LLM을 선택합니다.</p>
+</li>
+<li><p>데이터셋 준비: Fine-tuning에 사용할 고품질의 도메인 특화 데이터나 특정 작업에 대한 데이터를 준비합니다 (예: 질문-답변 쌍, 특정 스타일의 텍스트).</p>
+</li>
+<li><p>모델 추가 학습: 준비된 데이터셋으로 LLM을 추가적으로 학습시킵니다. 이 과정에서 모델의 가중치(파라미터)가 조정됩니다.</p>
+</li>
+<li><p>평가 및 배포: Fine-tuning된 모델의 성능을 평가하고, 실제 서비스에 배포합니다</p>
+</li>
+</ol>
+<p><img src='https://floatbot.ai/fine-tuning/Parameter-efficient-fine-tuning.png' width=700><br>&lt;[1] 2단계에 걸치 파인튜닝 사례: <a target="_blank" rel="noopener" href="https://floatbot.ai/tech/llm-fine-tuning-strategies%3E">https://floatbot.ai/tech/llm-fine-tuning-strategies&gt;</a></p>
+<h4 id="전이학습"><a href="#전이학습" class="headerlink" title="전이학습"></a>전이학습</h4><p>이렇게 한 분야 모델을 다른 분야를 학습시키는 것을 전이학습(Trasfer Learning)이라고 한다. 기존 학습한 모델의 내용이 다른 분야에도 전이된다는 의미로 이해한다.</p>
+<p><img src='https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/aPda/image/ND2C0uA1Ea0nfz-zPcNBVPnDoFA.png' width=700><br>&lt;[2] 전이학습&gt;</p>
+<p>전이학습은 파인튜닝 보다 포괄적인 의미를 갖는다. 파인튜닝은 전이학습의 한 형태로 특정 분야, 특정 작업에 집중해 추가학습하는 과정을 말한다.</p>
+<p><img src='https://thebook.io/img/080413/046_2.jpg'><br><a target="_blank" rel="noopener" href="https://thebook.io/080413/0006/">https://thebook.io/080413/0006/</a></p>
+<h4 id="파인-튜닝의-어려움"><a href="#파인-튜닝의-어려움" class="headerlink" title="파인 튜닝의 어려움"></a>파인 튜닝의 어려움</h4><ul>
+<li>기존 모델에 추가 학습해야 하는데, 1) 어느 정도 데이터로 어느 정도 훈련해야 하는지 정하기 어렵다. 2) 학습에 과도한 비용이 발생, 즉 LLM 모델에 추가 학습에도 방대한 자원이 필요  3) 데이터 준비가 어렵다. 파인튜닝을 위해서 “질문-답변” 형식의 세트가 필요한데 새 데이터를 이렇게 준비하는게 쉽지 않다.</li>
+</ul>
+<h3 id="활용-예"><a href="#활용-예" class="headerlink" title="활용 예:"></a>활용 예:</h3><ol>
+<li><p>고객 상담 챗봇의 응대 방식 개선: 특정 기업의 고객 응대 매뉴얼, 과거 상담 기록으로 Fine-tuning하여 챗봇이 기업의 가이드라인과 톤앤매너에 맞게 응대하도록 합니다.</p>
+</li>
+<li><p>특정 분야 텍스트 생성: 의학 전문 기사를 작성하는 LLM을 만들기 위해 방대한 의학 논문으로 Fine-tuning합니다.</p>
+</li>
+<li><p>코드 생성 모델 개선: 특정 프로그래밍 언어나 특정 프레임워크의 코드 샘플로 Fine-tuning하여 해당 분야의 코드 생성 능력을 향상시킵니다.</p>
+</li>
+</ol>
+<blockquote>
+<p>파인 튜닝에 대한 자세한 OpenAI 문서</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset">https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset</a></li>
+</ul>
+</blockquote>
+<h2 id="2-RAG"><a href="#2-RAG" class="headerlink" title="2. RAG"></a>2. RAG</h2><p>RAG (Retrieval-Augmented Generation, 검색 증강 생성) 은 정보 검색과 생성을 결합한 인공지능 모델이다. RAG 는 복잡한 정보가 필요한 질문에 답변하기 위해 설계되었다.  LLM의 ‘환각(Hallucination)’ 문제를 줄이고, 최신 정보나 특정 도메인의 전문 지식을 활용하게 하는 데 매우 효과적일 수 있다.</p>
+<h4 id="작동-방식-1"><a href="#작동-방식-1" class="headerlink" title="작동 방식:"></a>작동 방식:</h4><ol>
+<li><p>사용자 질문: 사용자가 LLM에 질문을 합니다.</p>
+</li>
+<li><p>정보 검색: 질문과 관련된 정보를 외부 지식 소스(벡터 데이터베이스 등)에서 검색합니다. (이때 질문을 임베딩하여 유사한 임베딩을 가진 문서를 찾는 방식이 주로 사용됩니다.)</p>
+</li>
+<li><p>컨텍스트 추가: 검색된 관련 정보(문서 조각 등)를 사용자 질문과 함께 LLM의 프롬프트에 추가하여 전달합니다.</p>
+</li>
+<li><p>답변 생성: LLM은 추가된 컨텍스트를 기반으로 답변을 생성합니다.</p>
+</li>
+</ol>
+<p>RAG는 2단계로 구성된다. 정보검색 단계와 텍스트 생성 단계이다.</p>
+<ol>
+<li><p>정보검색 단계</p>
+<ul>
+<li>질문: 프롬프트 입력</li>
+<li>쿼리: 문서 검색으로 데이터베이스, 문서 등의 콘텐츠 저장소에서 질문을 검색한다.</li>
+<li>결과: 검색 결과중에서 관련성 높은 문서와 사용자 질문을 결합해서 LLM에 전달한다.</li>
+</ul>
+</li>
+<li><p>테스트 생성 단계</p>
+<ul>
+<li>정보전달: 선택 문서 내용, 즉 사용자 질문 + 검색결과을 모델에 전달하면 LLM 모델이 의미를 이해하기 시작한다</li>
+<li>텍스트 생성: 질문의 답변을 생성한다.</li>
+</ul>
+</li>
+</ol>
+<p><img src='https://apmonitor.com/dde/uploads/Main/rag_llm_integration.png' width=700><br><a target="_blank" rel="noopener" href="https://apmonitor.com/dde/index.php/Main/RAGLargeLanguageModel">https://apmonitor.com/dde/index.php/Main/RAGLargeLanguageModel</a></p>
+<h4 id="활용예"><a href="#활용예" class="headerlink" title="활용예"></a>활용예</h4><ul>
+<li><p>기업 내부 지식 챗봇: 회사 규정, 제품 매뉴얼, 인사 정책 등 내부 문서를 학습시키지 않고, RAG를 통해 필요할 때 해당 문서에서 정보를 찾아 답변합니다.</p>
+</li>
+<li><p>법률 자문 시스템: 방대한 법조문 및 판례 데이터를 RAG에 연동하여 특정 사건에 대한 법률적 해석이나 관련 판례를 제시합니다.</p>
+</li>
+<li><p>뉴스 요약 및 분석: 실시간으로 업데이트되는 뉴스 기사를 RAG를 통해 검색하고, 사용자의 질문에 맞춰 요약하거나 분석합니다.</p>
+</li>
+</ul>
+<h2 id="3-Agent"><a href="#3-Agent" class="headerlink" title="3. Agent"></a>3. Agent</h2><p>Agent는 LLM을 추론 엔진으로 활용하여, 특정 목표를 달성하기 위해 일련의 행동을 계획하고 실행하며, 필요시 도구를 사용하고 피드백을 받아 스스로 개선해나가는 시스템입니다. LLM은 단순히 텍스트를 생성하는 것을 넘어, 문제 해결을 위한 ‘두뇌’ 역할을 합니다.</p>
+<img src='https://miro.medium.com/v2/resize:fit:927/1*PQHNtQQkq1ga0Sdh3Uui8w.png' width=400>
+
+<h4 id="작동-방식-2"><a href="#작동-방식-2" class="headerlink" title="작동 방식:"></a>작동 방식:</h4><ol>
+<li><p>목표 설정: 사용자 또는 시스템이 에이전트에게 특정 목표를 부여합니다 (예: “다음 주 파리 여행 계획을 세워줘”).</p>
+</li>
+<li><p>계획 수립 (LLM의 추론): LLM은 목표를 달성하기 위한 단계별 계획을 세웁니다 (예: 항공권 검색 -&gt; 호텔 예약 -&gt; 관광지 조사 -&gt; 예산 책정).</p>
+</li>
+<li><p>도구 사용: 계획에 따라 필요한 외부 도구(예: 항공권 예약 API, 구글 지도 API, 날씨 정보 API)를 호출하고 사용합니다.</p>
+</li>
+<li><p>관찰 및 피드백: 도구 사용 결과나 현재 상황을 관찰하고, 목표 달성에 얼마나 근접했는지 평가합니다.</p>
+</li>
+<li><p>반복 및 개선: 피드백을 바탕으로 다음 행동을 결정하거나, 필요시 계획을 수정하여 목표를 달성할 때까지 이 과정을 반복합니다.</p>
+</li>
+</ol>
+<h2 id="4-퓨샷-제로샷-러닝"><a href="#4-퓨샷-제로샷-러닝" class="headerlink" title="4. 퓨샷, 제로샷 러닝"></a>4. 퓨샷, 제로샷 러닝</h2><p>퓨샷러닝은 매우 적은 양의 데이터로 학습하는 능력을 말한다. 기존 모델에 매우 제한된 데이터로 부터 적응시키는 것이다.</p>
+<p>퓨샷 러닝과 더불어 제로샷 러닝, 원샷 러닝들이 있다.</p>
+<h3 id="제로샷-러닝"><a href="#제로샷-러닝" class="headerlink" title="제로샷 러닝"></a>제로샷 러닝</h3><h2 id="기존-모델에-전혀-보지-못한-데이터가-제시되었을-때-예측을-수행할-수-있는-것을-제로샷-러닝이라고-한다-기존-모델이-방대한-데이터를-바탕으로-추상화하고-일반화할-수-있는-능력이-필요"><a href="#기존-모델에-전혀-보지-못한-데이터가-제시되었을-때-예측을-수행할-수-있는-것을-제로샷-러닝이라고-한다-기존-모델이-방대한-데이터를-바탕으로-추상화하고-일반화할-수-있는-능력이-필요" class="headerlink" title="기존 모델에 전혀 보지 못한 데이터가 제시되었을 때 예측을 수행할 수 있는 것을 제로샷 러닝이라고 한다. - 기존 모델이 방대한 데이터를 바탕으로 추상화하고 일반화할 수 있는 능력이 필요"></a>기존 모델에 전혀 보지 못한 데이터가 제시되었을 때 예측을 수행할 수 있는 것을 제로샷 러닝이라고 한다.<br> - 기존 모델이 방대한 데이터를 바탕으로 추상화하고 일반화할 수 있는 능력이 필요</h2><img src='https://thebook.io/img/080413/049.jpg' width=700>
+
+
+<h3 id="원샷-러닝"><a href="#원샷-러닝" class="headerlink" title="원샷 러닝"></a>원샷 러닝</h3><p>반면에 얼룩말 이미지 하나만 학습해서 얼룩말을 분류하는 것을 원샷 러닝이라고 한다 보통 지도학습 분야가 그렇다</p>
+<h3 id="퓨샷-러닝"><a href="#퓨샷-러닝" class="headerlink" title="퓨샷 러닝"></a>퓨샷 러닝</h3><p>또한 여러개의 얼룩말 이미지를 학습하고 얼룩말을 분류하는  것을 퓨샷러닝이라고 한다.</p>
+<h1 id="—-참고-—"><a href="#—-참고-—" class="headerlink" title="— 참고 —"></a>— 참고 —</h1><ol>
+<li><p>LLM Fine-Tuning Strategies for Domain-Specific Applications</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://floatbot.ai/tech/llm-fine-tuning-strategies">https://floatbot.ai/tech/llm-fine-tuning-strategies</a></li>
+</ul>
+</li>
+<li><p>transfer learning</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://brunch.co.kr/@harryban0917/283">https://brunch.co.kr/@harryban0917/283</a></li>
+<li><a target="_blank" rel="noopener" href="https://vitalflux.com/transfer-learning-vs-fine-tuning-differences/">https://vitalflux.com/transfer-learning-vs-fine-tuning-differences/</a></li>
+</ul>
+</li>
+</ol>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-04-10T00:00:00.000Z" title="4/10/2025, 9:00:00 AM">2025-04-10</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-06-29T02:21:27.019Z" title="6/29/2025, 11:21:27 AM">2025-06-29</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">28분안에 읽기 (약 4175 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llm-01LLM_Models-806075edcbe4/">LLM01 - Models</a></p><div class="content"><p>대형언어모델에 대해서 간략이 정리한다.</p>
+<h1 id="언어모델-LM-Language-Model"><a href="#언어모델-LM-Language-Model" class="headerlink" title="언어모델(LM, Language Model)"></a>언어모델(LM, Language Model)</h1><p><a target="_blank" rel="noopener" href="https://brunch.co.kr/@brunchgpjz/49">https://brunch.co.kr/@brunchgpjz/49</a></p>
+<ol>
+<li><p>통계적 언어모델 (SLM)</p>
+</li>
+<li><p>신경 언어모델 (NLM)</p>
+</li>
+<li><p>사전학습된 언어모델 (PLM) </p>
+<ul>
+<li>LSTM, biLSTM, ELMo. 그리고 Self-attention 을 갖춘 Transformer 아키텍처의 BERT</li>
+</ul>
+</li>
+<li><p>대규모 언어모델 (LLM)</p>
+<ul>
+<li>PLM의 확장(모델 크기, 데이터 크기) 하면 성능 향상</li>
+</ul>
+</li>
+</ol>
+<h2 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h2><p>2018년 구글이 발표한 잔연어 처리 모델</p>
+<p>BERT(Bidirectional Encoder Representations from Transformers)는 Google이 2018년에 발표한 언어 모델입니다. BERT는 텍스트 이해를 위해 주로 사용되며, 특히 텍스트의 양방향(contextual) 특성을 잘 이해하는 데 능력이 있습니다. BERT의 핵심 메커니즈다는 self-attention, 즉 자기 주의력이 있습니다.</p>
+<h4 id="Transformer-아키텍처"><a href="#Transformer-아키텍처" class="headerlink" title="Transformer 아키텍처"></a>Transformer 아키텍처</h4><p>RNN 기반의 단점인 기억상실을 극복하고 self-attention 으로 문장 안의 단어 사이 관계 파악에 주력</p>
+<h4 id="Self-attention"><a href="#Self-attention" class="headerlink" title="Self-attention"></a>Self-attention</h4><p>문장 내의 모든 단어들에 대해 각각 중요도를 계산하고 특정 단어와 관련한 다른 단어들의 정보를 종합하는 방식을 통해서 문장의 문맥 속에서 단어의 의미를 더 정확히 파악할  수 있다.</p>
+<h4 id="Parallelize"><a href="#Parallelize" class="headerlink" title="Parallelize"></a>Parallelize</h4><p>RNN 과 달리 병렬로 계산해 속도 향상</p>
+<h4 id="사전학습"><a href="#사전학습" class="headerlink" title="사전학습"></a>사전학습</h4><p>BERT는 라벨 없는 대규모 텍스트 데이터를 사전학습한다. 언어의 지식을 습득하고 다양한 NLP task 에 적용을 준비한다.</p>
+<h4 id="부호제거"><a href="#부호제거" class="headerlink" title="부호제거"></a>부호제거</h4><p>BERT는 마스크한 언어모델 (Masked Language Model, MLM)과 다음 문장 예측(Next Sentence Prediction, NSP) 의 2가 방식으로 사전학습을 진행한다.</p>
+<ul>
+<li>MLM<ul>
+<li>문장에서 일부 단어를 가리고 가려진 단어를 예측한다.</li>
+</ul>
+</li>
+<li>NSP<ul>
+<li>2개의 문장을 주어지면 두번째 문장이 첫번째 문장 다음 문장인지 판단하는 학습을 한다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="양방향-언어모델"><a href="#양방향-언어모델" class="headerlink" title="양방향 언어모델"></a>양방향 언어모델</h4><p>문장의 양방향(앞, 뒤) 정보를 모두 활용하여 단어의 의미를 파악한다. 기존 모델들이 주로 단방향 또는 제한적인 양방향 정보만 활용했던 것에 비해 BERT는 문맥 정보를 활용해 높은 성능을 보여준다.</p>
+<h2 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h2><p>self-attention은 BERT의 구조에서 중요한 역할을 합니다. 이는 각 단어에 대해 다른 모든 단어와의 관계를 평가하여 중요도를 계산합니다. 이를 통해 각 단어가 문맥 속에서 얼마나 중요한지, 다른 단어들과 어떻게 상호작용하는지를 파악할 수 있습니다.</p>
+<p>BERT의 self-attention은 주로 두 가지로 구성됩니다:</p>
+<ol>
+<li><p><strong>Self-Attention Mechanism</strong>:</p>
+<ul>
+<li>BERT는 입력한 시퀀스에 대해 self-attention mechanism을 사용하여 각 단어의 의미를 계산합니다.</li>
+<li>각 단어는 입력 시퀀스의 모든 단어에 대한 가중치를 계산하고, 그 가중치에 따라 다른 단어들로부터의 정보를 수집합니다.</li>
+<li>이를 통해 각 단어가 문맥 내에서 어떻게 관련이 있는지 파악할 수 있습니다.</li>
+</ul>
+</li>
+<li><p><strong>Multi-Head Attention</strong>:</p>
+<ul>
+<li>BERT는 여러 개의 attention head를 사용하여 더 복잡하고 다양한 관계를 포착할 수 있습니다.</li>
+<li>각 attention head는 입력 시퀀스에 대해 독립적으로 작업을 수행하며, 서로 다른 기능을 가진 여러 attention matrix를 생성합니다.</li>
+<li>이를 통해 모델이 다양한 관점에서 입력 텍스트를 이해할 수 있습니다.</li>
+</ul>
+</li>
+</ol>
+<p>self-attention의 구체적인 계산 과정은 다음과 같습니다:</p>
+<ol>
+<li><p><strong>Query, Key, Value</strong>:</p>
+<ul>
+<li>BERT는 입력 시퀀스를 Q(query), K(key), V(value)로 나누어 각 단어에 대해 attention을 계산합니다.</li>
+</ul>
+</li>
+<li><p><strong>Attention Score Calculation</strong>:</p>
+<ul>
+<li>Q와 K를 Dot Product로 계산하여 attention score를 얻습니다.</li>
+<li>이를 통해 각 단어가 다른 단어들과 얼마나 관련이 있는지를 평가합니다.</li>
+</ul>
+</li>
+<li><p><strong>Attention Weight Calculation</strong>:</p>
+<ul>
+<li>Softmax 함수를 사용하여 attention score를 정규화하고, 이를 attention weight로 사용합니다.</li>
+</ul>
+</li>
+<li><p><strong>Contextualized Embedding</strong>:</p>
+<ul>
+<li>최종적으로 attention weight에 따라 다른 단어들로부터의 정보를 가중치하여, 각 단어의 contextualized embedding을 계산합니다.</li>
+</ul>
+</li>
+</ol>
+<p>이러한 과정을 통해 BERT는 입력 텍스트의 모든 단어가 문맥 내에서 어떻게 상호작용하는지를 이해하고, 이를 바탕으로 더 정교한 텍스트 이해를 가능하게 합니다.</p>
+<p>BERT의 self-attention mechanism은 기존의 언어 모델들에 비해 텍스트 이해 및 시각화 능력이 더 뛰어나며, 이는 다양한 NLP 작업에서 높은 성능을 발휘하는 데 기여하고 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>모델</th>
+<th>특징</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2024년 12월</td>
+<td>DeepSeek-V3</td>
+<td>- 6710억 개의 파라미터와 370억 개의 활성화된 파라미터 기반 MoE 모델</td>
+<td>- 적은 비용으로 높은 성능을 달성하여 화제가 됨</td>
+</tr>
+<tr>
+<td>2025년 1월</td>
+<td>DeepSeek-R1</td>
+<td>- 강화 학습 기반 추론 모델</td>
+<td>- 높은 성능과 가성비로 주목받음</td>
+</tr>
+<tr>
+<td>2025년 1월</td>
+<td>DeepSeek-R1-Zero</td>
+<td>- DeepSeek-R1 모델의 Zero 버전</td>
+<td>- 추가 정보 필요</td>
+</tr>
+</tbody></table>
+<p>LLM 모델, 파라미터 별  비교</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>개발사</th>
+<th>파라미터 크기</th>
+<th>주요 특징</th>
+<th>활용 분야</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Llama 1</td>
+<td>Meta</td>
+<td>7B, 13B, 33B, 65B</td>
+<td>연구용, 제한적 공개</td>
+<td>연구, 개발</td>
+</tr>
+<tr>
+<td>Llama 2</td>
+<td>Meta</td>
+<td>7B, 13B, 70B</td>
+<td>상업적 이용 가능, 다양한 기능 추가</td>
+<td>챗봇, 텍스트 생성, 번역 등</td>
+</tr>
+<tr>
+<td>Llama 3.1</td>
+<td>Meta</td>
+<td>8B, 70B, 405B</td>
+<td>128k 컨텍스트, 8개 언어 지원, 도구 사용, Llama Guard 3 및 Prompt Guard 등 안전 도구 강화</td>
+<td>챗봇, 텍스트 생성, 번역, 코딩, 수학 문제 해결 등</td>
+</tr>
+<tr>
+<td>DeepSeek-V3</td>
+<td>DeepSeek</td>
+<td>671B</td>
+<td>16-bit Transformer, MoE, dynamic biases</td>
+<td>텍스트 생성, 코딩, 수학 문제 해결 등</td>
+</tr>
+<tr>
+<td>DeepSeek-R1</td>
+<td>DeepSeek</td>
+<td>-</td>
+<td>강화 학습 기반, 추론 특화</td>
+<td>추론, 문제 해결</td>
+</tr>
+<tr>
+<td>DeepSeek-R1-Distill</td>
+<td>DeepSeek</td>
+<td>1.5B, 7B, 8B, 14B, 32B, 70B</td>
+<td>DeepSeek-R1 지식 증류, 다양한 크기 제공</td>
+<td>추론, 문제 해결</td>
+</tr>
+</tbody></table>
+<h1 id="Deepseek-V3"><a href="#Deepseek-V3" class="headerlink" title="Deepseek V3"></a>Deepseek V3</h1><ul>
+<li>딥시크-V3: 2024년 12월 공개된 LLM으로, 적은 비용으로 높은 성능을 달성하여 주목받았습니다.</li>
+<li>딥시크-R1: 2025년 1월 공개된 추론 AI 모델로, 일부 성능 테스트에서 OpenAI의 모델을 능가하는 결과를 보여 화제가 되었습니다.</li>
+</ul>
+<p>DeepSeek R1, 복잡한 아이디어 대신 단순한 RL 방식으로도 충분한 추론 성능 달성</p>
+<p>DeepSeek R1은 복잡한 아이디어(DPO, MCTS) 대신 단순한 RL 방식으로도 충분한 추론 성능을 달성할 수 있음을 보여주는 대표적인 사례입니다.</p>
+<p>기존 방식의 한계</p>
+<p>DPO(Direct Preference Optimization)와 MCTS(Monte Carlo Tree Search)는 복잡한 계산 과정과 많은 자원을 필요로 합니다.</p>
+<p>이러한 복잡성은 모델의 학습 속도를 늦추고, 대규모 모델에 적용하기 어렵다는 단점이 있습니다.</p>
+<p>DeepSeek R1의 접근 방식</p>
+<p>DeepSeek R1은 단순한 RL 알고리즘을 사용하여 추론 능력을 향상시켰습니다.</p>
+<p>지도 학습 데이터 없이 순수 강화 학습만으로 모델을 학습시켜 추론 능력을 끌어올렸습니다.</p>
+<p>자체 학습(Self-evolution) 과정을 통해 모델이 점진적으로 복잡한 추론 작업을 해결하는 능력을 개발했습니다.</p>
+<h2 id="Deepseek-Timeline"><a href="#Deepseek-Timeline" class="headerlink" title="Deepseek Timeline"></a>Deepseek Timeline</h2><ul>
+<li>2024년 9월 12일: o1-preview 출시</li>
+<li>2024년 12월 5일: o1 정식 버전 및 o1-pro 출시</li>
+<li>2024년 12월 20일: o3 발표 (ARC-AGI 통과, “AGI”로 주목받음)</li>
+<li>2024년 12월 26일: DeepSeek V3 출시</li>
+<li>2025년 1월 20일: DeepSeek R1 출시 (o1과 유사한 성능인데 오픈 소스)</li>
+<li>2025년 1월 25일: 홍콩대학교 연구진이 R1 결과 복제 성공</li>
+<li>2025년 1월 25일: Huggingface에서 R1을 복제한 완전 오픈소스 open-r1 프로젝트 발표<ul>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai">https://huggingface.co/deepseek-ai</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h2><p>DeepSeek v3는 Float8 E4M3, FP8 Master Accumulation, Latent Attention C Cache, Dynamic Biases for MoE 등 다양한 혁신적인 기술을 통해 높은 성능과 효율성을 동시에 달성했습니다. </p>
+<p>DeepSeek v3 특징</p>
+<ol>
+<li>E4M3 를 Float8 로 사용한다.<ul>
+<li>Float8 중에서도 E4M3 형식을 사용하여 메모리 사용량을 줄이면서도 높은 정밀도를 유지합니다. 기존에는 E5M2 형식이 주로 사용되었지만, DeepSeek v3는 E4M3를 사용하여 연산 효율성을 높였습니다.</li>
+</ul>
+</li>
+<li>매 4번째 FP8 합산을을 마스터 FP32 accum 에 합산된다.<ul>
+<li>DeepSeek v3는 매 4번째 FP8 누적 결과를 FP32 Master Accumulation에 더하여 정밀도를 향상시킵니다. 이는 FP8 연산의 단점을 보완하고 안정적인 학습을 가능하게 합니다.</li>
+</ul>
+</li>
+<li>Latent Attention stores C cache not KV cache<ul>
+<li>Latent Attention의 Key(K)와 Value(V) 캐시 대신 C 캐시를 사용하여 메모리 사용량을 줄이고 연산 속도를 향상시킵니다. 이는 더욱 효율적인 Attention 연산을 가능하게 합니다.</li>
+</ul>
+</li>
+<li>No MoE loss balancing - dynamic biases instead<ul>
+<li>기존의 MoE Loss Balancing 대신 Dynamic Biases를 사용하여 모델의 균형을 맞추고 학습 효율성을 높입니다. 이는 더욱 안정적인 MoE 학습을 가능하게 합니다.</li>
+</ul>
+</li>
+</ol>
+<p>주요 기법</p>
+<ol>
+<li><p>Float8 E4M3</p>
+<ul>
+<li>Float8 을 4비트 지수 (Exponent), 3비트 가수(Mantissa) 로 표현한다.</li>
+</ul>
+</li>
+<li><p>FP8 Master Accumulation</p>
+<ul>
+<li>FP8 연산 결과를 FP32 형식으로 누적하는 기술</li>
+</ul>
+</li>
+<li><p>Latency Attention</p>
+<ul>
+<li>Attension 으로 Latency Attention 으로 사용한다.</li>
+</ul>
+</li>
+<li><p>MoE ( Mixture of Experts)</p>
+<ul>
+<li>MoE 여러 개의 전문가 네트워크를 결합하여 성능을 향상시키는 기술, Dynamic Biases는 MoE의 각 전문가 네트워크에 동적으로 적용되는 편향(Bias)입니다.</li>
+</ul>
+</li>
+</ol>
+<h1 id="LLM-기법-해설"><a href="#LLM-기법-해설" class="headerlink" title="LLM 기법 해설"></a>LLM 기법 해설</h1><h2 id="전통-Attention-매커니즘"><a href="#전통-Attention-매커니즘" class="headerlink" title="전통 Attention 매커니즘"></a>전통 Attention 매커니즘</h2><p>Attention 메커니즘은 인공지는 자연어 처리에서 문맥 속에서 중요한 정보를 선별하고 집중하여 처리함으로써 효율성을 높이는 기술이다.</p>
+<p><a target="_blank" rel="noopener" href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a></p>
+<h4 id="전통적-Attention-매커니즘-작동방식"><a href="#전통적-Attention-매커니즘-작동방식" class="headerlink" title="전통적 Attention 매커니즘 작동방식"></a>전통적 Attention 매커니즘 작동방식</h4><ol>
+<li><p>유사도 계산 (Similarity Calculation)</p>
+<p> 입력된 각 단어(또는 토큰) 간의 유사도를 계산합니다. 이는 Query, Key, Value 벡터를 사용하여 수행됩니다.</p>
+<ul>
+<li>Query (Q): 질문 또는 현재 처리해야 할 정보를 나타내는 벡터</li>
+<li>Key (K): 입력 데이터의 각 단어(또는 토큰)를 나타내는 벡터</li>
+<li>Value (V): 입력 데이터의 각 단어(또는 토큰)의 실제 값을 나타내는 벡터</li>
+</ul>
+</li>
+<li><p>가중치 계산 (Weight Calculation)</p>
+<p> 계산된 유사도를 바탕으로 각 단어에 대한 가중치를 계산합니다. 이 가중치는 해당 단어가 얼마나 중요한지를 나타냅니다. Softmax 함수를 사용하여 가중치를 정규화합니다.</p>
+</li>
+<li><p>가중 평균 (Weighted Average)</p>
+<p> 계산된 가중치를 사용하여 입력 단어들의 가중 평균을 계산합니다. 이 가중 평균은 Attention 값을 나타냅니다.</p>
+</li>
+<li><p>출력 (Output)</p>
+<p> 계산된 Attention 값을 사용하여 최종 결과를 생성합니다.</p>
+</li>
+</ol>
+<img src='https://miro.medium.com/v2/resize:fit:1324/0*aB8v5Pmk3Q_P5UiG' width=800>
+
+<img src='https://media.licdn.com/dms/image/v2/D5612AQHGqpYzGg5Rgw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1710049461853?e=2147483647&v=beta&t=FMvxGDZZFSykfsb1fi3ebdRhq3eW_1XouRJyg3p_REc'>
+
+<p>토큰화한 단어 사이의 의미를 파악하기 위해 Sel-attention 을 Q, K, V 벡터로 수행한다.</p>
+<p><a target="_blank" rel="noopener" href="https://www.linkedin.com/pulse/what-self-attention-impact-large-language-models-llm-nikhil-goel-srpbc/">https://www.linkedin.com/pulse/what-self-attention-impact-large-language-models-llm-nikhil-goel-srpbc/</a></p>
+<p>Self-Attention</p>
+<img src='https://jalammar.github.io/images/t/transformer_self_attention_vectors.png' width=700>
+
+<h3 id="다양한-Attention-매커니즘"><a href="#다양한-Attention-매커니즘" class="headerlink" title="다양한 Attention 매커니즘"></a>다양한 Attention 매커니즘</h3><p>다양한 Attention 메커니즘 종류</p>
+<ol>
+<li>Self-Attention</li>
+</ol>
+<p>Self-Attention은 입력 시퀀스 내에서 각 요소들 간의 관계를 파악하는 데 사용되는 Attention 메커니즘입니다. Query, Key, Value가 모두 동일한 입력에서 파생된다는 특징을 가집니다.</p>
+<p>작동 방식</p>
+<ol>
+<li>Query, Key, Value 생성: 입력 시퀀스를 사용하여 Query, Key, Value 벡터를 생성합니다.</li>
+<li>유사도 계산: Query와 Key 벡터 간의 유사도를 계산합니다.</li>
+<li>가중치 계산: 계산된 유사도를 바탕으로 각 Key에 대한 가중치를 계산합니다.</li>
+<li>가중 평균: 가중치를 사용하여 Value 벡터의 가중 평균을 계산합니다.</li>
+<li>출력: 계산된 가중 평균을 Self-Attention의 출력으로 사용합니다.</li>
+</ol>
+<p>특징</p>
+<ul>
+<li>입력 시퀀스 내의 장거리 의존성을 효과적으로 파악할 수 있습니다.</li>
+<li>병렬 처리가 가능하여 계산 효율성이 높습니다.</li>
+</ul>
+<ol start="2">
+<li>Multi-Head Attention</li>
+</ol>
+<p>Multi-Head Attention은 Self-Attention을 여러 개의 head로 나누어 다양한 관점에서 입력 시퀀스를 분석하는 기법입니다. </p>
+<p>각 head는 독립적으로 Self-Attention을 수행하고, 그 결과를 concat하여 최종 출력을 생성합니다.</p>
+<p>작동 방식</p>
+<ol>
+<li>입력 분할: 입력을 여러 개의 head로 나눕니다.</li>
+<li>Self-Attention: 각 head에서 독립적으로 Self-Attention을 수행합니다.</li>
+<li>결과 concat: 각 head의 출력 결과를 concat합니다.</li>
+<li>출력: concat된 결과를 Multi-Head Attention의 출력으로 사용합니다.</li>
+</ol>
+<p>특징</p>
+<p>다양한 의미를 가진 정보를 효과적으로 추출할 수 있습니다.<br>모델의 표현력을 높여줍니다.</p>
+<ol start="3">
+<li>기타 Attention 메커니즘</li>
+</ol>
+<ul>
+<li>Global Attention: 입력 시퀀스 전체를 사용하여 Attention 값을 계산합니다.</li>
+<li>Local Attention: 입력 시퀀스의 특정 부분만 사용하여 Attention 값을 계산합니다.</li>
+<li>Hierarchical Attention: 계층적인 구조를 가진 입력 데이터에 적용되는 Attention 메커니즘입니다.</li>
+</ul>
+<h3 id="전통-Attention-한계"><a href="#전통-Attention-한계" class="headerlink" title="전통 Attention 한계"></a>전통 Attention 한계</h3><p>전통적인 Attention 메커니즘은 계산 복잡도가 높고, 긴 시퀀스에 취약하다는 단점이 있습니다.</p>
+<h2 id="Offload"><a href="#Offload" class="headerlink" title="Offload"></a>Offload</h2><p>인공지능 LLM(Large Language Model) 분야에서 Offload는 특정 작업을 메인 프로세서(CPU 또는 GPU)에서 다른 보조 프로세서(GPU, TPU, NPU 등)로 이전하여 처리하는 것을 의미합니다.</p>
+<p>Offload의 핵심 개념</p>
+<ul>
+<li>작업 분산: LLM은 막대한 연산 능력을 요구하기 때문에, 하나의 프로세서만으로는 처리하기 어려울 수 있습니다. Offload는 이러한 문제를 해결하기 위해 작업을 여러 프로세서에 분산하여 처리합니다.</li>
+<li>성능 향상: Offload를 통해 각 프로세서는 자신에게 특화된 작업을 효율적으로 처리할 수 있습니다. 이는 전체 시스템의 성능 향상으로 이어집니다.</li>
+<li>자원 효율성: Offload는 시스템 자원을 효율적으로 활용할 수 있도록 도와줍니다. 예를 들어, CPU는 복잡한 연산을 처리하고, GPU는 병렬 연산에 특화된 작업을 처리하는 방식으로 자원을 분배할 수 있습니다.</li>
+</ul>
+<p>Offload의 중요성</p>
+<ul>
+<li>LLM의 효율적인 실행: LLM은 엄청난 크기의 모델과 데이터를 처리해야 합니다. Offload는 이러한 대규모 작업을 효율적으로 처리하는 데 필수적인 기술입니다.</li>
+<li>추론 속도 향상: Offload를 통해 LLM의 추론 속도를 크게 향상시킬 수 있습니다. 이는 사용자 경험 개선에 중요한 역할을 합니다.</li>
+<li>다양한 하드웨어 활용: Offload는 다양한 종류의 하드웨어를 활용하여 LLM을 실행할 수 있도록 도와줍니다. 이는 하드웨어 선택의 폭을 넓혀주고, 비용 효율적인 시스템 구축을 가능하게 합니다.</li>
+</ul>
+<p>Offload의 활용 예시</p>
+<ul>
+<li>GPU Offloading: LLM의 연산 중 많은 부분을 GPU로 Offload하여 처리합니다. GPU는 병렬 연산에 특화되어 있어 LLM의 연산 속도를 크게 향상시킬 수 있습니다.</li>
+<li>TPU Offloading: Google에서 개발한 TPU(Tensor Processing Unit)는 LLM 연산에 특화된 하드웨어입니다. TPU Offloading을 통해 LLM의 성능을 극대화할 수 있습니다.</li>
+<li>NPU Offloading: NPU(Neural Processing Unit)는 신경망 연산에 특화된 하드웨어입니다. NPU Offloading을 통해 LLM의 추론 속도를 더욱 빠르게 만들 수 있습니다.</li>
+</ul>
+<p>결론</p>
+<p>Offload는 인공지능 LLM의 효율적인 실행을 위한 핵심 기술입니다. Offload를 통해 LLM의 성능을 향상시키고, 다양한 하드웨어를 활용하여 LLM을 더욱 폭넓게 활용할 수 있습니다.</p>
+<p>LLM 인퍼런스 훑어보기 (1) - LLM을 이용한 문장 생성</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dytis.tistory.com/53?category=1139923">https://dytis.tistory.com/53?category=1139923</a></li>
+</ul>
+<p>LLM 인퍼런스 훑어보기 (6) - quantization</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dytis.tistory.com/60?category=1139923">https://dytis.tistory.com/60?category=1139923</a></li>
+</ul>
+<hr>
+<h1 id="—-참고-—"><a href="#—-참고-—" class="headerlink" title="— 참고 —"></a>— 참고 —</h1><p>거대언어모델(LLM)의 현 주소</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://brunch.co.kr/@brunchgpjz/49">https://brunch.co.kr/@brunchgpjz/49</a></li>
+</ul>
+<p>unsloth 의 양자화</p>
+<ol>
+<li>Cool things from DeepSeek v3’s paper: <a target="_blank" rel="noopener" href="https://x.com/danielhanchen/status/1872719599029850391">https://x.com/danielhanchen/status/1872719599029850391</a></li>
+<li><a target="_blank" rel="noopener" href="https://unsloth.ai/blog/deepseekr1-dynamic">https://unsloth.ai/blog/deepseekr1-dynamic</a></li>
+</ol>
+<p>DeepSeek</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepSeek-V3">https://github.com/deepseek-ai/DeepSeek-V3</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepSeek-R1">https://github.com/deepseek-ai/DeepSeek-R1</a></li>
+</ul>
+<p>Korean LLM</p>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/collections/spow12/korean-llm-66416dfe6b649b6aa331c4f8">https://huggingface.co/collections/spow12/korean-llm-66416dfe6b649b6aa331c4f8</a></p>
+<p>LLM model Hosting</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://unsloth.ai/">https://unsloth.ai/</a></li>
+<li><a target="_blank" rel="noopener" href="https://featherless.ai/">https://featherless.ai/</a></li>
+</ul>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/">이전</a></div><div class="pagination-next"><a href="/page/3/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link is-current" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/89/">89</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">177</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">258</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-19T00:00:00.000Z">2025-04-19</time></p><p class="title"><a href="/nbconvert%EC%82%AC%EC%9A%A9-18b07cfb01b1/">nbconvert 사용</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-11T00:00:00.000Z">2025-04-11</time></p><p class="title"><a href="/llm-02LLM%ED%99%9C%EC%9A%A9-6bf20c6c19f9/">LLM02 - 활용방법</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-10T00:00:00.000Z">2025-04-10</time></p><p class="title"><a href="/llm-01LLM_Models-806075edcbe4/">LLM01 - Models</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-03-25T00:00:00.000Z">2025-03-25</time></p><p class="title"><a href="/pyenv-doctor-ea932b0ee5ca/">pyenv-doctor</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">12</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">57</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">93</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">31</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2025 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
