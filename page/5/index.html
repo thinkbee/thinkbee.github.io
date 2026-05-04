@@ -33,7 +33,176 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-02-02T01:00:00.000Z" title="2/2/2025, 10:00:00 AM">2025-02-02</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-03-06T10:12:31.266Z" title="3/6/2025, 7:12:31 PM">2025-03-06</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">15분안에 읽기 (약 2177 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><div class="content"><p>RTX 3080TI 를 사용해서 LLM 모델 llama-bench 로 벤치마크 테스트를 수행했다.</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Blog</a><a class="navbar-item" href="/documents">Doc</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/qkboo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-four-fifths-tablet is-four-fifths-desktop is-four-fifths-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-03-11T00:00:00.000Z" title="3/11/2025, 9:00:00 AM">2025-03-11</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-08-09T18:44:41.046Z" title="8/10/2025, 3:44:41 AM">2025-08-10</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming-Python/">Programming, Python</a></span><span class="level-item">13분안에 읽기 (약 1913 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/python-mamba-micromamba-install-135c207e8538/">mamba / micromamba 요약 정리</a></p><div class="content"><p>mamba 와 conda 는 서로 교체 가능한 파이썬 패키지 매니저이다.</p>
+<p>mamba는 conda와 같은 사용방법과 동일한 환경을 이어받은 패키지 관리자 이다. conda &amp; mamba 명령을 서로 거의 동일하게 사용할 수 있다. conda 의 패키지 채널을 그대로 사용할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mamba install ...</span><br><span class="line">mamba create -n ... -c ... ...</span><br><span class="line">mamba list</span><br></pre></td></tr></table></figure>
+
+<p>여기서는 micromamba를 사용해보려고 한다.</p>
+<p><code>micromamba</code> 는 mamba의 소규모 버전으로 독립적 실행 파일이다. 다만 mamba 와 micromamba는 환경 구성이 좀 다르다. micromamba는 mamba와 다르게 <u>MAMBA_ROOT_PREFIX</u> 환경 변수를 기준으로 패키지 관리가 시작되고 환경이 생성된다.</p>
+<ol>
+<li>설치</li>
+<li>micromamba 사용</li>
+<li>가상환경 사용</li>
+<li>Repoquery 명령</li>
+<li>Uninstall</li>
+<li>참고</li>
+</ol>
+<br>
+
+<h1 id="1-micromamba-설치"><a href="#1-micromamba-설치" class="headerlink" title="1. micromamba 설치"></a>1. micromamba 설치</h1><p><a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html">https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html</a></p>
+<h3 id="Linux-macOS-or-Git-Bash-on-Windows-install-with"><a href="#Linux-macOS-or-Git-Bash-on-Windows-install-with" class="headerlink" title="Linux, macOS, or Git Bash on Windows install with:"></a>Linux, macOS, or Git Bash on Windows install with:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;<span class="variable">$&#123;SHELL&#125;</span>&quot;</span> &lt;(curl -L micro.mamba.pm/install.sh)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows-에서-설치"><a href="#Windows-에서-설치" class="headerlink" title="Windows 에서 설치"></a>Windows 에서 설치</h3><p>Windows 의 PowerShell에서 Execution-policy 를 지정해야 한다.</p>
+<ol>
+<li>PowerShell을 관리자로 연다</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS&gt; Get-ExecutionPolicy</span><br><span class="line">Restricted</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Set-ExecutionPolicy로 RemoteSigned 혹은 Unrestricted 로 지정한다.</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS&gt; Set-ExecutionPolicy RemoteSigned</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>그리고 다음 스크립을 일반 PowerShell에서 실행한다</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS&gt; Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1).Content)</span><br></pre></td></tr></table></figure>
+
+<p>설치를 진행한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; <span class="built_in">Invoke-Expression</span> ((<span class="built_in">Invoke-WebRequest</span> <span class="literal">-Uri</span> https://micro.mamba.pm/install.ps1).Content)</span><br><span class="line"></span><br><span class="line">Downloading micromamba from https://github.com/mamba<span class="literal">-org</span>/micromamba<span class="literal">-releases</span>/releases/latest/download/micromamba<span class="literal">-win-64</span></span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">  <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>      <span class="number">0</span>      <span class="number">0</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span>     <span class="number">0</span></span><br><span class="line">  <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>      <span class="number">0</span>      <span class="number">0</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span>     <span class="number">0</span></span><br><span class="line"><span class="number">100</span> <span class="number">9280</span>k  <span class="number">100</span> <span class="number">9280</span>k    <span class="number">0</span>     <span class="number">0</span>  <span class="number">3355</span>k      <span class="number">0</span>  <span class="number">0</span>:<span class="number">00</span>:<span class="number">02</span>  <span class="number">0</span>:<span class="number">00</span>:<span class="number">02</span> <span class="literal">--</span>:<span class="literal">--</span>:<span class="literal">--</span> <span class="number">10.8</span>M</span><br><span class="line"></span><br><span class="line">Installing micromamba to C:\Users\student\AppData\Local\micromamba</span><br><span class="line"></span><br><span class="line">Adding C:\Users\student\AppData\Local\micromamba\micromamba.exe to PATH</span><br><span class="line"></span><br><span class="line"><span class="keyword">Do</span> you want to initialize micromamba <span class="keyword">for</span> the shell activate command? (Y/n): y</span><br><span class="line">Enter the path to the micromamba prefix (default: C:\Users\student\micromamba):</span><br><span class="line">Initializing micromamba <span class="keyword">in</span>  C:\Users\student\micromamba</span><br><span class="line">C:\Users\student\AppData\Local\micromamba\micromamba.exe</span><br><span class="line">The following argument was not expected: <span class="literal">-p</span></span><br><span class="line">Run with <span class="literal">--help</span> <span class="keyword">for</span> more information.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba self<span class="literal">-update</span></span><br></pre></td></tr></table></figure>
+
+<p>특정 버전으로 업데이트도 가능하다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba self<span class="literal">-update</span> <span class="literal">--version</span> <span class="number">1.4</span>.<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="micromamba-도움말"><a href="#micromamba-도움말" class="headerlink" title="micromamba 도움말."></a>micromamba 도움말.</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PS&gt; micromamba --help</span><br></pre></td></tr></table></figure>
+
+
+<br>
+
+
+<h1 id="2-micromamba-사용"><a href="#2-micromamba-사용" class="headerlink" title="2. micromamba 사용"></a>2. micromamba 사용</h1><p>micromamba의 가상환경은 <code>micromamba activate /path/to/env</code> 같이 활성화 시키는데,  <code>MAMBA_ROOT_PREFIX</code> 환경변수를 기준으로 <code>micromamba activate env</code> 같이 사용할 수 있다.</p>
+<p>현재 사용할 수 있는 환경을 출력.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba env list</span><br><span class="line">  Name  Active  Path</span><br><span class="line"><span class="literal">--------------------------------------------------------------</span></span><br><span class="line">  base          C:\Users\student\micromamba</span><br><span class="line">                C:\Users\student\miniconda3\envs\myenv</span><br></pre></td></tr></table></figure>
+
+
+<p>micromamba 명령으로 대부분의 conda 명령을 동일하게 실행할 수 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">micromamba info                          <span class="comment"># 현재 micromamba 환경정보</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 설치한 패키지 목록</span></span><br><span class="line">micromamba list ananconda                <span class="comment"># Anaconda 정보</span></span><br><span class="line">micromamba list python                   <span class="comment"># python 패키지 정보</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># upgrade</span></span><br><span class="line">micromamba update pip                    <span class="comment"># pip upgrade</span></span><br><span class="line">micromamba update pip=<span class="number">25.0</span>               <span class="comment"># pip upgrade to 25.0</span></span><br><span class="line">micromamba update conda                  <span class="comment"># conda upgrade</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="3-가상환경-사용"><a href="#3-가상환경-사용" class="headerlink" title="3. 가상환경 사용"></a>3. 가상환경 사용</h1><p><code>-n</code> 옵션으로 가상환경을 지정하고 생성&#x2F;수정&#x2F;삭제를 할 수 있고, 더불어 패키지를 함께 관리할 수 있다.</p>
+<h2 id="가상환경-생성"><a href="#가상환경-생성" class="headerlink" title="가상환경 생성"></a>가상환경 생성</h2><p>가상환경과 패키지를 함께 설치한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; mamba create <span class="literal">-n</span> myenv &lt;list of packages&gt;</span><br></pre></td></tr></table></figure>
+
+<p>가상환경에 python 버전을 지정할 수 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba create <span class="literal">-n</span> myenv python=<span class="number">3.12</span></span><br></pre></td></tr></table></figure>
+
+<p>가상환경에 설치 채널을 지정해 설치할 수 있다. 아래는 conda-forge 채널 이용</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba create <span class="literal">-n</span> myenv jupyterlab <span class="literal">-c</span> conda<span class="literal">-forge</span> python=<span class="number">3.12</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 가상환경 목록</span></span><br><span class="line"><span class="built_in">PS</span>&gt; micromamba env list</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="가상환경-활성화"><a href="#가상환경-활성화" class="headerlink" title="가상환경 활성화"></a>가상환경 활성화</h2><p>가상환경은 가상환경 이름을 주어 활성화 한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba activate myenv</span><br><span class="line">(myenv) <span class="built_in">PS</span> C:\Users\student&gt;</span><br></pre></td></tr></table></figure>
+
+<p>혹은 가상환경이 있는 위치의 절대경로를 주어 활성화 할 수 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba activate /path/to/myenv</span><br></pre></td></tr></table></figure>
+
+<p><code>run</code> 명령은 가상환경을 사용해서 특정 스크립트&#x2F;명령를 직접 실행할 수 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba run <span class="literal">-n</span> myenv mycommand</span><br></pre></td></tr></table></figure>
+
+<p>가상환경 myenv 의 서버 목록을 출력</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(myenv) <span class="built_in">PS</span>&gt; micromamba run <span class="literal">-n</span> myenv jupyter server list</span><br><span class="line">Currently running servers:</span><br><span class="line">http://localhost:<span class="number">8888</span>/?token=<span class="number">317</span>c9380f9c3ed4ab6f836a7ffbc789497728820e9c60f47 :: D:\Jupyter_Hub</span><br><span class="line">http://localhost:<span class="number">8585</span>/ :: D:\Jupyter_Hub</span><br><span class="line">http://desktop<span class="literal">-goyangi</span>:<span class="number">8686</span>/ :: D:\Jupyter_Hub</span><br></pre></td></tr></table></figure>
+
+
+<p>사용중인 가상환경 비활성화</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(myenv) <span class="built_in">PS</span>&gt; micromamba deactivate</span><br><span class="line"><span class="built_in">PS</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="모듈-x2F-패키지-설치"><a href="#모듈-x2F-패키지-설치" class="headerlink" title="모듈&#x2F;패키지 설치"></a>모듈&#x2F;패키지 설치</h2><p>micromamba 명령을 사용해 모듈과 패키지를 설치 채널을 지정해서 설치할 수 있다.</p>
+<p>활성화 myenv 가상환경에서 matplotlib 패키지를 설치한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(myenv) <span class="built_in">PS</span>&gt;micromamba install matplotlib <span class="literal">-c</span> conda<span class="literal">-forge</span></span><br><span class="line">Pinned packages:</span><br><span class="line">  - python=<span class="number">3.12</span></span><br><span class="line">Transaction</span><br><span class="line">  Prefix: C:\Users\student\micromamba\envs\myenv</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>비활성 상태에서 myenv 가상환경에 패키지를 설치한다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba <span class="literal">-n</span> myenv install matplotlib</span><br><span class="line">Pinned packages:</span><br><span class="line">  - python=<span class="number">3.12</span></span><br><span class="line"></span><br><span class="line">Transaction</span><br><span class="line">  Prefix: C:\Users\student\micromamba\envs\myenv</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="가상환경-업데이트"><a href="#가상환경-업데이트" class="headerlink" title="가상환경 업데이트"></a>가상환경 업데이트</h2><p>특정 가상환경을 모두 업데이트</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">micromamba update <span class="literal">-n</span> myenv <span class="literal">--all</span></span><br></pre></td></tr></table></figure>
+
+
+<p>환경의 모든 패키지를 덥데이트 하려면 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">micromamba update --all</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="가상환경-제거"><a href="#가상환경-제거" class="headerlink" title="가상환경 제거"></a>가상환경 제거</h2><p>설치한 가상환경을 지운다</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; micromamba env remove <span class="literal">-n</span> myenv <span class="literal">--all</span></span><br><span class="line">...</span><br><span class="line">Proceed ([<span class="type">y</span>]/n)? y</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="4-Repoquery-명령"><a href="#4-Repoquery-명령" class="headerlink" title="4. Repoquery 명령"></a>4. Repoquery 명령</h1><p>mamba 는 새로운 패키지 검색 명령으로 <code>repoquery</code> 명령을 선보이고 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 설치 가능한 모든 python 패키지 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery search python</span><br><span class="line"></span><br><span class="line"><span class="comment"># 설치 가능한 python=버전 패키지 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery search <span class="string">&quot;python&gt;=3.11&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 설치 가능한 jupyterlab 버전 패키지 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery search <span class="string">&quot;jupyterlab&gt;=4.0&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 현재 환경의 jupyterlab 에 연관된 의존성 패키지 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery depends jupyterlab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 현재 환경의 jupyterlab 에 연관된 모든 의존성 세부 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery depends jupyterlab <span class="literal">--recursive</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>패키지 연관 의존성을 트리형식으로 출력할 수 있다.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 현재 환경의 jupyterlab 에 연관된 의존성 패키지의 트리 목록</span></span><br><span class="line"><span class="variable">$</span> micromamba repoquery depends <span class="literal">-t</span> jupyterlab</span><br><span class="line">jupyterlab[<span class="number">4.3</span><span class="type">.4</span>]</span><br><span class="line"> ├─ jupyter<span class="literal">-lsp</span>[<span class="number">2.2</span><span class="type">.0</span>]</span><br><span class="line">  │  ├─ python already visited</span><br><span class="line">  │  └─ jupyter_server[<span class="number">2.15</span><span class="type">.0</span>]</span><br><span class="line">  │     ├─ python already visited</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>And you can ask for the inverse, which packages depend on some other package (e.g. ipython) using whoneeds.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ micromamba repoquery whoneeds ipython</span><br><span class="line"></span><br><span class="line">Name            Version Build          Depends          Channel</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">jupyter_console 6.4.3   pyhd3eb1b0_0   ipython          pkgs/main</span><br><span class="line">ipykernel       6.9.1   py39haa95532_0 ipython &gt;=7.23.1 pkgs/main</span><br><span class="line">ipywidgets      7.6.5   pyhd3eb1b0_1   ipython &gt;=4.0.0  pkgs/main</span><br><span class="line">With the -t,--tree flag, you can get the same information in a tree.</span><br></pre></td></tr></table></figure>
+
+<p>트리 형식 출력</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ mamba repoquery whoneeds -t ipython</span><br><span class="line"></span><br><span class="line">ipython[8.2.0]</span><br><span class="line">├─ jupyter_console[6.4.3]</span><br><span class="line">│  └─ jupyter[1.0.0]</span><br><span class="line">├─ ipykernel[6.9.1]</span><br><span class="line">│  ├─ notebook[6.4.8]</span><br><span class="line">│  │  ├─ widgetsnbextension[3.5.2]</span><br><span class="line">│  │  │  └─ ipywidgets[7.6.5]</span><br><span class="line">│  │  │     └─ jupyter already visited</span><br><span class="line">│  │  └─ jupyter already visited</span><br><span class="line">│  ├─ jupyter_console already visited</span><br><span class="line">│  ├─ ipywidgets already visited</span><br><span class="line">│  ├─ jupyter already visited</span><br><span class="line">│  └─ qtconsole[5.3.0]</span><br><span class="line">│     └─ jupyter already visited</span><br><span class="line">└─ ipywidgets already visited</span><br></pre></td></tr></table></figure>
+
+
+<br>
+
+
+<h1 id="5-Uninstall-Windows"><a href="#5-Uninstall-Windows" class="headerlink" title="5. Uninstall, Windows"></a>5. Uninstall, Windows</h1><p>Micromamba는 Windows 11에서 다음과 같은 방법으로 삭제할 수 있습니다.</p>
+<ol>
+<li>micromamba 설치 디렉토리 삭제:</li>
+</ol>
+<p>micromamba가 설치된 디렉토리를 찾습니다. 일반적으로 C:\Users&lt;사용자 이름&gt;.local\bin 또는 C:\micromamba에 설치됩니다.<br>해당 디렉토리를 삭제합니다.</p>
+<ol start="2">
+<li>환경 변수에서 micromamba 경로 제거:</li>
+</ol>
+<p>Windows 검색 창에서 “환경 변수”를 검색하고 “시스템 환경 변수 편집”을 엽니다.<br>“시스템 속성” 창에서 “환경 변수” 버튼을 클릭합니다.<br>“시스템 변수” 섹션에서 “Path” 변수를 선택하고 “편집” 버튼을 클릭합니다.<br>micromamba가 설치된 디렉토리 경로가 있는지 확인하고, 있다면 해당 경로를 삭제합니다.<br>“확인” 버튼을 클릭하여 변경 사항을 저장합니다.</p>
+<ol start="3">
+<li>micromamba 관련 파일 삭제:</li>
+</ol>
+<p>C:\Users&lt;사용자 이름&gt;.condarc 파일을 삭제합니다. (존재하는 경우)<br>C:\Users&lt;사용자 이름&gt;.mambarc 파일을 삭제합니다. (존재하는 경우)</p>
+<p>C:\Users&lt;사용자 이름&gt;\AppData\Local\micromamba  (존재하는 경우)</p>
+<ol start="4">
+<li>(선택 사항) micromamba 설치 시 생성된 바로가기 삭제:</li>
+</ol>
+<p>micromamba 설치 시 생성된 바로가기가 있다면 삭제합니다.</p>
+<ol start="5">
+<li>(선택 사항) micromamba와 관련된 가상 환경 삭제:</li>
+</ol>
+<p>micromamba를 사용하여 생성한 가상 환경이 있다면 해당 디렉토리를 삭제합니다. 가상 환경은 일반적으로 C:\Users&lt;사용자 이름&gt;.micromamba\envs 디렉토리에 저장됩니다.</p>
+<hr>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
+<li>Micromamba Installation<ul>
+<li><a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html">https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html</a></li>
+</ul>
+</li>
+<li>Mamba<ul>
+<li><a target="_blank" rel="noopener" href="https://mamba.readthedocs.io/en/latest/user_guide/mamba.html">https://mamba.readthedocs.io/en/latest/user_guide/mamba.html</a></li>
+</ul>
+</li>
+<li>VS-code 와 사용<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/mamba-org/vscode-micromamba">https://github.com/mamba-org/vscode-micromamba</a></li>
+</ul>
+</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-02-02T01:00:00.000Z" title="2/2/2025, 10:00:00 AM">2025-02-02</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-03-06T10:12:31.266Z" title="3/6/2025, 7:12:31 PM">2025-03-06</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">15분안에 읽기 (약 2177 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llama-model-bench-rtx3080ti-e1cdcf8d9cee/">Local LLM 실험: RTX 3080Ti 에서 bench mark 결과</a></p><div class="content"><p>RTX 3080TI 를 사용해서 LLM 모델 llama-bench 로 벤치마크 테스트를 수행했다.</p>
 <ol>
 <li>llama-3-korean-bllossom-8B</li>
 <li>llama-3.1-korean-reasoning-8B</li>
@@ -1467,508 +1636,7 @@
 <td align="right">73.87 ± 3.13</td>
 </tr>
 </tbody></table>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-02-01T00:00:00.000Z" title="2/1/2025, 9:00:00 AM">2025-02-01</time>&nbsp;게시 됨</span><span class="level-item"><time dateTime="2025-02-12T04:55:38.227Z" title="2/12/2025, 1:55:38 PM">2025-02-12</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/AI/">AI</a><span> / </span><a class="link-muted" href="/categories/AI/LLM/">LLM</a></span><span class="level-item">한 시간안에 읽기 (약 7383 단어)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/llama_deepseekr1_distill_llama8b_rtx3080ti-4ab221cf05b4/">Local LLM 실험: DeepSeek-R1-Distill-Llama-8B, RTX 3080 TI</a></p><div class="content"><p>RTX 3080TI 를 사용해서 LLM 모델을 Local 로 돌려보고 있다. </p>
-<p>wikidoc 의 <a target="_blank" rel="noopener" href="https://wikidocs.net/226033">https://wikidocs.net/226033</a> 질문지와 2~3개 질문을 추가해서 진행했다.</p>
-<p>시스템 사양</p>
-<ul>
-<li>AMD Ryzen 7 5800X3D</li>
-<li>RAM 64GB</li>
-<li>RTX 3080 TI</li>
-</ul>
-<br>
-
-<h1 id="DeepSeek-R1-Distill-Llama-8B-F16-gguf"><a href="#DeepSeek-R1-Distill-Llama-8B-F16-gguf" class="headerlink" title="DeepSeek-R1-Distill-Llama-8B-F16.gguf"></a>DeepSeek-R1-Distill-Llama-8B-F16.gguf</h1><p><a target="_blank" rel="noopener" href="https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF">https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF</a></p>
-<p>로딩에 약20분 소요되어 보인다.</p>
-<h3 id="누구"><a href="#누구" class="headerlink" title="누구?"></a>누구?</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">누구냐 너</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">네, 네가 말하는 &quot;누구냐 너&quot;은 &quot;누구냐? 네&quot;라는 문구를 질문하는 것이다. 이는“你是谁呢？”或者“你是谁？”라고翻译할 수 있다.</span><br><span class="line"></span><br><span class="line">어떻게 해도 네가 대답할 수 있는 만큼, 네가 네 자신을 소개할 수 있을지 모르겠어. 네가 원하는 대로 대답해봐! 😊</span><br></pre></td></tr></table></figure>
-
-
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 0 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 13</span><br><span class="line">slot update_slots: id  0 | task 0 | kv cache rm [0, end)</span><br><span class="line">slot update_slots: id  0 | task 0 | prompt processing progress, n_past = 13, n_tokens = 13, progress = 1.000000</span><br><span class="line">slot update_slots: id  0 | task 0 | prompt done, n_past = 13, n_tokens = 13</span><br><span class="line">slot      release: id  0 | task 0 | stop processing: n_past = 103, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 0 |</span><br><span class="line">prompt eval time =     676.56 ms /    13 tokens (   52.04 ms per token,    19.21 tokens per second)</span><br><span class="line">       eval time =   35787.96 ms /    91 tokens (  393.27 ms per token,     2.54 tokens per second)</span><br><span class="line">      total time =   36464.52 ms /   104 tokens</span><br></pre></td></tr></table></figure>
-
-
-<p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">니가 이해할 수 있는 언어는 어떠 언어들이야?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">니가 이해할 수 있는 언어는 영어, 한국어, 중국어, 일본어, 그리고 여러 가지 다른 언어와方言을 이해할 수 있습니다. 무슨 언어로 도와드리겠습니다か이겠어요? 😊</span><br></pre></td></tr></table></figure>
-
-
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 92 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 116</span><br><span class="line">slot update_slots: id  0 | task 92 | kv cache rm [13, end)</span><br><span class="line">slot update_slots: id  0 | task 92 | prompt processing progress, n_past = 116, n_tokens = 103, progress = 0.887931</span><br><span class="line">slot update_slots: id  0 | task 92 | prompt done, n_past = 116, n_tokens = 103</span><br><span class="line">slot      release: id  0 | task 92 | stop processing: n_past = 370, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 92 |</span><br><span class="line">prompt eval time =    1442.26 ms /   103 tokens (   14.00 ms per token,    71.42 tokens per second)</span><br><span class="line">       eval time =   99349.69 ms /   255 tokens (  389.61 ms per token,     2.57 tokens per second)</span><br><span class="line">      total time =  100791.95 ms /   358 tokens</span><br></pre></td></tr></table></figure>
-
-
-<p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">너는 한국어 이해하니?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">네, 한국어를 이해하고 있습니다! 😊</span><br><span class="line"></span><br><span class="line">네, 도와드리겠습니다. 원하는 대로 만들어드리겠습니다.</span><br></pre></td></tr></table></figure>
-
-
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 1200 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 466</span><br><span class="line">slot update_slots: id  0 | task 1200 | kv cache rm [421, end)</span><br><span class="line">slot update_slots: id  0 | task 1200 | prompt processing progress, n_past = 466, n_tokens = 45, progress = 0.096567</span><br><span class="line">slot update_slots: id  0 | task 1200 | prompt done, n_past = 466, n_tokens = 45</span><br><span class="line">slot      release: id  0 | task 1200 | stop processing: n_past = 733, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1200 |</span><br><span class="line">prompt eval time =    1475.86 ms /    45 tokens (   32.80 ms per token,    30.49 tokens per second)</span><br><span class="line">       eval time =  103316.40 ms /   268 tokens (  385.51 ms per token,     2.59 tokens per second)</span><br><span class="line">      total time =  104792.25 ms /   313 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="데이터"><a href="#데이터" class="headerlink" title="데이터"></a>데이터</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">언제까지의 데이터를 학습했지?</span><br></pre></td></tr></table></figure>
-
-<p>답:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The AI, in this case, appears to be capable of understanding and responding in multiple languages, including Korean, English, Chinese, and Japanese, among others. It can also handle various dialects and slang, which suggests it has been trained on a significant dataset covering these languages and their variations. However, the exact number of languages it can process and the size of the dataset are not explicitly stated.</span><br><span class="line"></span><br><span class="line">The AI&#x27;s ability to switch languages based on the user&#x27;s input indicates that it dynamically adjusts its response to the language used. This likely involves real-time language detection and processing, rather than pre-programmed responses for each language.</span><br><span class="line"></span><br><span class="line">Regarding the technology behind the AI, it is likely utilizing neural networks, which are a common approach for natural language processing tasks. The complexity of these networks can vary, and without specific information, it&#x27;s hard to determine the exact architecture.</span><br><span class="line"></span><br><span class="line">In summary, the AI seems to have been trained on a comprehensive dataset covering multiple languages and dialects, enabling it to understand and respond in various languages. The technology behind it probably includes neural networks, allowing it to adapt to different inputs and provide a wide range of responses.</span><br></pre></td></tr></table></figure>
-
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 348 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 177</span><br><span class="line">slot update_slots: id  0 | task 348 | kv cache rm [116, end)</span><br><span class="line">slot update_slots: id  0 | task 348 | prompt processing progress, n_past = 177, n_tokens = 61, progress = 0.344633</span><br><span class="line">slot update_slots: id  0 | task 348 | prompt done, n_past = 177, n_tokens = 61</span><br><span class="line">slot      release: id  0 | task 348 | stop processing: n_past = 752, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 348 |</span><br><span class="line">prompt eval time =    1490.37 ms /    61 tokens (   24.43 ms per token,    40.93 tokens per second)</span><br><span class="line">       eval time =  223929.58 ms /   576 tokens (  388.77 ms per token,     2.57 tokens per second)</span><br><span class="line">      total time =  225419.94 ms /   637 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="창조능력"><a href="#창조능력" class="headerlink" title="창조능력"></a>창조능력</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;고구마&#x27;로 삼행시를 지어줘</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">고구마로 삼행시를 지어주는 데 도와드리겠습니다! 😊</span><br><span class="line"></span><br><span class="line">네, 도와드리겠습니다. 원하는 대로 만들겠습니다.</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 925 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 421</span><br><span class="line">slot update_slots: id  0 | task 925 | kv cache rm [177, end)</span><br><span class="line">slot update_slots: id  0 | task 925 | prompt processing progress, n_past = 421, n_tokens = 244, progress = 0.579572</span><br><span class="line">slot update_slots: id  0 | task 925 | prompt done, n_past = 421, n_tokens = 244</span><br><span class="line">slot      release: id  0 | task 925 | stop processing: n_past = 694, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 925 |</span><br><span class="line">prompt eval time =    1648.24 ms /   244 tokens (    6.76 ms per token,   148.04 tokens per second)</span><br><span class="line">       eval time =  108852.54 ms /   274 tokens (  397.27 ms per token,     2.52 tokens per second)</span><br><span class="line">      total time =  110500.79 ms /   518 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="끝말잇기"><a href="#끝말잇기" class="headerlink" title="끝말잇기"></a>끝말잇기</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">끝말잇기를 하자. 내가 먼저 할게.</span><br><span class="line"></span><br><span class="line">기차</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">끝말잇기를 하자. 내가 먼저 할게.</span><br><span class="line"></span><br><span class="line">기차</span><br></pre></td></tr></table></figure>
-
-
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 1469 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 512</span><br><span class="line">slot update_slots: id  0 | task 1469 | kv cache rm [466, end)</span><br><span class="line">slot update_slots: id  0 | task 1469 | prompt processing progress, n_past = 512, n_tokens = 46, progress = 0.089844</span><br><span class="line">slot update_slots: id  0 | task 1469 | prompt done, n_past = 512, n_tokens = 46</span><br><span class="line">slot      release: id  0 | task 1469 | stop processing: n_past = 784, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1469 |</span><br><span class="line">prompt eval time =    1568.28 ms /    46 tokens (   34.09 ms per token,    29.33 tokens per second)</span><br><span class="line">       eval time =  105810.17 ms /   273 tokens (  387.58 ms per token,     2.58 tokens per second)</span><br><span class="line">      total time =  107378.45 ms /   319 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="문제-만들기1"><a href="#문제-만들기1" class="headerlink" title="문제 만들기1"></a>문제 만들기1</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">초등 국어 문제 3개 만들어줘, 힌트 정답 해설 포함</span><br></pre></td></tr></table></figure>
-
-<p>답:</p>
-<p>Elementary Korean Questions with Hints and Answers</p>
-<ol>
-<li><p><strong>How many apples can you count?</strong></p>
-<ul>
-<li><strong>Hint:</strong> Count the apples one by one and put each one on the other side of the table.</li>
-<li><strong>Answer:</strong> There are 5 apples.</li>
-</ul>
-</li>
-<li><p><strong>What color is the cat?</strong></p>
-<ul>
-<li><strong>Hint:</strong> Look at the cat sitting on the chair in the living room. The color of its fur will help you.</li>
-<li><strong>Answer:</strong> The cat is brown.</li>
-</ul>
-</li>
-<li><p><strong>What is the name of the dog?</strong></p>
-<ul>
-<li><strong>Hint:</strong> Notice what kind of animal the dog is and what it’s doing. The name of the dog will help you find the answer.</li>
-<li><strong>Answer:</strong> The dog is called Max.</li>
-</ul>
-</li>
-</ol>
-<p>These questions are designed to assess basic comprehension and vocabulary skills in Korean, suitable for elementary-level students. Each question includes a hint to guide students toward the correct answer, ensuring a clear and structured learning experience.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 1743 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 551</span><br><span class="line">slot update_slots: id  0 | task 1743 | kv cache rm [512, end)</span><br><span class="line">slot update_slots: id  0 | task 1743 | prompt processing progress, n_past = 551, n_tokens = 39, progress = 0.070780</span><br><span class="line">slot update_slots: id  0 | task 1743 | prompt done, n_past = 551, n_tokens = 39</span><br><span class="line">slot      release: id  0 | task 1743 | stop processing: n_past = 1482, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 1743 |</span><br><span class="line">prompt eval time =    1869.56 ms /    39 tokens (   47.94 ms per token,    20.86 tokens per second)</span><br><span class="line">       eval time =  360229.58 ms /   932 tokens (  386.51 ms per token,     2.59 tokens per second)</span><br><span class="line">      total time =  362099.14 ms /   971 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="문제만들기2"><a href="#문제만들기2" class="headerlink" title="문제만들기2"></a>문제만들기2</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">고등학교 지구과학 문제 3개를 만들어져, 힌트, 정답과 해설을 포함해줘</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>고등학교 지구과학 문제 3개</p>
-<ol>
-<li><p><strong>역사적河流</strong>  </p>
-<ul>
-<li><strong>힌트:</strong> 가장 긴河 流이 한 강으로,黄海로 흐르는 강입니다.  </li>
-<li><strong>정답:</strong> 한 강  </li>
-<li><strong>해설:</strong> 한 강은 한국에서 가장 긴河流로,黃海에 흐르는重要河 流입니다.</li>
-</ul>
-</li>
-<li><p><strong>기후帯</strong>  </p>
-<ul>
-<li><strong>힌트:</strong> 아마존 기름림은 적도 주변에 있습니다.  </li>
-<li><strong>정답:</strong> 열대 기후帯  </li>
-<li><strong>해설:</strong> 아마존 기름림은 열대 기후帯에 속한 지역으로, 강렬한 비雨과热帯적인气候를 특징으로 합니다.</li>
-</ul>
-</li>
-<li><p><strong>州 수도</strong>  </p>
-<ul>
-<li><strong>힌트:</strong> 콜로라도 주의 남중부에 위치한 도시입니다.  </li>
-<li><strong>정답:</strong> 덴버  </li>
-<li><strong>해설:</strong> 덴버는 콜로라도 주의 수도이며, 고산 지대로서 높은 해拔을 가지고 있습니다.</li>
-</ul>
-</li>
-</ol>
-<p>이 세 문제는 고등학교 지구과학 학생들을 위한适合한 문제입니다.各문제는 지리적 특征과 학생들의지식 수준에 맞춘内容로,힌트와 해설을 통해 문제 해결을 안내합니다.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot launch_slot_: id  0 | task 2676 | processing task</span><br><span class="line">slot update_slots: id  0 | task 2676 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 778</span><br><span class="line">slot update_slots: id  0 | task 2676 | kv cache rm [551, end)</span><br><span class="line">slot update_slots: id  0 | task 2676 | prompt processing progress, n_past = 778, n_tokens = 227, progress = 0.291774</span><br><span class="line">slot update_slots: id  0 | task 2676 | prompt done, n_past = 778, n_tokens = 227</span><br><span class="line">slot      release: id  0 | task 2676 | stop processing: n_past = 1634, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 2676 |</span><br><span class="line">prompt eval time =    1478.08 ms /   227 tokens (    6.51 ms per token,   153.58 tokens per second)</span><br><span class="line">       eval time =  330115.05 ms /   857 tokens (  385.20 ms per token,     2.60 tokens per second)</span><br><span class="line">      total time =  331593.13 ms /  1084 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="판단"><a href="#판단" class="headerlink" title="판단"></a>판단</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">철수는 하루에 치킨 100마리를 튀기고 민수는 하루에 치킨 60마리를 튀긴다. 누가 더 일을 잘하지?</span><br></pre></td></tr></table></figure>
-
-<p>답:</p>
-<p>철수는 하루에 치킨 100마리를 튀기고 민수는 하루에 치킨 60마리를 튀기고 있습니다. 철수는 더 많은 마리를 튀기고 있습니다. 따라서 철수는 민수보다 더 많은 일을 하거나 더 나은 효율을 가지고 있습니다.</p>
-<p><strong>철수는 더 많은 일을 하고 있습니다.</strong></p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 3534 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1108</span><br><span class="line">slot update_slots: id  0 | task 3534 | kv cache rm [778, end)</span><br><span class="line">slot update_slots: id  0 | task 3534 | prompt processing progress, n_past = 1108, n_tokens = 330, progress = 0.297834</span><br><span class="line">slot update_slots: id  0 | task 3534 | prompt done, n_past = 1108, n_tokens = 330</span><br><span class="line">slot      release: id  0 | task 3534 | stop processing: n_past = 1479, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 3534 |</span><br><span class="line">prompt eval time =    1479.34 ms /   330 tokens (    4.48 ms per token,   223.07 tokens per second)</span><br><span class="line">       eval time =  145504.30 ms /   372 tokens (  391.14 ms per token,     2.56 tokens per second)</span><br><span class="line">      total time =  146983.64 ms /   702 tokens</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="문장-교정"><a href="#문장-교정" class="headerlink" title="문장 교정"></a>문장 교정</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">다음 텍스트를 자연스럽게 교정해 줘.</span><br><span class="line"></span><br><span class="line">이번 장에서 여러분은 커널을 디버깅을 하는 데 있어 여러 가지 접근 방법이 있다는 것을 배웠다. 우리는 어떤 상황에서 어떤 접근 방법을 사용해야 할지 빠르게 결정할 수 있도록 그런 접근 방법들을 분류도 해봤다. 모든 도구 혹은 기법이 모든 시나리오 혹은 상황에 도움이 되지 않는다는 것이 핵심 포인트 중 하나다. 예를 들어서 KASAN 같은 강력한 메모리 체커는 개발 단계 및 유닛 테스트 단계에서는 정말 유용하지만 시스템 테스트나 제품화 단계에서는 일반적으로 사용이 불가능 하다 (다(프로덕션 커널은 디버그 커널과 달리 KASAN 사용이 비활성화 되도록 환경 설정이 되기 때문이다.)</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>In this chapter, you’ve learned about various methods for debugging the kernel. We classified these methods to help you quickly decide which method to use in different situations. One key point is that not all tools or techniques are useful in every scenario. For example, a strong memory checker like KASAN is very useful in the development phase and unit test phase, but is generally not used in the system test or product phase. This is because, unlike debug kernels, in production kernels, KASAN is disabled due to environment settings.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 3907 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1383</span><br><span class="line">slot update_slots: id  0 | task 3907 | kv cache rm [1108, end)</span><br><span class="line">slot update_slots: id  0 | task 3907 | prompt processing progress, n_past = 1383, n_tokens = 275, progress = 0.198843</span><br><span class="line">slot update_slots: id  0 | task 3907 | prompt done, n_past = 1383, n_tokens = 275</span><br><span class="line">slot      release: id  0 | task 3907 | stop processing: n_past = 2574, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 3907 |</span><br><span class="line">prompt eval time =    1380.52 ms /   275 tokens (    5.02 ms per token,   199.20 tokens per second)</span><br><span class="line">       eval time =  473219.25 ms /  1192 tokens (  397.00 ms per token,     2.52 tokens per second)</span><br><span class="line">      total time =  474599.77 ms /  1467 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="영문-번역"><a href="#영문-번역" class="headerlink" title="영문 번역"></a>영문 번역</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">We both worked with young moms who go completely dark for a few hours in the evening, when they are with their families and putting their kids to bed.</span><br><span class="line"></span><br><span class="line">위 문장을 한국어로 번역해</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>We both worked with young moms who go completely dark for a few hours in the evening, when they are with their families and putting their kids to bed.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 5100 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1532</span><br><span class="line">slot update_slots: id  0 | task 5100 | kv cache rm [1383, end)</span><br><span class="line">slot update_slots: id  0 | task 5100 | prompt processing progress, n_past = 1532, n_tokens = 149, progress = 0.097258</span><br><span class="line">slot update_slots: id  0 | task 5100 | prompt done, n_past = 1532, n_tokens = 149</span><br><span class="line">slot      release: id  0 | task 5100 | stop processing: n_past = 1936, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 5100 |</span><br><span class="line">prompt eval time =    1779.25 ms /   149 tokens (   11.94 ms per token,    83.74 tokens per second)</span><br><span class="line">       eval time =  161435.15 ms /   405 tokens (  398.61 ms per token,     2.51 tokens per second)</span><br><span class="line">      total time =  163214.40 ms /   554 tokens</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="명령-에러-처리"><a href="#명령-에러-처리" class="headerlink" title="명령 에러 처리"></a>명령 에러 처리</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e 명령 실행 시에만 E319: Sorry, the command is not available in this version 메시지가 나온다.</span><br></pre></td></tr></table></figure>
-
-<p>답:</p>
-<p>To address the issue of the <code>crontab -e</code> command not working, follow these steps:</p>
-<ol>
-<li><p><strong>Identify the Cron Version</strong>: Determine which cron implementation you are using by typing <code>crontab -V</code> or <code>man cron</code>. This will inform you if you’re using <code>GNU cron</code> or another implementation.</p>
-</li>
-<li><p><strong>Check for <code>-e</code> Option Support</strong>: If the <code>-e</code> option isn’t available, note that different cron versions may support different commands or have variations in their syntax.</p>
-</li>
-<li><p><strong>Use an Alternative Text Editor</strong>:</p>
-<ul>
-<li>Open the crontab file with a text editor like <code>vim</code>.</li>
-<li>Ensure you have the necessary permissions to edit the file. If not, use <code>sudo</code> to gain root privileges.</li>
-</ul>
-</li>
-<li><p><strong>Modify the Cron File Directly</strong>:</p>
-<ul>
-<li>Edit the crontab file located at <code>/etc/crontab</code> or <code>/usr/etc/crontab</code>.</li>
-<li>Make the desired changes and save the file.</li>
-</ul>
-</li>
-<li><p><strong>Alternative Commands</strong>:</p>
-<ul>
-<li>Use the <code>at</code> command with specific intervals, such as <code>@hourly</code>, to schedule tasks if <code>crontab -e</code> isn’t available.</li>
-<li>Explore graphical tools like <code>crontab-gui</code> for an easier interface to manage cron schedules.</li>
-</ul>
-</li>
-<li><p><strong>Verify Cron Implementation</strong>:</p>
-<ul>
-<li>If you’re using <code>dcron</code>, note that its behavior and commands may differ from <code>crontab</code>.</li>
-</ul>
-</li>
-<li><p><strong>Manual Editing as a Last Resort</strong>:</p>
-<ul>
-<li>Back up the crontab file.</li>
-<li>Remove the existing file and recreate it with the necessary entries, ensuring the correct format.</li>
-</ul>
-</li>
-</ol>
-<p>By following these steps, you can effectively edit your cron table even if the <code>crontab -e</code> command isn’t available.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 5506 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 1597</span><br><span class="line">slot update_slots: id  0 | task 5506 | kv cache rm [1532, end)</span><br><span class="line">slot update_slots: id  0 | task 5506 | prompt processing progress, n_past = 1597, n_tokens = 65, progress = 0.040701</span><br><span class="line">slot update_slots: id  0 | task 5506 | prompt done, n_past = 1597, n_tokens = 65</span><br><span class="line">slot      release: id  0 | task 5506 | stop processing: n_past = 2596, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 5506 |</span><br><span class="line">prompt eval time =    1354.27 ms /    65 tokens (   20.83 ms per token,    48.00 tokens per second)</span><br><span class="line">       eval time =  394077.31 ms /  1000 tokens (  394.08 ms per token,     2.54 tokens per second)</span><br><span class="line">      total time =  395431.58 ms /  1065 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="지명과-특산물"><a href="#지명과-특산물" class="headerlink" title="지명과 특산물"></a>지명과 특산물</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">다음 지문을 읽고 문제에 답하시오.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">1950년 7월, 한국 전쟁 초기에 이승만 대통령은 맥아더 장군에게 유격대원들을 북한군의 후방에 침투시키는 방안을 제안했다. 이후, 육군본부는 육본직할 유격대와 육본 독립 유격대를 편성했다. 국군은 포항과 인접한 장사동 지역에 상륙작전을 수행할 부대로 독립 제1유격대대를 선정했다. 육군본부는 독립 제1유격대대에 동해안의 장사동 해안에 상륙작전을 감행하여 북한군 제2군단의 보급로를 차단하고 국군 제1군단의 작전을 유리하게 하기 위한 작전명령(육본 작명 제174호)을 하달했다. 9월 14일, 독립 제1유격대대는 부산에서 LST 문산호에 승선하여 영덕군의 장사동으로 출항했다.</span><br><span class="line"></span><br><span class="line">1950년 9월 15일, 독립 제1유격대대는 장사동 해안에 상륙을 시도하였으나 태풍 케지아로 인한 높은 파도와 안개로 인해 어려움을 겪었다. LST 문산호는 북한군의 사격과 파도로 인해 좌초되었고, 상륙부대는 09:00시경에 전원이 상륙을 완료하였다. 그 후, 15:00시경에 200고지를 점령하였고, 다양한 무기와 장비를 노획하였다. 9월 16일과 17일에는 독립 제1유격대대가 여러 위치에서 북한군과의 전투를 벌였으며, 미 구축함과의 연락 두절로 인해 추가적인 어려움을 겪었다.</span><br><span class="line"></span><br><span class="line">장사동에서 위급한 상황에 처한 독립 제1유격대대를 구출하기 위해 해군본부는 LT-1(인왕호)를 급파했으나, LST 문산호의 구출에 실패했다. 해군본부는 상륙부대의 철수를 지원하기 위해 LST 조치원호를 현지로 보냈다. 9월 18일, 이명흠 부대장은 유엔 해군과의 협력 하에 부족한 식량과 탄약 지원을 받았다. 9월 19일, 유엔군의 함포지원과 함께 LST 조치원호가 도착하여 철수 작전을 시작했다. 스피어 소령은 직접 해안에 상륙하여 구조작전을 지시하였다. 9월 20일, 725명이 부산항으로 복귀했으나, 32명이 장사동 해안에 남아 북한군의 포로가 되었거나 탈출하여 국군에 합류하였다.</span><br><span class="line"></span><br><span class="line">장사리 전투가 인천 상륙작전의 양동작전으로 알려졌으나, 이 전투가 드라마틱한 요소로 인해 과장되었으며, 실제로는 인천 상륙작전과 큰 관련이 없다. 또한, 북한이나 중국의 군사적 상황을 고려할 때, 장사리에서의 전투가 낙동강 전선에 영향을 끼칠 가능성은 낮다.</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">문제</span><br><span class="line">1. 지문에 나오는 지명을 모두 쓰시오.</span><br><span class="line">2. 그중 대게로 유명한 곳은?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p><strong>Question 1: List of Places Mentioned</strong></p>
-<ol>
-<li><strong>포항 (Pohang)</strong></li>
-<li><strong>장사동 (Jinseong-dong)</strong></li>
-<li><strong>영덕군 (Yangju-gun)</strong></li>
-<li><strong>북한군 제2군단 (North Korean 2nd Corps)</strong></li>
-<li><strong>미 구축함 (U.S. military vessels)</strong></li>
-<li><strong>해군본부 (Naval Headquarters)</strong></li>
-<li><strong>스피어 소령 (Spear Colonel)</strong></li>
-<li><strong>부산항 (Busan Port)</strong></li>
-<li><strong>낙동강 (Nakdong River)</strong></li>
-<li><strong>인천 상륙작전 (Incheon Landing Operation)</strong></li>
-</ol>
-<p><strong>Question 2: Notable Place</strong></p>
-<p>The most notable place mentioned, considering the broader context of the Korean War, is <strong>인천 상륙작전 (Incheon Landing Operation)</strong>. This operation is globally recognized as a significant turning point in the war. However, if focusing specifically on the Jinseong-dong operations detailed in the text, <strong>장사동 (Jinseong-dong)</strong> would be the main location of discussion.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 6530 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 2739</span><br><span class="line">slot update_slots: id  0 | task 6530 | kv cache rm [2708, end)</span><br><span class="line">slot update_slots: id  0 | task 6530 | prompt processing progress, n_past = 2739, n_tokens = 31, progress = 0.011318</span><br><span class="line">slot update_slots: id  0 | task 6530 | prompt done, n_past = 2739, n_tokens = 31</span><br><span class="line">slot      release: id  0 | task 6530 | stop processing: n_past = 3826, truncated = 0</span><br><span class="line">slot print_timing: id  0 | task 6530 |</span><br><span class="line">prompt eval time =    1578.84 ms /    31 tokens (   50.93 ms per token,    19.63 tokens per second)</span><br><span class="line">       eval time =  445367.25 ms /  1088 tokens (  409.34 ms per token,     2.44 tokens per second)</span><br><span class="line">      total time =  446946.09 ms /  1119 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="강수량과-그-영향"><a href="#강수량과-그-영향" class="headerlink" title="강수량과 그 영향"></a>강수량과 그 영향</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">겨울철 강수량이 그 다음 해의 농수산물 수확량에 미치는 영향은?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>겨울철 강수량이 그 다음 해의 농수산물 수확량에 미치는 영향은, 여러 가지因素에 따라 달리ます. 특히, 강수량의 양과 타이밍, 특정 작物에 대한 민감도, 지역 간 차이, 농업 기법, 정부 정책,以及 長期 기후 추이 등이 중요한要素입니다.</p>
-<ol>
-<li><p><strong>강수양과 타이밍</strong>:</p>
-<ul>
-<li><strong>过量 강수</strong>는-waterlogging-을 일으켜 작물에 손상을 주거나, 전기 재배에 도움이 되지 않아 다음 해의 수확량을 감소할 수 있습니다.</li>
-<li><strong>조금 강수</strong>는, 토양으로부터 물을 공급해 작물을 도와줍니다.</li>
-<li><strong>이른 강수</strong>는, 작물을 심은 전에 발생해, 다음 해의 재배에 영향을 미칠 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>작물 특성</strong>:</p>
-<ul>
-<li><strong>대규모 작물</strong>如 쌀은, 강수량에 매우 민감합니다. 강수가 과도한 경우, 쌀의 수확을 크게 감소할 수 있습니다.</li>
-<li><strong>작물에 따른 차이</strong>는, 강수에 대한 민감도가 차이가 있습니다. 보리,맥아 등은 강수에 상대적으로 강해, 수확량을 덜 영향을 받을 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>지역 간 차이</strong>:</p>
-<ul>
-<li>북부 지역에서, 강설은 특히 많이 내려, 작물에 무게가 되거나, 기근으로 작물 성장에 어려움을 주는 데 기여할 수 있습니다.</li>
-<li>남부 지역에서는, 강수량이 적을 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>농업 기법</strong>:</p>
-<ul>
-<li><strong>조도 기법</strong>과 ** 灌漑 기법**은, 강수를 관리하는 데 도움을 줄 수 있습니다.</li>
-<li><strong>기술적 도움</strong>은, 강수에 대한適応을 이끌어 내는 데 기여할 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>정부 정책</strong>:</p>
-<ul>
-<li>정부는, 농업을 지지하는 정책을 통해, 강수에 대한 영향을 완화하는 데 도움을 줄 수 있습니다.</li>
-<li>예를 들어,农장지대와水리 기관을 개선하는 정책은, 강수에 대한 내성을 높일 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>長期 기후 추이</strong>:</p>
-<ul>
-<li>기후 변화로 인해, 강수 양과 패턴이 바뀌고 있습니다. 이는, 농업에 대한 영향도 변해나갈 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>역사적 연구와 통계자료</strong>:</p>
-<ul>
-<li>역사적 데이터나 연구를 통해, 강수량과 수확량의 관계를 분석할 수 있습니다. 이는,具体한 지역이나 작물에 대한详细한 통찰을 제공할 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>기술적 도움</strong>:</p>
-<ul>
-<li>현대 농업 기법, 예를 들어滴灌과정밀 농업은, 강수에 대한适응을 도와주며, 수확량을 향상시킬 수 있습니다.</li>
-</ul>
-</li>
-</ol>
-<p><strong>결론</strong>:<br>겨울철 강수량이 다음 해의 농수산물 수확량에 미치는 영향은, 강수양, 타이밍, 작물 특性, 지역 간 차이, 농업 기법, 정부 정책,以及 기후 변화에 의해 다양하게 나타납니다. 이를 이해하기 위해,역사적 데이터,政府 보고서, 농업 통계자료 등을 통해,详细한 분석을 진행할 필요があります.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 7619 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 3011</span><br><span class="line">slot update_slots: id  0 | task 7619 | kv cache rm [2739, end)</span><br><span class="line">slot update_slots: id  0 | task 7619 | prompt processing progress, n_past = 3011, n_tokens = 272, progress = 0.090335</span><br><span class="line">slot update_slots: id  0 | task 7619 | prompt done, n_past = 3011, n_tokens = 272</span><br><span class="line">slot update_slots: id  0 | task 7619 | slot context shift, n_keep = 1, n_left = 4094, n_discard = 2047</span><br><span class="line">slot      release: id  0 | task 7619 | stop processing: n_past = 2452, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 7619 |</span><br><span class="line">prompt eval time =    1373.10 ms /   272 tokens (    5.05 ms per token,   198.09 tokens per second)</span><br><span class="line">       eval time =  595671.60 ms /  1489 tokens (  400.05 ms per token,     2.50 tokens per second)</span><br><span class="line">      total time =  597044.70 ms /  1761 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="라니냐-발생-가능성"><a href="#라니냐-발생-가능성" class="headerlink" title="라니냐 발생 가능성"></a>라니냐 발생 가능성</h3><p>질문: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024년 겨울에 라니냐가 발생할 수 있을것 같아?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>2024년 겨울에 라니냐(La Niña)가 발생할 수 있는 가능성은 현재의 기후モデル이나 기후 예보에 따라 달러요ন기법을 통해 예측되고 있습니다. 라니냐는 태평양 해표면 온도that cools the sea surfaces in the Pacific, which can lead to global cooling, and it’s a periodic climate phenomenon.</p>
-<p>지구 기후는 자연적 변동을 통해 La Niña와 El Niño가 交替하게 나타납니다. 2024년에도 La Niña의 가능성은 모델에 따라 예상됩니다. 그러나 기후 예보는 중도보다는 불확실한 성질을 가지고 있습니다.</p>
-<p>결론적으로, 2024년 겨울에 La Niña가 발생할 수 있는 가능성이 있습니다, but it’s not certain.</p>
-<hr>
-<p>지구 기후는 매우复杂한 시스템이고 예상치도 중도보다는 불확실합니다. 2024년 La Niña가 실제로 발생할지 모르겠습니다.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 9109 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 3802</span><br><span class="line">slot update_slots: id  0 | task 9109 | kv cache rm [1, end)</span><br><span class="line">slot update_slots: id  0 | task 9109 | prompt processing progress, n_past = 2049, n_tokens = 2048, progress = 0.538664</span><br><span class="line">slot update_slots: id  0 | task 9109 | kv cache rm [2049, end)</span><br><span class="line">slot update_slots: id  0 | task 9109 | prompt processing progress, n_past = 3802, n_tokens = 1753, progress = 0.999737</span><br><span class="line">slot update_slots: id  0 | task 9109 | prompt done, n_past = 3802, n_tokens = 1753</span><br><span class="line">slot update_slots: id  0 | task 9109 | slot context shift, n_keep = 1, n_left = 4094, n_discard = 2047</span><br><span class="line">slot      release: id  0 | task 9109 | stop processing: n_past = 2173, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 9109 |</span><br><span class="line">prompt eval time =   10869.47 ms /  3801 tokens (    2.86 ms per token,   349.70 tokens per second)</span><br><span class="line">       eval time =  166385.48 ms /   419 tokens (  397.10 ms per token,     2.52 tokens per second)</span><br><span class="line">      total time =  177254.94 ms /  4220 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="경제-이론"><a href="#경제-이론" class="headerlink" title="경제 이론"></a>경제 이론</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">현대 화폐 이론에 대해서 설명해줘</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>Modern currency theory encompasses a range of concepts and principles that explain the functioning and role of money in modern economies. Here’s a structured and organized summary of the key points:</p>
-<ol>
-<li><p><strong>Evolution of Money</strong>:</p>
-<ul>
-<li><strong>Abstract Nature</strong>: Money has evolved beyond physical coins and paper to include abstract forms like fiat currency, which is not backed by a physical commodity.</li>
-<li><strong>Trust and Confidence</strong>: The foundation of modern money is the trust and confidence that a currency will be accepted in the future, ensuring its value remains stable over time.</li>
-</ul>
-</li>
-<li><p><strong>Functions of Money</strong>:</p>
-<ul>
-<li><strong>Medium of Exchange</strong>: facilitates the buying and selling of goods and services.</li>
-<li><strong>Unit of Account</strong>: standardizes the measurement of value across economies.</li>
-<li><strong>Store of Value</strong>: allows for saving and investment, maintaining purchasing power over time.</li>
-</ul>
-</li>
-<li><p><strong>Central Banks and Monetary Policy</strong>:</p>
-<ul>
-<li><strong>Role in Regulation</strong>: Central banks influence money supply and interest rates, using tools like interest rate adjustments to manage inflation and economic growth.</li>
-<li><strong>Monetary Policy Tools</strong>: Open market operations, where central banks buy or sell government securities, affect the money supply and interest rates.</li>
-</ul>
-</li>
-<li><p><strong>Fractional Reserve Banking</strong>:</p>
-<ul>
-<li><strong>Reserve Requirements</strong>: Banks keep a fraction of their deposits as reserves, lending the rest. This practice can expand the money supply through the multiplier effect.</li>
-</ul>
-</li>
-<li><p><strong>Modern Monetary Theory (MMT)</strong>:</p>
-<ul>
-<li><strong>Key Idea</strong>: Countries controlling their currency can spend freely, potentially without worrying about running out of money, as long as inflation is controlled.</li>
-<li><strong>Practical Implications</strong>: MMT suggests that governments can finance public spending through currency creation, but it emphasizes the need to maintain price stability.</li>
-</ul>
-</li>
-<li><p><strong>Globalization and Currency Management</strong>:</p>
-<ul>
-<li><strong>Exchange Rates</strong>: The interconnected global economy requires countries to manage their currencies in a way that aligns with global markets.</li>
-<li><strong>Impact of Monetary Policy</strong>: Central banks must consider how their policies affect global exchange rates and trade balances.</li>
-</ul>
-</li>
-<li><p><strong>Technological Influences</strong>:</p>
-<ul>
-<li><strong>Digital Money</strong>: Innovations like cryptocurrencies and central bank digital currencies (CBDCs) challenge traditional views of money and its management.</li>
-<li><strong>Technological Disruptions</strong>: These innovations can affect financial stability and the traditional role of central banks.</li>
-</ul>
-</li>
-<li><p><strong>Inflation and Deflation Management</strong>:</p>
-<ul>
-<li><strong>Central Bank Tools</strong>: Central banks use interest rates and other tools to control inflation and deflation, aiming to maintain economic stability.</li>
-<li><strong>Economic Scenarios</strong>: Different economic conditions may require varied approaches to monetary policy.</li>
-</ul>
-</li>
-<li><p><strong>Interconnected Concepts</strong>:</p>
-<ul>
-<li><strong>Key Principles</strong>: Trust, confidence, and the dual role of central banks in providing liquidity and controlling inflation are central to modern currency theories.</li>
-<li><strong>Interconnections</strong>: Understanding how these elements relate is crucial for grasping the overall framework of modern currency theories.</li>
-</ul>
-</li>
-</ol>
-<p>In summary, modern currency theories provide a comprehensive framework for understanding the role and functioning of money in contemporary economies, incorporating elements of trust, technological innovation, and global interconnectedness.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 9530 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4037</span><br><span class="line">slot update_slots: id  0 | task 9530 | kv cache rm [1, end)</span><br><span class="line">slot update_slots: id  0 | task 9530 | prompt processing progress, n_past = 2049, n_tokens = 2048, progress = 0.507307</span><br><span class="line">slot update_slots: id  0 | task 9530 | kv cache rm [2049, end)</span><br><span class="line">slot update_slots: id  0 | task 9530 | prompt processing progress, n_past = 4037, n_tokens = 1988, progress = 0.999752</span><br><span class="line">slot update_slots: id  0 | task 9530 | prompt done, n_past = 4037, n_tokens = 1988</span><br><span class="line">slot update_slots: id  0 | task 9530 | slot context shift, n_keep = 1, n_left = 4094, n_discard = 2047</span><br><span class="line">slot      release: id  0 | task 9530 | stop processing: n_past = 3370, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 9530 |</span><br><span class="line">prompt eval time =   10827.40 ms /  4036 tokens (    2.68 ms per token,   372.76 tokens per second)</span><br><span class="line">       eval time =  556137.12 ms /  1381 tokens (  402.71 ms per token,     2.48 tokens per second)</span><br><span class="line">      total time =  566964.51 ms /  5417 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="크롤링"><a href="#크롤링" class="headerlink" title="크롤링"></a>크롤링</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">have you got any crawling ability from some url?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p><strong>Final Answer:</strong></p>
-<p>In the context of modern currency theories, “crawling ability” is likely a metaphorical term that describes the dynamic and adaptive nature of money within the modern economy. It suggests that money is not static but is constantly in motion and undergoing transformations, such as moving between different forms (physical, digital), being exchanged across borders, and adapting to technological advancements. This ability reflects the interconnectedness and fluidity of modern financial systems, where money circulates efficiently and changes in response to economic shifts and technological innovations.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 10913 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4675</span><br><span class="line">slot update_slots: id  0 | task 10913 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 2627</span><br><span class="line">slot update_slots: id  0 | task 10913 | kv cache rm [0, end)</span><br><span class="line">slot update_slots: id  0 | task 10913 | prompt processing progress, n_past = 2048, n_tokens = 2048, progress = 0.779597</span><br><span class="line">slot update_slots: id  0 | task 10913 | kv cache rm [2048, end)</span><br><span class="line">slot update_slots: id  0 | task 10913 | prompt processing progress, n_past = 2627, n_tokens = 579, progress = 1.000000</span><br><span class="line">slot update_slots: id  0 | task 10913 | prompt done, n_past = 2627, n_tokens = 579</span><br><span class="line">slot      release: id  0 | task 10913 | stop processing: n_past = 3453, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 10913 |</span><br><span class="line">prompt eval time =    7698.41 ms /  2627 tokens (    2.93 ms per token,   341.24 tokens per second)</span><br><span class="line">       eval time =  329577.53 ms /   827 tokens (  398.52 ms per token,     2.51 tokens per second)</span><br><span class="line">      total time =  337275.94 ms /  3454 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="외부-파일-처리-여부"><a href="#외부-파일-처리-여부" class="headerlink" title="외부 파일 처리 여부"></a>외부 파일 처리 여부</h3><p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">너는 외부 텍스트 파일을 읽고 질문에 답해 줄 수 있어?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>겨울철 강수량이 그 다음 해의 농수산물 수확량에 미치는 영향은, 복잡한 다섯 가지 요소에 의해 다양한 결과를 나타내줄 수 있습니다. 이 요소들은 다음과 같습니다:</p>
-<ol>
-<li><p><strong>땀의 상태</strong>:</p>
-<ul>
-<li><strong>이루는 강수</strong>: 토양을潤하고, 다음 해의 성장에 도움을 줄 수 있습니다.</li>
-<li><strong>너무한 강수</strong>: 수해로 인해 작물에 손상을 입거나, 성장을妨げ줄 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>강수의 타이밍</strong>:</p>
-<ul>
-<li><strong>이른 강수</strong>: 심은 전에 일어나는ため, 다음 해의 재배에 영향을 미칠 수 있습니다.</li>
-<li><strong>지연된 강수</strong>: 성장 단계기에 발생해, 작물에 무게를 주는 데 기여할 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>작물의 유형</strong>:</p>
-<ul>
-<li><strong>민감한 작물</strong>: 쌀 등은 강수에 특히 민감하며, 수확량을 크게 감소할 수 있습니다.</li>
-<li><strong>민감도不同的 작물</strong>: 보리, 맥아 등은 강수에 상대적으로 강해, 수확량의 영향을 덜 받을 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>지역의 기후</strong>:</p>
-<ul>
-<li><strong>북부 지역</strong>: 강설이 많이 내려, 작물 성장에 어려움을 주는 데 기여할 수 있습니다.</li>
-<li><strong>남부 지역</strong>: 강수량이 적을 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>농업 기법</strong>:</p>
-<ul>
-<li><strong>조도 기법</strong>: 강수를 관리하는 데 도움을 줄 수 있습니다.</li>
-<li><strong>灌漑 기법</strong>: 토양에 적절한 수분을 유지하는 데 도움을 줄 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>정부 정책</strong>:</p>
-<ul>
-<li><strong>농업 지원 정책</strong>: 농업을 지지하는 정책을 통해 강수에 대한 영향을 완화하는 데 도움을 줄 수 있습니다.</li>
-</ul>
-</li>
-<li><p>** 长期 기후 변화**:</p>
-<ul>
-<li>기후 변화로 인해 강수 양과 패턴이 바뀌고 있습니다. 이는, 농업에 대한 영향도 변해나갈 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>역사적 데이터와 통계 자료</strong>:</p>
-<ul>
-<li>역사적 데이터나 연구를 통해, 강수량과 수확량의 관계를 분석할 수 있습니다.</li>
-</ul>
-</li>
-<li><p><strong>경제적 영향</strong>:</p>
-<ul>
-<li>작물 손실로 인해 식량 가격과 공급망에 영향을 미칠 수 있습니다. Farmers might need insurance to cover their losses, and governments might offer aid to support affected areas.</li>
-</ul>
-</li>
-</ol>
-<p><strong>결론</strong>:<br>겨울철 강수량이 다음 해의 농수산물 수확량에 미치는 영향은, 복잡한 요소들의 상互작을 통해 다양한 결과를 나타내줄 수 있습니다. 이 요소들을 이해하고, 각自変연락된 영향을 고려하여, 농업을 계획할 때 중요한 정보를 활용할 수 있습니다.</p>
-<hr>
-<blockquote>
-<p>메모리 부족인가, 엉뚱한 답을 내놓았다.</p>
-</blockquote>
-<hr>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 11742 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 4803</span><br><span class="line">slot update_slots: id  0 | task 11742 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 2755</span><br><span class="line">slot update_slots: id  0 | task 11742 | kv cache rm [2627, end)</span><br><span class="line">slot update_slots: id  0 | task 11742 | prompt processing progress, n_past = 2755, n_tokens = 128, progress = 0.046461</span><br><span class="line">slot update_slots: id  0 | task 11742 | prompt done, n_past = 2755, n_tokens = 128</span><br><span class="line">slot update_slots: id  0 | task 11742 | slot context shift, n_keep = 1, n_left = 4094, n_discard = 2047</span><br><span class="line">slot      release: id  0 | task 11742 | stop processing: n_past = 2088, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 11742 |</span><br><span class="line">prompt eval time =    1320.06 ms /   128 tokens (   10.31 ms per token,    96.97 tokens per second)</span><br><span class="line">       eval time =  552944.30 ms /  1381 tokens (  400.39 ms per token,     2.50 tokens per second)</span><br><span class="line">      total time =  554264.35 ms /  1509 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>질문:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">너는 pdf 파일을 읽고 질문에 답해 줄 수 있어?</span><br></pre></td></tr></table></figure>
-
-
-<p>답:</p>
-<p>네, 너와 같이 PDF 파일을 읽고 질문에 답변할 수 있는 기능을 가지고 있습니다.ただし, PDF 파일의 텍스트를 읽을 때는, 때로는 이미지를 사용한 텍스트나 보호된 콘텐츠로 인해,<em>directly</em> PDF를 읽을 수 없습니다. 그러나, PDF내의 텍스트를 이미지로 저장해 오른다면, 그 이미지를 분석하고 텍스트를 추출해 질문에 답변할 수 있습니다.</p>
-<p>또한, PDF 파일을 직접 읽는 대신, PDF내의 텍스트를 복사하고貼어오면, 그 텍스트를 가지고 답변을 제공할 수 있습니다.</p>
-<p>즉, PDF 파일을 통해 정보를 취득하고 답변할 수 있습니다, 단, PDF의 구조나 보호된 콘텐츠가 아닌普通な 텍스트일 때는 가능합니다.</p>
-<p>처리:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">slot update_slots: id  0 | task 13124 | new prompt, n_ctx_slot = 4096, n_keep = 0, n_prompt_tokens = 5456</span><br><span class="line">slot update_slots: id  0 | task 13124 | input truncated, n_ctx = 4096, n_keep = 0, n_left = 4096, n_prompt_tokens = 3408</span><br><span class="line">slot update_slots: id  0 | task 13124 | kv cache rm [1, end)</span><br><span class="line">slot update_slots: id  0 | task 13124 | prompt processing progress, n_past = 2049, n_tokens = 2048, progress = 0.600939</span><br><span class="line">slot update_slots: id  0 | task 13124 | kv cache rm [2049, end)</span><br><span class="line">slot update_slots: id  0 | task 13124 | prompt processing progress, n_past = 3408, n_tokens = 1359, progress = 0.999707</span><br><span class="line">slot update_slots: id  0 | task 13124 | prompt done, n_past = 3408, n_tokens = 1359</span><br><span class="line">slot      release: id  0 | task 13124 | stop processing: n_past = 3688, truncated = 1</span><br><span class="line">slot print_timing: id  0 | task 13124 |</span><br><span class="line">prompt eval time =    9517.07 ms /  3407 tokens (    2.79 ms per token,   357.99 tokens per second)</span><br><span class="line">       eval time =  112992.25 ms /   281 tokens (  402.11 ms per token,     2.49 tokens per second)</span><br><span class="line">      total time =  122509.32 ms /  3688 tokens</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><ul>
-<li>한글에 대한 이해가 부족하다</li>
-<li>한글 질문에 영문 답변이 꽤 있을 듯 하다.</li>
-<li>각 질문에 대한 응답이 느리다.</li>
-</ul>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/4/">이전</a></div><div class="pagination-next"><a href="/page/6/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><a class="pagination-link is-current" href="/page/5/">5</a></li><li><a class="pagination-link" href="/page/6/">6</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/90/">90</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">179</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">260</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-08-16T00:00:00.000Z">2025-08-16</time></p><p class="title"><a href="/mariadb-enable_tls2-2508-9bc096984bf8/">MariaDB 클라언트-서버 TLS/SSL 암호화 연결(2)-2508업데이트</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Database/">Database</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-19T00:00:00.000Z">2025-04-19</time></p><p class="title"><a href="/nbconvert%EC%82%AC%EC%9A%A9-18b07cfb01b1/">nbconvert 사용</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-11T00:00:00.000Z">2025-04-11</time></p><p class="title"><a href="/llm-02LLM%ED%99%9C%EC%9A%A9-6bf20c6c19f9/">LLM02 - 활용방법</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-10T00:00:00.000Z">2025-04-10</time></p><p class="title"><a href="/llm-01LLM_Models-806075edcbe4/">LLM01 - Models</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">12</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">58</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">28</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">94</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">31</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2026 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/4/">이전</a></div><div class="pagination-next"><a href="/page/6/">다음</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><a class="pagination-link is-current" href="/page/5/">5</a></li><li><a class="pagination-link" href="/page/6/">6</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/90/">90</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/images/qkboo_400.png" alt="Gangtai"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gangtai</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Paju, South Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">포스트</p><a href="/archives"><p class="title">180</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">카테고리</p><a href="/categories"><p class="title">19</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">태그</p><a href="/tags"><p class="title">260</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/thinkbee" target="_blank" rel="noopener">팔로우</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/thinkbee"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/gangtaigoh"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">최근 글</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2026-05-02T00:00:00.000Z">2026-05-02</time></p><p class="title"><a href="/ssh-keyshare-c0c829ea739f/">Linux - ssh 키 공유</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Linux/">Linux</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-08-16T00:00:00.000Z">2025-08-16</time></p><p class="title"><a href="/mariadb-enable_tls2-2508-9bc096984bf8/">MariaDB 클라언트-서버 TLS/SSL 암호화 연결(2)-2508업데이트</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Database/">Database</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-06-24T23:00:00.000Z">2025-06-25</time></p><p class="title"><a href="/WSL-%EC%99%B8%EB%B6%80%EB%94%94%EC%8A%A4%ED%81%AC-a38220eecf9e/">WSL 외부디스크 마운트</a></p><p class="categories"><a href="/categories/OS/">OS</a> / <a href="/categories/OS/Windows/">Windows</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-19T00:00:00.000Z">2025-04-19</time></p><p class="title"><a href="/nbconvert%EC%82%AC%EC%9A%A9-18b07cfb01b1/">nbconvert 사용</a></p><p class="categories"><a href="/categories/Programming/">Programming</a> / <a href="/categories/Programming/Python/">Python</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2025-04-11T00:00:00.000Z">2025-04-11</time></p><p class="title"><a href="/llm-02LLM%ED%99%9C%EC%9A%A9-6bf20c6c19f9/">LLM02 - 활용방법</a></p><p class="categories"><a href="/categories/AI/">AI</a> / <a href="/categories/AI/LLM/">LLM</a></p></div></article></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">광고</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1465716454138955" data-ad-slot="4441624809" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">카테고리</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/AI/"><span class="level-start"><span class="level-item">AI</span></span><span class="level-end"><span class="level-item tag">12</span></span></a><ul><li><a class="level is-mobile" href="/categories/AI/LLM/"><span class="level-start"><span class="level-item">LLM</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/ETC/"><span class="level-start"><span class="level-item">ETC</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/IT/"><span class="level-start"><span class="level-item">IT</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">59</span></span></a><ul><li><a class="level is-mobile" href="/categories/OS/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">29</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Raspberry-Pi/"><span class="level-start"><span class="level-item">Raspberry Pi</span></span><span class="level-end"><span class="level-item tag">21</span></span></a></li><li><a class="level is-mobile" href="/categories/OS/Windows/"><span class="level-start"><span class="level-item">Windows</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming/"><span class="level-start"><span class="level-item">Programming</span></span><span class="level-end"><span class="level-item tag">94</span></span></a><ul><li><a class="level is-mobile" href="/categories/Programming/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Angularjs/"><span class="level-start"><span class="level-item">Angularjs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/C-C/"><span class="level-start"><span class="level-item">C/C++</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">23</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/Python/"><span class="level-start"><span class="level-item">Python</span></span><span class="level-end"><span class="level-item tag">31</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/R/"><span class="level-start"><span class="level-item">R</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Programming/git/"><span class="level-start"><span class="level-item">git</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Programming-Python/"><span class="level-start"><span class="level-item">Programming, Python</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/github/"><span class="level-start"><span class="level-item">github</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/thinkbee_logo.png" alt="IT Tech blogging" height="28"></a><p class="is-size-7"><span>&copy; 2026 Gangtai Goh</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
